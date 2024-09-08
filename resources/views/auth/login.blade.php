@@ -1,48 +1,98 @@
 <x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
-
-        <x-validation-errors class="mb-4" />
-
-        @session('status')
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ $value }}
+    <!-- Start Banner Area -->
+    <section class="banner-area organic-breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+                <div class="col-first">
+                    <h1>Welcome Back !</h1>
+                    <nav class="d-flex align-items-center">
+                        <h4 class="text-light">Enter yout details</h4>
+                    </nav>
+                </div>
             </div>
-        @endsession
+        </div>
+    </section>
+    <!-- End Banner Area -->
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
+    <!--================Login Box Area =================-->
+    <section class="login_box_area section_gap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="login_box_img">
+                        <img class="img-fluid" src="{{ asset('assets/img/login.jpg') }}" alt="">
+                        <div class="hover">
+                            <h4>Welcome to Our Website!</h4>
+                            <p>We are delighted to have you here. If you are new and looking to join our community, you
+                                can easily create an account to get started. Enjoy exploring our features and services
+                                designed to enhance your experience.</p>
+                            <a class="primary-btn" href="{{ route('register') }}">Create an Account</a>
 
-            <div>
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="login_form_inner">
+                        <h3>Log in to enter</h3>
+
+                        <!-- Display Validation Errors -->
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <strong>Whoops! Something went wrong.</strong>
+                                <ul class="mt-3">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        <!-- Display Status Message -->
+                        @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+
+                        <form class="row login_form" method="POST" action="{{ route('login') }}"
+                            novalidate="novalidate">
+                            @csrf
+
+                            <!-- Email Field -->
+                            <div class="col-md-12 form-group">
+                                <input type="email" class="form-control" id="email" name="email"
+                                    placeholder="Email" value="{{ old('email') }}" required autofocus
+                                    autocomplete="username" onfocus="this.placeholder = ''"
+                                    onblur="this.placeholder = 'Email'">
+                            </div>
+
+                            <!-- Password Field -->
+                            <div class="col-md-12 form-group">
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="Password" required autocomplete="current-password"
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
+                            </div>
+
+                            <!-- Remember Me Checkbox -->
+                            <div class="col-md-12 form-group">
+                                <div class="creat_account">
+                                    <input type="checkbox" id="remember_me" name="remember">
+                                    <label for="remember_me">Keep me logged in</label>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button and Forgot Password Link -->
+                            <div class="col-md-12 form-group">
+                                <button type="submit" class="primary-btn">Log In</button>
+                                @if (Route::has('password.request'))
+                                    <a href="{{ route('password.request') }}">Forgot Password?</a>
+                                @endif
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-            </div>
-
-            <div class="block mt-4">
-                <label for="remember_me" class="flex items-center">
-                    <x-checkbox id="remember_me" name="remember" />
-                    <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-button class="ms-4">
-                    {{ __('Log in') }}
-                </x-button>
-            </div>
-        </form>
-    </x-authentication-card>
+        </div>
+    </section>
+    <!--================End Login Box Area =================-->
 </x-guest-layout>

@@ -36,20 +36,11 @@
                         <h3>Log in to enter</h3>
 
                         <!-- Display Validation Errors -->
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <strong>Whoops! Something went wrong.</strong>
-                                <ul class="mt-3">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
+                        <x-validation-errors class="mb-4" />
 
                         <!-- Display Status Message -->
                         @if (session('status'))
-                            <div class="alert alert-success">
+                            <div class="alert alert-success text-center">
                                 {{ session('status') }}
                             </div>
                         @endif

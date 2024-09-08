@@ -1,36 +1,63 @@
 <x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
-
-        <x-validation-errors class="mb-4" />
-
-        <form method="POST" action="{{ route('password.update') }}">
-            @csrf
-
-            <input type="hidden" name="token" value="{{ $request->route('token') }}">
-
-            <div class="block">
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
+    <!-- Start Banner Area -->
+    <section class="banner-area organic-breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+                <div class="col-first">
+                    <h1>Reset Password</h1>
+                    <nav class="d-flex align-items-center">
+                        <h4 class="text-light">Enter your new password below</h4>
+                    </nav>
+                </div>
             </div>
+        </div>
+    </section>
+    <!-- End Banner Area -->
 
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            </div>
+    <!--================Reset Password Box Area =================-->
+    <section class="login_box_area section_gap">
+        <div class="container">
+            <div class="login_box_inner">
+                <p>Please enter your new password below to reset it. Make sure to use a strong password to keep your
+                    account secure.</p>
 
-            <div class="mt-4">
-                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-            </div>
+                <!-- Display Validation Errors -->
+                <x-validation-errors class="mb-4" />
 
-            <div class="flex items-center justify-end mt-4">
-                <x-button>
-                    {{ __('Reset Password') }}
-                </x-button>
+                <form class="row tracking_form" method="POST" action="{{ route('password.update') }}"
+                    novalidate="novalidate">
+                    @csrf
+                    <input type="hidden" name="token" value="{{ $request->route('token') }}">
+
+                    <!-- Email Field -->
+                    <div class="col-md-12 form-group">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email"
+                            value="{{ old('email', $request->email) }}" required autofocus autocomplete="username"
+                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'">
+                    </div>
+
+                    <!-- Password Field -->
+                    <div class="col-md-12 form-group">
+                        <input type="password" class="form-control" id="password" name="password"
+                            placeholder="New Password" required autocomplete="new-password"
+                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'New Password'">
+                    </div>
+
+                    <!-- Confirm Password Field -->
+                    <div class="col-md-12 form-group">
+                        <input type="password" class="form-control" id="password_confirmation"
+                            name="password_confirmation" placeholder="Confirm New Password" required
+                            autocomplete="new-password" onfocus="this.placeholder = ''"
+                            onblur="this.placeholder = 'Confirm New Password'">
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="col-md-12 form-group">
+                        <button type="submit" class="primary-btn">Reset Password</button>
+                    </div>
+                </form>
             </div>
-        </form>
-    </x-authentication-card>
+        </div>
+    </section>
+    <!--================End Reset Password Box Area =================-->
 </x-guest-layout>

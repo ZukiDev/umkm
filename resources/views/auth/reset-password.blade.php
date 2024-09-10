@@ -4,9 +4,9 @@
         <div class="container">
             <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
                 <div class="col-first">
-                    <h1>Reset Password</h1>
+                    <h1>Reset Kata Sandi</h1>
                     <nav class="d-flex align-items-center">
-                        <h4 class="text-light">Enter your new password below</h4>
+                        <h4 class="text-light">Masukkan kata sandi baru Anda di bawah ini</h4>
                     </nav>
                 </div>
             </div>
@@ -18,8 +18,8 @@
     <section class="login_box_area section_gap">
         <div class="container">
             <div class="login_box_inner">
-                <p>Please enter your new password below to reset it. Make sure to use a strong password to keep your
-                    account secure.</p>
+                <p>Masukkan kata sandi baru Anda di bawah ini untuk meresetnya. Gunakan kombinasi huruf, angka, dan
+                    simbol untuk menjaga keamanan akun Anda.</p>
 
                 <!-- Display Validation Errors -->
                 <x-validation-errors class="mb-4" />
@@ -31,29 +31,33 @@
 
                     <!-- Email Field -->
                     <div class="col-md-12 form-group">
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email"
-                            value="{{ old('email', $request->email) }}" required autofocus autocomplete="username"
-                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'">
+                        <input type="email" class="form-control" id="email" name="email"
+                            placeholder="Masukkan Email Anda" value="{{ old('email', $request->email) }}" required
+                            autofocus autocomplete="username">
                     </div>
 
                     <!-- Password Field -->
                     <div class="col-md-12 form-group">
                         <input type="password" class="form-control" id="password" name="password"
-                            placeholder="New Password" required autocomplete="new-password"
-                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'New Password'">
+                            placeholder="Buat Kata Sandi Baru" required autocomplete="new-password">
                     </div>
 
                     <!-- Confirm Password Field -->
                     <div class="col-md-12 form-group">
                         <input type="password" class="form-control" id="password_confirmation"
-                            name="password_confirmation" placeholder="Confirm New Password" required
-                            autocomplete="new-password" onfocus="this.placeholder = ''"
-                            onblur="this.placeholder = 'Confirm New Password'">
+                            name="password_confirmation" placeholder="Konfirmasi Kata Sandi Baru" required
+                            autocomplete="new-password">
+                    </div>
+
+                    <!-- Password Tips -->
+                    <div class="col-md-12 form-group text-center">
+                        <small class="text-muted">Tips: Gunakan minimal 8 karakter dengan campuran huruf besar, kecil,
+                            angka, dan simbol.</small>
                     </div>
 
                     <!-- Submit Button -->
                     <div class="col-md-12 form-group">
-                        <button type="submit" class="primary-btn">Reset Password</button>
+                        <button type="submit" class="primary-btn w-100">Reset Kata Sandi</button>
                     </div>
                 </form>
             </div>

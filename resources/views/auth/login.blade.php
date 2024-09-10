@@ -4,9 +4,9 @@
         <div class="container">
             <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
                 <div class="col-first">
-                    <h1>Welcome Back !</h1>
+                    <h1>Selamat Datang Kembali!</h1>
                     <nav class="d-flex align-items-center">
-                        <h4 class="text-light">Enter yout details</h4>
+                        <h4 class="text-light">Masukkan detail Anda untuk melanjutkan</h4>
                     </nav>
                 </div>
             </div>
@@ -18,22 +18,23 @@
     <section class="login_box_area section_gap">
         <div class="container">
             <div class="row">
+                <!-- Welcome Image & Info Section -->
                 <div class="col-lg-6">
                     <div class="login_box_img">
-                        <img class="img-fluid" src="{{ asset('assets/img/login.jpg') }}" alt="">
+                        <img class="img-fluid" src="{{ asset('assets/img/login.jpg') }}" alt="Welcome Image">
                         <div class="hover">
-                            <h4>Welcome to Our Website!</h4>
-                            <p>We are delighted to have you here. If you are new and looking to join our community, you
-                                can easily create an account to get started. Enjoy exploring our features and services
-                                designed to enhance your experience.</p>
-                            <a class="primary-btn" href="{{ route('register') }}">Create an Account</a>
-
+                            <h4>Selamat Datang di Website Kami!</h4>
+                            <p>Kami senang Anda di sini. Jika baru, buat akun baru dengan mudah dan mulai nikmati
+                                fitur-fitur kami.</p>
+                            <a class="primary-btn" href="{{ route('register') }}">Buat Akun Baru</a>
                         </div>
                     </div>
                 </div>
+
+                <!-- Login Form Section -->
                 <div class="col-lg-6">
                     <div class="login_form_inner">
-                        <h3>Log in to enter</h3>
+                        <h3>Masuk untuk Melanjutkan</h3>
 
                         <!-- Display Validation Errors -->
                         <x-validation-errors class="mb-4" />
@@ -45,6 +46,7 @@
                             </div>
                         @endif
 
+                        <!-- Login Form -->
                         <form class="row login_form" method="POST" action="{{ route('login') }}"
                             novalidate="novalidate">
                             @csrf
@@ -52,31 +54,28 @@
                             <!-- Email Field -->
                             <div class="col-md-12 form-group">
                                 <input type="email" class="form-control" id="email" name="email"
-                                    placeholder="Email" value="{{ old('email') }}" required autofocus
-                                    autocomplete="username" onfocus="this.placeholder = ''"
-                                    onblur="this.placeholder = 'Email'">
+                                    placeholder="Masukkan Email Anda" value="{{ old('email') }}" required autofocus
+                                    autocomplete="username">
                             </div>
 
                             <!-- Password Field -->
                             <div class="col-md-12 form-group">
                                 <input type="password" class="form-control" id="password" name="password"
-                                    placeholder="Password" required autocomplete="current-password"
-                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
+                                    placeholder="Masukkan Kata Sandi Anda" required autocomplete="current-password">
                             </div>
 
                             <!-- Remember Me Checkbox -->
-                            <div class="col-md-12 form-group">
-                                <div class="creat_account">
-                                    <input type="checkbox" id="remember_me" name="remember">
-                                    <label for="remember_me">Keep me logged in</label>
-                                </div>
+                            <div class="col-md-12 form-group d-flex align-items-center">
+                                <input type="checkbox" id="remember_me" name="remember" class="me-2">
+                                <label for="remember_me" class="mb-0">Tetap Masuk</label>
                             </div>
 
                             <!-- Submit Button and Forgot Password Link -->
                             <div class="col-md-12 form-group">
-                                <button type="submit" class="primary-btn">Log In</button>
+                                <button type="submit" class="primary-btn w-100">Masuk</button>
                                 @if (Route::has('password.request'))
-                                    <a href="{{ route('password.request') }}">Forgot Password?</a>
+                                    <a class="text-center d-block mt-3" href="{{ route('password.request') }}">Lupa Kata
+                                        Sandi?</a>
                                 @endif
                             </div>
                         </form>

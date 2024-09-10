@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="no-js">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="{{ asset('assets/img/fav.png') }}" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-
+    <!-- meta character set -->
+    <meta charset="UTF-8" />
+    <!-- Site Title -->
+    <title>{{ config('app.name', 'UMKM') }}</title>
     {{-- CSS Template --}}
     <link rel="stylesheet" href="{{ asset('assets/css/linearicons.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.min.css') }}" />
@@ -23,48 +23,11 @@
     <link rel="stylesheet" href="{{ asset('assets/css/ion.rangeSlider.skinFlat.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/magnific-popup.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" />
-
-    <!-- Styles -->
-    @livewireStyles
 </head>
 
 <body>
-    <!-- Page Heading -->
-    @include('layouts.partials.header')
 
-    <!-- Page Content -->
-    {{-- {{ $slot }} --}}
-    <!-- start banner Area -->
-    @include('layouts.partials.banner')
-    <!-- End banner Area -->
-
-    <!-- start features Area -->
-    @include('layouts.partials.features')
-    <!-- end features Area -->
-
-    <!-- Start category Area -->
-    @include('layouts.partials.category')
-    <!-- End category Area -->
-
-    <!-- start product Area -->
-    @include('layouts.partials.product')
-    <!-- end product Area -->
-
-    <!-- Start exclusive deal Area -->
-    @include('layouts.partials.exclusive-deal')
-    <!-- End exclusive deal Area -->
-
-    <!-- Start brand Area -->
-    @include('layouts.partials.brand')
-    <!-- End brand Area -->
-
-    <!-- Start related-product Area -->
-    @include('layouts.partials.related-product')
-    <!-- End related-product Area -->
-
-    @include('layouts.partials.footer')
-
-    @stack('modals')
+    @include('components.welcome')
 
     <script src="{{ asset('assets/js/vendor/jquery-2.2.4.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
@@ -83,7 +46,6 @@
     <script src="{{ asset('assets/js/gmaps.min.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
-    @livewireScripts
 </body>
 
 </html>

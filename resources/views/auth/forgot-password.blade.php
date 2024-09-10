@@ -1,37 +1,37 @@
 <x-guest-layout>
-    <!-- Start Banner Area -->
+    <!-- Mulai Area Banner -->
     <section class="banner-area organic-breadcrumb">
         <div class="container">
             <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
                 <div class="col-first">
-                    <h1>Password Reset</h1>
+                    <h1>Reset Kata Sandi</h1>
                     <nav class="d-flex align-items-center">
-                        <h4 class="text-light">Enter your email address to reset your password</h4>
+                        <h4 class="text-light">Masukkan alamat email Anda untuk mereset kata sandi</h4>
                     </nav>
                 </div>
             </div>
         </div>
     </section>
-    <!-- End Banner Area -->
+    <!-- Akhir Area Banner -->
 
-    <!--================Forgot Password Box Area =================-->
+    <!--================Area Kotak Lupa Kata Sandi =================-->
     <section class="login_box_area section_gap">
         <div class="container">
             <div class="login_box_inner">
-                <p>Forgot your password? No problem. Just enter your email address below, and we'll send you a link to
-                    reset your password.</p>
+                <p>Lupa kata sandi Anda? Tidak masalah. Cukup masukkan alamat email Anda di bawah ini, dan kami akan
+                    mengirimkan tautan untuk mereset kata sandi Anda.</p>
 
-                <!-- Display Status Message -->
+                <!-- Tampilkan Pesan Status -->
                 @if (session('status'))
                     <div class="alert alert-success text-center">
                         {{ session('status') }}
                     </div>
                 @endif
 
-                <!-- Display Validation Errors -->
+                <!-- Tampilkan Validasi Kesalahan -->
                 @if ($errors->any())
                     <div class="alert alert-danger text-center">
-                        <strong>Whoops! Something went wrong.</strong>
+                        <strong>Ups! Ada yang salah.</strong>
                         <ul>
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
@@ -44,20 +44,20 @@
                     novalidate="novalidate">
                     @csrf
 
-                    <!-- Email Field -->
+                    <!-- Field Email -->
                     <div class="col-md-12 form-group">
                         <input type="email" class="form-control" id="email" name="email" placeholder="Email"
                             value="{{ old('email') }}" required autofocus autocomplete="username"
                             onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'">
                     </div>
 
-                    <!-- Submit Button -->
+                    <!-- Tombol Kirim -->
                     <div class="col-md-12 form-group">
-                        <button type="submit" class="primary-btn">Send Password Reset Link</button>
+                        <button type="submit" class="primary-btn">Kirim Tautan Reset Kata Sandi</button>
                     </div>
                 </form>
             </div>
         </div>
     </section>
-    <!--================End Forgot Password Box Area =================-->
+    <!--================Akhir Area Kotak Lupa Kata Sandi =================-->
 </x-guest-layout>

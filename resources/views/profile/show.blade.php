@@ -5,10 +5,11 @@
             <div class="container">
                 <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
                     <div class="col-first">
-                        <h1>Informasi Pribadi</h1>
-                        <nav class="d-flex align-items-center">
-                            <h4 class="text-light">Anda dapat mengelola informasi pribadi Anda seperti nama, email, dan
-                                kata sandi!</h4>
+                        <h1 class="text-2xl font-bold text-light mb-4">Informasi Pribadi</h1>
+                        <nav class="flex items-center">
+                            <h4 class="text-sm text-light">
+                                Anda dapat mengelola informasi pribadi Anda seperti nama, email, dan kata sandi!
+                            </h4>
                         </nav>
                     </div>
                 </div>

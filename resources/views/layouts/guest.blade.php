@@ -24,11 +24,11 @@
     <link rel="stylesheet" href="{{ asset('assets/css/magnific-popup.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" />
 
-    <!-- Styles -->
-    @livewireStyles
+    {{-- <!-- Styles -->
+    @livewireStyles --}}
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 </head>
 
 <body>
@@ -58,7 +58,7 @@
     <script src="{{ asset('assets/js/gmaps.min.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
-    @livewireScripts
+    {{-- @livewireScripts --}}
 
 </body>
 

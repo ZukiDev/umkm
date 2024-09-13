@@ -1,63 +1,34 @@
 <x-guest-layout>
-    <!-- Mulai Area Banner -->
-    <section class="banner-area organic-breadcrumb">
-        <div class="container">
-            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-                <div class="col-first">
-                    <h1>Reset Kata Sandi</h1>
-                    <nav class="d-flex align-items-center">
-                        <h4 class="text-light">Masukkan alamat email Anda untuk mereset kata sandi</h4>
-                    </nav>
-                </div>
-            </div>
+    <x-authentication-card>
+        <x-slot name="logo">
+            <x-authentication-card-logo />
+        </x-slot>
+
+        <div class="mb-4 text-sm text-gray-600">
+            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
         </div>
-    </section>
-    <!-- Akhir Area Banner -->
 
-    <!--================Area Kotak Lupa Kata Sandi =================-->
-    <section class="login_box_area section_gap">
-        <div class="container">
-            <div class="login_box_inner">
-                <p>Lupa kata sandi Anda? Tidak masalah. Cukup masukkan alamat email Anda di bawah ini, dan kami akan
-                    mengirimkan tautan untuk mereset kata sandi Anda.</p>
-
-                <!-- Tampilkan Pesan Status -->
-                @if (session('status'))
-                    <div class="alert alert-success text-center">
-                        {{ session('status') }}
-                    </div>
-                @endif
-
-                <!-- Tampilkan Validasi Kesalahan -->
-                @if ($errors->any())
-                    <div class="alert alert-danger text-center">
-                        <strong>Ups! Ada yang salah.</strong>
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-
-                <form class="row tracking_form" method="POST" action="{{ route('password.email') }}"
-                    novalidate="novalidate">
-                    @csrf
-
-                    <!-- Field Email -->
-                    <div class="col-md-12 form-group">
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email"
-                            value="{{ old('email') }}" required autofocus autocomplete="username"
-                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'">
-                    </div>
-
-                    <!-- Tombol Kirim -->
-                    <div class="col-md-12 form-group">
-                        <button type="submit" class="primary-btn">Kirim Tautan Reset Kata Sandi</button>
-                    </div>
-                </form>
+        @session('status')
+            <div class="mb-4 font-medium text-sm text-green-600">
+                {{ $value }}
             </div>
-        </div>
-    </section>
-    <!--================Akhir Area Kotak Lupa Kata Sandi =================-->
+        @endsession
+
+        <x-validation-errors class="mb-4" />
+
+        <form method="POST" action="{{ route('password.email') }}">
+            @csrf
+
+            <div class="block">
+                <x-label for="email" value="{{ __('Email') }}" />
+                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            </div>
+
+            <div class="flex items-center justify-end mt-4">
+                <x-button>
+                    {{ __('Email Password Reset Link') }}
+                </x-button>
+            </div>
+        </form>
+    </x-authentication-card>
 </x-guest-layout>

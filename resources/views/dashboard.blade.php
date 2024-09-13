@@ -1,29 +1,15 @@
 <x-app-layout>
-    <!-- start banner Area -->
-    @include('layouts.partials.banner')
-    <!-- End banner Area -->
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Dashboard') }}
+        </h2>
+    </x-slot>
 
-    <!-- start features Area -->
-    @include('layouts.partials.features')
-    <!-- end features Area -->
-
-    <!-- Start category Area -->
-    @include('layouts.partials.category')
-    <!-- End category Area -->
-
-    <!-- start product Area -->
-    @include('layouts.partials.product')
-    <!-- end product Area -->
-
-    <!-- Start exclusive deal Area -->
-    @include('layouts.partials.exclusive-deal')
-    <!-- End exclusive deal Area -->
-
-    <!-- Start brand Area -->
-    @include('layouts.partials.brand')
-    <!-- End brand Area -->
-
-    <!-- Start related-product Area -->
-    @include('layouts.partials.related-product')
-    <!-- End related-product Area -->
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <x-welcome />
+            </div>
+        </div>
+    </div>
 </x-app-layout>

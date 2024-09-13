@@ -1,114 +1,60 @@
 <x-guest-layout>
-    <!-- Start Banner Area -->
-    <section class="banner-area organic-breadcrumb">
-        <div class="container">
-            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-                <div class="col-first">
-                    <h1>Selamat Datang !</h1>
-                    <nav class="d-flex align-items-center">
-                        <h4 class="text-light">Buat Akun Anda Sekarang</h4>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End Banner Area -->
+    <x-authentication-card>
+        <x-slot name="logo">
+            <x-authentication-card-logo />
+        </x-slot>
 
-    <!--================Registration Box Area =================-->
-    <section class="login_box_area section_gap">
-        <div class="container">
-            <div class="row">
-                <!-- Login Prompt Section -->
-                <div class="col-lg-6">
-                    <div class="login_box_img">
-                        <img class="img-fluid" src="{{ asset('assets/img/login.jpg') }}" alt="Registration Image">
-                        <div class="hover">
-                            <h4>Sudah Punya Akun?</h4>
-                            <p>Jika Anda sudah memiliki akun, masuk untuk mengelola pengaturan Anda.</p>
-                            <a class="primary-btn" href="{{ route('login') }}">Masuk</a>
+        <x-validation-errors class="mb-4" />
+
+        <form method="POST" action="{{ route('register') }}">
+            @csrf
+
+            <div>
+                <x-label for="name" value="{{ __('Name') }}" />
+                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="email" value="{{ __('Email') }}" />
+                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="password" value="{{ __('Password') }}" />
+                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
+                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+            </div>
+
+            @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
+                <div class="mt-4">
+                    <x-label for="terms">
+                        <div class="flex items-center">
+                            <x-checkbox name="terms" id="terms" required />
+
+                            <div class="ms-2">
+                                {!! __('I agree to the :terms_of_service and :privacy_policy', [
+                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Terms of Service').'</a>',
+                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Privacy Policy').'</a>',
+                                ]) !!}
+                            </div>
                         </div>
-                    </div>
+                    </x-label>
                 </div>
+            @endif
 
-                <!-- Registration Form Section -->
-                <div class="col-lg-6">
-                    <div class="login_form_inner">
-                        <h3>Buat Akun Baru</h3>
+            <div class="flex items-center justify-end mt-4">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+                    {{ __('Already registered?') }}
+                </a>
 
-                        <!-- Display Validation Errors -->
-                        <x-validation-errors class="mb-4" />
-
-                        <!-- Display Status Message -->
-                        @if (session('status'))
-                            <div class="alert alert-success text-center">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-
-                        <!-- Registration Form -->
-                        <form class="row login_form" method="POST" action="{{ route('register') }}"
-                            novalidate="novalidate">
-                            @csrf
-
-                            <!-- Name Field -->
-                            <div class="col-md-12 form-group">
-                                <input type="text" class="form-control" id="name" name="name"
-                                    placeholder="Masukkan Nama Anda" value="{{ old('name') }}" required autofocus
-                                    autocomplete="name">
-                            </div>
-
-                            <!-- Email Field -->
-                            <div class="col-md-12 form-group">
-                                <input type="email" class="form-control" id="email" name="email"
-                                    placeholder="Masukkan Email Anda" value="{{ old('email') }}" required
-                                    autocomplete="username">
-                            </div>
-
-                            <!-- Password Field -->
-                            <div class="col-md-12 form-group">
-                                <input type="password" class="form-control" id="password" name="password"
-                                    placeholder="Buat Kata Sandi" required autocomplete="new-password">
-                            </div>
-
-                            <!-- Confirm Password Field -->
-                            <div class="col-md-12 form-group">
-                                <input type="password" class="form-control" id="password_confirmation"
-                                    name="password_confirmation" placeholder="Konfirmasi Kata Sandi" required
-                                    autocomplete="new-password">
-                            </div>
-
-                            @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
-                                <!-- Terms and Privacy Policy -->
-                                <div class="col-md-12 form-group">
-                                    <div class="creat_account">
-                                        <input type="checkbox" id="terms" name="terms" required>
-                                        <label for="terms">
-                                            Saya setuju dengan
-                                            <a target="_blank" href="{{ route('terms.show') }}"
-                                                class="underline text-sm text-gray-600 hover:text-gray-900">Syarat
-                                                Layanan</a>
-                                            dan
-                                            <a target="_blank" href="{{ route('policy.show') }}"
-                                                class="underline text-sm text-gray-600 hover:text-gray-900">Kebijakan
-                                                Privasi</a>.
-                                        </label>
-                                    </div>
-                                </div>
-                            @endif
-
-                            <!-- Submit Button and Login Link -->
-                            <div class="col-md-12 form-group">
-                                <button type="submit" class="primary-btn w-100">Daftar</button>
-                                <a class="text-center d-block mt-3 underline text-sm text-gray-600 hover:text-gray-900"
-                                    href="{{ route('login') }}">
-                                    Sudah terdaftar? Masuk di sini
-                                </a>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                <x-button class="ms-4">
+                    {{ __('Register') }}
+                </x-button>
             </div>
-        </div>
-    </section>
-    <!--================End Registration Box Area =================-->
+        </form>
+    </x-authentication-card>
 </x-guest-layout>

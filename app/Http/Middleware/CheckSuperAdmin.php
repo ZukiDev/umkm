@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\SuperAdmin;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,7 +17,15 @@ class CheckSuperAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->superAdmin) {
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
+        $user = Auth::user();
+
+        $superAdmin = SuperAdmin::where('user_id', $user->id)->first();
+
+        if ($superAdmin != null) {
             return $next($request);
         }
 

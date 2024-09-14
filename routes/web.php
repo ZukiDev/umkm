@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController; // Add this line
 use App\Http\Controllers\CustomerController; // Add this line
 use App\Http\Controllers\AdminController; // Add this line
 use App\Http\Controllers\SuperAdminController; // Add this line
@@ -14,19 +15,18 @@ Route::middleware([
     config('jetstream.auth_session', 'default'),
     'verified',
 ])->group(function () {
-    // Route::get('/dashboard', function () {
-    //     return view('dashboard');
-    // })->name('dashboard');
-    Route::middleware(['auth'])->group(function () {
-        Route::get('/', [CustomerController::class, 'home'])->name('customer.home');
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+    Route::middleware(['auth'])->group(function () {
+        Route::middleware(['customer'])->group(function () {
+            Route::get('/', [CustomerController::class, 'home'])->name('customer.home');
+        });
         Route::middleware(['admin'])->group(function () {
-            Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+            Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
         });
 
-        Route::middleware(['superadmin'])->group(function () {
-            Route::get('/super-admin', [SuperAdminController::class, 'index'])->name('superadmin.index'); // Ensure 'superadmin' middleware is defined
-            Route::get('/super-admin', [SuperAdminController::class, 'index'])->name('superadmin.index');
+        Route::middleware(['super-admin'])->group(function () {
+            Route::get('/super-admin', [SuperAdminController::class, 'index'])->name('superAdmin.index');
         });
     });
 });

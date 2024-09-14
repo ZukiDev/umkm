@@ -263,10 +263,14 @@
                         </ul>
 
                         <div class="p-2 text-sm font-medium text-gray-900 dark:text-white">
-                            <a href="#" title=""
-                                class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600">
-                                Sign Out </a>
+                            <form method="POST" action="{{ route('logout') }}" x-data>
+                                @csrf
+                                <button type="submit" class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600">
+                                    Sign Out
+                                </button>
+                            </form>
                         </div>
+
                     </div>
 
                     <button type="button" data-collapse-toggle="ecommerce-navbar-menu-1"

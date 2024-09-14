@@ -21,9 +21,11 @@ class CheckAdmin
             return redirect('/');
         }
 
-        $admin = Admin::where('user_id', Auth::user()->id)->first();
+        $user = Auth::user();
 
-        if ($admin) {
+        $admin = Admin::where('user_id', $user->id)->first();
+
+        if ($admin != null) {
             return $next($request);
         }
 

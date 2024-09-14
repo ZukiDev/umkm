@@ -7,7 +7,7 @@ use App\Http\Controllers\AdminController; // Add this line
 use App\Http\Controllers\SuperAdminController; // Add this line
 
 Route::get('/', function () {
-    return view('homepage');
+    return view('welcome');
 });
 
 Route::middleware([
@@ -19,7 +19,7 @@ Route::middleware([
 
     Route::middleware(['auth'])->group(function () {
         Route::middleware(['customer'])->group(function () {
-            Route::get('/', [CustomerController::class, 'home'])->name('customer.home');
+            // Route::get('/', [CustomerController::class, 'home'])->name('customer.home');
         });
         Route::middleware(['admin'])->group(function () {
             Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');

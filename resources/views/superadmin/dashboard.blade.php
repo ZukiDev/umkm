@@ -1,488 +1,1483 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      eCommerce Dashboard | TailAdmin - Tailwind CSS Admin Dashboard Template
-    </title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<html lang="en" class="light scroll-smooth" dir="ltr">
 
-  </head>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ config('app.name', 'UMKM Blitar') }}</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="E-Commerce UMKM Blitar">
+    <meta name="keywords" content="umkm, blitar, ecommmerce">
+    <meta name="version" content="1.0.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <body
-    x-data="{ page: 'ecommerce', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
-    x-init="
-         darkMode = JSON.parse(localStorage.getItem('darkMode'));
-         $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
-    :class="{'dark text-bodydark bg-boxdark-2': darkMode === true}"
-  >
-    <!-- ===== Preloader Start ===== -->
-    <include src="./partials/preloader.html"></include>
-    <!-- ===== Preloader End ===== -->
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
-    <!-- ===== Page Wrapper Start ===== -->
-    <div class="flex h-screen overflow-hidden">
-      <!-- ===== Sidebar Start ===== -->
-      <include src="./partials/sidebar.html"></include>
-      <!-- ===== Sidebar End ===== -->
+    <!-- Css -->
+    <link href="{{ asset('assets/libs/jsvectormap/css/jsvectormap.min.css') }}" rel="stylesheet">
+    <!-- Main Css -->
+    <link href="{{ asset('assets/libs/simplebar/simplebar.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/libs/@iconscout/unicons/css/line.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ asset('assets/libs/@mdi/font/css/materialdesignicons.min.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{ asset('assets/css/tailwind.css') }}">
 
-      <!-- ===== Content Area Start ===== -->
-      <div
-        class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden"
-      >
-        <!-- ===== Header Start ===== -->
-        <include src="./partials/header.html" />
-        <!-- ===== Header End ===== -->
+</head>
 
-        <!-- ===== Main Content Start ===== -->
-        <main>
-          <div class="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
-            <div
-              class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5"
-            >
-              <!-- Card Item Start -->
-              <div
-                class="rounded-sm border border-stroke bg-white px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark"
-              >
-                <div
-                  class="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4"
-                >
-                  <svg
-                    class="fill-primary dark:fill-white"
-                    width="22"
-                    height="16"
-                    viewBox="0 0 22 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M11 15.1156C4.19376 15.1156 0.825012 8.61876 0.687512 8.34376C0.584387 8.13751 0.584387 7.86251 0.687512 7.65626C0.825012 7.38126 4.19376 0.918762 11 0.918762C17.8063 0.918762 21.175 7.38126 21.3125 7.65626C21.4156 7.86251 21.4156 8.13751 21.3125 8.34376C21.175 8.61876 17.8063 15.1156 11 15.1156ZM2.26876 8.00001C3.02501 9.27189 5.98126 13.5688 11 13.5688C16.0188 13.5688 18.975 9.27189 19.7313 8.00001C18.975 6.72814 16.0188 2.43126 11 2.43126C5.98126 2.43126 3.02501 6.72814 2.26876 8.00001Z"
-                      fill=""
-                    />
-                    <path
-                      d="M11 10.9219C9.38438 10.9219 8.07812 9.61562 8.07812 8C8.07812 6.38438 9.38438 5.07812 11 5.07812C12.6156 5.07812 13.9219 6.38438 13.9219 8C13.9219 9.61562 12.6156 10.9219 11 10.9219ZM11 6.625C10.2437 6.625 9.625 7.24375 9.625 8C9.625 8.75625 10.2437 9.375 11 9.375C11.7563 9.375 12.375 8.75625 12.375 8C12.375 7.24375 11.7563 6.625 11 6.625Z"
-                      fill=""
-                    />
-                  </svg>
-                </div>
-
-                <div class="mt-4 flex items-end justify-between">
-                  <div>
-                    <h4
-                      class="text-title-md font-bold text-black dark:text-white"
-                    >
-                      $3.456K
-                    </h4>
-                    <span class="text-sm font-medium">Total views</span>
-                  </div>
-
-                  <span
-                    class="flex items-center gap-1 text-sm font-medium text-meta-3"
-                  >
-                    0.43%
-                    <svg
-                      class="fill-meta-3"
-                      width="10"
-                      height="11"
-                      viewBox="0 0 10 11"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M4.35716 2.47737L0.908974 5.82987L5.0443e-07 4.94612L5 0.0848689L10 4.94612L9.09103 5.82987L5.64284 2.47737L5.64284 10.0849L4.35716 10.0849L4.35716 2.47737Z"
-                        fill=""
-                      />
-                    </svg>
-                  </span>
-                </div>
-              </div>
-              <!-- Card Item End -->
-
-              <!-- Card Item Start -->
-              <div
-                class="rounded-sm border border-stroke bg-white px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark"
-              >
-                <div
-                  class="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4"
-                >
-                  <svg
-                    class="fill-primary dark:fill-white"
-                    width="20"
-                    height="22"
-                    viewBox="0 0 20 22"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M11.7531 16.4312C10.3781 16.4312 9.27808 17.5312 9.27808 18.9062C9.27808 20.2812 10.3781 21.3812 11.7531 21.3812C13.1281 21.3812 14.2281 20.2812 14.2281 18.9062C14.2281 17.5656 13.0937 16.4312 11.7531 16.4312ZM11.7531 19.8687C11.2375 19.8687 10.825 19.4562 10.825 18.9406C10.825 18.425 11.2375 18.0125 11.7531 18.0125C12.2687 18.0125 12.6812 18.425 12.6812 18.9406C12.6812 19.4219 12.2343 19.8687 11.7531 19.8687Z"
-                      fill=""
-                    />
-                    <path
-                      d="M5.22183 16.4312C3.84683 16.4312 2.74683 17.5312 2.74683 18.9062C2.74683 20.2812 3.84683 21.3812 5.22183 21.3812C6.59683 21.3812 7.69683 20.2812 7.69683 18.9062C7.69683 17.5656 6.56245 16.4312 5.22183 16.4312ZM5.22183 19.8687C4.7062 19.8687 4.2937 19.4562 4.2937 18.9406C4.2937 18.425 4.7062 18.0125 5.22183 18.0125C5.73745 18.0125 6.14995 18.425 6.14995 18.9406C6.14995 19.4219 5.73745 19.8687 5.22183 19.8687Z"
-                      fill=""
-                    />
-                    <path
-                      d="M19.0062 0.618744H17.15C16.325 0.618744 15.6031 1.23749 15.5 2.06249L14.95 6.01562H1.37185C1.0281 6.01562 0.684353 6.18749 0.443728 6.46249C0.237478 6.73749 0.134353 7.11562 0.237478 7.45937C0.237478 7.49374 0.237478 7.49374 0.237478 7.52812L2.36873 13.9562C2.50623 14.4375 2.9531 14.7812 3.46873 14.7812H12.9562C14.2281 14.7812 15.3281 13.8187 15.5 12.5469L16.9437 2.26874C16.9437 2.19999 17.0125 2.16562 17.0812 2.16562H18.9375C19.35 2.16562 19.7281 1.82187 19.7281 1.37499C19.7281 0.928119 19.4187 0.618744 19.0062 0.618744ZM14.0219 12.3062C13.9531 12.8219 13.5062 13.2 12.9906 13.2H3.7781L1.92185 7.56249H14.7094L14.0219 12.3062Z"
-                      fill=""
-                    />
-                  </svg>
-                </div>
-
-                <div class="mt-4 flex items-end justify-between">
-                  <div>
-                    <h4
-                      class="text-title-md font-bold text-black dark:text-white"
-                    >
-                      $45,2K
-                    </h4>
-                    <span class="text-sm font-medium">Total Profit</span>
-                  </div>
-
-                  <span
-                    class="flex items-center gap-1 text-sm font-medium text-meta-3"
-                  >
-                    4.35%
-                    <svg
-                      class="fill-meta-3"
-                      width="10"
-                      height="11"
-                      viewBox="0 0 10 11"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M4.35716 2.47737L0.908974 5.82987L5.0443e-07 4.94612L5 0.0848689L10 4.94612L9.09103 5.82987L5.64284 2.47737L5.64284 10.0849L4.35716 10.0849L4.35716 2.47737Z"
-                        fill=""
-                      />
-                    </svg>
-                  </span>
-                </div>
-              </div>
-              <!-- Card Item End -->
-
-              <!-- Card Item Start -->
-              <div
-                class="rounded-sm border border-stroke bg-white px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark"
-              >
-                <div
-                  class="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4"
-                >
-                  <svg
-                    class="fill-primary dark:fill-white"
-                    width="22"
-                    height="22"
-                    viewBox="0 0 22 22"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M21.1063 18.0469L19.3875 3.23126C19.2157 1.71876 17.9438 0.584381 16.3969 0.584381H5.56878C4.05628 0.584381 2.78441 1.71876 2.57816 3.23126L0.859406 18.0469C0.756281 18.9063 1.03128 19.7313 1.61566 20.3844C2.20003 21.0375 2.99066 21.3813 3.85003 21.3813H18.1157C18.975 21.3813 19.8 21.0031 20.35 20.3844C20.9 19.7656 21.2094 18.9063 21.1063 18.0469ZM19.2157 19.3531C18.9407 19.6625 18.5625 19.8344 18.15 19.8344H3.85003C3.43753 19.8344 3.05941 19.6625 2.78441 19.3531C2.50941 19.0438 2.37191 18.6313 2.44066 18.2188L4.12503 3.43751C4.19378 2.71563 4.81253 2.16563 5.56878 2.16563H16.4313C17.1532 2.16563 17.7719 2.71563 17.875 3.43751L19.5938 18.2531C19.6282 18.6656 19.4907 19.0438 19.2157 19.3531Z"
-                      fill=""
-                    />
-                    <path
-                      d="M14.3345 5.29375C13.922 5.39688 13.647 5.80938 13.7501 6.22188C13.7845 6.42813 13.8189 6.63438 13.8189 6.80625C13.8189 8.35313 12.547 9.625 11.0001 9.625C9.45327 9.625 8.1814 8.35313 8.1814 6.80625C8.1814 6.6 8.21577 6.42813 8.25015 6.22188C8.35327 5.80938 8.07827 5.39688 7.66577 5.29375C7.25327 5.19063 6.84077 5.46563 6.73765 5.87813C6.6689 6.1875 6.63452 6.49688 6.63452 6.80625C6.63452 9.2125 8.5939 11.1719 11.0001 11.1719C13.4064 11.1719 15.3658 9.2125 15.3658 6.80625C15.3658 6.49688 15.3314 6.1875 15.2626 5.87813C15.1595 5.46563 14.747 5.225 14.3345 5.29375Z"
-                      fill=""
-                    />
-                  </svg>
-                </div>
-
-                <div class="mt-4 flex items-end justify-between">
-                  <div>
-                    <h4
-                      class="text-title-md font-bold text-black dark:text-white"
-                    >
-                      2.450
-                    </h4>
-                    <span class="text-sm font-medium">Total Product</span>
-                  </div>
-
-                  <span
-                    class="flex items-center gap-1 text-sm font-medium text-meta-3"
-                  >
-                    2.59%
-                    <svg
-                      class="fill-meta-3"
-                      width="10"
-                      height="11"
-                      viewBox="0 0 10 11"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M4.35716 2.47737L0.908974 5.82987L5.0443e-07 4.94612L5 0.0848689L10 4.94612L9.09103 5.82987L5.64284 2.47737L5.64284 10.0849L4.35716 10.0849L4.35716 2.47737Z"
-                        fill=""
-                      />
-                    </svg>
-                  </span>
-                </div>
-              </div>
-              <!-- Card Item End -->
-
-              <!-- Card Item Start -->
-              <div
-                class="rounded-sm border border-stroke bg-white px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark"
-              >
-                <div
-                  class="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4"
-                >
-                  <svg
-                    class="fill-primary dark:fill-white"
-                    width="22"
-                    height="18"
-                    viewBox="0 0 22 18"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M7.18418 8.03751C9.31543 8.03751 11.0686 6.35313 11.0686 4.25626C11.0686 2.15938 9.31543 0.475006 7.18418 0.475006C5.05293 0.475006 3.2998 2.15938 3.2998 4.25626C3.2998 6.35313 5.05293 8.03751 7.18418 8.03751ZM7.18418 2.05626C8.45605 2.05626 9.52168 3.05313 9.52168 4.29063C9.52168 5.52813 8.49043 6.52501 7.18418 6.52501C5.87793 6.52501 4.84668 5.52813 4.84668 4.29063C4.84668 3.05313 5.9123 2.05626 7.18418 2.05626Z"
-                      fill=""
-                    />
-                    <path
-                      d="M15.8124 9.6875C17.6687 9.6875 19.1468 8.24375 19.1468 6.42188C19.1468 4.6 17.6343 3.15625 15.8124 3.15625C13.9905 3.15625 12.478 4.6 12.478 6.42188C12.478 8.24375 13.9905 9.6875 15.8124 9.6875ZM15.8124 4.7375C16.8093 4.7375 17.5999 5.49375 17.5999 6.45625C17.5999 7.41875 16.8093 8.175 15.8124 8.175C14.8155 8.175 14.0249 7.41875 14.0249 6.45625C14.0249 5.49375 14.8155 4.7375 15.8124 4.7375Z"
-                      fill=""
-                    />
-                    <path
-                      d="M15.9843 10.0313H15.6749C14.6437 10.0313 13.6468 10.3406 12.7874 10.8563C11.8593 9.61876 10.3812 8.79376 8.73115 8.79376H5.67178C2.85303 8.82814 0.618652 11.0625 0.618652 13.8469V16.3219C0.618652 16.975 1.13428 17.4906 1.7874 17.4906H20.2468C20.8999 17.4906 21.4499 16.9406 21.4499 16.2875V15.4625C21.4155 12.4719 18.9749 10.0313 15.9843 10.0313ZM2.16553 15.9438V13.8469C2.16553 11.9219 3.74678 10.3406 5.67178 10.3406H8.73115C10.6562 10.3406 12.2374 11.9219 12.2374 13.8469V15.9438H2.16553V15.9438ZM19.8687 15.9438H13.7499V13.8469C13.7499 13.2969 13.6468 12.7469 13.4749 12.2313C14.0937 11.7844 14.8499 11.5781 15.6405 11.5781H15.9499C18.0812 11.5781 19.8343 13.3313 19.8343 15.4625V15.9438H19.8687Z"
-                      fill=""
-                    />
-                  </svg>
-                </div>
-
-                <div class="mt-4 flex items-end justify-between">
-                  <div>
-                    <h4
-                      class="text-title-md font-bold text-black dark:text-white"
-                    >
-                      3.456
-                    </h4>
-                    <span class="text-sm font-medium">Total Users</span>
-                  </div>
-
-                  <span
-                    class="flex items-center gap-1 text-sm font-medium text-meta-5"
-                  >
-                    0.95%
-                    <svg
-                      class="fill-meta-5"
-                      width="10"
-                      height="11"
-                      viewBox="0 0 10 11"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M5.64284 7.69237L9.09102 4.33987L10 5.22362L5 10.0849L-8.98488e-07 5.22362L0.908973 4.33987L4.35716 7.69237L4.35716 0.0848701L5.64284 0.0848704L5.64284 7.69237Z"
-                        fill=""
-                      />
-                    </svg>
-                  </span>
-                </div>
-              </div>
-              <!-- Card Item End -->
+<body class="font-nunito text-base text-black dark:text-white dark:bg-slate-900">
+    <!-- Loader Start -->
+    <div id="preloader">
+        <div id="status">
+            <div class="spinner">
+                <div class="double-bounce1"></div>
+                <div class="double-bounce2"></div>
             </div>
-
-            <div
-              class="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5"
-            >
-              <!-- ====== Chart One Start -->
-              <include src="./partials/chart-01.html" />
-              <!-- ====== Chart One End -->
-
-              <!-- ====== Chart Two Start -->
-              <include src="./partials/chart-02.html" />
-              <!-- ====== Chart Two End -->
-
-              <!-- ====== Chart Three Start -->
-              <include src="./partials/chart-03.html" />
-              <!-- ====== Chart Three End -->
-
-              <!-- ====== Map One Start -->
-              <include src="./partials/map-01.html" />
-              <!-- ====== Map One End -->
-
-              <!-- ====== Table One Start -->
-              <div class="col-span-12 xl:col-span-8">
-                <include src="./partials/table-01.html" />
-              </div>
-              <!-- ====== Table One End -->
-
-              <!-- ====== Chat Card Start -->
-              <div
-                class="col-span-12 rounded-sm border border-stroke bg-white py-6 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4"
-              >
-                <h4
-                  class="mb-6 px-7.5 text-xl font-bold text-black dark:text-white"
-                >
-                  Chats
-                </h4>
-
-                <div>
-                  <a
-                    href="messages.html"
-                    class="flex items-center gap-5 px-7.5 py-3 hover:bg-gray-3 dark:hover:bg-meta-4"
-                  >
-                    <div class="relative h-14 w-14 rounded-full">
-                      <img src="./images/user/user-03.png" alt="User" />
-                      <span
-                        class="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-meta-3"
-                      ></span>
-                    </div>
-
-                    <div class="flex flex-1 items-center justify-between">
-                      <div>
-                        <h5 class="font-medium text-black dark:text-white">
-                          Devid Heilo
-                        </h5>
-                        <p>
-                          <span
-                            class="text-sm font-medium text-black dark:text-white"
-                            >Hello, how are you?</span
-                          >
-                          <span class="text-xs"> . 12 min</span>
-                        </p>
-                      </div>
-                      <div
-                        class="flex h-6 w-6 items-center justify-center rounded-full bg-primary"
-                      >
-                        <span class="text-sm font-medium text-white">3</span>
-                      </div>
-                    </div>
-                  </a>
-                  <a
-                    href="messages.html"
-                    class="flex items-center gap-5 px-7.5 py-3 hover:bg-gray-3 dark:hover:bg-meta-4"
-                  >
-                    <div class="relative h-14 w-14 rounded-full">
-                      <img src="./images/user/user-04.png" alt="User" />
-                      <span
-                        class="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-meta-3"
-                      ></span>
-                    </div>
-
-                    <div class="flex flex-1 items-center justify-between">
-                      <div>
-                        <h5 class="font-medium">Henry Fisher</h5>
-                        <p>
-                          <span class="text-sm font-medium"
-                            >I am waiting for you</span
-                          >
-                          <span class="text-xs"> . 5:54 PM</span>
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                  <a
-                    href="messages.html"
-                    class="flex items-center gap-5 px-7.5 py-3 hover:bg-gray-3 dark:hover:bg-meta-4"
-                  >
-                    <div class="relative h-14 w-14 rounded-full">
-                      <img src="./images/user/user-05.png" alt="User" />
-                      <span
-                        class="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-meta-6"
-                      ></span>
-                    </div>
-
-                    <div class="flex flex-1 items-center justify-between">
-                      <div>
-                        <h5 class="font-medium">Wilium Smith</h5>
-                        <p>
-                          <span class="text-sm font-medium"
-                            >Where are you now?</span
-                          >
-                          <span class="text-xs"> . 10:12 PM</span>
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                  <a
-                    href="messages.html"
-                    class="flex items-center gap-5 px-7.5 py-3 hover:bg-gray-3 dark:hover:bg-meta-4"
-                  >
-                    <div class="relative h-14 w-14 rounded-full">
-                      <img src="./images/user/user-01.png" alt="User" />
-                      <span
-                        class="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-meta-3"
-                      ></span>
-                    </div>
-
-                    <div class="flex flex-1 items-center justify-between">
-                      <div>
-                        <h5 class="font-medium text-black dark:text-white">
-                          Henry Deco
-                        </h5>
-                        <p>
-                          <span
-                            class="text-sm font-medium text-black dark:text-white"
-                            >Thank you so much!</span
-                          >
-                          <span class="text-xs"> . Sun</span>
-                        </p>
-                      </div>
-                      <div
-                        class="flex h-6 w-6 items-center justify-center rounded-full bg-primary"
-                      >
-                        <span class="text-sm font-medium text-white">2</span>
-                      </div>
-                    </div>
-                  </a>
-                  <a
-                    href="messages.html"
-                    class="flex items-center gap-5 px-7.5 py-3 hover:bg-gray-3 dark:hover:bg-meta-4"
-                  >
-                    <div class="relative h-14 w-14 rounded-full">
-                      <img src="./images/user/user-02.png" alt="User" />
-                      <span
-                        class="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-meta-7"
-                      ></span>
-                    </div>
-
-                    <div class="flex flex-1 items-center justify-between">
-                      <div>
-                        <h5 class="font-medium">Jubin Jack</h5>
-                        <p>
-                          <span class="text-sm font-medium"
-                            >I really love that!</span
-                          >
-                          <span class="text-xs"> . Oct 23</span>
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                  <a
-                    href="messages.html"
-                    class="flex items-center gap-5 px-7.5 py-3 hover:bg-gray-3 dark:hover:bg-meta-4"
-                  >
-                    <div class="relative h-14 w-14 rounded-full">
-                      <img src="./images/user/user-05.png" alt="User" />
-                      <span
-                        class="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-meta-6"
-                      ></span>
-                    </div>
-
-                    <div class="flex flex-1 items-center justify-between">
-                      <div>
-                        <h5 class="font-medium">Wilium Smith</h5>
-                        <p>
-                          <span class="text-sm font-medium"
-                            >Where are you now?</span
-                          >
-                          <span class="text-xs"> . Sep 20</span>
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-              <!-- ====== Chat Card End -->
-            </div>
-          </div>
-        </main>
-        <!-- ===== Main Content End ===== -->
-      </div>
-      <!-- ===== Content Area End ===== -->
+        </div>
     </div>
-    <!-- ===== Page Wrapper End ===== -->
-  </body>
+    <!-- Loader End -->
+
+
+    <div class="page-wrapper toggled">
+        <!-- sidebar-wrapper -->
+        <nav id="sidebar" class="sidebar-wrapper sidebar-dark">
+            <div class="sidebar-content">
+                <div class="sidebar-brand">
+                    <a href="index.html"><img src="{{ asset('assets/images/logo-light.png') }}') }}" height="24"
+                            alt=""></a>
+                </div>
+
+                <ul class="sidebar-menu border-t border-white/10" data-simplebar style="height: calc(100% - 70px);">
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-chart-line me-2"></i>Dashboard</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="index.html">Analytics</a></li>
+                                <li><a href="index-crypto.html">Cryptocurrency</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-browser me-2"></i>Layouts</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="index-dark.html">Dark Dashboard</a></li>
+                                <li><a href="index-rtl.html">RTL Dashboard</a></li>
+                                <li><a href="index-dark-rtl.html">Dark RTL Dashboard</a></li>
+                                <li><a href="index-sidebar-light.html">Light Sidebar</a></li>
+                                <li><a href="index-sidebar-colored.html">Colored Sidebar</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-apps me-2"></i>Apps</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="chat.html">Chat</a></li>
+                                <li><a href="email.html">Email</a></li>
+                                <li><a href="calendar.html">Calendar</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-user me-2"></i>User Profile</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="profile.html">Profile</a></li>
+                                <li><a href="profile-billing.html">Billing Info</a></li>
+                                <li><a href="profile-payment.html">Payment</a></li>
+                                <li><a href="profile-social.html">Social Profile</a></li>
+                                <li><a href="profile-notification.html">Notifications</a></li>
+                                <li><a href="profile-setting.html">Profile Settings</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-blogger me-2"></i>Blog</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="blog.html">Blogs</a></li>
+                                <li><a href="blog-detail.html">Blog Detail</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-shopping-cart me-2"></i>E-Commerce</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="shop.html">Shop</a></li>
+                                <li><a href="shop-item-detail.html">Shop Detail</a></li>
+                                <li><a href="shop-cart.html">Shopcart</a></li>
+                                <li><a href="checkout.html">Checkout</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-camera me-2"></i>Gallery</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="gallery-one.html">Gallary One</a></li>
+                                <li><a href="gallery-two.html">Gallery Two</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-file me-2"></i>Pages</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="starter.html">Starter</a></li>
+                                <li><a href="faqs.html">FAQs</a></li>
+                                <li><a href="pricing.html">Pricing</a></li>
+                                <li><a href="team.html">Team</a></li>
+                                <li><a href="privacy.html">Privacy Policy</a></li>
+                                <li><a href="terms.html">Term & Condition</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="">
+                        <a href="ui-components.html"><i class="uil uil-chart-line me-2"></i>UI Components</a>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-envelope me-2"></i>Email Template</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="email-confirmation.html">Confirmation</a></li>
+                                <li><a href="email-password-reset.html">Reset Password</a></li>
+                                <li><a href="email-alert.html">Alert</a></li>
+                                <li><a href="email-invoices.html">Invoice</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-invoice me-2"></i>Invoice</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="invoice-list.html">Invoice List</a></li>
+                                <li><a href="invoice.html">Invoice Preview</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-sign-in-alt me-2"></i>Authentication</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="auth-login.html">Login</a></li>
+                                <li><a href="auth-signup.html">Signup</a></li>
+                                <li><a href="auth-signup-success.html">Signup Success</a></li>
+                                <li><a href="auth-re-password.html">Reset Password</a></li>
+                                <li><a href="auth-lock-screen.html">Lockscreen</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-layers me-2"></i>Miscellaneous</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="comingsoon.html">Comingsoon</a></li>
+                                <li><a href="maintenance.html">Maintenance</a></li>
+                                <li><a href="error.html">Error</a></li>
+                                <li><a href="thankyou.html">Thank You</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li
+                        class="relative lg:m-8 m-6 px-8 py-10 rounded-lg bg-gradient-to-b to-transparent from-slate-800 text-center">
+                        <span class="relative z-10">
+                            <span class="text-xl font-bold h5 text-white">Upgrade to Pro</span>
+
+                            <span class="text-slate-400 mt-3 mb-5 block">Get one month free and subscribe to pro</span>
+
+                            <a href="https://1.envato.market/techwind" target="_blank"
+                                class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center bg-gray-500/5 hover:bg-gray-500 border-gray-500/10 hover:border-gray-500 text-white rounded-md">Subscribe</a>
+                        </span>
+
+                        <img src="{{ asset('assets/images/shree-276.png') }}') }}"
+                            class="absolute top-1/2 -translate-y-1/2 start-0 end-0 mx-auto text-center h-40 w-40 z-0 opacity-5"
+                            alt="">
+                    </li>
+                </ul>
+                <!-- sidebar-menu  -->
+            </div>
+        </nav>
+        <!-- sidebar-wrapper  -->
+
+        <!-- Start Page Content -->
+        <main class="page-content bg-gray-50 dark:bg-slate-800">
+            <!-- Top Header -->
+            <div class="top-header">
+                <div class="header-bar flex justify-between">
+                    <div class="flex items-center space-x-1">
+                        <!-- Logo -->
+                        <a href="#" class="xl:hidden block me-2">
+                            <img src="{{ asset('assets/images/logo-icon-32.png') }}') }}" class="md:hidden block"
+                                alt="">
+                            <span class="md:block hidden">
+                                <img src="{{ asset('assets/images/logo-dark.png') }}') }}"
+                                    class="inline-block dark:hidden" alt="">
+                                <img src="{{ asset('assets/images/logo-light.png') }}') }}"
+                                    class="hidden dark:inline-block" alt="">
+                            </span>
+                        </a>
+                        <!-- Logo -->
+
+                        <!-- show or close sidebar -->
+                        <a id="close-sidebar"
+                            class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[20px] text-center bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-100 dark:border-gray-800 text-slate-900 dark:text-white rounded-full"
+                            href="javascript:void(0)">
+                            <i data-feather="menu" class="h-4 w-4"></i>
+                        </a>
+                        <!-- show or close sidebar -->
+
+                        <!-- Searchbar -->
+                        <div class="ps-1.5">
+                            <div class="form-icon relative sm:block hidden">
+                                <i class="uil uil-search absolute top-1/2 -translate-y-1/2 start-3"></i>
+                                <input type="text"
+                                    class="form-input w-56 ps-9 py-2 px-3 h-8 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded-3xl outline-none border border-gray-100 dark:border-gray-800 focus:ring-0 bg-white"
+                                    name="s" id="searchItem" placeholder="Search...">
+                            </div>
+                        </div>
+                        <!-- Searchbar -->
+                    </div>
+
+                    <ul class="list-none mb-0 space-x-1">
+                        <!-- Country Dropdown -->
+                        <li class="dropdown inline-block relative">
+                            <button data-dropdown-toggle="dropdown"
+                                class="dropdown-toggle h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[20px] text-center bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-100 dark:border-gray-800 text-slate-900 dark:text-white rounded-full"
+                                type="button">
+                                <img src="{{ asset('assets/images/flags/usa.png') }}') }}" alt="">
+                            </button>
+                            <!-- Dropdown menu -->
+                            <div class="dropdown-menu absolute start-0 m-0 mt-4 z-10 w-36 rounded-md overflow-hidden bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 hidden"
+                                onclick="event.stopPropagation();">
+                                <ul class="list-none py-2 text-start">
+                                    <li class="my-1">
+                                        <a href=""
+                                            class="flex items-center text-[15px] font-semibold py-1.5 px-4 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white"><img
+                                                src="{{ asset('assets/images/flags/germany.png') }}') }}"
+                                                class="h-6 w-6 rounded-full me-2 shadow dark:shadow-gray-700"
+                                                alt=""> German</a>
+                                    </li>
+                                    <li class="my-1">
+                                        <a href=""
+                                            class="flex items-center text-[15px] font-semibold py-1.5 px-4 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white"><img
+                                                src="{{ asset('assets/images/flags/italy.png') }}') }}"
+                                                class="h-6 w-6 rounded-full me-2 shadow dark:shadow-gray-700"
+                                                alt=""> Italian</a>
+                                    </li>
+                                    <li class="my-1">
+                                        <a href=""
+                                            class="flex items-center text-[15px] font-semibold py-1.5 px-4 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white"><img
+                                                src="{{ asset('assets/images/flags/russia.png') }}') }}"
+                                                class="h-6 w-6 rounded-full me-2 shadow dark:shadow-gray-700"
+                                                alt=""> Russian</a>
+                                    </li>
+                                    <li class="my-1">
+                                        <a href=""
+                                            class="flex items-center text-[15px] font-semibold py-1.5 px-4 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white"><img
+                                                src="{{ asset('assets/images/flags/spain.png') }}') }}"
+                                                class="h-6 w-6 rounded-full me-2 shadow dark:shadow-gray-700"
+                                                alt=""> Spanish</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!-- Country Dropdown -->
+
+                        <!-- Shop cart Dropdown -->
+                        <li class="dropdown inline-block relative">
+                            <button data-dropdown-toggle="dropdown"
+                                class="dropdown-toggle h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[20px] text-center bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-100 dark:border-gray-800 text-slate-900 dark:text-white rounded-full"
+                                type="button">
+                                <i data-feather="shopping-cart" class="h-4 w-4"></i>
+                                <span
+                                    class="absolute top-0 end-0 flex items-center justify-center bg-emerald-600 text-white text-[10px] font-bold rounded-full size-2 after:content-[''] after:absolute after:h-2 after:w-2 after:bg-emerald-600 after:top-0 after:end-0 after:rounded-full after:animate-ping"></span>
+                            </button>
+                            <!-- Dropdown menu -->
+                            <div class="dropdown-menu absolute end-0 m-0 mt-4 z-10 w-60 rounded-md bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 hidden"
+                                onclick="event.stopPropagation();">
+                                <ul class="py-3 text-start" aria-labelledby="dropdownDefault">
+                                    <li>
+                                        <a href="#" class="flex items-center justify-between py-1.5 px-4">
+                                            <span class="flex items-center">
+                                                <img src="{{ asset('assets/images/shop/items/s1.jpg') }}"
+                                                    class="rounded shadow dark:shadow-gray-700 w-9" alt="">
+                                                <span class="ms-3">
+                                                    <span class="block font-semibold">T-shirt (M)</span>
+                                                    <span class="block text-sm text-slate-400">$320 X 2</span>
+                                                </span>
+                                            </span>
+
+                                            <span class="font-semibold">$640</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" class="flex items-center justify-between py-1.5 px-4">
+                                            <span class="flex items-center">
+                                                <img src="{{ asset('assets/images/shop/items/s2.jpg') }}"
+                                                    class="rounded shadow dark:shadow-gray-700 w-9" alt="">
+                                                <span class="ms-3">
+                                                    <span class="block font-semibold">Bag</span>
+                                                    <span class="block text-sm text-slate-400">$50 X 5</span>
+                                                </span>
+                                            </span>
+
+                                            <span class="font-semibold">$250</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" class="flex items-center justify-between py-1.5 px-4">
+                                            <span class="flex items-center">
+                                                <img src="{{ asset('assets/images/shop/items/s3.jpg') }}"
+                                                    class="rounded shadow dark:shadow-gray-700 w-9" alt="">
+                                                <span class="ms-3">
+                                                    <span class="block font-semibold">Watch (Men)</span>
+                                                    <span class="block text-sm text-slate-400">$800 X 1</span>
+                                                </span>
+                                            </span>
+
+                                            <span class="font-semibold">$800</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="border-t border-gray-100 dark:border-gray-800 my-2"></li>
+
+                                    <li class="flex items-center justify-between py-1.5 px-4">
+                                        <h6 class="font-semibold mb-0">Total($):</h6>
+                                        <h6 class="font-semibold mb-0">$1690</h6>
+                                    </li>
+
+                                    <li class="py-1.5 px-4">
+                                        <a href="javascript:void(0)"
+                                            class="py-[5px] px-4 inline-block font-semibold tracking-wide align-middle duration-500 text-sm text-center rounded-md bg-indigo-600 hover:bg-indigo-700 border border-indigo-600 hover:border-indigo-700 text-white">View
+                                            Cart</a>
+                                        <a href="javascript:void(0)"
+                                            class="py-[5px] px-4 inline-block font-semibold tracking-wide align-middle duration-500 text-sm text-center rounded-md bg-indigo-600 hover:bg-indigo-700 border border-indigo-600 hover:border-indigo-700 text-white">Checkout</a>
+                                        <p class="text-sm text-slate-400 mt-1">*T&C Apply</p>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li><!--end dropdown-->
+                        <!-- Shop cart Dropdown -->
+
+                        <!-- Notification Dropdown -->
+                        <li class="dropdown inline-block relative">
+                            <button data-dropdown-toggle="dropdown"
+                                class="dropdown-toggle h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[20px] text-center bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-100 dark:border-gray-800 text-slate-900 dark:text-white rounded-full"
+                                type="button">
+                                <i data-feather="bell" class="h-4 w-4"></i>
+                                <span
+                                    class="absolute top-0 end-0 flex items-center justify-center bg-red-600 text-white text-[10px] font-bold rounded-full size-2 after:content-[''] after:absolute after:h-2 after:w-2 after:bg-red-600 after:top-0 after:end-0 after:rounded-full after:animate-ping"></span>
+                            </button>
+                            <!-- Dropdown menu -->
+                            <div class="dropdown-menu absolute end-0 m-0 mt-4 z-10 w-64 rounded-md overflow-hidden bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 hidden"
+                                onclick="event.stopPropagation();">
+                                <span class="px-4 py-4 flex justify-between">
+                                    <span class="font-semibold">Notifications</span>
+                                    <span
+                                        class="flex items-center justify-center bg-red-600/20 text-red-600 text-[10px] font-bold rounded-full w-5 max-h-5 ms-1">3</span>
+                                </span>
+                                <ul class="py-2 text-start h-64 border-t border-gray-100 dark:border-gray-800"
+                                    data-simplebar>
+                                    <li>
+                                        <a href="#!" class="block font-medium py-1.5 px-4">
+                                            <div class="flex items-center">
+                                                <div
+                                                    class="h-10 w-10 rounded-md shadow shadow-indigo-600/10 dark:shadow-gray-700 bg-indigo-600/10 dark:bg-slate-800 text-indigo-600 dark:text-white flex items-center justify-center">
+                                                    <i data-feather="shopping-cart" class="h-4 w-4"></i>
+                                                </div>
+                                                <div class="ms-2">
+                                                    <span class="text-[15px] font-semibold block">Order Complete</span>
+                                                    <small class="text-slate-400">15 min ago</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#!" class="block font-medium py-1.5 px-4">
+                                            <div class="flex items-center">
+                                                <img src="{{ asset('assets/images/client/04.jpg') }}"
+                                                    class="h-10 w-10 rounded-md shadow dark:shadow-gray-700"
+                                                    alt="">
+                                                <div class="ms-2">
+                                                    <span class="text-[15px] font-semibold block"><span
+                                                            class="font-bold">Message</span> from Luis</span>
+                                                    <small class="text-slate-400">1 hour ago</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#!" class="block font-medium py-1.5 px-4">
+                                            <div class="flex items-center">
+                                                <div
+                                                    class="h-10 w-10 rounded-md shadow shadow-indigo-600/10 dark:shadow-gray-700 bg-indigo-600/10 dark:bg-slate-800 text-indigo-600 dark:text-white flex items-center justify-center">
+                                                    <i data-feather="dollar-sign" class="h-4 w-4"></i>
+                                                </div>
+                                                <div class="ms-2">
+                                                    <span class="text-[15px] font-semibold block"><span
+                                                            class="font-bold">One Refund Request</span></span>
+                                                    <small class="text-slate-400">2 hour ago</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#!" class="block font-medium py-1.5 px-4">
+                                            <div class="flex items-center">
+                                                <div
+                                                    class="h-10 w-10 rounded-md shadow shadow-indigo-600/10 dark:shadow-gray-700 bg-indigo-600/10 dark:bg-slate-800 text-indigo-600 dark:text-white flex items-center justify-center">
+                                                    <i data-feather="truck" class="h-4 w-4"></i>
+                                                </div>
+                                                <div class="ms-2">
+                                                    <span class="text-[15px] font-semibold block">Deliverd your
+                                                        Order</span>
+                                                    <small class="text-slate-400">Yesterday</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#!" class="block font-medium py-1.5 px-4">
+                                            <div class="flex items-center">
+                                                <img src="{{ asset('assets/images/client/05.jpg') }}"
+                                                    class="h-10 w-10 rounded-md shadow dark:shadow-gray-700"
+                                                    alt="">
+                                                <div class="ms-2">
+                                                    <span class="text-[15px] font-semibold block"><span
+                                                            class="font-bold">Cally</span> started following you</span>
+                                                    <small class="text-slate-400">2 days ago</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li><!--end dropdown-->
+                        <!-- Notification Dropdown -->
+
+                        <!-- User/Profile Dropdown -->
+                        <li class="dropdown inline-block relative">
+                            <button data-dropdown-toggle="dropdown" class="dropdown-toggle items-center"
+                                type="button">
+                                <span
+                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[20px] text-center bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-100 dark:border-gray-800 text-slate-900 dark:text-white rounded-full"><img
+                                        src="{{ Auth::user()->profile_photo_url }}" class="rounded-full"
+                                        alt=""></span>
+                                <span
+                                    class="font-semibold text-[16px] ms-1 sm:inline-block hidden">{{ Auth::user()->name }}</span>
+                            </button>
+                            <!-- Dropdown menu -->
+                            <div class="dropdown-menu absolute end-0 m-0 mt-4 z-10 w-44 rounded-md overflow-hidden bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 hidden"
+                                onclick="event.stopPropagation();">
+                                <ul class="py-2 text-start">
+                                    <li>
+                                        <a href="profile.html"
+                                            class="block font-medium py-1 px-4 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white"><i
+                                                class="uil uil-user me-2"></i>Profile</a>
+                                    </li>
+                                    <li>
+                                        <a href="chat.html"
+                                            class="block font-medium py-1 px-4 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white"><i
+                                                class="uil uil-comment me-2"></i>Chat</a>
+                                    </li>
+                                    <li>
+                                        <a href="email.html"
+                                            class="block font-medium py-1 px-4 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white"><i
+                                                class="uil uil-envelope me-2"></i>Email</a>
+                                    </li>
+                                    <li>
+                                        <a href="profile-setting.html"
+                                            class="block font-medium py-1 px-4 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white"><i
+                                                class="uil uil-setting me-2"></i>Settings</a>
+                                    </li>
+                                    <li class="border-t border-gray-100 dark:border-gray-800 my-2"></li>
+                                    <li>
+                                        <a href="lock-screen.html"
+                                            class="block font-medium py-1 px-4 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white"><i
+                                                class="uil uil-lock me-2"></i>Lockscreen</a>
+                                    </li>
+                                    <li>
+                                        <!-- Authentication Logout Form -->
+                                        <form method="POST" action="{{ route('logout') }}" x-data>
+                                            @csrf
+                                            <button type="submit" href="{{ route('logout') }}"
+                                                class="block py-1.5 px-4 hover:text-indigo-600"
+                                                @click.prevent="$root.submit();">
+                                                <i class="uil uil-sign-out-alt align-middle me-1"></i> Keluar
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li><!--end dropdown-->
+                        <!-- User/Profile Dropdown -->
+                    </ul>
+                </div>
+            </div>
+            <!-- Top Header -->
+
+            <div class="container-fluid relative px-3">
+                <div class="layout-specing">
+                    <!-- Start Content -->
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h5 class="text-xl font-bold">Hello, {{ Auth::user()->name }}</h5>
+                            <h6 class="text-slate-400 font-semibold">Welcome!</h6>
+                        </div>
+
+                        <div class="flex items-center">
+                            <div class="position-relative">
+                                <select
+                                    class="form-select form-input w-full py-2 h-10 bg-white dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-100 focus:border-gray-200 dark:border-gray-800 dark:focus:border-gray-700 focus:ring-0"
+                                    id="yearchart">
+                                    <option value="Y" selected>Yearly</option>
+                                    <option value="M">Monthly</option>
+                                    <option value="W">Weekly</option>
+                                    <option value="T">Today</option>
+                                </select>
+                            </div>
+
+                            <a href="" class="ms-1">
+                                <span
+                                    class="py-[7px] px-6 font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600/5 hover:bg-indigo-600 border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white rounded-md sm:inline-block hidden"><i
+                                        class="uil uil-export"></i> Export</span>
+
+                                <span
+                                    class="h-10 w-10 items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md border bg-indigo-600/5 hover:bg-indigo-600 border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white sm:hidden inline-flex"><i
+                                        class="uil uil-export"></i></span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="grid xl:grid-cols-5 md:grid-cols-3 grid-cols-1 mt-6 gap-6">
+                        <div
+                            class="relative overflow-hidden rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
+                            <div class="p-5 flex items-center">
+                                <span
+                                    class="flex justify-center items-center rounded-md size-14 min-w-[56px] bg-indigo-600/5 dark:bg-indigo-600/10 shadow shadow-indigo-600/5 dark:shadow-indigo-600/10 text-indigo-600">
+                                    <i data-feather="users" class="h-5 w-5"></i>
+                                </span>
+
+                                <span class="ms-3">
+                                    <span class="text-slate-400 font-semibold block">Total Visitors</span>
+                                    <span class="flex items-center justify-between mt-1">
+                                        <span class="text-xl font-semibold"><span class="counter-value"
+                                                data-target="45890">42205</span></span>
+                                        <span class="text-red-600 text-sm ms-1 font-semibold"><i
+                                                class="uil uil-chart-down"></i> 0.5%</span>
+                                    </span>
+                                </span>
+                            </div>
+
+                            <div class="px-5 py-4 bg-gray-50 dark:bg-slate-800">
+                                <a href=""
+                                    class="relative inline-block font-semibold tracking-wide align-middle text-base text-center border-none after:content-[''] after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:transition-all after:duration-500 text-indigo-600 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white after:bg-indigo-600 dark:after:bg-white duration-500">View
+                                    data <i class="uil uil-arrow-right"></i></a>
+                            </div>
+                        </div><!--end-->
+
+                        <div
+                            class="relative overflow-hidden rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
+                            <div class="p-5 flex items-center">
+                                <span
+                                    class="flex justify-center items-center rounded-md size-14 min-w-[56px] bg-indigo-600/5 dark:bg-indigo-600/10 shadow shadow-indigo-600/5 dark:shadow-indigo-600/10 text-indigo-600">
+                                    <i data-feather="dollar-sign" class="h-5 w-5"></i>
+                                </span>
+
+                                <span class="ms-3">
+                                    <span class="text-slate-400 font-semibold block">Revenue</span>
+                                    <span class="flex items-center justify-between mt-1">
+                                        <span class="text-xl font-semibold">$<span class="counter-value"
+                                                data-target="48575">35214</span></span>
+                                        <span class="text-emerald-600 text-sm ms-1 font-semibold"><i
+                                                class="uil uil-arrow-growth"></i> 3.84%</span>
+                                    </span>
+                                </span>
+                            </div>
+
+                            <div class="px-5 py-4 bg-gray-50 dark:bg-slate-800">
+                                <a href=""
+                                    class="relative inline-block font-semibold tracking-wide align-middle text-base text-center border-none after:content-[''] after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:transition-all after:duration-500 text-indigo-600 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white after:bg-indigo-600 dark:after:bg-white duration-500">View
+                                    data <i class="uil uil-arrow-right"></i></a>
+                            </div>
+                        </div><!--end-->
+
+                        <div
+                            class="relative overflow-hidden rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
+                            <div class="p-5 flex items-center">
+                                <span
+                                    class="flex justify-center items-center rounded-md size-14 min-w-[56px] bg-indigo-600/5 dark:bg-indigo-600/10 shadow shadow-indigo-600/5 dark:shadow-indigo-600/10 text-indigo-600">
+                                    <i data-feather="shopping-cart" class="h-5 w-5"></i>
+                                </span>
+
+                                <span class="ms-3">
+                                    <span class="text-slate-400 font-semibold block">Orders</span>
+                                    <span class="flex items-center justify-between mt-1">
+                                        <span class="text-xl font-semibold"><span class="counter-value"
+                                                data-target="4800">3402</span>+</span>
+                                        <span class="text-emerald-600 text-sm ms-1 font-semibold"><i
+                                                class="uil uil-arrow-growth"></i> 1.46%</span>
+                                    </span>
+                                </span>
+                            </div>
+
+                            <div class="px-5 py-4 bg-gray-50 dark:bg-slate-800">
+                                <a href=""
+                                    class="relative inline-block font-semibold tracking-wide align-middle text-base text-center border-none after:content-[''] after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:transition-all after:duration-500 text-indigo-600 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white after:bg-indigo-600 dark:after:bg-white duration-500">View
+                                    data <i class="uil uil-arrow-right"></i></a>
+                            </div>
+                        </div><!--end-->
+
+                        <div
+                            class="relative overflow-hidden rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
+                            <div class="p-5 flex items-center">
+                                <span
+                                    class="flex justify-center items-center rounded-md size-14 min-w-[56px] bg-indigo-600/5 dark:bg-indigo-600/10 shadow shadow-indigo-600/5 dark:shadow-indigo-600/10 text-indigo-600">
+                                    <i data-feather="shopping-bag" class="h-5 w-5"></i>
+                                </span>
+
+                                <span class="ms-3">
+                                    <span class="text-slate-400 font-semibold block">Items</span>
+                                    <span class="flex items-center justify-between mt-1">
+                                        <span class="text-xl font-semibold"><span class="counter-value"
+                                                data-target="145">23</span></span>
+                                        <span class="text-slate-400 text-sm ms-1 font-semibold"><i
+                                                class="uil uil-analysis"></i> 0.0%</span>
+                                    </span>
+                                </span>
+                            </div>
+
+                            <div class="px-5 py-4 bg-gray-50 dark:bg-slate-800">
+                                <a href=""
+                                    class="relative inline-block font-semibold tracking-wide align-middle text-base text-center border-none after:content-[''] after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:transition-all after:duration-500 text-indigo-600 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white after:bg-indigo-600 dark:after:bg-white duration-500">View
+                                    data <i class="uil uil-arrow-right"></i></a>
+                            </div>
+                        </div><!--end-->
+
+                        <div
+                            class="relative overflow-hidden rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
+                            <div class="p-5 flex items-center">
+                                <span
+                                    class="flex justify-center items-center rounded-md size-14 min-w-[56px] bg-indigo-600/5 dark:bg-indigo-600/10 shadow shadow-indigo-600/5 dark:shadow-indigo-600/10 text-indigo-600">
+                                    <i data-feather="dollar-sign" class="h-5 w-5"></i>
+                                </span>
+
+                                <span class="ms-3">
+                                    <span class="text-slate-400 font-semibold block">Expenses</span>
+                                    <span class="flex items-center justify-between mt-1">
+                                        <span class="text-xl font-semibold">$<span class="counter-value"
+                                                data-target="24351">22135</span></span>
+                                        <span class="text-emerald-600 text-sm ms-1 font-semibold"><i
+                                                class="uil uil-arrow-growth"></i> 1.6%</span>
+                                    </span>
+                                </span>
+                            </div>
+
+                            <div class="px-5 py-4 bg-gray-50 dark:bg-slate-800">
+                                <a href=""
+                                    class="relative inline-block font-semibold tracking-wide align-middle text-base text-center border-none after:content-[''] after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:transition-all after:duration-500 text-indigo-600 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white after:bg-indigo-600 dark:after:bg-white duration-500">View
+                                    data <i class="uil uil-arrow-right"></i></a>
+                            </div>
+                        </div><!--end-->
+                    </div>
+
+                    <div class="grid lg:grid-cols-12 grid-cols-1 mt-6 gap-6">
+                        <div class="lg:col-span-8">
+                            <div
+                                class="relative overflow-hidden rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
+                                <div
+                                    class="p-6 flex items-center justify-between border-b border-gray-100 dark:border-gray-800">
+                                    <h6 class="text-lg font-semibold">Profit / Expenses Analytics</h6>
+
+                                    <div class="position-relative">
+                                        <select
+                                            class="form-select form-input w-full py-2 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-100 focus:border-gray-200 dark:border-gray-800 dark:focus:border-gray-700 focus:ring-0"
+                                            id="yearchart">
+                                            <option value="Y" selected>Yearly</option>
+                                            <option value="M">Monthly</option>
+                                            <option value="W">Weekly</option>
+                                            <option value="T">Today</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div id="mainchart" class="apex-chart px-4 pb-6"></div>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-4">
+                            <div
+                                class="relative overflow-hidden rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
+                                <div
+                                    class="p-6 flex items-center justify-between border-b border-gray-100 dark:border-gray-800">
+                                    <h6 class="text-lg font-semibold">Customers by Country</h6>
+
+                                    <div class="dropdown relative">
+                                        <button data-dropdown-toggle="dropdown" class="dropdown-toggle items-center"
+                                            type="button">
+                                            <span
+                                                class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[20px] text-center bg-gray-800/5 hover:bg-gray-800/10 dark:bg-gray-800 border border-gray-800/5 dark:border-gray-800 text-slate-900 dark:text-white rounded-full"><i
+                                                    class="mdi mdi-dots-vertical"></i></span>
+                                        </button>
+                                        <!-- Dropdown menu -->
+                                        <div class="dropdown-menu absolute end-0 m-0 mt-4 z-10 w-44 rounded-md overflow-hidden bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 hidden"
+                                            onclick="event.stopPropagation();">
+                                            <ul class="py-2 text-start">
+                                                <li>
+                                                    <a href=""
+                                                        class="block font-medium py-1 px-4 text-slate-400 dark:text-white/70 hover:text-slate-900 dark:hover:text-white">Profile</a>
+                                                </li>
+                                                <li>
+                                                    <a href=""
+                                                        class="block font-medium py-1 px-4 text-slate-400 dark:text-white/70 hover:text-slate-900 dark:hover:text-white">Profile
+                                                        Settings</a>
+                                                </li>
+                                                <li>
+                                                    <a href=""
+                                                        class="block font-medium py-1 px-4 text-slate-400 dark:text-white/70 hover:text-slate-900 dark:hover:text-white">Delete</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-6 border-b border-gray-100 dark:border-gray-800">
+                                    <div id="map" class="w-full h-[236px]"></div>
+                                </div>
+
+                                <div class="p-6">
+                                    <ul class="list-none flex">
+                                        <li class="inline-block w-1/2"><span
+                                                class="text-indigo-600 font-semibold">Canada</span>:<span
+                                                class="text-slate-400 ms-2">12468</span></li>
+                                        <li class="inline-block w-1/2"><span
+                                                class="text-indigo-600 font-semibold">Greenland</span>:<span
+                                                class="text-slate-400 ms-2">12468</span></li>
+                                    </ul>
+                                    <ul class="list-none flex">
+                                        <li class="inline-block w-1/2"><span
+                                                class="text-indigo-600 font-semibold">Russia</span>:<span
+                                                class="text-slate-400 ms-2">12468</span></li>
+                                        <li class="inline-block w-1/2"><span
+                                                class="text-indigo-600 font-semibold">Palestine</span>:<span
+                                                class="text-slate-400 ms-2">12468</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid lg:grid-cols-12 grid-cols-1 mt-6 gap-6">
+                        <div class="xl:col-span-5 lg:col-span-12">
+                            <div
+                                class="relative overflow-hidden rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
+                                <div
+                                    class="p-6 flex items-center justify-between border-b border-gray-100 dark:border-gray-800">
+                                    <h6 class="text-lg font-semibold">Orders</h6>
+
+                                    <a href=""
+                                        class="relative inline-block font-semibold tracking-wide align-middle text-base text-center border-none after:content-[''] after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:transition-all after:duration-500 text-slate-400 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white after:bg-indigo-600 dark:after:bg-white duration-500">View
+                                        orders <i class="uil uil-arrow-right"></i></a>
+                                </div>
+
+                                <div class="relative overflow-x-auto block w-full max-h-[400px]" data-simplebar>
+                                    <table class="w-full text-start">
+                                        <thead class="text-base">
+                                            <tr>
+                                                <th class="text-start font-semibold text-[15px] p-4 min-w-[100px]">No.
+                                                </th>
+                                                <th class="text-start font-semibold text-[15px] p-4 min-w-[128px]">ID
+                                                </th>
+                                                <th class="text-start font-semibold text-[15px] p-4 min-w-[128px]">Date
+                                                </th>
+                                                <th class="text-start font-semibold text-[15px] p-4 min-w-[128px]">
+                                                    Price</th>
+                                                <th class="text-end font-semibold text-[15px] p-4 min-w-[128px]">Status
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    01</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    #tw001</td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">10th Aug 2023</span>
+                                                </td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">$253</span>
+                                                </td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span
+                                                        class="bg-emerald-600/10 dark:bg-emerald-600/20 border border-emerald-600/10 dark:border-emerald-600/20 text-emerald-600 text-[12px] font-bold px-2.5 py-0.5 rounded h-5 ms-1">Delivered</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    02</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    #tw002</td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">13th Aug 2023</span>
+                                                </td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">$123</span>
+                                                </td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span
+                                                        class="bg-indigo-600/10 dark:bg-indigo-600/20 border border-indigo-600/10 dark:border-indigo-600/20 text-indigo-600 text-[12px] font-bold px-2.5 py-0.5 rounded h-5 ms-1">New
+                                                        Order</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    03</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    #tw003</td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">18th Aug 2023</span>
+                                                </td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">$245</span>
+                                                </td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span
+                                                        class="bg-red-600/10 dark:bg-red-600/20 border border-red-600/10 dark:border-red-600/20 text-red-600 text-[12px] font-bold px-2.5 py-0.5 rounded h-5 ms-1">Return</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    04</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    #tw004</td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">21st Aug 2023</span>
+                                                </td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">$157</span>
+                                                </td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span
+                                                        class="bg-gray-500/5 border border-gray-500/5 text-gray-500 text-[12px] font-bold px-2.5 py-0.5 rounded h-5 ms-1">Cancel</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    05</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    #tw005</td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">22nd Aug 2023</span>
+                                                </td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">$62</span>
+                                                </td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span
+                                                        class="bg-indigo-600/10 dark:bg-indigo-600/20 border border-indigo-600/10 dark:border-indigo-600/20 text-indigo-600 text-[12px] font-bold px-2.5 py-0.5 rounded h-5 ms-1">New
+                                                        Order</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    06</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    #tw006</td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">23rd Aug 2023</span>
+                                                </td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">$456</span>
+                                                </td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span
+                                                        class="bg-emerald-600/10 dark:bg-emerald-600/20 border border-emerald-600/10 dark:border-emerald-600/20 text-emerald-600 text-[12px] font-bold px-2.5 py-0.5 rounded h-5 ms-1">Delivered</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    07</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    #tw007</td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">24th Aug 2023</span>
+                                                </td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">$478</span>
+                                                </td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span
+                                                        class="bg-emerald-600/10 dark:bg-emerald-600/20 border border-emerald-600/10 dark:border-emerald-600/20 text-emerald-600 text-[12px] font-bold px-2.5 py-0.5 rounded h-5 ms-1">Delivered</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="xl:col-span-4 lg:col-span-6">
+                            <div class="rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
+                                <div
+                                    class="flex justify-between items-center border-b border-gray-100 dark:border-gray-800 p-4">
+                                    <div class="flex">
+                                        <img src="{{ asset('assets/images/client/01.jpg') }}"
+                                            class="h-11 w-11 rounded-full shadow dark:shadow-gray-700" alt="">
+                                        <div class="overflow-hidden ms-3">
+                                            <a href="#" class="block font-semibold text-truncate">Calvin
+                                                Carlo</a>
+                                            <span class="text-slate-400 flex items-center text-sm"><span
+                                                    class="bg-green-600 text-white text-[10px] font-bold rounded-full size-2 me-1"></span>
+                                                Online</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="dropdown relative">
+                                        <button data-dropdown-toggle="dropdown" class="dropdown-toggle items-center"
+                                            type="button">
+                                            <span
+                                                class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[20px] text-center bg-gray-800/5 hover:bg-gray-800/10 dark:bg-gray-800 border border-gray-800/5 dark:border-gray-800 text-slate-900 dark:text-white rounded-full"><i
+                                                    class="mdi mdi-dots-vertical"></i></span>
+                                        </button>
+                                        <!-- Dropdown menu -->
+                                        <div class="dropdown-menu absolute end-0 m-0 mt-4 z-10 w-44 rounded-md overflow-hidden bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 hidden"
+                                            onclick="event.stopPropagation();">
+                                            <ul class="py-2 text-start">
+                                                <li>
+                                                    <a href=""
+                                                        class="block font-medium py-1 px-4 text-slate-400 dark:text-white/70 hover:text-slate-900 dark:hover:text-white"><i
+                                                            class="mdi mdi-account-outline"></i> Profile</a>
+                                                </li>
+                                                <li>
+                                                    <a href=""
+                                                        class="block font-medium py-1 px-4 text-slate-400 dark:text-white/70 hover:text-slate-900 dark:hover:text-white"><i
+                                                            class="mdi mdi-cog-outline"></i> Profile Settings</a>
+                                                </li>
+                                                <li>
+                                                    <a href=""
+                                                        class="block font-medium py-1 px-4 text-slate-400 dark:text-white/70 hover:text-slate-900 dark:hover:text-white"><i
+                                                            class="mdi mdi-trash-can-outline"></i> Delete</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <ul class="p-4 list-none mb-0 max-h-[350px] bg-[url('../../{{ asset('assets/images/bg-chat.png') }}')] bg-no-repeat bg-center bg-cover"
+                                    data-simplebar>
+                                    <li>
+                                        <div class="inline-block">
+                                            <div class="flex mb-3">
+                                                <div class="relative">
+                                                    <img src="{{ asset('assets/images/client/01.jpg') }}"
+                                                        class="size-9 min-w-[36px] rounded-full shadow dark:shadow-gray-700"
+                                                        alt="">
+                                                    <span
+                                                        class="absolute top-0.5 start-0.5 flex items-center justify-center bg-green-600 text-white text-[10px] font-bold rounded-full size-2 after:content-[''] after:absolute after:h-2 after:w-2 after:bg-green-600 after:top-0 after:end-0 after:rounded-full after:animate-ping"></span>
+                                                </div>
+
+                                                <div class="ms-2 max-w-lg">
+                                                    <p
+                                                        class="bg-white dark:bg-slate-900 text-slate-400 text-sm shadow dark:shadow-gray-700 px-3 py-2 rounded mb-1">
+                                                        Hey Cristina</p>
+                                                    <span class="text-slate-400 text-sm"><i
+                                                            class="mdi mdi-clock-outline me-1"></i>59 min ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="text-end">
+                                        <div class="inline-block">
+                                            <div class="flex mb-3">
+                                                <div class="relative order-2">
+                                                    <img src="{{ asset('assets/images/client/05.jpg') }}"
+                                                        class="size-9 min-w-[36px] rounded-full shadow dark:shadow-gray-700"
+                                                        alt="">
+                                                    <span
+                                                        class="absolute top-0.5 end-0.5 flex items-center justify-center bg-green-600 text-white text-[10px] font-bold rounded-full size-2 after:content-[''] after:absolute after:h-2 after:w-2 after:bg-green-600 after:top-0 after:end-0 after:rounded-full after:animate-ping"></span>
+                                                </div>
+
+                                                <div class="me-2 max-w-lg">
+                                                    <p
+                                                        class="bg-white dark:bg-slate-900 text-slate-400 text-sm shadow dark:shadow-gray-700 px-3 py-2 rounded mb-1">
+                                                        Hello Calvin</p>
+                                                    <span class="text-slate-400 text-sm"><i
+                                                            class="mdi mdi-clock-outline me-1"></i>45 min ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="text-end">
+                                        <div class="inline-block">
+                                            <div class="flex mb-3">
+                                                <div class="relative order-2">
+                                                    <img src="{{ asset('assets/images/client/05.jpg') }}"
+                                                        class="size-9 min-w-[36px] rounded-full shadow dark:shadow-gray-700"
+                                                        alt="">
+                                                    <span
+                                                        class="absolute top-0.5 end-0.5 flex items-center justify-center bg-green-600 text-white text-[10px] font-bold rounded-full size-2 after:content-[''] after:absolute after:h-2 after:w-2 after:bg-green-600 after:top-0 after:end-0 after:rounded-full after:animate-ping"></span>
+                                                </div>
+
+                                                <div class="me-2 max-w-lg">
+                                                    <p
+                                                        class="bg-white dark:bg-slate-900 text-slate-400 text-sm shadow dark:shadow-gray-700 px-3 py-2 rounded mb-1">
+                                                        How can i help you?</p>
+                                                    <span class="text-slate-400 text-sm"><i
+                                                            class="mdi mdi-clock-outline me-1"></i>44 min ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="inline-block">
+                                            <div class="flex mb-3">
+                                                <div class="relative">
+                                                    <img src="{{ asset('assets/images/client/01.jpg') }}"
+                                                        class="size-9 min-w-[36px] rounded-full shadow dark:shadow-gray-700"
+                                                        alt="">
+                                                    <span
+                                                        class="absolute top-0.5 start-0.5 flex items-center justify-center bg-green-600 text-white text-[10px] font-bold rounded-full size-2 after:content-[''] after:absolute after:h-2 after:w-2 after:bg-green-600 after:top-0 after:end-0 after:rounded-full after:animate-ping"></span>
+                                                </div>
+
+                                                <div class="ms-2 max-w-lg">
+                                                    <p
+                                                        class="bg-white dark:bg-slate-900 text-slate-400 text-sm shadow dark:shadow-gray-700 px-3 py-2 rounded mb-1">
+                                                        Nice to meet you</p>
+                                                    <span class="text-slate-400 text-sm"><i
+                                                            class="mdi mdi-clock-outline me-1"></i>42 min ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="inline-block">
+                                            <div class="flex mb-3">
+                                                <div class="relative">
+                                                    <img src="{{ asset('assets/images/client/01.jpg') }}"
+                                                        class="size-9 min-w-[36px] rounded-full shadow dark:shadow-gray-700"
+                                                        alt="">
+                                                    <span
+                                                        class="absolute top-0.5 start-0.5 flex items-center justify-center bg-green-600 text-white text-[10px] font-bold rounded-full size-2 after:content-[''] after:absolute after:h-2 after:w-2 after:bg-green-600 after:top-0 after:end-0 after:rounded-full after:animate-ping"></span>
+                                                </div>
+
+                                                <div class="ms-2 max-w-lg">
+                                                    <p
+                                                        class="bg-white dark:bg-slate-900 text-slate-400 text-sm shadow dark:shadow-gray-700 px-3 py-2 rounded mb-1">
+                                                        Hope you are doing fine?</p>
+                                                    <span class="text-slate-400 text-sm"><i
+                                                            class="mdi mdi-clock-outline me-1"></i>40 min ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="text-end">
+                                        <div class="inline-block">
+                                            <div class="flex mb-3">
+                                                <div class="relative order-2">
+                                                    <img src="{{ asset('assets/images/client/05.jpg') }}"
+                                                        class="size-9 min-w-[36px] rounded-full shadow dark:shadow-gray-700"
+                                                        alt="">
+                                                    <span
+                                                        class="absolute top-0.5 end-0.5 flex items-center justify-center bg-green-600 text-white text-[10px] font-bold rounded-full size-2 after:content-[''] after:absolute after:h-2 after:w-2 after:bg-green-600 after:top-0 after:end-0 after:rounded-full after:animate-ping"></span>
+                                                </div>
+
+                                                <div class="me-2 max-w-lg">
+                                                    <p
+                                                        class="bg-white dark:bg-slate-900 text-slate-400 text-sm shadow dark:shadow-gray-700 px-3 py-2 rounded mb-1">
+                                                        I'm good thanks for asking</p>
+                                                    <span class="text-slate-400 text-sm"><i
+                                                            class="mdi mdi-clock-outline me-1"></i>38 min ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="inline-block">
+                                            <div class="flex mb-3">
+                                                <div class="relative">
+                                                    <img src="{{ asset('assets/images/client/01.jpg') }}"
+                                                        class="size-9 min-w-[36px] rounded-full shadow dark:shadow-gray-700"
+                                                        alt="">
+                                                    <span
+                                                        class="absolute top-0.5 start-0.5 flex items-center justify-center bg-green-600 text-white text-[10px] font-bold rounded-full size-2 after:content-[''] after:absolute after:h-2 after:w-2 after:bg-green-600 after:top-0 after:end-0 after:rounded-full after:animate-ping"></span>
+                                                </div>
+
+                                                <div class="ms-2 max-w-lg">
+                                                    <p
+                                                        class="bg-white dark:bg-slate-900 text-slate-400 text-sm shadow dark:shadow-gray-700 px-3 py-2 rounded mb-1">
+                                                        I am intrested to know more about your prices and services you
+                                                        offer</p>
+                                                    <span class="text-slate-400 text-sm"><i
+                                                            class="mdi mdi-clock-outline me-1"></i>35 min ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="text-end">
+                                        <div class="inline-block">
+                                            <div class="flex mb-3">
+                                                <div class="relative order-2">
+                                                    <img src="{{ asset('assets/images/client/05.jpg') }}"
+                                                        class="size-9 min-w-[36px] rounded-full shadow dark:shadow-gray-700"
+                                                        alt="">
+                                                    <span
+                                                        class="absolute top-0.5 end-0.5 flex items-center justify-center bg-green-600 text-white text-[10px] font-bold rounded-full size-2 after:content-[''] after:absolute after:h-2 after:w-2 after:bg-green-600 after:top-0 after:end-0 after:rounded-full after:animate-ping"></span>
+                                                </div>
+
+                                                <div class="me-2 max-w-lg">
+                                                    <p
+                                                        class="bg-white dark:bg-slate-900 text-slate-400 text-sm shadow dark:shadow-gray-700 px-3 py-2 rounded mb-1">
+                                                        Sure please check below link to find more useful information <a
+                                                            href="https://shreethemes.in/techwind/" target="_blank"
+                                                            class="text-indigo-600">https://shreethemes.in/techwind/</a>
+                                                    </p>
+                                                    <span class="text-slate-400 text-sm"><i
+                                                            class="mdi mdi-clock-outline me-1"></i>29 min ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="inline-block">
+                                            <div class="flex mb-3">
+                                                <div class="relative">
+                                                    <img src="{{ asset('assets/images/client/01.jpg') }}"
+                                                        class="size-9 min-w-[36px] rounded-full shadow dark:shadow-gray-700"
+                                                        alt="">
+                                                    <span
+                                                        class="absolute top-0.5 start-0.5 flex items-center justify-center bg-green-600 text-white text-[10px] font-bold rounded-full size-2 after:content-[''] after:absolute after:h-2 after:w-2 after:bg-green-600 after:top-0 after:end-0 after:rounded-full after:animate-ping"></span>
+                                                </div>
+
+                                                <div class="ms-2 max-w-lg">
+                                                    <p
+                                                        class="bg-white dark:bg-slate-900 text-slate-400 text-sm shadow dark:shadow-gray-700 px-3 py-2 rounded mb-1">
+                                                        Thank you 😊</p>
+                                                    <span class="text-slate-400 text-sm"><i
+                                                            class="mdi mdi-clock-outline me-1"></i>26 min ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="text-end">
+                                        <div class="inline-block">
+                                            <div class="flex mb-3">
+                                                <div class="relative order-2">
+                                                    <img src="{{ asset('assets/images/client/05.jpg') }}"
+                                                        class="size-9 min-w-[36px] rounded-full shadow dark:shadow-gray-700"
+                                                        alt="">
+                                                    <span
+                                                        class="absolute top-0.5 end-0.5 flex items-center justify-center bg-green-600 text-white text-[10px] font-bold rounded-full size-2 after:content-[''] after:absolute after:h-2 after:w-2 after:bg-green-600 after:top-0 after:end-0 after:rounded-full after:animate-ping"></span>
+                                                </div>
+
+                                                <div class="me-2 max-w-lg">
+                                                    <p
+                                                        class="bg-white dark:bg-slate-900 text-slate-400 text-sm shadow dark:shadow-gray-700 px-3 py-2 rounded mb-1">
+                                                        Welcome</p>
+                                                    <span class="text-slate-400 text-sm"><i
+                                                            class="mdi mdi-clock-outline me-1"></i>15 min ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="inline-block">
+                                            <div class="flex items-center mb-3">
+                                                <div class="relative">
+                                                    <img src="{{ asset('assets/images/client/01.jpg') }}"
+                                                        class="size-9 min-w-[36px] rounded-full shadow dark:shadow-gray-700"
+                                                        alt="">
+                                                    <span
+                                                        class="absolute top-0.5 start-0.5 flex items-center justify-center bg-green-600 text-white text-[10px] font-bold rounded-full size-2 after:content-[''] after:absolute after:h-2 after:w-2 after:bg-green-600 after:top-0 after:end-0 after:rounded-full after:animate-ping"></span>
+                                                </div>
+
+                                                <div class="ms-2 max-w-lg">
+                                                    <p class="text-slate-400 text-sm rounded mb-1">Frank Williams is
+                                                        typing
+                                                        <span class="animate-typing ms-1">
+                                                            <span
+                                                                class="dot inline-block size-1 bg-slate-400 -mr-px opacity-60 rounded-full"></span>
+                                                            <span
+                                                                class="dot inline-block size-1 bg-slate-400 -mr-px opacity-60 rounded-full"></span>
+                                                            <span
+                                                                class="dot inline-block size-1 bg-slate-400 -mr-px opacity-60 rounded-full"></span>
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <div class="p-2 border-t border-gray-100 dark:border-gray-800">
+                                    <div class="flex ">
+                                        <input type="text"
+                                            class="form-input w-full py-2 px-3 h-9 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-100 dark:border-gray-800 focus:ring-0"
+                                            placeholder="Enter Message...">
+
+                                        <div class="min-w-[125px] text-end">
+                                            <a href="#"
+                                                class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[16px] text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md"><i
+                                                    class="mdi mdi-send"></i></a>
+                                            <a href="#"
+                                                class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[16px] text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md"><i
+                                                    class="mdi mdi-emoticon-happy-outline"></i></a>
+                                            <a href="#"
+                                                class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[16px] text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md"><i
+                                                    class="mdi mdi-paperclip"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="xl:col-span-3 lg:col-span-6">
+                            <div class="rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
+                                <div
+                                    class="p-6 flex items-center justify-between border-b border-gray-100 dark:border-gray-800">
+                                    <h6 class="text-lg font-semibold">Top Products / Items</h6>
+
+                                    <a href=""
+                                        class="text-slate-400 hover:text-indigo-600 dark:text-white/70 dark:hover:text-white text-[20px]"><i
+                                            class="mdi mdi-swap-vertical"></i></a>
+                                </div>
+
+                                <div class="relative overflow-x-auto block w-full max-h-[400px]" data-simplebar>
+                                    <table class="w-full text-start">
+                                        <thead class="text-base">
+                                            <tr>
+                                                <th class="text-start font-semibold text-[15px] p-4 min-w-[150px]">
+                                                    Products</th>
+                                                <th class="text-start font-semibold text-[15px] p-4 min-w-[100px]">
+                                                    Earnings</th>
+                                                <th class="text-end font-semibold text-[15px] p-4 min-w-[80px]">
+                                                    Progress</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    Techwind</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    $4120</td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-emerald-600 text-sm ms-1 font-semibold"><i
+                                                            class="uil uil-arrow-growth"></i> 5.5%</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    Landrick</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    $5648</td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-red-600 text-sm ms-1 font-semibold"><i
+                                                            class="uil uil-chart-down"></i> 15.8%</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    Hously</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    $456</td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-emerald-600 text-sm ms-1 font-semibold"><i
+                                                            class="uil uil-arrow-growth"></i> 1.3%</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    Jobstack</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    $546</td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-red-600 text-sm ms-1 font-semibold"><i
+                                                            class="uil uil-chart-down"></i> 1.54%</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    Giglink</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    $124</td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-red-600 text-sm ms-1 font-semibold"><i
+                                                            class="uil uil-chart-down"></i> 8.5%</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    Upwind</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    $1545</td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-emerald-600 text-sm ms-1 font-semibold"><i
+                                                            class="uil uil-arrow-growth"></i> 6.4%</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    Fronter</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    $1215</td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-red-600 text-sm ms-1 font-semibold"><i
+                                                            class="uil uil-chart-down"></i> 4.8%</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    Doctris</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    $2321</td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-emerald-600 text-sm ms-1 font-semibold"><i
+                                                            class="uil uil-arrow-growth"></i> 4.1%</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Content -->
+                </div>
+            </div><!--end container-->
+
+            <!-- Footer Start -->
+            <footer class="shadow dark:shadow-gray-700 bg-white dark:bg-slate-900 px-6 py-4">
+                <div class="container-fluid">
+                    <div class="grid grid-cols-1">
+                        <div class="sm:text-start text-center mx-md-2">
+                            <p class="mb-0 text-slate-400">©
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script> Techwind. Design with <i
+                                    class="mdi mdi-heart text-red-600"></i> by <a href="https://shreethemes.in/"
+                                    target="_blank" class="text-reset">Shreethemes</a>.
+                            </p>
+                        </div><!--end col-->
+                    </div><!--end grid-->
+                </div><!--end container-->
+            </footer><!--end footer-->
+            <!-- End -->
+        </main>
+        <!--End page-content" -->
+    </div>
+    <!-- page-wrapper -->
+
+    <!-- Switcher -->
+    <div class="fixed top-[30%] -end-3 z-50">
+        <span class="relative inline-block rotate-90">
+            <input type="checkbox" class="checkbox opacity-0 absolute" id="chk" />
+            <label
+                class="label bg-slate-900 dark:bg-white shadow dark:shadow-gray-700 cursor-pointer rounded-full flex justify-between items-center p-1 w-14 h-8"
+                for="chk">
+                <i class="uil uil-moon text-[20px] text-yellow-500"></i>
+                <i class="uil uil-sun text-[20px] text-yellow-500"></i>
+                <span class="ball bg-white dark:bg-slate-900 rounded-full absolute top-[2px] left-[2px] size-7"></span>
+            </label>
+        </span>
+    </div>
+    <!-- Switcher -->
+
+    <!-- JAVASCRIPTS -->
+    <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('assets/js/apexchart.init.js') }}"></script>
+    <script src="{{ asset('assets/libs/jsvectormap/js/jsvectormap.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/jsvectormap/maps/world.js') }}"></script>
+    <script src="{{ asset('assets/js/jsvectormap.init.js') }}"></script>
+    <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins.init.js') }}"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
+    <!-- JAVASCRIPTS -->
+</body>
+
 </html>

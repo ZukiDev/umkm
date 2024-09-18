@@ -1,776 +1,1483 @@
-<!--
-
-=========================================================
-* Argon Dashboard 2 Tailwind - v1.0.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-tailwind
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-
-* Coded by www.creative-tim.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png" />
-    <link rel="icon" type="image/png" href="./assets/img/favicon.png" />
-    <title>Argon Dashboard 2 Tailwind by Creative Tim</title>
-    <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-    <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <!-- Nucleo Icons -->
-    <link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
-    <!-- Popper -->
-    <script src="https://unpkg.com/@popperjs/core@2"></script>
-    <!-- Main Styling -->
-    <link href="./assets/css/argon-dashboard-tailwind.css?v=1.0.1" rel="stylesheet" />
-  </head>
+<html lang="en" class="light scroll-smooth" dir="ltr">
 
-  <body class="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
-    <div class="absolute w-full bg-blue-500 dark:hidden min-h-75"></div>
-    <!-- sidenav  -->
-    <aside class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4 overflow-y-auto antialiased transition-transform duration-200 -translate-x-full bg-white border-0 shadow-xl dark:shadow-none dark:bg-slate-850 max-w-64 ease-nav-brand z-990 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0" aria-expanded="false">
-      <div class="h-19">
-        <i class="absolute top-0 right-0 p-4 opacity-50 cursor-pointer fas fa-times dark:text-white text-slate-400 xl:hidden" sidenav-close></i>
-        <a class="block px-8 py-6 m-0 text-sm whitespace-nowrap dark:text-white text-slate-700" href="https://demos.creative-tim.com/argon-dashboard-tailwind/pages/dashboard.html" target="_blank">
-          <img src="./assets/img/logo-ct-dark.png" class="inline h-full max-w-full transition-all duration-200 dark:hidden ease-nav-brand max-h-8" alt="main_logo" />
-          <img src="./assets/img/logo-ct.png" class="hidden h-full max-w-full transition-all duration-200 dark:inline ease-nav-brand max-h-8" alt="main_logo" />
-          <span class="ml-1 font-semibold transition-all duration-200 ease-nav-brand">Argon Dashboard 2</span>
-        </a>
-      </div>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ config('app.name', 'UMKM Blitar') }}</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="E-Commerce UMKM Blitar">
+    <meta name="keywords" content="umkm, blitar, ecommmerce">
+    <meta name="version" content="1.0.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-      <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent" />
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
-      <div class="items-center block w-auto max-h-screen overflow-auto h-sidenav grow basis-full">
-        <ul class="flex flex-col pl-0 mb-0">
-          <li class="mt-0.5 w-full">
-            <a class="py-2.7 bg-blue-500/13 dark:text-white dark:opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg px-4 font-semibold text-slate-700 transition-colors" href="./pages/dashboard.html">
-              <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                <i class="relative top-0 text-sm leading-normal text-blue-500 ni ni-tv-2"></i>
-              </div>
-              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Dashboard</span>
-            </a>
-          </li>
+    <!-- Css -->
+    <link href="{{ asset('assets/libs/jsvectormap/css/jsvectormap.min.css') }}" rel="stylesheet">
+    <!-- Main Css -->
+    <link href="{{ asset('assets/libs/simplebar/simplebar.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/libs/@iconscout/unicons/css/line.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ asset('assets/libs/@mdi/font/css/materialdesignicons.min.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{ asset('assets/css/tailwind.css') }}">
 
-          <li class="mt-0.5 w-full">
-            <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="./pages/tables.html">
-              <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                <i class="relative top-0 text-sm leading-normal text-orange-500 ni ni-calendar-grid-58"></i>
-              </div>
-              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Tables</span>
-            </a>
-          </li>
+</head>
 
-          <li class="mt-0.5 w-full">
-            <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="./pages/billing.html">
-              <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
-                <i class="relative top-0 text-sm leading-normal text-emerald-500 ni ni-credit-card"></i>
-              </div>
-              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Billing</span>
-            </a>
-          </li>
-
-          <li class="mt-0.5 w-full">
-            <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="./pages/virtual-reality.html">
-              <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                <i class="relative top-0 text-sm leading-normal text-cyan-500 ni ni-app"></i>
-              </div>
-              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Virtual Reality</span>
-            </a>
-          </li>
-
-          <li class="mt-0.5 w-full">
-            <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="./pages/rtl.html">
-              <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                <i class="relative top-0 text-sm leading-normal text-red-600 ni ni-world-2"></i>
-              </div>
-              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">RTL</span>
-            </a>
-          </li>
-
-          <li class="w-full mt-4">
-            <h6 class="pl-6 ml-2 text-xs font-bold leading-tight uppercase dark:text-white opacity-60">Account pages</h6>
-          </li>
-
-          <li class="mt-0.5 w-full">
-            <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="./pages/profile.html">
-              <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                <i class="relative top-0 text-sm leading-normal text-slate-700 ni ni-single-02"></i>
-              </div>
-              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Profile</span>
-            </a>
-          </li>
-
-          <li class="mt-0.5 w-full">
-            <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="./pages/sign-in.html">
-              <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                <i class="relative top-0 text-sm leading-normal text-orange-500 ni ni-single-copy-04"></i>
-              </div>
-              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Sign In</span>
-            </a>
-          </li>
-
-          <li class="mt-0.5 w-full">
-            <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="./pages/sign-up.html">
-              <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                <i class="relative top-0 text-sm leading-normal text-cyan-500 ni ni-collection"></i>
-              </div>
-              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Sign Up</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="mx-4">
-        <!-- load phantom colors for card after: -->
-        <p class="invisible hidden text-gray-800 text-red-500 text-red-600 text-blue-500 bg-gray-500/30 bg-cyan-500/30 bg-emerald-500/30 bg-orange-500/30 bg-red-500/30 after:bg-gradient-to-tl after:from-zinc-800 after:to-zinc-700 dark:bg-gradient-to-tl dark:from-slate-750 dark:to-gray-850 after:from-blue-700 after:to-cyan-500 after:from-orange-500 after:to-yellow-500 after:from-green-600 after:to-lime-400 after:from-red-600 after:to-orange-600 after:from-slate-600 after:to-slate-300 text-emerald-500 text-cyan-500 text-slate-400"></p>
-        <div class="relative flex flex-col min-w-0 break-words bg-transparent border-0 shadow-none rounded-2xl bg-clip-border" sidenav-card>
-          <img class="w-1/2 mx-auto" src="./assets/img/illustrations/icon-documentation.svg" alt="sidebar illustrations" />
-          <div class="flex-auto w-full p-4 pt-0 text-center">
-            <div class="transition-all duration-200 ease-nav-brand">
-              <h6 class="mb-0 dark:text-white text-slate-700">Need help?</h6>
-              <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Please check our docs</p>
+<body class="font-nunito text-base text-black dark:text-white dark:bg-slate-900">
+    <!-- Loader Start -->
+    <div id="preloader">
+        <div id="status">
+            <div class="spinner">
+                <div class="double-bounce1"></div>
+                <div class="double-bounce2"></div>
             </div>
-          </div>
         </div>
-        <a href="https://www.creative-tim.com/learning-lab/tailwind/html/quick-start/argon-dashboard/" target="_blank" class="inline-block w-full px-8 py-2 mb-4 text-xs font-bold leading-normal text-center text-white capitalize transition-all ease-in rounded-lg shadow-md bg-slate-700 bg-150 hover:shadow-xs hover:-translate-y-px">Documentation</a>
-        <!-- pro btn  -->
-        <a class="inline-block w-full px-8 py-2 text-xs font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md select-none bg-150 bg-x-25 hover:shadow-xs hover:-translate-y-px" href="https://www.creative-tim.com/product/argon-dashboard-pro-tailwind?ref=sidebarfree" target="_blank">Upgrade to pro</a>
-      </div>
-    </aside>
-
-    <!-- end sidenav -->
-
-    <main class="relative h-full max-h-screen transition-all duration-200 ease-in-out xl:ml-68 rounded-xl">
-      <!-- Navbar -->
-      <nav class="relative flex flex-wrap items-center justify-between px-0 py-2 mx-6 transition-all ease-in shadow-none duration-250 rounded-2xl lg:flex-nowrap lg:justify-start" navbar-main navbar-scroll="false">
-        <div class="flex items-center justify-between w-full px-4 py-1 mx-auto flex-wrap-inherit">
-          <nav>
-            <!-- breadcrumb -->
-            <ol class="flex flex-wrap pt-1 mr-12 bg-transparent rounded-lg sm:mr-16">
-              <li class="text-sm leading-normal">
-                <a class="text-white opacity-50" href="javascript:;">Pages</a>
-              </li>
-              <li class="text-sm pl-2 capitalize leading-normal text-white before:float-left before:pr-2 before:text-white before:content-['/']" aria-current="page">Dashboard</li>
-            </ol>
-            <h6 class="mb-0 font-bold text-white capitalize">Dashboard</h6>
-          </nav>
-
-          <div class="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
-            <div class="flex items-center md:ml-auto md:pr-4">
-              <div class="relative flex flex-wrap items-stretch w-full transition-all rounded-lg ease">
-                <span class="text-sm ease leading-5.6 absolute z-50 -ml-px flex h-full items-center whitespace-nowrap rounded-lg rounded-tr-none rounded-br-none border border-r-0 border-transparent bg-transparent py-2 px-2.5 text-center font-normal text-slate-500 transition-all">
-                  <i class="fas fa-search"></i>
-                </span>
-                <input type="text" class="pl-9 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid border-gray-300 dark:bg-slate-850 dark:text-white bg-white bg-clip-padding py-2 pr-3 text-gray-700 transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none focus:transition-shadow" placeholder="Type here..." />
-              </div>
-            </div>
-            <ul class="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
-              <!-- online builder btn  -->
-              <!-- <li class="flex items-center">
-                <a class="inline-block px-8 py-2 mb-0 mr-4 text-xs font-bold text-center text-blue-500 uppercase align-middle transition-all ease-in bg-transparent border border-blue-500 border-solid rounded-lg shadow-none cursor-pointer leading-pro hover:-translate-y-px active:shadow-xs hover:border-blue-500 active:bg-blue-500 active:hover:text-blue-500 hover:text-blue-500 tracking-tight-rem hover:bg-transparent hover:opacity-75 hover:shadow-none active:text-white active:hover:bg-transparent" target="_blank" href="https://www.creative-tim.com/builder/soft-ui?ref=navbar-dashboard&amp;_ga=2.76518741.1192788655.1647724933-1242940210.1644448053">Online Builder</a>
-              </li> -->
-              <li class="flex items-center">
-                <a href="./pages/sign-in.html" class="block px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand">
-                  <i class="fa fa-user sm:mr-1"></i>
-                  <span class="hidden sm:inline">Sign In</span>
-                </a>
-              </li>
-              <li class="flex items-center pl-4 xl:hidden">
-                <a href="javascript:;" class="block p-0 text-sm text-white transition-all ease-nav-brand" sidenav-trigger>
-                  <div class="w-4.5 overflow-hidden">
-                    <i class="ease mb-0.75 relative block h-0.5 rounded-sm bg-white transition-all"></i>
-                    <i class="ease mb-0.75 relative block h-0.5 rounded-sm bg-white transition-all"></i>
-                    <i class="ease relative block h-0.5 rounded-sm bg-white transition-all"></i>
-                  </div>
-                </a>
-              </li>
-              <li class="flex items-center px-4">
-                <a href="javascript:;" class="p-0 text-sm text-white transition-all ease-nav-brand">
-                  <i fixed-plugin-button-nav class="cursor-pointer fa fa-cog"></i>
-                  <!-- fixed-plugin-button-nav  -->
-                </a>
-              </li>
-
-              <!-- notifications -->
-
-              <li class="relative flex items-center pr-2">
-                <p class="hidden transform-dropdown-show"></p>
-                <a href="javascript:;" class="block p-0 text-sm text-white transition-all ease-nav-brand" dropdown-trigger aria-expanded="false">
-                  <i class="cursor-pointer fa fa-bell"></i>
-                </a>
-
-                <ul dropdown-menu class="text-sm transform-dropdown before:font-awesome before:leading-default before:duration-350 before:ease lg:shadow-3xl duration-250 min-w-44 before:sm:right-8 before:text-5.5 pointer-events-none absolute right-0 top-0 z-50 origin-top list-none rounded-lg border-0 border-solid border-transparent dark:shadow-dark-xl dark:bg-slate-850 bg-white bg-clip-padding px-2 py-4 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-2 before:left-auto before:top-0 before:z-50 before:inline-block before:font-normal before:text-white before:antialiased before:transition-all before:content-['\f0d8'] sm:-mr-6 lg:absolute lg:right-0 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
-                  <!-- add show class on dropdown open js -->
-                  <li class="relative mb-2">
-                    <a class="dark:hover:bg-slate-900 ease py-1.2 clear-both block w-full whitespace-nowrap rounded-lg bg-transparent px-4 duration-300 hover:bg-gray-200 hover:text-slate-700 lg:transition-colors" href="javascript:;">
-                      <div class="flex py-1">
-                        <div class="my-auto">
-                          <img src="./assets/img/team-2.jpg" class="inline-flex items-center justify-center mr-4 text-sm text-white h-9 w-9 max-w-none rounded-xl" />
-                        </div>
-                        <div class="flex flex-col justify-center">
-                          <h6 class="mb-1 text-sm font-normal leading-normal dark:text-white"><span class="font-semibold">New message</span> from Laur</h6>
-                          <p class="mb-0 text-xs leading-tight text-slate-400 dark:text-white/80">
-                            <i class="mr-1 fa fa-clock"></i>
-                            13 minutes ago
-                          </p>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-
-                  <li class="relative mb-2">
-                    <a class="dark:hover:bg-slate-900 ease py-1.2 clear-both block w-full whitespace-nowrap rounded-lg px-4 transition-colors duration-300 hover:bg-gray-200 hover:text-slate-700" href="javascript:;">
-                      <div class="flex py-1">
-                        <div class="my-auto">
-                          <img src="./assets/img/small-logos/logo-spotify.svg" class="inline-flex items-center justify-center mr-4 text-sm text-white bg-gradient-to-tl from-zinc-800 to-zinc-700 dark:bg-gradient-to-tl dark:from-slate-750 dark:to-gray-850 h-9 w-9 max-w-none rounded-xl" />
-                        </div>
-                        <div class="flex flex-col justify-center">
-                          <h6 class="mb-1 text-sm font-normal leading-normal dark:text-white"><span class="font-semibold">New album</span> by Travis Scott</h6>
-                          <p class="mb-0 text-xs leading-tight text-slate-400 dark:text-white/80">
-                            <i class="mr-1 fa fa-clock"></i>
-                            1 day
-                          </p>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-
-                  <li class="relative">
-                    <a class="dark:hover:bg-slate-900 ease py-1.2 clear-both block w-full whitespace-nowrap rounded-lg px-4 transition-colors duration-300 hover:bg-gray-200 hover:text-slate-700" href="javascript:;">
-                      <div class="flex py-1">
-                        <div class="inline-flex items-center justify-center my-auto mr-4 text-sm text-white transition-all duration-200 ease-nav-brand bg-gradient-to-tl from-slate-600 to-slate-300 h-9 w-9 rounded-xl">
-                          <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <title>credit-card</title>
-                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                              <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                                <g transform="translate(1716.000000, 291.000000)">
-                                  <g transform="translate(453.000000, 454.000000)">
-                                    <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
-                                    <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
-                                  </g>
-                                </g>
-                              </g>
-                            </g>
-                          </svg>
-                        </div>
-                        <div class="flex flex-col justify-center">
-                          <h6 class="mb-1 text-sm font-normal leading-normal dark:text-white">Payment successfully completed</h6>
-                          <p class="mb-0 text-xs leading-tight text-slate-400 dark:text-white/80">
-                            <i class="mr-1 fa fa-clock"></i>
-                            2 days
-                          </p>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
-      <!-- end Navbar -->
-
-      <!-- cards -->
-      <div class="w-full px-6 py-6 mx-auto">
-        <!-- row 1 -->
-        <div class="flex flex-wrap -mx-3">
-          <!-- card1 -->
-          <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
-            <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
-              <div class="flex-auto p-4">
-                <div class="flex flex-row -mx-3">
-                  <div class="flex-none w-2/3 max-w-full px-3">
-                    <div>
-                      <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Today's Money</p>
-                      <h5 class="mb-2 font-bold dark:text-white">$53,000</h5>
-                      <p class="mb-0 dark:text-white dark:opacity-60">
-                        <span class="text-sm font-bold leading-normal text-emerald-500">+55%</span>
-                        since yesterday
-                      </p>
-                    </div>
-                  </div>
-                  <div class="px-3 text-right basis-1/3">
-                    <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-blue-500 to-violet-500">
-                      <i class="ni leading-none ni-money-coins text-lg relative top-3.5 text-white"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- card2 -->
-          <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
-            <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
-              <div class="flex-auto p-4">
-                <div class="flex flex-row -mx-3">
-                  <div class="flex-none w-2/3 max-w-full px-3">
-                    <div>
-                      <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Today's Users</p>
-                      <h5 class="mb-2 font-bold dark:text-white">2,300</h5>
-                      <p class="mb-0 dark:text-white dark:opacity-60">
-                        <span class="text-sm font-bold leading-normal text-emerald-500">+3%</span>
-                        since last week
-                      </p>
-                    </div>
-                  </div>
-                  <div class="px-3 text-right basis-1/3">
-                    <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-red-600 to-orange-600">
-                      <i class="ni leading-none ni-world text-lg relative top-3.5 text-white"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- card3 -->
-          <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
-            <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
-              <div class="flex-auto p-4">
-                <div class="flex flex-row -mx-3">
-                  <div class="flex-none w-2/3 max-w-full px-3">
-                    <div>
-                      <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">New Clients</p>
-                      <h5 class="mb-2 font-bold dark:text-white">+3,462</h5>
-                      <p class="mb-0 dark:text-white dark:opacity-60">
-                        <span class="text-sm font-bold leading-normal text-red-600">-2%</span>
-                        since last quarter
-                      </p>
-                    </div>
-                  </div>
-                  <div class="px-3 text-right basis-1/3">
-                    <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-emerald-500 to-teal-400">
-                      <i class="ni leading-none ni-paper-diploma text-lg relative top-3.5 text-white"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- card4 -->
-          <div class="w-full max-w-full px-3 sm:w-1/2 sm:flex-none xl:w-1/4">
-            <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
-              <div class="flex-auto p-4">
-                <div class="flex flex-row -mx-3">
-                  <div class="flex-none w-2/3 max-w-full px-3">
-                    <div>
-                      <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Sales</p>
-                      <h5 class="mb-2 font-bold dark:text-white">$103,430</h5>
-                      <p class="mb-0 dark:text-white dark:opacity-60">
-                        <span class="text-sm font-bold leading-normal text-emerald-500">+5%</span>
-                        than last month
-                      </p>
-                    </div>
-                  </div>
-                  <div class="px-3 text-right basis-1/3">
-                    <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-orange-500 to-yellow-500">
-                      <i class="ni leading-none ni-cart text-lg relative top-3.5 text-white"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- cards row 2 -->
-        <div class="flex flex-wrap mt-6 -mx-3">
-          <div class="w-full max-w-full px-3 mt-0 lg:w-7/12 lg:flex-none">
-            <div class="border-black/12.5 dark:bg-slate-850 dark:shadow-dark-xl shadow-xl relative z-20 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-white bg-clip-border">
-              <div class="border-black/12.5 mb-0 rounded-t-2xl border-b-0 border-solid p-6 pt-4 pb-0">
-                <h6 class="capitalize dark:text-white">Sales overview</h6>
-                <p class="mb-0 text-sm leading-normal dark:text-white dark:opacity-60">
-                  <i class="fa fa-arrow-up text-emerald-500"></i>
-                  <span class="font-semibold">4% more</span> in 2021
-                </p>
-              </div>
-              <div class="flex-auto p-4">
-                <div>
-                  <canvas id="chart-line" height="300"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="w-full max-w-full px-3 lg:w-5/12 lg:flex-none">
-            <div slider class="relative w-full h-full overflow-hidden rounded-2xl">
-              <!-- slide 1 -->
-              <div slide class="absolute w-full h-full transition-all duration-500">
-                <img class="object-cover h-full" src="./assets/img/carousel-1.jpg" alt="carousel image" />
-                <div class="block text-start ml-12 left-0 bottom-0 absolute right-[15%] pt-5 pb-5 text-white">
-                  <div class="inline-block w-8 h-8 mb-4 text-center text-black bg-white bg-center rounded-lg fill-current stroke-none">
-                    <i class="top-0.75 text-xxs relative text-slate-700 ni ni-camera-compact"></i>
-                  </div>
-                  <h5 class="mb-1 text-white">Get started with Argon</h5>
-                  <p class="dark:opacity-80">There’s nothing I really wanted to do in life that I wasn’t able to get good at.</p>
-                </div>
-              </div>
-
-              <!-- slide 2 -->
-              <div slide class="absolute w-full h-full transition-all duration-500">
-                <img class="object-cover h-full" src="./assets/img/carousel-2.jpg" alt="carousel image" />
-                <div class="block text-start ml-12 left-0 bottom-0 absolute right-[15%] pt-5 pb-5 text-white">
-                  <div class="inline-block w-8 h-8 mb-4 text-center text-black bg-white bg-center rounded-lg fill-current stroke-none">
-                    <i class="top-0.75 text-xxs relative text-slate-700 ni ni-bulb-61"></i>
-                  </div>
-                  <h5 class="mb-1 text-white">Faster way to create web pages</h5>
-                  <p class="dark:opacity-80">That’s my skill. I’m not really specifically talented at anything except for the ability to learn.</p>
-                </div>
-              </div>
-
-              <!-- slide 3 -->
-              <div slide class="absolute w-full h-full transition-all duration-500">
-                <img class="object-cover h-full" src="./assets/img/carousel-3.jpg" alt="carousel image" />
-                <div class="block text-start ml-12 left-0 bottom-0 absolute right-[15%] pt-5 pb-5 text-white">
-                  <div class="inline-block w-8 h-8 mb-4 text-center text-black bg-white bg-center rounded-lg fill-current stroke-none">
-                    <i class="top-0.75 text-xxs relative text-slate-700 ni ni-trophy"></i>
-                  </div>
-                  <h5 class="mb-1 text-white">Share with us your design tips!</h5>
-                  <p class="dark:opacity-80">Don’t be afraid to be wrong because you can’t learn anything from a compliment.</p>
-                </div>
-              </div>
-
-              <!-- Control buttons -->
-              <button btn-next class="absolute z-10 w-10 h-10 p-2 text-lg text-white border-none opacity-50 cursor-pointer hover:opacity-100 far fa-chevron-right active:scale-110 top-6 right-4"></button>
-              <button btn-prev class="absolute z-10 w-10 h-10 p-2 text-lg text-white border-none opacity-50 cursor-pointer hover:opacity-100 far fa-chevron-left active:scale-110 top-6 right-16"></button>
-            </div>
-          </div>
-        </div>
-
-        <!-- cards row 3 -->
-
-        <div class="flex flex-wrap mt-6 -mx-3">
-          <div class="w-full max-w-full px-3 mt-0 mb-6 lg:mb-0 lg:w-7/12 lg:flex-none">
-            <div class="relative flex flex-col min-w-0 break-words bg-white border-0 border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl dark:bg-gray-950 border-black-125 rounded-2xl bg-clip-border">
-              <div class="p-4 pb-0 mb-0 rounded-t-4">
-                <div class="flex justify-between">
-                  <h6 class="mb-2 dark:text-white">Sales by Country</h6>
-                </div>
-              </div>
-              <div class="overflow-x-auto">
-                <table class="items-center w-full mb-4 align-top border-collapse border-gray-200 dark:border-white/40">
-                  <tbody>
-                    <tr>
-                      <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
-                        <div class="flex items-center px-2 py-1">
-                          <div>
-                            <img src="./assets/img/icons/flags/US.png" alt="Country flag" />
-                          </div>
-                          <div class="ml-6">
-                            <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Country:</p>
-                            <h6 class="mb-0 text-sm leading-normal dark:text-white">United States</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                        <div class="text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Sales:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">2500</h6>
-                        </div>
-                      </td>
-                      <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                        <div class="text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Value:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">$230,900</h6>
-                        </div>
-                      </td>
-                      <td class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                        <div class="flex-1 text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Bounce:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">29.9%</h6>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
-                        <div class="flex items-center px-2 py-1">
-                          <div>
-                            <img src="./assets/img/icons/flags/DE.png" alt="Country flag" />
-                          </div>
-                          <div class="ml-6">
-                            <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Country:</p>
-                            <h6 class="mb-0 text-sm leading-normal dark:text-white">Germany</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                        <div class="text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Sales:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">3.900</h6>
-                        </div>
-                      </td>
-                      <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                        <div class="text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Value:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">$440,000</h6>
-                        </div>
-                      </td>
-                      <td class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                        <div class="flex-1 text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Bounce:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">40.22%</h6>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
-                        <div class="flex items-center px-2 py-1">
-                          <div>
-                            <img src="./assets/img/icons/flags/GB.png" alt="Country flag" />
-                          </div>
-                          <div class="ml-6">
-                            <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Country:</p>
-                            <h6 class="mb-0 text-sm leading-normal dark:text-white">Great Britain</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                        <div class="text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Sales:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">1.400</h6>
-                        </div>
-                      </td>
-                      <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                        <div class="text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Value:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">$190,700</h6>
-                        </div>
-                      </td>
-                      <td class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                        <div class="flex-1 text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Bounce:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">23.44%</h6>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="p-2 align-middle bg-transparent border-0 w-3/10 whitespace-nowrap">
-                        <div class="flex items-center px-2 py-1">
-                          <div>
-                            <img src="./assets/img/icons/flags/BR.png" alt="Country flag" />
-                          </div>
-                          <div class="ml-6">
-                            <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Country:</p>
-                            <h6 class="mb-0 text-sm leading-normal dark:text-white">Brasil</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="p-2 align-middle bg-transparent border-0 whitespace-nowrap">
-                        <div class="text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Sales:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">562</h6>
-                        </div>
-                      </td>
-                      <td class="p-2 align-middle bg-transparent border-0 whitespace-nowrap">
-                        <div class="text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Value:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">$143,960</h6>
-                        </div>
-                      </td>
-                      <td class="p-2 text-sm leading-normal align-middle bg-transparent border-0 whitespace-nowrap">
-                        <div class="flex-1 text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Bounce:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">32.14%</h6>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-          <div class="w-full max-w-full px-3 mt-0 lg:w-5/12 lg:flex-none">
-            <div class="border-black/12.5 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl relative flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-white bg-clip-border">
-              <div class="p-4 pb-0 rounded-t-4">
-                <h6 class="mb-0 dark:text-white">Categories</h6>
-              </div>
-              <div class="flex-auto p-4">
-                <ul class="flex flex-col pl-0 mb-0 rounded-lg">
-                  <li class="relative flex justify-between py-2 pr-4 mb-2 border-0 rounded-t-lg rounded-xl text-inherit">
-                    <div class="flex items-center">
-                      <div class="inline-block w-8 h-8 mr-4 text-center text-black bg-center shadow-sm fill-current stroke-none bg-gradient-to-tl from-zinc-800 to-zinc-700 dark:bg-gradient-to-tl dark:from-slate-750 dark:to-gray-850 rounded-xl">
-                        <i class="text-white ni ni-mobile-button relative top-0.75 text-xxs"></i>
-                      </div>
-                      <div class="flex flex-col">
-                        <h6 class="mb-1 text-sm leading-normal text-slate-700 dark:text-white">Devices</h6>
-                        <span class="text-xs leading-tight dark:text-white/80">250 in stock, <span class="font-semibold">346+ sold</span></span>
-                      </div>
-                    </div>
-                    <div class="flex">
-                      <button class="group ease-in leading-pro text-xs rounded-3.5xl p-1.2 h-6.5 w-6.5 mx-0 my-auto inline-block cursor-pointer border-0 bg-transparent text-center align-middle font-bold text-slate-700 shadow-none transition-all dark:text-white"><i class="ni ease-bounce text-2xs group-hover:translate-x-1.25 ni-bold-right transition-all duration-200" aria-hidden="true"></i></button>
-                    </div>
-                  </li>
-                  <li class="relative flex justify-between py-2 pr-4 mb-2 border-0 rounded-xl text-inherit">
-                    <div class="flex items-center">
-                      <div class="inline-block w-8 h-8 mr-4 text-center text-black bg-center shadow-sm fill-current stroke-none bg-gradient-to-tl from-zinc-800 to-zinc-700 dark:bg-gradient-to-tl dark:from-slate-750 dark:to-gray-850 rounded-xl">
-                        <i class="text-white ni ni-tag relative top-0.75 text-xxs"></i>
-                      </div>
-                      <div class="flex flex-col">
-                        <h6 class="mb-1 text-sm leading-normal text-slate-700 dark:text-white">Tickets</h6>
-                        <span class="text-xs leading-tight dark:text-white/80">123 closed, <span class="font-semibold">15 open</span></span>
-                      </div>
-                    </div>
-                    <div class="flex">
-                      <button class="group ease-in leading-pro text-xs rounded-3.5xl p-1.2 h-6.5 w-6.5 mx-0 my-auto inline-block cursor-pointer border-0 bg-transparent text-center align-middle font-bold text-slate-700 shadow-none transition-all dark:text-white"><i class="ni ease-bounce text-2xs group-hover:translate-x-1.25 ni-bold-right transition-all duration-200" aria-hidden="true"></i></button>
-                    </div>
-                  </li>
-                  <li class="relative flex justify-between py-2 pr-4 mb-2 border-0 rounded-b-lg rounded-xl text-inherit">
-                    <div class="flex items-center">
-                      <div class="inline-block w-8 h-8 mr-4 text-center text-black bg-center shadow-sm fill-current stroke-none bg-gradient-to-tl from-zinc-800 to-zinc-700 dark:bg-gradient-to-tl dark:from-slate-750 dark:to-gray-850 rounded-xl">
-                        <i class="text-white ni ni-box-2 relative top-0.75 text-xxs"></i>
-                      </div>
-                      <div class="flex flex-col">
-                        <h6 class="mb-1 text-sm leading-normal text-slate-700 dark:text-white">Error logs</h6>
-                        <span class="text-xs leading-tight dark:text-white/80">1 is active, <span class="font-semibold">40 closed</span></span>
-                      </div>
-                    </div>
-                    <div class="flex">
-                      <button class="group ease-in leading-pro text-xs rounded-3.5xl p-1.2 h-6.5 w-6.5 mx-0 my-auto inline-block cursor-pointer border-0 bg-transparent text-center align-middle font-bold text-slate-700 shadow-none transition-all dark:text-white"><i class="ni ease-bounce text-2xs group-hover:translate-x-1.25 ni-bold-right transition-all duration-200" aria-hidden="true"></i></button>
-                    </div>
-                  </li>
-                  <li class="relative flex justify-between py-2 pr-4 border-0 rounded-b-lg rounded-xl text-inherit">
-                    <div class="flex items-center">
-                      <div class="inline-block w-8 h-8 mr-4 text-center text-black bg-center shadow-sm fill-current stroke-none bg-gradient-to-tl from-zinc-800 to-zinc-700 dark:bg-gradient-to-tl dark:from-slate-750 dark:to-gray-850 rounded-xl">
-                        <i class="text-white ni ni-satisfied relative top-0.75 text-xxs"></i>
-                      </div>
-                      <div class="flex flex-col">
-                        <h6 class="mb-1 text-sm leading-normal text-slate-700 dark:text-white">Happy users</h6>
-                        <span class="text-xs leading-tight dark:text-white/80"><span class="font-semibold">+ 430 </span></span>
-                      </div>
-                    </div>
-                    <div class="flex">
-                      <button class="group ease-in leading-pro text-xs rounded-3.5xl p-1.2 h-6.5 w-6.5 mx-0 my-auto inline-block cursor-pointer border-0 bg-transparent text-center align-middle font-bold text-slate-700 shadow-none transition-all dark:text-white"><i class="ni ease-bounce text-2xs group-hover:translate-x-1.25 ni-bold-right transition-all duration-200" aria-hidden="true"></i></button>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <footer class="pt-4">
-          <div class="w-full px-6 mx-auto">
-            <div class="flex flex-wrap items-center -mx-3 lg:justify-between">
-              <div class="w-full max-w-full px-3 mt-0 mb-6 shrink-0 lg:mb-0 lg:w-1/2 lg:flex-none">
-                <div class="text-sm leading-normal text-center text-slate-500 lg:text-left">
-                  ©
-                  <script>
-                    document.write(new Date().getFullYear() + ",");
-                  </script>
-                  made with <i class="fa fa-heart"></i> by
-                  <a href="https://www.creative-tim.com" class="font-semibold text-slate-700 dark:text-white" target="_blank">Creative Tim</a>
-                  for a better web.
-                </div>
-              </div>
-              <div class="w-full max-w-full px-3 mt-0 shrink-0 lg:w-1/2 lg:flex-none">
-                <ul class="flex flex-wrap justify-center pl-0 mb-0 list-none lg:justify-end">
-                  <li class="nav-item">
-                    <a href="https://www.creative-tim.com" class="block px-4 pt-0 pb-1 text-sm font-normal transition-colors ease-in-out text-slate-500" target="_blank">Creative Tim</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="https://www.creative-tim.com/presentation" class="block px-4 pt-0 pb-1 text-sm font-normal transition-colors ease-in-out text-slate-500" target="_blank">About Us</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="https://creative-tim.com/blog" class="block px-4 pt-0 pb-1 text-sm font-normal transition-colors ease-in-out text-slate-500" target="_blank">Blog</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="https://www.creative-tim.com/license" class="block px-4 pt-0 pb-1 pr-0 text-sm font-normal transition-colors ease-in-out text-slate-500" target="_blank">License</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </footer>
-      </div>
-      <!-- end cards -->
-    </main>
-    <div fixed-plugin>
-      <a fixed-plugin-button class="fixed px-4 py-2 text-xl bg-white shadow-lg cursor-pointer bottom-8 right-8 z-990 rounded-circle text-slate-700">
-        <i class="py-2 pointer-events-none fa fa-cog"> </i>
-      </a>
-      <!-- -right-90 in loc de 0-->
-      <div fixed-plugin-card class="z-sticky backdrop-blur-2xl backdrop-saturate-200 dark:bg-slate-850/80 shadow-3xl w-90 ease -right-90 fixed top-0 left-auto flex h-full min-w-0 flex-col break-words rounded-none border-0 bg-white/80 bg-clip-border px-2.5 duration-200">
-        <div class="px-6 pt-4 pb-0 mb-0 border-b-0 rounded-t-2xl">
-          <div class="float-left">
-            <h5 class="mt-4 mb-0 dark:text-white">Argon Configurator</h5>
-            <p class="dark:text-white dark:opacity-80">See our dashboard options.</p>
-          </div>
-          <div class="float-right mt-6">
-            <button fixed-plugin-close-button class="inline-block p-0 mb-4 text-sm font-bold leading-normal text-center uppercase align-middle transition-all ease-in bg-transparent border-0 rounded-lg shadow-none cursor-pointer hover:-translate-y-px tracking-tight-rem bg-150 bg-x-25 active:opacity-85 dark:text-white text-slate-700">
-              <i class="fa fa-close"></i>
-            </button>
-          </div>
-          <!-- End Toggle Button -->
-        </div>
-        <hr class="h-px mx-0 my-1 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent" />
-        <div class="flex-auto p-6 pt-0 overflow-auto sm:pt-4">
-          <!-- Sidebar Backgrounds -->
-          <div>
-            <h6 class="mb-0 dark:text-white">Sidebar Colors</h6>
-          </div>
-          <a href="javascript:void(0)">
-            <div class="my-2 text-left" sidenav-colors>
-              <span class="py-2.2 text-xs rounded-circle h-5.6 mr-1.25 w-5.6 ease-in-out bg-gradient-to-tl from-blue-500 to-violet-500 relative inline-block cursor-pointer whitespace-nowrap border border-solid border-slate-700 text-center align-baseline font-bold uppercase leading-none text-white transition-all duration-200 hover:border-slate-700" active-color data-color="blue" onclick="sidebarColor(this)"></span>
-              <span class="py-2.2 text-xs rounded-circle h-5.6 mr-1.25 w-5.6 ease-in-out bg-gradient-to-tl from-zinc-800 to-zinc-700 dark:bg-gradient-to-tl dark:from-slate-750 dark:to-gray-850 relative inline-block cursor-pointer whitespace-nowrap border border-solid border-white text-center align-baseline font-bold uppercase leading-none text-white transition-all duration-200 hover:border-slate-700" data-color="gray" onclick="sidebarColor(this)"></span>
-              <span class="py-2.2 text-xs rounded-circle h-5.6 mr-1.25 w-5.6 ease-in-out bg-gradient-to-tl from-blue-700 to-cyan-500 relative inline-block cursor-pointer whitespace-nowrap border border-solid border-white text-center align-baseline font-bold uppercase leading-none text-white transition-all duration-200 hover:border-slate-700" data-color="cyan" onclick="sidebarColor(this)"></span>
-              <span class="py-2.2 text-xs rounded-circle h-5.6 mr-1.25 w-5.6 ease-in-out bg-gradient-to-tl from-emerald-500 to-teal-400 relative inline-block cursor-pointer whitespace-nowrap border border-solid border-white text-center align-baseline font-bold uppercase leading-none text-white transition-all duration-200 hover:border-slate-700" data-color="emerald" onclick="sidebarColor(this)"></span>
-              <span class="py-2.2 text-xs rounded-circle h-5.6 mr-1.25 w-5.6 ease-in-out bg-gradient-to-tl from-orange-500 to-yellow-500 relative inline-block cursor-pointer whitespace-nowrap border border-solid border-white text-center align-baseline font-bold uppercase leading-none text-white transition-all duration-200 hover:border-slate-700" data-color="orange" onclick="sidebarColor(this)"></span>
-              <span class="py-2.2 text-xs rounded-circle h-5.6 mr-1.25 w-5.6 ease-in-out bg-gradient-to-tl from-red-600 to-orange-600 relative inline-block cursor-pointer whitespace-nowrap border border-solid border-white text-center align-baseline font-bold uppercase leading-none text-white transition-all duration-200 hover:border-slate-700" data-color="red" onclick="sidebarColor(this)"></span>
-            </div>
-          </a>
-          <!-- Sidenav Type -->
-          <div class="mt-4">
-            <h6 class="mb-0 dark:text-white">Sidenav Type</h6>
-            <p class="text-sm leading-normal dark:text-white dark:opacity-80">Choose between 2 different sidenav types.</p>
-          </div>
-          <div class="flex">
-            <button transparent-style-btn class="inline-block w-full px-4 py-2.5 mb-2 font-bold leading-normal text-center text-white capitalize align-middle transition-all bg-blue-500 border border-transparent border-solid rounded-lg cursor-pointer text-sm xl-max:cursor-not-allowed xl-max:opacity-65 xl-max:pointer-events-none xl-max:bg-gradient-to-tl xl-max:from-blue-500 xl-max:to-violet-500 xl-max:text-white xl-max:border-0 hover:-translate-y-px dark:cursor-not-allowed dark:opacity-65 dark:pointer-events-none dark:bg-gradient-to-tl dark:from-blue-500 dark:to-violet-500 dark:text-white dark:border-0 hover:shadow-xs active:opacity-85 ease-in tracking-tight-rem shadow-md bg-150 bg-x-25 bg-gradient-to-tl from-blue-500 to-violet-500 hover:border-blue-500" data-class="bg-transparent" active-style>White</button>
-            <button white-style-btn class="inline-block w-full px-4 py-2.5 mb-2 ml-2 font-bold leading-normal text-center text-blue-500 capitalize align-middle transition-all bg-transparent border border-blue-500 border-solid rounded-lg cursor-pointer text-sm xl-max:cursor-not-allowed xl-max:opacity-65 xl-max:pointer-events-none xl-max:bg-gradient-to-tl xl-max:from-blue-500 xl-max:to-violet-500 xl-max:text-white xl-max:border-0 hover:-translate-y-px dark:cursor-not-allowed dark:opacity-65 dark:pointer-events-none dark:bg-gradient-to-tl dark:from-blue-500 dark:to-violet-500 dark:text-white dark:border-0 hover:shadow-xs active:opacity-85 ease-in tracking-tight-rem shadow-md bg-150 bg-x-25 bg-none hover:border-blue-500" data-class="bg-white">Dark</button>
-          </div>
-          <p class="block mt-2 text-sm leading-normal dark:text-white dark:opacity-80 xl:hidden">You can change the sidenav type just on desktop view.</p>
-          <!-- Navbar Fixed -->
-          <div class="flex my-4">
-            <h6 class="mb-0 dark:text-white">Navbar Fixed</h6>
-            <div class="block pl-0 ml-auto min-h-6">
-              <input navbarFixed class="rounded-10 duration-250 ease-in-out after:rounded-circle after:shadow-2xl after:duration-250 checked:after:translate-x-5.3 h-5 relative float-left mt-1 ml-auto w-10 cursor-pointer appearance-none border border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain bg-left bg-no-repeat align-top transition-all after:absolute after:top-px after:h-4 after:w-4 after:translate-x-px after:bg-white after:content-[''] checked:border-blue-500/95 checked:bg-blue-500/95 checked:bg-none checked:bg-right" type="checkbox" />
-            </div>
-          </div>
-          <hr class="h-px my-6 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent " />
-          <div class="flex mt-2 mb-12">
-            <h6 class="mb-0 dark:text-white">Light / Dark</h6>
-            <div class="block pl-0 ml-auto min-h-6">
-              <input dark-toggle class="rounded-10 duration-250 ease-in-out after:rounded-circle after:shadow-2xl after:duration-250 checked:after:translate-x-5.3 h-5 relative float-left mt-1 ml-auto w-10 cursor-pointer appearance-none border border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain bg-left bg-no-repeat align-top transition-all after:absolute after:top-px after:h-4 after:w-4 after:translate-x-px after:bg-white after:content-[''] checked:border-blue-500/95 checked:bg-blue-500/95 checked:bg-none checked:bg-right" type="checkbox" />
-            </div>
-          </div>
-          <a target="_blank" class="dark:border dark:border-solid dark:border-white inline-block w-full px-6 py-2.5 mb-4 font-bold leading-normal text-center text-white align-middle transition-all bg-transparent border border-solid border-transparent rounded-lg cursor-pointer text-sm ease-in hover:shadow-xs hover:-translate-y-px active:opacity-85 tracking-tight-rem shadow-md bg-150 bg-x-25 bg-gradient-to-tl from-zinc-800 to-zinc-700 dark:bg-gradient-to-tl dark:from-slate-750 dark:to-gray-850" href="https://www.creative-tim.com/product/argon-dashboard-tailwind" >Free Download</a>
-          <a target="_blank" class="dark:border dark:border-solid dark:border-white dark:text-white inline-block w-full px-6 py-2.5 mb-4 font-bold leading-normal text-center align-middle transition-all bg-transparent border border-solid rounded-lg shadow-none cursor-pointer active:shadow-xs hover:-translate-y-px active:opacity-85 text-sm ease-in tracking-tight-rem bg-150 bg-x-25 border-slate-700 text-slate-700 hover:bg-transparent hover:text-slate-700 hover:shadow-none active:bg-slate-700 active:text-white active:hover:bg-transparent active:hover:text-slate-700 active:hover:shadow-none" href="https://www.creative-tim.com/learning-lab/tailwind/html/quick-start/argon-dashboard/">View documentation</a>
-          <div class="w-full text-center">
-            <a class="github-button" href="https://github.com/creativetimofficial/argon-dashboard-tailwind" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star creativetimofficial/argon-dashboard on GitHub">Star</a>
-            <h6 class="mt-4 dark:text-white">Thank you for sharing!</h6>
-            <a href="https://twitter.com/intent/tweet?text=Check%20Argon%20Dashboard%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23tailwindcss&amp;url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fargon-dashboard-tailwind" class="inline-block px-5 py-2.5 mb-0 mr-2 font-bold text-center text-white align-middle transition-all border-0  rounded-lg cursor-pointer hover:shadow-xs hover:-translate-y-px active:opacity-85 leading-normal text-sm ease-in tracking-tight-rem shadow-md bg-150 bg-x-25 me-2 border-slate-700 bg-slate-700" target="_blank"> <i class="mr-1 fab fa-twitter"></i> Tweet </a>
-            <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/argon-dashboard-tailwind" class="inline-block px-5 py-2.5 mb-0 mr-2 font-bold text-center text-white align-middle transition-all border-0  rounded-lg cursor-pointer hover:shadow-xs hover:-translate-y-px active:opacity-85 leading-normal text-sm ease-in tracking-tight-rem shadow-md bg-150 bg-x-25 me-2 border-slate-700 bg-slate-700" target="_blank"> <i class="mr-1 fab fa-facebook-square"></i> Share </a>
-          </div>
-        </div>
-      </div>
     </div>
-  </body>
-  <!-- plugin for charts  -->
-  <script src="./assets/js/plugins/chartjs.min.js" async></script>
-  <!-- plugin for scrollbar  -->
-  <script src="./assets/js/plugins/perfect-scrollbar.min.js" async></script>
-  <!-- main script file  -->
-  <script src="./assets/js/argon-dashboard-tailwind.js?v=1.0.1" async></script>
+    <!-- Loader End -->
+
+
+    <div class="page-wrapper toggled">
+        <!-- sidebar-wrapper -->
+        <nav id="sidebar" class="sidebar-wrapper sidebar-dark">
+            <div class="sidebar-content">
+                <div class="sidebar-brand">
+                    <a href="index.html"><img src="{{ asset('assets/images/logo-light.png') }}') }}" height="24"
+                            alt=""></a>
+                </div>
+
+                <ul class="sidebar-menu border-t border-white/10" data-simplebar style="height: calc(100% - 70px);">
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-chart-line me-2"></i>Dashboard</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="index.html">Analytics</a></li>
+                                <li><a href="index-crypto.html">Cryptocurrency</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-browser me-2"></i>Layouts</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="index-dark.html">Dark Dashboard</a></li>
+                                <li><a href="index-rtl.html">RTL Dashboard</a></li>
+                                <li><a href="index-dark-rtl.html">Dark RTL Dashboard</a></li>
+                                <li><a href="index-sidebar-light.html">Light Sidebar</a></li>
+                                <li><a href="index-sidebar-colored.html">Colored Sidebar</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-apps me-2"></i>Apps</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="chat.html">Chat</a></li>
+                                <li><a href="email.html">Email</a></li>
+                                <li><a href="calendar.html">Calendar</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-user me-2"></i>User Profile</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="profile.html">Profile</a></li>
+                                <li><a href="profile-billing.html">Billing Info</a></li>
+                                <li><a href="profile-payment.html">Payment</a></li>
+                                <li><a href="profile-social.html">Social Profile</a></li>
+                                <li><a href="profile-notification.html">Notifications</a></li>
+                                <li><a href="profile-setting.html">Profile Settings</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-blogger me-2"></i>Blog</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="blog.html">Blogs</a></li>
+                                <li><a href="blog-detail.html">Blog Detail</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-shopping-cart me-2"></i>E-Commerce</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="shop.html">Shop</a></li>
+                                <li><a href="shop-item-detail.html">Shop Detail</a></li>
+                                <li><a href="shop-cart.html">Shopcart</a></li>
+                                <li><a href="checkout.html">Checkout</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-camera me-2"></i>Gallery</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="gallery-one.html">Gallary One</a></li>
+                                <li><a href="gallery-two.html">Gallery Two</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-file me-2"></i>Pages</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="starter.html">Starter</a></li>
+                                <li><a href="faqs.html">FAQs</a></li>
+                                <li><a href="pricing.html">Pricing</a></li>
+                                <li><a href="team.html">Team</a></li>
+                                <li><a href="privacy.html">Privacy Policy</a></li>
+                                <li><a href="terms.html">Term & Condition</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="">
+                        <a href="ui-components.html"><i class="uil uil-chart-line me-2"></i>UI Components</a>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-envelope me-2"></i>Email Template</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="email-confirmation.html">Confirmation</a></li>
+                                <li><a href="email-password-reset.html">Reset Password</a></li>
+                                <li><a href="email-alert.html">Alert</a></li>
+                                <li><a href="email-invoices.html">Invoice</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-invoice me-2"></i>Invoice</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="invoice-list.html">Invoice List</a></li>
+                                <li><a href="invoice.html">Invoice Preview</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-sign-in-alt me-2"></i>Authentication</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="auth-login.html">Login</a></li>
+                                <li><a href="auth-signup.html">Signup</a></li>
+                                <li><a href="auth-signup-success.html">Signup Success</a></li>
+                                <li><a href="auth-re-password.html">Reset Password</a></li>
+                                <li><a href="auth-lock-screen.html">Lockscreen</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-layers me-2"></i>Miscellaneous</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="comingsoon.html">Comingsoon</a></li>
+                                <li><a href="maintenance.html">Maintenance</a></li>
+                                <li><a href="error.html">Error</a></li>
+                                <li><a href="thankyou.html">Thank You</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li
+                        class="relative lg:m-8 m-6 px-8 py-10 rounded-lg bg-gradient-to-b to-transparent from-slate-800 text-center">
+                        <span class="relative z-10">
+                            <span class="text-xl font-bold h5 text-white">Upgrade to Pro</span>
+
+                            <span class="text-slate-400 mt-3 mb-5 block">Get one month free and subscribe to pro</span>
+
+                            <a href="https://1.envato.market/techwind" target="_blank"
+                                class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center bg-gray-500/5 hover:bg-gray-500 border-gray-500/10 hover:border-gray-500 text-white rounded-md">Subscribe</a>
+                        </span>
+
+                        <img src="{{ asset('assets/images/shree-276.png') }}') }}"
+                            class="absolute top-1/2 -translate-y-1/2 start-0 end-0 mx-auto text-center h-40 w-40 z-0 opacity-5"
+                            alt="">
+                    </li>
+                </ul>
+                <!-- sidebar-menu  -->
+            </div>
+        </nav>
+        <!-- sidebar-wrapper  -->
+
+        <!-- Start Page Content -->
+        <main class="page-content bg-gray-50 dark:bg-slate-800">
+            <!-- Top Header -->
+            <div class="top-header">
+                <div class="header-bar flex justify-between">
+                    <div class="flex items-center space-x-1">
+                        <!-- Logo -->
+                        <a href="#" class="xl:hidden block me-2">
+                            <img src="{{ asset('assets/images/logo-icon-32.png') }}') }}" class="md:hidden block"
+                                alt="">
+                            <span class="md:block hidden">
+                                <img src="{{ asset('assets/images/logo-dark.png') }}') }}"
+                                    class="inline-block dark:hidden" alt="">
+                                <img src="{{ asset('assets/images/logo-light.png') }}') }}"
+                                    class="hidden dark:inline-block" alt="">
+                            </span>
+                        </a>
+                        <!-- Logo -->
+
+                        <!-- show or close sidebar -->
+                        <a id="close-sidebar"
+                            class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[20px] text-center bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-100 dark:border-gray-800 text-slate-900 dark:text-white rounded-full"
+                            href="javascript:void(0)">
+                            <i data-feather="menu" class="h-4 w-4"></i>
+                        </a>
+                        <!-- show or close sidebar -->
+
+                        <!-- Searchbar -->
+                        <div class="ps-1.5">
+                            <div class="form-icon relative sm:block hidden">
+                                <i class="uil uil-search absolute top-1/2 -translate-y-1/2 start-3"></i>
+                                <input type="text"
+                                    class="form-input w-56 ps-9 py-2 px-3 h-8 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded-3xl outline-none border border-gray-100 dark:border-gray-800 focus:ring-0 bg-white"
+                                    name="s" id="searchItem" placeholder="Search...">
+                            </div>
+                        </div>
+                        <!-- Searchbar -->
+                    </div>
+
+                    <ul class="list-none mb-0 space-x-1">
+                        <!-- Country Dropdown -->
+                        <li class="dropdown inline-block relative">
+                            <button data-dropdown-toggle="dropdown"
+                                class="dropdown-toggle h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[20px] text-center bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-100 dark:border-gray-800 text-slate-900 dark:text-white rounded-full"
+                                type="button">
+                                <img src="{{ asset('assets/images/flags/usa.png') }}') }}" alt="">
+                            </button>
+                            <!-- Dropdown menu -->
+                            <div class="dropdown-menu absolute start-0 m-0 mt-4 z-10 w-36 rounded-md overflow-hidden bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 hidden"
+                                onclick="event.stopPropagation();">
+                                <ul class="list-none py-2 text-start">
+                                    <li class="my-1">
+                                        <a href=""
+                                            class="flex items-center text-[15px] font-semibold py-1.5 px-4 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white"><img
+                                                src="{{ asset('assets/images/flags/germany.png') }}') }}"
+                                                class="h-6 w-6 rounded-full me-2 shadow dark:shadow-gray-700"
+                                                alt=""> German</a>
+                                    </li>
+                                    <li class="my-1">
+                                        <a href=""
+                                            class="flex items-center text-[15px] font-semibold py-1.5 px-4 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white"><img
+                                                src="{{ asset('assets/images/flags/italy.png') }}') }}"
+                                                class="h-6 w-6 rounded-full me-2 shadow dark:shadow-gray-700"
+                                                alt=""> Italian</a>
+                                    </li>
+                                    <li class="my-1">
+                                        <a href=""
+                                            class="flex items-center text-[15px] font-semibold py-1.5 px-4 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white"><img
+                                                src="{{ asset('assets/images/flags/russia.png') }}') }}"
+                                                class="h-6 w-6 rounded-full me-2 shadow dark:shadow-gray-700"
+                                                alt=""> Russian</a>
+                                    </li>
+                                    <li class="my-1">
+                                        <a href=""
+                                            class="flex items-center text-[15px] font-semibold py-1.5 px-4 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white"><img
+                                                src="{{ asset('assets/images/flags/spain.png') }}') }}"
+                                                class="h-6 w-6 rounded-full me-2 shadow dark:shadow-gray-700"
+                                                alt=""> Spanish</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!-- Country Dropdown -->
+
+                        <!-- Shop cart Dropdown -->
+                        <li class="dropdown inline-block relative">
+                            <button data-dropdown-toggle="dropdown"
+                                class="dropdown-toggle h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[20px] text-center bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-100 dark:border-gray-800 text-slate-900 dark:text-white rounded-full"
+                                type="button">
+                                <i data-feather="shopping-cart" class="h-4 w-4"></i>
+                                <span
+                                    class="absolute top-0 end-0 flex items-center justify-center bg-emerald-600 text-white text-[10px] font-bold rounded-full size-2 after:content-[''] after:absolute after:h-2 after:w-2 after:bg-emerald-600 after:top-0 after:end-0 after:rounded-full after:animate-ping"></span>
+                            </button>
+                            <!-- Dropdown menu -->
+                            <div class="dropdown-menu absolute end-0 m-0 mt-4 z-10 w-60 rounded-md bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 hidden"
+                                onclick="event.stopPropagation();">
+                                <ul class="py-3 text-start" aria-labelledby="dropdownDefault">
+                                    <li>
+                                        <a href="#" class="flex items-center justify-between py-1.5 px-4">
+                                            <span class="flex items-center">
+                                                <img src="{{ asset('assets/images/shop/items/s1.jpg') }}"
+                                                    class="rounded shadow dark:shadow-gray-700 w-9" alt="">
+                                                <span class="ms-3">
+                                                    <span class="block font-semibold">T-shirt (M)</span>
+                                                    <span class="block text-sm text-slate-400">$320 X 2</span>
+                                                </span>
+                                            </span>
+
+                                            <span class="font-semibold">$640</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" class="flex items-center justify-between py-1.5 px-4">
+                                            <span class="flex items-center">
+                                                <img src="{{ asset('assets/images/shop/items/s2.jpg') }}"
+                                                    class="rounded shadow dark:shadow-gray-700 w-9" alt="">
+                                                <span class="ms-3">
+                                                    <span class="block font-semibold">Bag</span>
+                                                    <span class="block text-sm text-slate-400">$50 X 5</span>
+                                                </span>
+                                            </span>
+
+                                            <span class="font-semibold">$250</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" class="flex items-center justify-between py-1.5 px-4">
+                                            <span class="flex items-center">
+                                                <img src="{{ asset('assets/images/shop/items/s3.jpg') }}"
+                                                    class="rounded shadow dark:shadow-gray-700 w-9" alt="">
+                                                <span class="ms-3">
+                                                    <span class="block font-semibold">Watch (Men)</span>
+                                                    <span class="block text-sm text-slate-400">$800 X 1</span>
+                                                </span>
+                                            </span>
+
+                                            <span class="font-semibold">$800</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="border-t border-gray-100 dark:border-gray-800 my-2"></li>
+
+                                    <li class="flex items-center justify-between py-1.5 px-4">
+                                        <h6 class="font-semibold mb-0">Total($):</h6>
+                                        <h6 class="font-semibold mb-0">$1690</h6>
+                                    </li>
+
+                                    <li class="py-1.5 px-4">
+                                        <a href="javascript:void(0)"
+                                            class="py-[5px] px-4 inline-block font-semibold tracking-wide align-middle duration-500 text-sm text-center rounded-md bg-indigo-600 hover:bg-indigo-700 border border-indigo-600 hover:border-indigo-700 text-white">View
+                                            Cart</a>
+                                        <a href="javascript:void(0)"
+                                            class="py-[5px] px-4 inline-block font-semibold tracking-wide align-middle duration-500 text-sm text-center rounded-md bg-indigo-600 hover:bg-indigo-700 border border-indigo-600 hover:border-indigo-700 text-white">Checkout</a>
+                                        <p class="text-sm text-slate-400 mt-1">*T&C Apply</p>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li><!--end dropdown-->
+                        <!-- Shop cart Dropdown -->
+
+                        <!-- Notification Dropdown -->
+                        <li class="dropdown inline-block relative">
+                            <button data-dropdown-toggle="dropdown"
+                                class="dropdown-toggle h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[20px] text-center bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-100 dark:border-gray-800 text-slate-900 dark:text-white rounded-full"
+                                type="button">
+                                <i data-feather="bell" class="h-4 w-4"></i>
+                                <span
+                                    class="absolute top-0 end-0 flex items-center justify-center bg-red-600 text-white text-[10px] font-bold rounded-full size-2 after:content-[''] after:absolute after:h-2 after:w-2 after:bg-red-600 after:top-0 after:end-0 after:rounded-full after:animate-ping"></span>
+                            </button>
+                            <!-- Dropdown menu -->
+                            <div class="dropdown-menu absolute end-0 m-0 mt-4 z-10 w-64 rounded-md overflow-hidden bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 hidden"
+                                onclick="event.stopPropagation();">
+                                <span class="px-4 py-4 flex justify-between">
+                                    <span class="font-semibold">Notifications</span>
+                                    <span
+                                        class="flex items-center justify-center bg-red-600/20 text-red-600 text-[10px] font-bold rounded-full w-5 max-h-5 ms-1">3</span>
+                                </span>
+                                <ul class="py-2 text-start h-64 border-t border-gray-100 dark:border-gray-800"
+                                    data-simplebar>
+                                    <li>
+                                        <a href="#!" class="block font-medium py-1.5 px-4">
+                                            <div class="flex items-center">
+                                                <div
+                                                    class="h-10 w-10 rounded-md shadow shadow-indigo-600/10 dark:shadow-gray-700 bg-indigo-600/10 dark:bg-slate-800 text-indigo-600 dark:text-white flex items-center justify-center">
+                                                    <i data-feather="shopping-cart" class="h-4 w-4"></i>
+                                                </div>
+                                                <div class="ms-2">
+                                                    <span class="text-[15px] font-semibold block">Order Complete</span>
+                                                    <small class="text-slate-400">15 min ago</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#!" class="block font-medium py-1.5 px-4">
+                                            <div class="flex items-center">
+                                                <img src="{{ asset('assets/images/client/04.jpg') }}"
+                                                    class="h-10 w-10 rounded-md shadow dark:shadow-gray-700"
+                                                    alt="">
+                                                <div class="ms-2">
+                                                    <span class="text-[15px] font-semibold block"><span
+                                                            class="font-bold">Message</span> from Luis</span>
+                                                    <small class="text-slate-400">1 hour ago</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#!" class="block font-medium py-1.5 px-4">
+                                            <div class="flex items-center">
+                                                <div
+                                                    class="h-10 w-10 rounded-md shadow shadow-indigo-600/10 dark:shadow-gray-700 bg-indigo-600/10 dark:bg-slate-800 text-indigo-600 dark:text-white flex items-center justify-center">
+                                                    <i data-feather="dollar-sign" class="h-4 w-4"></i>
+                                                </div>
+                                                <div class="ms-2">
+                                                    <span class="text-[15px] font-semibold block"><span
+                                                            class="font-bold">One Refund Request</span></span>
+                                                    <small class="text-slate-400">2 hour ago</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#!" class="block font-medium py-1.5 px-4">
+                                            <div class="flex items-center">
+                                                <div
+                                                    class="h-10 w-10 rounded-md shadow shadow-indigo-600/10 dark:shadow-gray-700 bg-indigo-600/10 dark:bg-slate-800 text-indigo-600 dark:text-white flex items-center justify-center">
+                                                    <i data-feather="truck" class="h-4 w-4"></i>
+                                                </div>
+                                                <div class="ms-2">
+                                                    <span class="text-[15px] font-semibold block">Deliverd your
+                                                        Order</span>
+                                                    <small class="text-slate-400">Yesterday</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#!" class="block font-medium py-1.5 px-4">
+                                            <div class="flex items-center">
+                                                <img src="{{ asset('assets/images/client/05.jpg') }}"
+                                                    class="h-10 w-10 rounded-md shadow dark:shadow-gray-700"
+                                                    alt="">
+                                                <div class="ms-2">
+                                                    <span class="text-[15px] font-semibold block"><span
+                                                            class="font-bold">Cally</span> started following you</span>
+                                                    <small class="text-slate-400">2 days ago</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li><!--end dropdown-->
+                        <!-- Notification Dropdown -->
+
+                        <!-- User/Profile Dropdown -->
+                        <li class="dropdown inline-block relative">
+                            <button data-dropdown-toggle="dropdown" class="dropdown-toggle items-center"
+                                type="button">
+                                <span
+                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[20px] text-center bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-100 dark:border-gray-800 text-slate-900 dark:text-white rounded-full"><img
+                                        src="{{ Auth::user()->profile_photo_url }}" class="rounded-full"
+                                        alt=""></span>
+                                <span
+                                    class="font-semibold text-[16px] ms-1 sm:inline-block hidden">{{ Auth::user()->name }}</span>
+                            </button>
+                            <!-- Dropdown menu -->
+                            <div class="dropdown-menu absolute end-0 m-0 mt-4 z-10 w-44 rounded-md overflow-hidden bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 hidden"
+                                onclick="event.stopPropagation();">
+                                <ul class="py-2 text-start">
+                                    <li>
+                                        <a href="profile.html"
+                                            class="block font-medium py-1 px-4 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white"><i
+                                                class="uil uil-user me-2"></i>Profile</a>
+                                    </li>
+                                    <li>
+                                        <a href="chat.html"
+                                            class="block font-medium py-1 px-4 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white"><i
+                                                class="uil uil-comment me-2"></i>Chat</a>
+                                    </li>
+                                    <li>
+                                        <a href="email.html"
+                                            class="block font-medium py-1 px-4 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white"><i
+                                                class="uil uil-envelope me-2"></i>Email</a>
+                                    </li>
+                                    <li>
+                                        <a href="profile-setting.html"
+                                            class="block font-medium py-1 px-4 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white"><i
+                                                class="uil uil-setting me-2"></i>Settings</a>
+                                    </li>
+                                    <li class="border-t border-gray-100 dark:border-gray-800 my-2"></li>
+                                    <li>
+                                        <a href="lock-screen.html"
+                                            class="block font-medium py-1 px-4 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white"><i
+                                                class="uil uil-lock me-2"></i>Lockscreen</a>
+                                    </li>
+                                    <li>
+                                        <!-- Authentication Logout Form -->
+                                        <form method="POST" action="{{ route('logout') }}" x-data>
+                                            @csrf
+                                            <button type="submit" href="{{ route('logout') }}"
+                                                class="block py-1.5 px-4 hover:text-indigo-600"
+                                                @click.prevent="$root.submit();">
+                                                <i class="uil uil-sign-out-alt align-middle me-1"></i> Keluar
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li><!--end dropdown-->
+                        <!-- User/Profile Dropdown -->
+                    </ul>
+                </div>
+            </div>
+            <!-- Top Header -->
+
+            <div class="container-fluid relative px-3">
+                <div class="layout-specing">
+                    <!-- Start Content -->
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h5 class="text-xl font-bold">Hello, {{ Auth::user()->name }}</h5>
+                            <h6 class="text-slate-400 font-semibold">Welcome!</h6>
+                        </div>
+
+                        <div class="flex items-center">
+                            <div class="position-relative">
+                                <select
+                                    class="form-select form-input w-full py-2 h-10 bg-white dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-100 focus:border-gray-200 dark:border-gray-800 dark:focus:border-gray-700 focus:ring-0"
+                                    id="yearchart">
+                                    <option value="Y" selected>Yearly</option>
+                                    <option value="M">Monthly</option>
+                                    <option value="W">Weekly</option>
+                                    <option value="T">Today</option>
+                                </select>
+                            </div>
+
+                            <a href="" class="ms-1">
+                                <span
+                                    class="py-[7px] px-6 font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600/5 hover:bg-indigo-600 border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white rounded-md sm:inline-block hidden"><i
+                                        class="uil uil-export"></i> Export</span>
+
+                                <span
+                                    class="h-10 w-10 items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md border bg-indigo-600/5 hover:bg-indigo-600 border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white sm:hidden inline-flex"><i
+                                        class="uil uil-export"></i></span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="grid xl:grid-cols-5 md:grid-cols-3 grid-cols-1 mt-6 gap-6">
+                        <div
+                            class="relative overflow-hidden rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
+                            <div class="p-5 flex items-center">
+                                <span
+                                    class="flex justify-center items-center rounded-md size-14 min-w-[56px] bg-indigo-600/5 dark:bg-indigo-600/10 shadow shadow-indigo-600/5 dark:shadow-indigo-600/10 text-indigo-600">
+                                    <i data-feather="users" class="h-5 w-5"></i>
+                                </span>
+
+                                <span class="ms-3">
+                                    <span class="text-slate-400 font-semibold block">Total Visitors</span>
+                                    <span class="flex items-center justify-between mt-1">
+                                        <span class="text-xl font-semibold"><span class="counter-value"
+                                                data-target="45890">42205</span></span>
+                                        <span class="text-red-600 text-sm ms-1 font-semibold"><i
+                                                class="uil uil-chart-down"></i> 0.5%</span>
+                                    </span>
+                                </span>
+                            </div>
+
+                            <div class="px-5 py-4 bg-gray-50 dark:bg-slate-800">
+                                <a href=""
+                                    class="relative inline-block font-semibold tracking-wide align-middle text-base text-center border-none after:content-[''] after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:transition-all after:duration-500 text-indigo-600 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white after:bg-indigo-600 dark:after:bg-white duration-500">View
+                                    data <i class="uil uil-arrow-right"></i></a>
+                            </div>
+                        </div><!--end-->
+
+                        <div
+                            class="relative overflow-hidden rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
+                            <div class="p-5 flex items-center">
+                                <span
+                                    class="flex justify-center items-center rounded-md size-14 min-w-[56px] bg-indigo-600/5 dark:bg-indigo-600/10 shadow shadow-indigo-600/5 dark:shadow-indigo-600/10 text-indigo-600">
+                                    <i data-feather="dollar-sign" class="h-5 w-5"></i>
+                                </span>
+
+                                <span class="ms-3">
+                                    <span class="text-slate-400 font-semibold block">Revenue</span>
+                                    <span class="flex items-center justify-between mt-1">
+                                        <span class="text-xl font-semibold">$<span class="counter-value"
+                                                data-target="48575">35214</span></span>
+                                        <span class="text-emerald-600 text-sm ms-1 font-semibold"><i
+                                                class="uil uil-arrow-growth"></i> 3.84%</span>
+                                    </span>
+                                </span>
+                            </div>
+
+                            <div class="px-5 py-4 bg-gray-50 dark:bg-slate-800">
+                                <a href=""
+                                    class="relative inline-block font-semibold tracking-wide align-middle text-base text-center border-none after:content-[''] after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:transition-all after:duration-500 text-indigo-600 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white after:bg-indigo-600 dark:after:bg-white duration-500">View
+                                    data <i class="uil uil-arrow-right"></i></a>
+                            </div>
+                        </div><!--end-->
+
+                        <div
+                            class="relative overflow-hidden rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
+                            <div class="p-5 flex items-center">
+                                <span
+                                    class="flex justify-center items-center rounded-md size-14 min-w-[56px] bg-indigo-600/5 dark:bg-indigo-600/10 shadow shadow-indigo-600/5 dark:shadow-indigo-600/10 text-indigo-600">
+                                    <i data-feather="shopping-cart" class="h-5 w-5"></i>
+                                </span>
+
+                                <span class="ms-3">
+                                    <span class="text-slate-400 font-semibold block">Orders</span>
+                                    <span class="flex items-center justify-between mt-1">
+                                        <span class="text-xl font-semibold"><span class="counter-value"
+                                                data-target="4800">3402</span>+</span>
+                                        <span class="text-emerald-600 text-sm ms-1 font-semibold"><i
+                                                class="uil uil-arrow-growth"></i> 1.46%</span>
+                                    </span>
+                                </span>
+                            </div>
+
+                            <div class="px-5 py-4 bg-gray-50 dark:bg-slate-800">
+                                <a href=""
+                                    class="relative inline-block font-semibold tracking-wide align-middle text-base text-center border-none after:content-[''] after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:transition-all after:duration-500 text-indigo-600 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white after:bg-indigo-600 dark:after:bg-white duration-500">View
+                                    data <i class="uil uil-arrow-right"></i></a>
+                            </div>
+                        </div><!--end-->
+
+                        <div
+                            class="relative overflow-hidden rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
+                            <div class="p-5 flex items-center">
+                                <span
+                                    class="flex justify-center items-center rounded-md size-14 min-w-[56px] bg-indigo-600/5 dark:bg-indigo-600/10 shadow shadow-indigo-600/5 dark:shadow-indigo-600/10 text-indigo-600">
+                                    <i data-feather="shopping-bag" class="h-5 w-5"></i>
+                                </span>
+
+                                <span class="ms-3">
+                                    <span class="text-slate-400 font-semibold block">Items</span>
+                                    <span class="flex items-center justify-between mt-1">
+                                        <span class="text-xl font-semibold"><span class="counter-value"
+                                                data-target="145">23</span></span>
+                                        <span class="text-slate-400 text-sm ms-1 font-semibold"><i
+                                                class="uil uil-analysis"></i> 0.0%</span>
+                                    </span>
+                                </span>
+                            </div>
+
+                            <div class="px-5 py-4 bg-gray-50 dark:bg-slate-800">
+                                <a href=""
+                                    class="relative inline-block font-semibold tracking-wide align-middle text-base text-center border-none after:content-[''] after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:transition-all after:duration-500 text-indigo-600 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white after:bg-indigo-600 dark:after:bg-white duration-500">View
+                                    data <i class="uil uil-arrow-right"></i></a>
+                            </div>
+                        </div><!--end-->
+
+                        <div
+                            class="relative overflow-hidden rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
+                            <div class="p-5 flex items-center">
+                                <span
+                                    class="flex justify-center items-center rounded-md size-14 min-w-[56px] bg-indigo-600/5 dark:bg-indigo-600/10 shadow shadow-indigo-600/5 dark:shadow-indigo-600/10 text-indigo-600">
+                                    <i data-feather="dollar-sign" class="h-5 w-5"></i>
+                                </span>
+
+                                <span class="ms-3">
+                                    <span class="text-slate-400 font-semibold block">Expenses</span>
+                                    <span class="flex items-center justify-between mt-1">
+                                        <span class="text-xl font-semibold">$<span class="counter-value"
+                                                data-target="24351">22135</span></span>
+                                        <span class="text-emerald-600 text-sm ms-1 font-semibold"><i
+                                                class="uil uil-arrow-growth"></i> 1.6%</span>
+                                    </span>
+                                </span>
+                            </div>
+
+                            <div class="px-5 py-4 bg-gray-50 dark:bg-slate-800">
+                                <a href=""
+                                    class="relative inline-block font-semibold tracking-wide align-middle text-base text-center border-none after:content-[''] after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:transition-all after:duration-500 text-indigo-600 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white after:bg-indigo-600 dark:after:bg-white duration-500">View
+                                    data <i class="uil uil-arrow-right"></i></a>
+                            </div>
+                        </div><!--end-->
+                    </div>
+
+                    <div class="grid lg:grid-cols-12 grid-cols-1 mt-6 gap-6">
+                        <div class="lg:col-span-8">
+                            <div
+                                class="relative overflow-hidden rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
+                                <div
+                                    class="p-6 flex items-center justify-between border-b border-gray-100 dark:border-gray-800">
+                                    <h6 class="text-lg font-semibold">Profit / Expenses Analytics</h6>
+
+                                    <div class="position-relative">
+                                        <select
+                                            class="form-select form-input w-full py-2 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-100 focus:border-gray-200 dark:border-gray-800 dark:focus:border-gray-700 focus:ring-0"
+                                            id="yearchart">
+                                            <option value="Y" selected>Yearly</option>
+                                            <option value="M">Monthly</option>
+                                            <option value="W">Weekly</option>
+                                            <option value="T">Today</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div id="mainchart" class="apex-chart px-4 pb-6"></div>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-4">
+                            <div
+                                class="relative overflow-hidden rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
+                                <div
+                                    class="p-6 flex items-center justify-between border-b border-gray-100 dark:border-gray-800">
+                                    <h6 class="text-lg font-semibold">Customers by Country</h6>
+
+                                    <div class="dropdown relative">
+                                        <button data-dropdown-toggle="dropdown" class="dropdown-toggle items-center"
+                                            type="button">
+                                            <span
+                                                class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[20px] text-center bg-gray-800/5 hover:bg-gray-800/10 dark:bg-gray-800 border border-gray-800/5 dark:border-gray-800 text-slate-900 dark:text-white rounded-full"><i
+                                                    class="mdi mdi-dots-vertical"></i></span>
+                                        </button>
+                                        <!-- Dropdown menu -->
+                                        <div class="dropdown-menu absolute end-0 m-0 mt-4 z-10 w-44 rounded-md overflow-hidden bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 hidden"
+                                            onclick="event.stopPropagation();">
+                                            <ul class="py-2 text-start">
+                                                <li>
+                                                    <a href=""
+                                                        class="block font-medium py-1 px-4 text-slate-400 dark:text-white/70 hover:text-slate-900 dark:hover:text-white">Profile</a>
+                                                </li>
+                                                <li>
+                                                    <a href=""
+                                                        class="block font-medium py-1 px-4 text-slate-400 dark:text-white/70 hover:text-slate-900 dark:hover:text-white">Profile
+                                                        Settings</a>
+                                                </li>
+                                                <li>
+                                                    <a href=""
+                                                        class="block font-medium py-1 px-4 text-slate-400 dark:text-white/70 hover:text-slate-900 dark:hover:text-white">Delete</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-6 border-b border-gray-100 dark:border-gray-800">
+                                    <div id="map" class="w-full h-[236px]"></div>
+                                </div>
+
+                                <div class="p-6">
+                                    <ul class="list-none flex">
+                                        <li class="inline-block w-1/2"><span
+                                                class="text-indigo-600 font-semibold">Canada</span>:<span
+                                                class="text-slate-400 ms-2">12468</span></li>
+                                        <li class="inline-block w-1/2"><span
+                                                class="text-indigo-600 font-semibold">Greenland</span>:<span
+                                                class="text-slate-400 ms-2">12468</span></li>
+                                    </ul>
+                                    <ul class="list-none flex">
+                                        <li class="inline-block w-1/2"><span
+                                                class="text-indigo-600 font-semibold">Russia</span>:<span
+                                                class="text-slate-400 ms-2">12468</span></li>
+                                        <li class="inline-block w-1/2"><span
+                                                class="text-indigo-600 font-semibold">Palestine</span>:<span
+                                                class="text-slate-400 ms-2">12468</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid lg:grid-cols-12 grid-cols-1 mt-6 gap-6">
+                        <div class="xl:col-span-5 lg:col-span-12">
+                            <div
+                                class="relative overflow-hidden rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
+                                <div
+                                    class="p-6 flex items-center justify-between border-b border-gray-100 dark:border-gray-800">
+                                    <h6 class="text-lg font-semibold">Orders</h6>
+
+                                    <a href=""
+                                        class="relative inline-block font-semibold tracking-wide align-middle text-base text-center border-none after:content-[''] after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:transition-all after:duration-500 text-slate-400 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white after:bg-indigo-600 dark:after:bg-white duration-500">View
+                                        orders <i class="uil uil-arrow-right"></i></a>
+                                </div>
+
+                                <div class="relative overflow-x-auto block w-full max-h-[400px]" data-simplebar>
+                                    <table class="w-full text-start">
+                                        <thead class="text-base">
+                                            <tr>
+                                                <th class="text-start font-semibold text-[15px] p-4 min-w-[100px]">No.
+                                                </th>
+                                                <th class="text-start font-semibold text-[15px] p-4 min-w-[128px]">ID
+                                                </th>
+                                                <th class="text-start font-semibold text-[15px] p-4 min-w-[128px]">Date
+                                                </th>
+                                                <th class="text-start font-semibold text-[15px] p-4 min-w-[128px]">
+                                                    Price</th>
+                                                <th class="text-end font-semibold text-[15px] p-4 min-w-[128px]">Status
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    01</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    #tw001</td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">10th Aug 2023</span>
+                                                </td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">$253</span>
+                                                </td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span
+                                                        class="bg-emerald-600/10 dark:bg-emerald-600/20 border border-emerald-600/10 dark:border-emerald-600/20 text-emerald-600 text-[12px] font-bold px-2.5 py-0.5 rounded h-5 ms-1">Delivered</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    02</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    #tw002</td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">13th Aug 2023</span>
+                                                </td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">$123</span>
+                                                </td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span
+                                                        class="bg-indigo-600/10 dark:bg-indigo-600/20 border border-indigo-600/10 dark:border-indigo-600/20 text-indigo-600 text-[12px] font-bold px-2.5 py-0.5 rounded h-5 ms-1">New
+                                                        Order</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    03</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    #tw003</td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">18th Aug 2023</span>
+                                                </td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">$245</span>
+                                                </td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span
+                                                        class="bg-red-600/10 dark:bg-red-600/20 border border-red-600/10 dark:border-red-600/20 text-red-600 text-[12px] font-bold px-2.5 py-0.5 rounded h-5 ms-1">Return</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    04</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    #tw004</td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">21st Aug 2023</span>
+                                                </td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">$157</span>
+                                                </td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span
+                                                        class="bg-gray-500/5 border border-gray-500/5 text-gray-500 text-[12px] font-bold px-2.5 py-0.5 rounded h-5 ms-1">Cancel</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    05</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    #tw005</td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">22nd Aug 2023</span>
+                                                </td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">$62</span>
+                                                </td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span
+                                                        class="bg-indigo-600/10 dark:bg-indigo-600/20 border border-indigo-600/10 dark:border-indigo-600/20 text-indigo-600 text-[12px] font-bold px-2.5 py-0.5 rounded h-5 ms-1">New
+                                                        Order</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    06</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    #tw006</td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">23rd Aug 2023</span>
+                                                </td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">$456</span>
+                                                </td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span
+                                                        class="bg-emerald-600/10 dark:bg-emerald-600/20 border border-emerald-600/10 dark:border-emerald-600/20 text-emerald-600 text-[12px] font-bold px-2.5 py-0.5 rounded h-5 ms-1">Delivered</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    07</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    #tw007</td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">24th Aug 2023</span>
+                                                </td>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-slate-400">$478</span>
+                                                </td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span
+                                                        class="bg-emerald-600/10 dark:bg-emerald-600/20 border border-emerald-600/10 dark:border-emerald-600/20 text-emerald-600 text-[12px] font-bold px-2.5 py-0.5 rounded h-5 ms-1">Delivered</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="xl:col-span-4 lg:col-span-6">
+                            <div class="rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
+                                <div
+                                    class="flex justify-between items-center border-b border-gray-100 dark:border-gray-800 p-4">
+                                    <div class="flex">
+                                        <img src="{{ asset('assets/images/client/01.jpg') }}"
+                                            class="h-11 w-11 rounded-full shadow dark:shadow-gray-700" alt="">
+                                        <div class="overflow-hidden ms-3">
+                                            <a href="#" class="block font-semibold text-truncate">Calvin
+                                                Carlo</a>
+                                            <span class="text-slate-400 flex items-center text-sm"><span
+                                                    class="bg-green-600 text-white text-[10px] font-bold rounded-full size-2 me-1"></span>
+                                                Online</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="dropdown relative">
+                                        <button data-dropdown-toggle="dropdown" class="dropdown-toggle items-center"
+                                            type="button">
+                                            <span
+                                                class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[20px] text-center bg-gray-800/5 hover:bg-gray-800/10 dark:bg-gray-800 border border-gray-800/5 dark:border-gray-800 text-slate-900 dark:text-white rounded-full"><i
+                                                    class="mdi mdi-dots-vertical"></i></span>
+                                        </button>
+                                        <!-- Dropdown menu -->
+                                        <div class="dropdown-menu absolute end-0 m-0 mt-4 z-10 w-44 rounded-md overflow-hidden bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 hidden"
+                                            onclick="event.stopPropagation();">
+                                            <ul class="py-2 text-start">
+                                                <li>
+                                                    <a href=""
+                                                        class="block font-medium py-1 px-4 text-slate-400 dark:text-white/70 hover:text-slate-900 dark:hover:text-white"><i
+                                                            class="mdi mdi-account-outline"></i> Profile</a>
+                                                </li>
+                                                <li>
+                                                    <a href=""
+                                                        class="block font-medium py-1 px-4 text-slate-400 dark:text-white/70 hover:text-slate-900 dark:hover:text-white"><i
+                                                            class="mdi mdi-cog-outline"></i> Profile Settings</a>
+                                                </li>
+                                                <li>
+                                                    <a href=""
+                                                        class="block font-medium py-1 px-4 text-slate-400 dark:text-white/70 hover:text-slate-900 dark:hover:text-white"><i
+                                                            class="mdi mdi-trash-can-outline"></i> Delete</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <ul class="p-4 list-none mb-0 max-h-[350px] bg-[url('../../{{ asset('assets/images/bg-chat.png') }}')] bg-no-repeat bg-center bg-cover"
+                                    data-simplebar>
+                                    <li>
+                                        <div class="inline-block">
+                                            <div class="flex mb-3">
+                                                <div class="relative">
+                                                    <img src="{{ asset('assets/images/client/01.jpg') }}"
+                                                        class="size-9 min-w-[36px] rounded-full shadow dark:shadow-gray-700"
+                                                        alt="">
+                                                    <span
+                                                        class="absolute top-0.5 start-0.5 flex items-center justify-center bg-green-600 text-white text-[10px] font-bold rounded-full size-2 after:content-[''] after:absolute after:h-2 after:w-2 after:bg-green-600 after:top-0 after:end-0 after:rounded-full after:animate-ping"></span>
+                                                </div>
+
+                                                <div class="ms-2 max-w-lg">
+                                                    <p
+                                                        class="bg-white dark:bg-slate-900 text-slate-400 text-sm shadow dark:shadow-gray-700 px-3 py-2 rounded mb-1">
+                                                        Hey Cristina</p>
+                                                    <span class="text-slate-400 text-sm"><i
+                                                            class="mdi mdi-clock-outline me-1"></i>59 min ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="text-end">
+                                        <div class="inline-block">
+                                            <div class="flex mb-3">
+                                                <div class="relative order-2">
+                                                    <img src="{{ asset('assets/images/client/05.jpg') }}"
+                                                        class="size-9 min-w-[36px] rounded-full shadow dark:shadow-gray-700"
+                                                        alt="">
+                                                    <span
+                                                        class="absolute top-0.5 end-0.5 flex items-center justify-center bg-green-600 text-white text-[10px] font-bold rounded-full size-2 after:content-[''] after:absolute after:h-2 after:w-2 after:bg-green-600 after:top-0 after:end-0 after:rounded-full after:animate-ping"></span>
+                                                </div>
+
+                                                <div class="me-2 max-w-lg">
+                                                    <p
+                                                        class="bg-white dark:bg-slate-900 text-slate-400 text-sm shadow dark:shadow-gray-700 px-3 py-2 rounded mb-1">
+                                                        Hello Calvin</p>
+                                                    <span class="text-slate-400 text-sm"><i
+                                                            class="mdi mdi-clock-outline me-1"></i>45 min ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="text-end">
+                                        <div class="inline-block">
+                                            <div class="flex mb-3">
+                                                <div class="relative order-2">
+                                                    <img src="{{ asset('assets/images/client/05.jpg') }}"
+                                                        class="size-9 min-w-[36px] rounded-full shadow dark:shadow-gray-700"
+                                                        alt="">
+                                                    <span
+                                                        class="absolute top-0.5 end-0.5 flex items-center justify-center bg-green-600 text-white text-[10px] font-bold rounded-full size-2 after:content-[''] after:absolute after:h-2 after:w-2 after:bg-green-600 after:top-0 after:end-0 after:rounded-full after:animate-ping"></span>
+                                                </div>
+
+                                                <div class="me-2 max-w-lg">
+                                                    <p
+                                                        class="bg-white dark:bg-slate-900 text-slate-400 text-sm shadow dark:shadow-gray-700 px-3 py-2 rounded mb-1">
+                                                        How can i help you?</p>
+                                                    <span class="text-slate-400 text-sm"><i
+                                                            class="mdi mdi-clock-outline me-1"></i>44 min ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="inline-block">
+                                            <div class="flex mb-3">
+                                                <div class="relative">
+                                                    <img src="{{ asset('assets/images/client/01.jpg') }}"
+                                                        class="size-9 min-w-[36px] rounded-full shadow dark:shadow-gray-700"
+                                                        alt="">
+                                                    <span
+                                                        class="absolute top-0.5 start-0.5 flex items-center justify-center bg-green-600 text-white text-[10px] font-bold rounded-full size-2 after:content-[''] after:absolute after:h-2 after:w-2 after:bg-green-600 after:top-0 after:end-0 after:rounded-full after:animate-ping"></span>
+                                                </div>
+
+                                                <div class="ms-2 max-w-lg">
+                                                    <p
+                                                        class="bg-white dark:bg-slate-900 text-slate-400 text-sm shadow dark:shadow-gray-700 px-3 py-2 rounded mb-1">
+                                                        Nice to meet you</p>
+                                                    <span class="text-slate-400 text-sm"><i
+                                                            class="mdi mdi-clock-outline me-1"></i>42 min ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="inline-block">
+                                            <div class="flex mb-3">
+                                                <div class="relative">
+                                                    <img src="{{ asset('assets/images/client/01.jpg') }}"
+                                                        class="size-9 min-w-[36px] rounded-full shadow dark:shadow-gray-700"
+                                                        alt="">
+                                                    <span
+                                                        class="absolute top-0.5 start-0.5 flex items-center justify-center bg-green-600 text-white text-[10px] font-bold rounded-full size-2 after:content-[''] after:absolute after:h-2 after:w-2 after:bg-green-600 after:top-0 after:end-0 after:rounded-full after:animate-ping"></span>
+                                                </div>
+
+                                                <div class="ms-2 max-w-lg">
+                                                    <p
+                                                        class="bg-white dark:bg-slate-900 text-slate-400 text-sm shadow dark:shadow-gray-700 px-3 py-2 rounded mb-1">
+                                                        Hope you are doing fine?</p>
+                                                    <span class="text-slate-400 text-sm"><i
+                                                            class="mdi mdi-clock-outline me-1"></i>40 min ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="text-end">
+                                        <div class="inline-block">
+                                            <div class="flex mb-3">
+                                                <div class="relative order-2">
+                                                    <img src="{{ asset('assets/images/client/05.jpg') }}"
+                                                        class="size-9 min-w-[36px] rounded-full shadow dark:shadow-gray-700"
+                                                        alt="">
+                                                    <span
+                                                        class="absolute top-0.5 end-0.5 flex items-center justify-center bg-green-600 text-white text-[10px] font-bold rounded-full size-2 after:content-[''] after:absolute after:h-2 after:w-2 after:bg-green-600 after:top-0 after:end-0 after:rounded-full after:animate-ping"></span>
+                                                </div>
+
+                                                <div class="me-2 max-w-lg">
+                                                    <p
+                                                        class="bg-white dark:bg-slate-900 text-slate-400 text-sm shadow dark:shadow-gray-700 px-3 py-2 rounded mb-1">
+                                                        I'm good thanks for asking</p>
+                                                    <span class="text-slate-400 text-sm"><i
+                                                            class="mdi mdi-clock-outline me-1"></i>38 min ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="inline-block">
+                                            <div class="flex mb-3">
+                                                <div class="relative">
+                                                    <img src="{{ asset('assets/images/client/01.jpg') }}"
+                                                        class="size-9 min-w-[36px] rounded-full shadow dark:shadow-gray-700"
+                                                        alt="">
+                                                    <span
+                                                        class="absolute top-0.5 start-0.5 flex items-center justify-center bg-green-600 text-white text-[10px] font-bold rounded-full size-2 after:content-[''] after:absolute after:h-2 after:w-2 after:bg-green-600 after:top-0 after:end-0 after:rounded-full after:animate-ping"></span>
+                                                </div>
+
+                                                <div class="ms-2 max-w-lg">
+                                                    <p
+                                                        class="bg-white dark:bg-slate-900 text-slate-400 text-sm shadow dark:shadow-gray-700 px-3 py-2 rounded mb-1">
+                                                        I am intrested to know more about your prices and services you
+                                                        offer</p>
+                                                    <span class="text-slate-400 text-sm"><i
+                                                            class="mdi mdi-clock-outline me-1"></i>35 min ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="text-end">
+                                        <div class="inline-block">
+                                            <div class="flex mb-3">
+                                                <div class="relative order-2">
+                                                    <img src="{{ asset('assets/images/client/05.jpg') }}"
+                                                        class="size-9 min-w-[36px] rounded-full shadow dark:shadow-gray-700"
+                                                        alt="">
+                                                    <span
+                                                        class="absolute top-0.5 end-0.5 flex items-center justify-center bg-green-600 text-white text-[10px] font-bold rounded-full size-2 after:content-[''] after:absolute after:h-2 after:w-2 after:bg-green-600 after:top-0 after:end-0 after:rounded-full after:animate-ping"></span>
+                                                </div>
+
+                                                <div class="me-2 max-w-lg">
+                                                    <p
+                                                        class="bg-white dark:bg-slate-900 text-slate-400 text-sm shadow dark:shadow-gray-700 px-3 py-2 rounded mb-1">
+                                                        Sure please check below link to find more useful information <a
+                                                            href="https://shreethemes.in/techwind/" target="_blank"
+                                                            class="text-indigo-600">https://shreethemes.in/techwind/</a>
+                                                    </p>
+                                                    <span class="text-slate-400 text-sm"><i
+                                                            class="mdi mdi-clock-outline me-1"></i>29 min ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="inline-block">
+                                            <div class="flex mb-3">
+                                                <div class="relative">
+                                                    <img src="{{ asset('assets/images/client/01.jpg') }}"
+                                                        class="size-9 min-w-[36px] rounded-full shadow dark:shadow-gray-700"
+                                                        alt="">
+                                                    <span
+                                                        class="absolute top-0.5 start-0.5 flex items-center justify-center bg-green-600 text-white text-[10px] font-bold rounded-full size-2 after:content-[''] after:absolute after:h-2 after:w-2 after:bg-green-600 after:top-0 after:end-0 after:rounded-full after:animate-ping"></span>
+                                                </div>
+
+                                                <div class="ms-2 max-w-lg">
+                                                    <p
+                                                        class="bg-white dark:bg-slate-900 text-slate-400 text-sm shadow dark:shadow-gray-700 px-3 py-2 rounded mb-1">
+                                                        Thank you 😊</p>
+                                                    <span class="text-slate-400 text-sm"><i
+                                                            class="mdi mdi-clock-outline me-1"></i>26 min ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="text-end">
+                                        <div class="inline-block">
+                                            <div class="flex mb-3">
+                                                <div class="relative order-2">
+                                                    <img src="{{ asset('assets/images/client/05.jpg') }}"
+                                                        class="size-9 min-w-[36px] rounded-full shadow dark:shadow-gray-700"
+                                                        alt="">
+                                                    <span
+                                                        class="absolute top-0.5 end-0.5 flex items-center justify-center bg-green-600 text-white text-[10px] font-bold rounded-full size-2 after:content-[''] after:absolute after:h-2 after:w-2 after:bg-green-600 after:top-0 after:end-0 after:rounded-full after:animate-ping"></span>
+                                                </div>
+
+                                                <div class="me-2 max-w-lg">
+                                                    <p
+                                                        class="bg-white dark:bg-slate-900 text-slate-400 text-sm shadow dark:shadow-gray-700 px-3 py-2 rounded mb-1">
+                                                        Welcome</p>
+                                                    <span class="text-slate-400 text-sm"><i
+                                                            class="mdi mdi-clock-outline me-1"></i>15 min ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="inline-block">
+                                            <div class="flex items-center mb-3">
+                                                <div class="relative">
+                                                    <img src="{{ asset('assets/images/client/01.jpg') }}"
+                                                        class="size-9 min-w-[36px] rounded-full shadow dark:shadow-gray-700"
+                                                        alt="">
+                                                    <span
+                                                        class="absolute top-0.5 start-0.5 flex items-center justify-center bg-green-600 text-white text-[10px] font-bold rounded-full size-2 after:content-[''] after:absolute after:h-2 after:w-2 after:bg-green-600 after:top-0 after:end-0 after:rounded-full after:animate-ping"></span>
+                                                </div>
+
+                                                <div class="ms-2 max-w-lg">
+                                                    <p class="text-slate-400 text-sm rounded mb-1">Frank Williams is
+                                                        typing
+                                                        <span class="animate-typing ms-1">
+                                                            <span
+                                                                class="dot inline-block size-1 bg-slate-400 -mr-px opacity-60 rounded-full"></span>
+                                                            <span
+                                                                class="dot inline-block size-1 bg-slate-400 -mr-px opacity-60 rounded-full"></span>
+                                                            <span
+                                                                class="dot inline-block size-1 bg-slate-400 -mr-px opacity-60 rounded-full"></span>
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <div class="p-2 border-t border-gray-100 dark:border-gray-800">
+                                    <div class="flex ">
+                                        <input type="text"
+                                            class="form-input w-full py-2 px-3 h-9 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-100 dark:border-gray-800 focus:ring-0"
+                                            placeholder="Enter Message...">
+
+                                        <div class="min-w-[125px] text-end">
+                                            <a href="#"
+                                                class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[16px] text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md"><i
+                                                    class="mdi mdi-send"></i></a>
+                                            <a href="#"
+                                                class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[16px] text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md"><i
+                                                    class="mdi mdi-emoticon-happy-outline"></i></a>
+                                            <a href="#"
+                                                class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[16px] text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md"><i
+                                                    class="mdi mdi-paperclip"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="xl:col-span-3 lg:col-span-6">
+                            <div class="rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
+                                <div
+                                    class="p-6 flex items-center justify-between border-b border-gray-100 dark:border-gray-800">
+                                    <h6 class="text-lg font-semibold">Top Products / Items</h6>
+
+                                    <a href=""
+                                        class="text-slate-400 hover:text-indigo-600 dark:text-white/70 dark:hover:text-white text-[20px]"><i
+                                            class="mdi mdi-swap-vertical"></i></a>
+                                </div>
+
+                                <div class="relative overflow-x-auto block w-full max-h-[400px]" data-simplebar>
+                                    <table class="w-full text-start">
+                                        <thead class="text-base">
+                                            <tr>
+                                                <th class="text-start font-semibold text-[15px] p-4 min-w-[150px]">
+                                                    Products</th>
+                                                <th class="text-start font-semibold text-[15px] p-4 min-w-[100px]">
+                                                    Earnings</th>
+                                                <th class="text-end font-semibold text-[15px] p-4 min-w-[80px]">
+                                                    Progress</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    Techwind</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    $4120</td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-emerald-600 text-sm ms-1 font-semibold"><i
+                                                            class="uil uil-arrow-growth"></i> 5.5%</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    Landrick</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    $5648</td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-red-600 text-sm ms-1 font-semibold"><i
+                                                            class="uil uil-chart-down"></i> 15.8%</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    Hously</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    $456</td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-emerald-600 text-sm ms-1 font-semibold"><i
+                                                            class="uil uil-arrow-growth"></i> 1.3%</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    Jobstack</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    $546</td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-red-600 text-sm ms-1 font-semibold"><i
+                                                            class="uil uil-chart-down"></i> 1.54%</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    Giglink</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    $124</td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-red-600 text-sm ms-1 font-semibold"><i
+                                                            class="uil uil-chart-down"></i> 8.5%</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    Upwind</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    $1545</td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-emerald-600 text-sm ms-1 font-semibold"><i
+                                                            class="uil uil-arrow-growth"></i> 6.4%</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    Fronter</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    $1215</td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-red-600 text-sm ms-1 font-semibold"><i
+                                                            class="uil uil-chart-down"></i> 4.8%</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                    Doctris</th>
+                                                <td
+                                                    class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    $2321</td>
+                                                <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
+                                                    <span class="text-emerald-600 text-sm ms-1 font-semibold"><i
+                                                            class="uil uil-arrow-growth"></i> 4.1%</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Content -->
+                </div>
+            </div><!--end container-->
+
+            <!-- Footer Start -->
+            <footer class="shadow dark:shadow-gray-700 bg-white dark:bg-slate-900 px-6 py-4">
+                <div class="container-fluid">
+                    <div class="grid grid-cols-1">
+                        <div class="sm:text-start text-center mx-md-2">
+                            <p class="mb-0 text-slate-400">©
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script> Techwind. Design with <i
+                                    class="mdi mdi-heart text-red-600"></i> by <a href="https://shreethemes.in/"
+                                    target="_blank" class="text-reset">Shreethemes</a>.
+                            </p>
+                        </div><!--end col-->
+                    </div><!--end grid-->
+                </div><!--end container-->
+            </footer><!--end footer-->
+            <!-- End -->
+        </main>
+        <!--End page-content" -->
+    </div>
+    <!-- page-wrapper -->
+
+    <!-- Switcher -->
+    <div class="fixed top-[30%] -end-3 z-50">
+        <span class="relative inline-block rotate-90">
+            <input type="checkbox" class="checkbox opacity-0 absolute" id="chk" />
+            <label
+                class="label bg-slate-900 dark:bg-white shadow dark:shadow-gray-700 cursor-pointer rounded-full flex justify-between items-center p-1 w-14 h-8"
+                for="chk">
+                <i class="uil uil-moon text-[20px] text-yellow-500"></i>
+                <i class="uil uil-sun text-[20px] text-yellow-500"></i>
+                <span class="ball bg-white dark:bg-slate-900 rounded-full absolute top-[2px] left-[2px] size-7"></span>
+            </label>
+        </span>
+    </div>
+    <!-- Switcher -->
+
+    <!-- JAVASCRIPTS -->
+    <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('assets/js/apexchart.init.js') }}"></script>
+    <script src="{{ asset('assets/libs/jsvectormap/js/jsvectormap.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/jsvectormap/maps/world.js') }}"></script>
+    <script src="{{ asset('assets/js/jsvectormap.init.js') }}"></script>
+    <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins.init.js') }}"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
+    <!-- JAVASCRIPTS -->
+</body>
+
 </html>

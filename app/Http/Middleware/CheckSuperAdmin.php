@@ -23,9 +23,7 @@ class CheckSuperAdmin
 
         $user = Auth::user();
 
-        $superAdmin = SuperAdmin::where('user_id', $user->id)->first();
-
-        if ($superAdmin != null) {
+        if ($user->role->role === "superAdmin") {
             return $next($request);
         }
 

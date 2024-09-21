@@ -25,7 +25,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
+        'phone_number',
+        'role_id',
         'password',
     ];
 
@@ -63,19 +66,8 @@ class User extends Authenticatable
         ];
     }
 
-    public function customer()
+    public function role() 
     {
-        return $this->hasOne(Customer::class);
+        return $this->belongsTo(Role::class, 'role_id');
     }
-
-    public function admin()
-    {
-        return $this->hasOne(Admin::class);
-    }
-
-    public function superAdmin()
-    {
-        return $this->hasOne(SuperAdmin::class);
-    }
-
 }

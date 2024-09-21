@@ -23,9 +23,7 @@ class CheckCustomer
 
         $user = Auth::user();
 
-        $customer = Customer::where('user_id', $user->id)->first();
-
-        if ($customer != null) {
+        if ($user->role->role === "customer") {
             return $next($request);
         }
 

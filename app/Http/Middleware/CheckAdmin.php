@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Admin;
+use App\Models\Role;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,9 +23,7 @@ class CheckAdmin
 
         $user = Auth::user();
 
-        $admin = Admin::where('user_id', $user->id)->first();
-
-        if ($admin != null) {
+        if ($user->role->role === 'admin') {
             return $next($request);
         }
 

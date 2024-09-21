@@ -6,9 +6,6 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use App\Models\Admin;
-use App\Models\Customer;
-use App\Models\SuperAdmin;
 
 class UserSeeder extends Seeder
 {
@@ -18,39 +15,33 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         // Create Customer
-        $customerUser = User::create([
+        User::create([
             'name' => 'Customer User',
+            'username' => 'customer1',
             'email' => 'customer@gmail.com',
+            'phone_number' => '1234567890',
+            'role_id' => 1,
             'password' => Hash::make('password'), // hashed password
         ]);
 
-        Customer::create([
-            'user_id' => $customerUser->id,
-            'phone_number' => '1234567890',
-        ]);
-
         // Create Admin
-        $adminUser = User::create([
+        User::create([
             'name' => 'Admin User',
+            'username' => 'admin1',
             'email' => 'admin@gmail.com',
-            'password' => Hash::make('password'),
-        ]);
-
-        Admin::create([
-            'user_id' => $adminUser->id,
             'phone_number' => '0987654321',
+            'role_id' => 2,
+            'password' => Hash::make('password'),
         ]);
 
         // Create Super Admin
-        $superAdminUser = User::create([
+        User::create([
             'name' => 'Super Admin User',
+            'username' => 'superadmin1',
             'email' => 'superadmin@gmail.com',
-            'password' => Hash::make('password'),
-        ]);
-
-        SuperAdmin::create([
-            'user_id' => $superAdminUser->id,
             'phone_number' => '1122334455',
+            'role_id' => 3,
+            'password' => Hash::make('password'),
         ]);
     }
 }

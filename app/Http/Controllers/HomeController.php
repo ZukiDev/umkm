@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Models\Customer;
 use App\Models\SuperAdmin;
+use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -19,22 +20,16 @@ class HomeController extends Controller
             return view('welcome');
         }
 
-        $customer = Customer::where('user_id', $user->id)->first();
-        if ($customer != null) {
+        $role = Role::where('id', $user->role_id)->first();
+
+        if ($role->role === 'customer') {
             return view('welcome');
+        } elseif ($role->role === 'admin') {
+            return redirect('/dashboard-admin');
+        } elseif ($role->role === 'superAdmin') {
+            return redirect('/dashboard-superadmin');
+        } else{
+            return Redirect('/');
         }
-
-        $admin = Admin::where('user_id', $user->id)->first();
-        if ($admin != null) {
-            return Redirect('/dashboard-admin');
-        }
-
-        $superAdmin = SuperAdmin::where('user_id', $user->id)->first();
-        if ($superAdmin != null) {
-            return Redirect('/dashboard-superadmin');
-        }
-
-        // Add a default return statement
-        return Redirect('/');
     }
 }

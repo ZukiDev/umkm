@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController; // Add this line
 use App\Http\Controllers\SuperAdminController; // Add this line
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+// Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
 Route::middleware([
     'auth:sanctum',

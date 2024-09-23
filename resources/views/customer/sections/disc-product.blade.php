@@ -2,7 +2,7 @@
 <section class="relative py-16">
     <div class="container relative">
         <div class="grid grid-cols-1 items-center">
-            <h3 class="text-2xl leading-normal font-semibold">Recent Products</h3>
+            <h3 class="text-2xl leading-normal font-semibold">Produk Potongan Harga</h3>
         </div><!--end grid-->
 
         <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 mt-8 gap-[30px]">

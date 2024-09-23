@@ -17,7 +17,7 @@ Route::middleware([
 
     Route::middleware(['auth'])->group(function () {
         Route::middleware(['customer'])->group(function () {
-            // Route::get('/profile', [CustomerController::class, 'profile'])->name('customer.profile');
+            Route::get('/profile', [CustomerController::class, 'profile'])->name('customer.profile');
         });
         Route::middleware(['admin'])->group(function () {
             Route::get('/dashboard-admin', [AdminController::class, 'index'])->name('admin.index');

@@ -11,36 +11,10 @@
                             </a>
                             <p class="mt-6 text-gray-300">Start working with Tailwind CSS that can provide
                                 everything you need to generate awareness, drive traffic, connect.</p>
-                            <ul class="list-none mt-6">
-                                <li class="inline"><a href="https://1.envato.market/techwind" target="_blank"
-                                        class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center border-gray-800 rounded-md border hover:border-indigo-600 dark:hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-600"><i
-                                            class="uil uil-shopping-cart align-middle" title="Buy Now"></i></a>
-                                </li>
-                                <li class="inline"><a href="https://dribbble.com/shreethemes" target="_blank"
-                                        class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center border-gray-800 rounded-md border hover:border-indigo-600 dark:hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-600"><i
-                                            class="uil uil-dribbble align-middle" title="dribbble"></i></a></li>
-                                <li class="inline"><a href="https://www.behance.net/shreethemes" target="_blank"
-                                        class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center border-gray-800 rounded-md border hover:border-indigo-600 dark:hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-600"><i
-                                            class="uil uil-behance" title="Behance"></i></a></li>
-                                <li class="inline"><a href="http://linkedin.com/company/shreethemes" target="_blank"
-                                        class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center border-gray-800 rounded-md border hover:border-indigo-600 dark:hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-600"><i
-                                            class="uil uil-linkedin" title="Linkedin"></i></a></li>
-                                <li class="inline"><a href="https://www.facebook.com/shreethemes" target="_blank"
-                                        class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center border-gray-800 rounded-md border hover:border-indigo-600 dark:hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-600"><i
-                                            class="uil uil-facebook-f align-middle" title="facebook"></i></a>
-                                </li>
-                                <li class="inline"><a href="https://www.instagram.com/shreethemes/" target="_blank"
-                                        class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center border-gray-800 rounded-md border hover:border-indigo-600 dark:hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-600"><i
-                                            class="uil uil-instagram align-middle" title="instagram"></i></a>
-                                </li>
-                                <li class="inline"><a href="https://twitter.com/shreethemes" target="_blank"
-                                        class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center border-gray-800 rounded-md border hover:border-indigo-600 dark:hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-600"><i
-                                            class="uil uil-twitter align-middle" title="twitter"></i></a></li>
-                            </ul><!--end icon-->
                         </div><!--end col-->
 
                         <div class="lg:col-span-6 md:col-span-12">
-                            <h5 class="tracking-[1px] text-gray-100 font-semibold">Shopping & Clothes</h5>
+                            <h5 class="tracking-[1px] text-gray-100 font-semibold">Kategori</h5>
 
                             <div class="grid md:grid-cols-12 grid-cols-1">
                                 <div class="md:col-span-4">
@@ -115,24 +89,33 @@
                         </div>
 
                         <div class="lg:col-span-3 md:col-span-4">
-                            <h5 class="tracking-[1px] text-gray-100 font-semibold">Newsletter</h5>
-                            <p class="mt-6">Sign up and receive the latest tips via email.</p>
-                            <form>
-                                <div class="grid grid-cols-1">
-                                    <div class="my-3">
-                                        <label class="form-label">Write your email <span
-                                                class="text-red-600">*</span></label>
-                                        <div class="form-icon relative mt-2">
-                                            <i data-feather="mail" class="size-4 absolute top-3 start-4"></i>
-                                            <input type="email"
-                                                class="form-input ps-12 rounded w-full py-2 px-3 h-10 bg-gray-800 border-0 text-gray-100 focus:shadow-none focus:ring-0 placeholder:text-gray-200"
-                                                placeholder="Email" name="email" required="">
-                                        </div>
-                                    </div>
-
-                                    <button type="submit" id="submitsubscribe" name="send"
-                                        class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md">Subscribe</button>
-                                </div>
+                            <h5 class="tracking-[1px] text-gray-100 font-semibold">Kontak Kami</h5>
+                            <ul class="list-none mt-6">
+                                <li class="inline"><a href="https://1.envato.market/techwind" target="_blank"
+                                        class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center border-gray-800 rounded-md border hover:border-indigo-600 dark:hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-600"><i
+                                            class="uil uil-shopping-cart align-middle" title="Buy Now"></i></a>
+                                </li>
+                                <li class="inline"><a href="https://dribbble.com/shreethemes" target="_blank"
+                                        class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center border-gray-800 rounded-md border hover:border-indigo-600 dark:hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-600"><i
+                                            class="uil uil-dribbble align-middle" title="dribbble"></i></a></li>
+                                <li class="inline"><a href="https://www.behance.net/shreethemes" target="_blank"
+                                        class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center border-gray-800 rounded-md border hover:border-indigo-600 dark:hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-600"><i
+                                            class="uil uil-behance" title="Behance"></i></a></li>
+                                <li class="inline"><a href="http://linkedin.com/company/shreethemes" target="_blank"
+                                        class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center border-gray-800 rounded-md border hover:border-indigo-600 dark:hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-600"><i
+                                            class="uil uil-linkedin" title="Linkedin"></i></a></li>
+                                <li class="inline"><a href="https://www.facebook.com/shreethemes" target="_blank"
+                                        class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center border-gray-800 rounded-md border hover:border-indigo-600 dark:hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-600"><i
+                                            class="uil uil-facebook-f align-middle" title="facebook"></i></a>
+                                </li>
+                                <li class="inline"><a href="https://www.instagram.com/shreethemes/" target="_blank"
+                                        class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center border-gray-800 rounded-md border hover:border-indigo-600 dark:hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-600"><i
+                                            class="uil uil-instagram align-middle" title="instagram"></i></a>
+                                </li>
+                                <li class="inline"><a href="https://twitter.com/shreethemes" target="_blank"
+                                        class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center border-gray-800 rounded-md border hover:border-indigo-600 dark:hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-600"><i
+                                            class="uil uil-twitter align-middle" title="twitter"></i></a></li>
+                            </ul><!--end icon-->
                             </form>
                         </div><!--end col-->
                     </div><!--end grid-->
@@ -145,22 +128,22 @@
                 <div class="grid lg:grid-cols-4 md:grid-cols-2">
                     <div class="flex items-center lg:justify-center">
                         <i class="uil uil-truck align-middle text-lg mb-0 me-2"></i>
-                        <h6 class="mb-0 font-medium">Free delivery</h6>
+                        <h6 class="mb-0 font-medium">Gratis Ongkir</h6>
                     </div><!--end content-->
 
                     <div class="flex items-center lg:justify-center">
                         <i class="uil uil-archive align-middle text-lg mb-0 me-2"></i>
-                        <h6 class="mb-0 font-medium">Non-contact shipping</h6>
+                        <h6 class="mb-0 font-medium">Tanpa Kontak Fisik</h6>
                     </div><!--end content-->
 
                     <div class="flex items-center lg:justify-center">
                         <i class="uil uil-transaction align-middle text-lg mb-0 me-2"></i>
-                        <h6 class="mb-0 font-medium">Money-back quarantee</h6>
+                        <h6 class="mb-0 font-medium">Jaminan Uang Kembali</h6>
                     </div><!--end content-->
 
                     <div class="flex items-center lg:justify-center">
                         <i class="uil uil-shield-check align-middle text-lg mb-0 me-2"></i>
-                        <h6 class="mb-0 font-medium">Secure payments</h6>
+                        <h6 class="mb-0 font-medium">Pembayaran Mudah</h6>
                     </div><!--end content-->
                 </div><!--end grid-->
             </div><!--end-->
@@ -174,12 +157,12 @@
                     <p class="mb-0">©
                         <script>
                             document.write(new Date().getFullYear())
-                        </script> Techwind. Design with <i class="mdi mdi-heart text-red-600"></i>
-                        by <a href="https://shreethemes.in/" target="_blank" class="text-reset">Shreethemes</a>.
+                        </script> UMKM Blitar. Developed
+                        by <a href="#" target="_blank" class="text-reset">NovaDev</a>.
                     </p>
                 </div>
 
-                <ul class="list-none md:text-end text-center mt-6 md:mt-0">
+                {{-- <ul class="list-none md:text-end text-center mt-6 md:mt-0">
                     <li class="inline"><a href=""><img
                                 src="{{ asset('asset/images/payments/american-ex.png') }}" class="max-h-6 inline"
                                 title="American Express" alt=""></a></li>
@@ -192,7 +175,7 @@
                                 class="max-h-6 inline" title="Paypal" alt=""></a></li>
                     <li class="inline"><a href=""><img src="{{ asset('asset/images/payments/visa.png') }}"
                                 class="max-h-6 inline" title="Visa" alt=""></a></li>
-                </ul>
+                </ul> --}}
             </div><!--end grid-->
         </div><!--end container-->
     </div>

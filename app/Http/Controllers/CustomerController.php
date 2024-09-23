@@ -10,4 +10,9 @@ class CustomerController extends Controller
     {
         return view('welcome');
     }
+
+    public function profile()
+    {
+        return view('customer.pages.profile');
+    }
 }

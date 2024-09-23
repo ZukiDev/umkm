@@ -123,8 +123,8 @@
                                     {{ Auth::user()->name }}</p>
                             </li>
                             <li>
-                                <a href="shop-account.html" class="block py-1.5 px-4 hover:text-indigo-600"><i
-                                        class="uil uil-setting align-middle me-1"></i> Pengaturan</a>
+                                <a href="{{ route('customer.profile') }}" class="block py-1.5 px-4 hover:text-indigo-600"><i
+                                        class="uil uil-setting align-middle me-1"></i> Profil Saya</a>
                             </li>
                             <li class="border-t border-gray-100 dark:border-gray-800 my-2"></li>
                             <li>

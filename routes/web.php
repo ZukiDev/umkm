@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController; // Add this line
-use App\Http\Controllers\CustomerController; // Add this line
-use App\Http\Controllers\AdminController; // Add this line
-use App\Http\Controllers\SuperAdminController; // Add this line
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SuperAdminController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 // Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');

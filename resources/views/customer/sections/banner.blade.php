@@ -2,8 +2,8 @@
 <section class="relative mt-20">
     <div class="container-fluid relative">
         <div class="relative py-48 table w-full shadow-md overflow-hidden">
-            <div
-                class="absolute inset-0 bg-[url('{{ asset('asset/images/shop/bg.jpg') }}')] bg-no-repeat md:bg-left bg-center bg-cover">
+            <div class="absolute inset-0 bg-no-repeat md:bg-left bg-center bg-cover"
+                style="background-image: url('{{ asset('asset/images/shop/bg.jpg') }}')">
             </div>
             <div class="absolute inset-0 bg-slate-950/30"></div>
             <div class="container relative">

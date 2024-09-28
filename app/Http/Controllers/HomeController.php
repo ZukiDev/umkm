@@ -25,9 +25,9 @@ class HomeController extends Controller
         if ($role->role === 'customer') {
             return view('welcome');
         } elseif ($role->role === 'admin') {
-            return redirect('/dashboard-admin');
+            return redirect('/admin/dashboard');
         } elseif ($role->role === 'superAdmin') {
-            return redirect('/dashboard-superadmin');
+            return redirect('/super-admin/dashboard');
         } else{
             return Redirect('/');
         }

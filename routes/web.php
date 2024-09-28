@@ -20,11 +20,16 @@ Route::middleware([
             Route::get('/profile', [CustomerController::class, 'profile'])->name('customer.profile');
         });
         Route::middleware(['admin'])->group(function () {
-            Route::get('/dashboard-admin', [AdminController::class, 'index'])->name('admin.index');
+            Route::prefix('admin')->group(function () {
+                Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.index');
+            });
         });
 
         Route::middleware(['super-admin'])->group(function () {
-            Route::get('/dashboard-superadmin', [SuperAdminController::class, 'index'])->name('superadmin.index');
+            Route::prefix('super-admin')->group(function () {
+                Route::get('/dashboard', [SuperAdminController::class, 'index'])->name('super-admin.index');
+                Route::get('/profile', [SuperAdminController::class, 'profile'])->name('super-admin.profile');
+            });
         });
     });
 });

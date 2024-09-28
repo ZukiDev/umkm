@@ -9,6 +9,10 @@ class SuperAdminController extends Controller
 
     public function index()
     {
-        return view('superadmin.dashboard');
+        return view('super-admin.pages.dashboard');
+    }
+    public function profile()
+    {
+        return view('super-admin.pages.profile');
     }
 }

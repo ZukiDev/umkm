@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Store;
 
 class SuperAdminController extends Controller
 {
@@ -13,9 +12,8 @@ class SuperAdminController extends Controller
         return view('superadmin.layouts.dashboard');
     }
 
-    public function show()
+    public function profile()
     {
-        $stores = Store::all();
-        return view('superadmin.layouts.data-master.store.show', compact('stores'));
+        return view('super-admin.pages.profile');
     }
 }

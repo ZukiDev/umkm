@@ -21,13 +21,18 @@ Route::middleware([
             Route::get('/profile', [CustomerController::class, 'profile'])->name('customer.profile');
         });
         Route::middleware(['admin'])->group(function () {
-            Route::get('/dashboard-admin', [AdminController::class, 'index'])->name('admin.index');
+            Route::prefix('admin')->group(function () {
+                Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.index');
+            });
         });
 
         Route::middleware(['super-admin'])->group(function () {
-            Route::get('/dashboard-superadmin', [SuperAdminController::class, 'index'])->name('superadmin.index');
-            Route::resource('/dashboard-superadmin/data-master/store', StoreController::class)->names('superadmin.data-master.store');
-            Route::resource('/dashboard-superadmin/data-master/customer', SuperAdminCustomerController::class)->names('superadmin.data-master.customer');
+            Route::prefix('super-admin')->group(function () {
+                Route::get('/profile', [SuperAdminController::class, 'profile'])->name('super-admin.profile');
+                Route::get('/dashboard', [SuperAdminController::class, 'index'])->name('super-admin.index');
+                Route::resource('/dashboard-superadmin/data-master/store', StoreController::class)->names('superadmin.data-master.store');
+                Route::resource('/dashboard-superadmin/data-master/customer', SuperAdminCustomerController::class)->names('superadmin.data-master.customer');
+            });
         });
     });
 });

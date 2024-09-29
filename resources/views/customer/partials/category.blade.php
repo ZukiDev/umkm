@@ -35,11 +35,11 @@
         </div>
     </div>
 
-    @include('customer.sections.new-product')
+    @include('customer.partials.new-product')
 
-    @include('customer.sections.popular-umkm')
+    @include('customer.partials.popular-umkm')
 
-    @include('customer.sections.popular-product')
+    @include('customer.partials.popular-product')
 
 </section><!--end section-->
 <!-- End -->

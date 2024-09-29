@@ -15,7 +15,7 @@ class StoreController extends Controller
     public function index()
     {
         $stores = Store::all();
-        return view('superadmin.layouts.data-master.store', compact('stores'));
+        return view('superadmin.pages.data-master.store', compact('stores'));
     }
 
     /**

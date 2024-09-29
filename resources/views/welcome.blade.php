@@ -1,11 +1,11 @@
 @extends('layouts.landing')
 
 @section('content')
-    @include('customer.sections.banner')
+    @include('customer.partials.banner')
 
-    @include('customer.sections.category')
+    @include('customer.partials.category')
 
-    @include('customer.sections.cta')
+    @include('customer.partials.cta')
 
-    @include('customer.sections.disc-product')
+    @include('customer.partials.disc-product')
 @endsection

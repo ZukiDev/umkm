@@ -36,11 +36,11 @@
     </div>
     <!-- Loader End -->
 
-    @include('customer.sections.navbar')
+    @include('customer.partials.navbar')
 
     @yield('content')
 
-    @include('customer.sections.footer')
+    @include('customer.partials.footer')
 
     <!-- Back to top -->
     <a href="#" onclick="topFunction()" id="back-to-top"

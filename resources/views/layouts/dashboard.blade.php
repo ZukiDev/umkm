@@ -22,6 +22,7 @@
     <link href="{{ asset('assets/libs/@mdi/font/css/materialdesignicons.min.css') }}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{{ asset('assets/css/tailwind.css') }}">
 
+    @livewireStyles
 </head>
 
 <body class="font-nunito text-base text-black dark:text-white dark:bg-slate-900">
@@ -83,6 +84,9 @@
     <script src="{{ asset('assets/js/plugins.init.js') }}"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
     <!-- JAVASCRIPTS -->
+    @stack('modals')
+
+    @livewireScripts
 </body>
 
 </html>

@@ -14,6 +14,6 @@ class SuperAdminController extends Controller
 
     public function profile()
     {
-        return view('super-admin.pages.profile');
+        return view('superadmin.layouts.profile');
     }
 }

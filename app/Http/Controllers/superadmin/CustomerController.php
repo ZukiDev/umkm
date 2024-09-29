@@ -5,6 +5,7 @@ namespace App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Exception;
 
 class CustomerController extends Controller
 {
@@ -14,7 +15,7 @@ class CustomerController extends Controller
     public function index()
     {
         $customers = User::where('role_id', 1)->get();
-        return view('superadmin.layouts.data-master.customer.index', compact('customers'));
+        return view('superadmin.layouts.data-master.customer', compact('customers'));
     }
 
     /**
@@ -22,7 +23,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view('superadmin.layouts.data-master.customer.create');
+        //
     }
 
     /**
@@ -32,9 +33,12 @@ class CustomerController extends Controller
     {
         $this->validateCustomer($request);
 
-        User::create($request->all());
-
-        return redirect()->route('superadmin.data-master.customer.index')->with('success', 'Customer created successfully.');
+        try {
+            User::create($request->all());
+            return redirect()->route('superadmin.data-master.customer.index')->with('success', 'Customer created successfully.');
+        } catch (Exception $e) {
+            return redirect()->route('superadmin.data-master.customer.index')->with('error', 'Failed to create customer: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -42,7 +46,7 @@ class CustomerController extends Controller
      */
     public function show(User $customer)
     {
-        return view('superadmin.layouts.data-master.customer.show', compact('customer'));
+        //
     }
 
     /**
@@ -50,7 +54,7 @@ class CustomerController extends Controller
      */
     public function edit(User $customer)
     {
-        return view('superadmin.layouts.data-master.customer.edit', compact('customer'));
+        //
     }
 
     /**
@@ -60,9 +64,12 @@ class CustomerController extends Controller
     {
         $this->validateCustomer($request, $customer->id);
 
-        $customer->update($request->all());
-
-        return redirect()->route('superadmin.data-master.customer.index')->with('success', 'Customer updated successfully.');
+        try {
+            $customer->update($request->all());
+            return redirect()->route('superadmin.data-master.customer.index')->with('success', 'Customer updated successfully.');
+        } catch (Exception $e) {
+            return redirect()->route('superadmin.data-master.customer.index')->with('error', 'Failed to update customer: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -70,9 +77,12 @@ class CustomerController extends Controller
      */
     public function destroy(User $customer)
     {
-        $customer->delete();
-
-        return redirect()->route('superadmin.data-master.customer.index')->with('success', 'Customer deleted successfully.');
+        try {
+            $customer->delete();
+            return redirect()->route('superadmin.data-master.customer.index')->with('success', 'Customer deleted successfully.');
+        } catch (Exception $e) {
+            return redirect()->route('superadmin.data-master.customer.index')->with('error', 'Failed to delete customer: ' . $e->getMessage());
+        }
     }
 
     /**

@@ -28,10 +28,10 @@ Route::middleware([
 
         Route::middleware(['super-admin'])->group(function () {
             Route::prefix('super-admin')->group(function () {
-                Route::get('/profile', [SuperAdminController::class, 'profile'])->name('super-admin.profile');
-                Route::get('/dashboard', [SuperAdminController::class, 'index'])->name('super-admin.index');
-                Route::resource('/dashboard-superadmin/data-master/store', StoreController::class)->names('superadmin.data-master.store');
-                Route::resource('/dashboard-superadmin/data-master/customer', SuperAdminCustomerController::class)->names('superadmin.data-master.customer');
+                Route::get('/profile', [SuperAdminController::class, 'profile'])->name('superadmin.profile');
+                Route::get('/dashboard', [SuperAdminController::class, 'index'])->name('superadmin.index');
+                Route::resource('/dashboard/data-master/store', StoreController::class)->names('superadmin.data-master.store');
+                Route::resource('/dashboard/data-master/customer', SuperAdminCustomerController::class)->names('superadmin.data-master.customer');
             });
         });
     });

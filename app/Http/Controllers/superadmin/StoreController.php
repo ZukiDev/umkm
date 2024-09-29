@@ -5,6 +5,7 @@ namespace App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\Controller;
 use App\Models\Store;
 use Illuminate\Http\Request;
+use Exception;
 
 class StoreController extends Controller
 {
@@ -14,7 +15,7 @@ class StoreController extends Controller
     public function index()
     {
         $stores = Store::all();
-        return view('superadmin.layouts.data-master.store.index', compact('stores'));
+        return view('superadmin.layouts.data-master.store', compact('stores'));
     }
 
     /**
@@ -22,7 +23,7 @@ class StoreController extends Controller
      */
     public function create()
     {
-        return view('superadmin.layouts.data-master.store.create');
+        //
     }
 
     /**
@@ -32,9 +33,12 @@ class StoreController extends Controller
     {
         $this->validateStore($request);
 
-        Store::create($request->all());
-
-        return redirect()->route('superadmin.data-master.store.index')->with('success', 'Store created successfully.');
+        try {
+            Store::create($request->all());
+            return redirect()->route('superadmin.data-master.store.index')->with('success', 'Store created successfully.');
+        } catch (Exception $e) {
+            return redirect()->route('superadmin.data-master.store.index')->with('error', 'Failed to create store: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -42,7 +46,7 @@ class StoreController extends Controller
      */
     public function show(Store $store)
     {
-        return view('superadmin.layouts.data-master.store.show', compact('store'));
+        //
     }
 
     /**
@@ -50,7 +54,7 @@ class StoreController extends Controller
      */
     public function edit(Store $store)
     {
-        return view('superadmin.layouts.data-master.store.edit', compact('store'));
+        //
     }
 
     /**
@@ -60,9 +64,12 @@ class StoreController extends Controller
     {
         $this->validateStore($request, $store->id);
 
-        $store->update($request->all());
-
-        return redirect()->route('superadmin.data-master.store.index')->with('success', 'Store updated successfully.');
+        try {
+            $store->update($request->all());
+            return redirect()->route('superadmin.data-master.store.index')->with('success', 'Store updated successfully.');
+        } catch (Exception $e) {
+            return redirect()->route('superadmin.data-master.store.index')->with('error', 'Failed to update store: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -70,9 +77,12 @@ class StoreController extends Controller
      */
     public function destroy(Store $store)
     {
-        $store->delete();
-
-        return redirect()->route('superadmin.data-master.store.index')->with('success', 'Store deleted successfully.');
+        try {
+            $store->delete();
+            return redirect()->route('superadmin.data-master.store.index')->with('success', 'Store deleted successfully.');
+        } catch (Exception $e) {
+            return redirect()->route('superadmin.data-master.store.index')->with('error', 'Failed to delete store: ' . $e->getMessage());
+        }
     }
 
     /**

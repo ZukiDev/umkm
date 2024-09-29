@@ -4,10 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SuperAdmin\StoreController;
+use App\Http\Controllers\SuperAdmin\CustomerController as SuperAdminCustomerController;
 use App\Http\Controllers\SuperAdminController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-// Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
 Route::middleware([
     'auth:sanctum',
@@ -25,6 +26,8 @@ Route::middleware([
 
         Route::middleware(['super-admin'])->group(function () {
             Route::get('/dashboard-superadmin', [SuperAdminController::class, 'index'])->name('superadmin.index');
+            Route::resource('/dashboard-superadmin/data-master/store', StoreController::class)->names('superadmin.data-master.store');
+            Route::resource('/dashboard-superadmin/data-master/customer', SuperAdminCustomerController::class)->names('superadmin.data-master.customer');
         });
     });
 });

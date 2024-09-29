@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\superadmin;
+namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Store;
@@ -14,7 +14,7 @@ class StoreController extends Controller
     public function index()
     {
         $stores = Store::all();
-        return view('stores.index', compact('stores'));
+        return view('superadmin.layouts.data-master.store.index', compact('stores'));
     }
 
     /**
@@ -22,7 +22,7 @@ class StoreController extends Controller
      */
     public function create()
     {
-        return view('stores.create');
+        return view('superadmin.layouts.data-master.store.create');
     }
 
     /**
@@ -30,73 +30,69 @@ class StoreController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'store_name' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
-            'owner_name' => 'nullable|string|max:255',
-            'address_id' => 'required|exists:addresses,id',
-            'email' => 'nullable|email|unique:stores',
-            'phone_number' => 'nullable|string|unique:stores',
-            'business_type' => 'nullable|string|max:100',
-            'status' => 'boolean',
-            'logo' => 'nullable|string|max:2048',
-        ]);
+        $this->validateStore($request);
 
-        $store = Store::create($request->all());
+        Store::create($request->all());
 
-        return redirect()->route('stores.index')->with('success', 'Store created successfully.');
+        return redirect()->route('superadmin.data-master.store.index')->with('success', 'Store created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Store $store)
     {
-        $store = Store::findOrFail($id);
-        return view('stores.show', compact('store'));
+        return view('superadmin.layouts.data-master.store.show', compact('store'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Store $store)
     {
-        $store = Store::findOrFail($id);
-        return view('stores.edit', compact('store'));
+        return view('superadmin.layouts.data-master.store.edit', compact('store'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Store $store)
     {
-        $store = Store::findOrFail($id);
-
-        $request->validate([
-            'store_name' => 'sometimes|required|string|max:255',
-            'description' => 'sometimes|required|string|max:255',
-            'owner_name' => 'nullable|string|max:255',
-            'address_id' => 'sometimes|required|exists:addresses,id',
-            'email' => 'sometimes|nullable|email|unique:stores,email,' . $store->id,
-            'phone_number' => 'sometimes|nullable|string|unique:stores,phone_number,' . $store->id,
-            'business_type' => 'sometimes|nullable|string|max:100',
-            'status' => 'sometimes|boolean',
-            'logo' => 'sometimes|nullable|string|max:2048',
-        ]);
+        $this->validateStore($request, $store->id);
 
         $store->update($request->all());
 
-        return redirect()->route('stores.index')->with('success', 'Store updated successfully.');
+        return redirect()->route('superadmin.data-master.store.index')->with('success', 'Store updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Store $store)
     {
-        $store = Store::findOrFail($id);
         $store->delete();
 
-        return redirect()->route('stores.index')->with('success', 'Store deleted successfully.');
+        return redirect()->route('superadmin.data-master.store.index')->with('success', 'Store deleted successfully.');
+    }
+
+    /**
+     * Validate the store data.
+     */
+    protected function validateStore(Request $request, $storeId = null)
+    {
+        $uniqueEmailRule = 'nullable|email|unique:stores,email' . ($storeId ? ',' . $storeId : '');
+        $uniquePhoneRule = 'nullable|string|unique:stores,phone_number' . ($storeId ? ',' . $storeId : '');
+
+        $request->validate([
+            'store_name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'owner_name' => 'nullable|string|max:255',
+            'address_id' => 'required|exists:addresses,id',
+            'email' => $uniqueEmailRule,
+            'phone_number' => $uniquePhoneRule,
+            'business_type' => 'nullable|string|max:100',
+            'status' => 'boolean',
+            'logo' => 'nullable|string|max:2048',
+        ]);
     }
 }

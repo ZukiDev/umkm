@@ -88,7 +88,9 @@
                                                     <td class="p-4">{{ $umkm->business_type }}</td>
                                                     <td class="p-4">
                                                         <span
-                                                            class="bg-emerald-600 text-white text-[12px] font-semibold px-2.5 py-0.5 rounded h-5">{{ $umkm->status }}</span>
+                                                            class="text-white text-[12px] font-semibold px-2.5 py-0.5 rounded h-5 {{ $umkm->status == 1 ? 'bg-emerald-600' : 'bg-red-600' }}">
+                                                            {{ $umkm->status == 1 ? 'Aktif' : 'Tidak Aktif' }}
+                                                        </span>
                                                     </td>
                                                     <td class="p-4 text-end">
                                                         <!-- View Button -->

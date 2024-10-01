@@ -111,41 +111,11 @@
                                                     </td>
                                                 </tr>
 
-                                                <!-- Start View Modal -->
-                                                <dialog id="viewModal{{ $umkm->id }}"
-                                                    class="rounded-md shadow dark:shadow-gray-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
-                                                    <div class="relative h-auto md:w-[480px] w-300px">
-                                                        <!-- Modal Header with Close Button -->
-                                                        <div
-                                                            class="flex justify-between items-center px-6 py-4 border-b border-gray-100 dark:border-gray-700">
-                                                            <h3 class="font-bold text-lg">Data {{ $umkm->store_name }}</h3>
-                                                            <!-- Close Button (X) -->
-                                                            <form method="dialog">
-                                                                <button
-                                                                    class="size-6 flex justify-center items-center shadow dark:shadow-gray-800 rounded-md btn-ghost bg-red-600">
-                                                                    <i data-feather="x" class="size-4 text-white"></i>
-                                                                </button>
-                                                            </form>
-                                                        </div>
-
-                                                        <!-- Modal Content -->
-                                                        <div class="p-6 text-justify">
-                                                            <p>Nama: {{ $umkm->store_name }}</p>
-                                                            <p>Pemilik: {{ $umkm->owner_name }}</p>
-                                                            <p>No.Telp: {{ $umkm->user->phone_number }}</p>
-                                                            <p>Alamat: {{ $umkm->address->address }}</p>
-                                                            <p>Kategori: {{ $umkm->business_type }}</p>
-                                                            <p>Status: {{ $umkm->status }}</p>
-                                                        </div>
-                                                    </div>
-                                                </dialog>
-                                                <!-- End Modal -->
-
-
                                                 <!-- Start Edit Modal -->
                                                 <dialog id="editModal{{ $umkm->id }}"
                                                     class="rounded-md shadow dark:shadow-gray-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
-                                                    <div class="relative h-auto md:w-[480px] w-300px">
+                                                    <div class="relative h-auto md:w-[960px] w-full">
+                                                        <!-- Adjusted width for larger modal -->
                                                         <!-- Modal Header with Close Button -->
                                                         <div
                                                             class="flex justify-between items-center px-6 py-4 border-b border-gray-100 dark:border-gray-700">
@@ -163,49 +133,125 @@
                                                         <div class="p-6">
                                                             <form
                                                                 action="{{ route('superadmin.data-master.store.update', $umkm->id) }}"
-                                                                method="POST">
+                                                                method="POST" enctype="multipart/form-data">
                                                                 @csrf
                                                                 @method('PUT')
-                                                                <input type="text" name="store_name"
-                                                                    value="{{ $umkm->store_name }}"
+
+                                                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                                                    <!-- Grid for 3 columns -->
+                                                                    <!-- User Data Section -->
+                                                                    <div>
+                                                                        <h4 class="font-semibold mb-3">Data Akun</h4>
+                                                                        <input type="text" name="name"
+                                                                            value="{{ $umkm->user->name }}"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="Nama Akun" required>
+                                                                        <input type="text" name="username"
+                                                                            value="{{ $umkm->user->username }}"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="Username" required>
+                                                                        <input type="email" name="email"
+                                                                            value="{{ $umkm->user->email }}"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="Email" required>
+                                                                        <input type="number" name="phone_number"
+                                                                            value="{{ $umkm->user->phone_number }}"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="No. Telp" required>
+                                                                        <input type="password" name="password"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="Password (Opsional)">
+                                                                        <input type="password"
+                                                                            name="password_confirmation"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="Konfirmasi Password (Opsional)">
+                                                                    </div>
+
+                                                                    <!-- Address Data Section -->
+                                                                    <div>
+                                                                        <h4 class="font-semibold mb-3">Data Alamat</h4>
+                                                                        <input type="text" name="address"
+                                                                            value="{{ $umkm->address->address }}"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="Alamat" required>
+                                                                        <input type="text" name="province"
+                                                                            value="{{ $umkm->address->province }}"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="Provinsi" required>
+                                                                        <input type="text" name="city"
+                                                                            value="{{ $umkm->address->city }}"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="Kota" required>
+                                                                        <input type="text" name="district"
+                                                                            value="{{ $umkm->address->district }}"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="Kecamatan" required>
+                                                                        <input type="text" name="post_code"
+                                                                            value="{{ $umkm->address->post_code }}"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="Kode Pos" required>
+                                                                        <textarea name="delivery_instructions" class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="Petunjuk Pengiriman">{{ $umkm->address->delivery_instructions }}</textarea>
+                                                                    </div>
+
+                                                                    <!-- Store Data Section -->
+                                                                    <div>
+                                                                        <h4 class="font-semibold mb-3">Data Toko</h4>
+                                                                        <input type="text" name="store_name"
+                                                                            value="{{ $umkm->store_name }}"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="Nama UMKM" required>
+                                                                        <input type="text" name="owner_name"
+                                                                            value="{{ $umkm->owner_name }}"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="Nama Pemilik" required>
+                                                                        <input type="text" name="business_type"
+                                                                            value="{{ $umkm->business_type }}"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="Kategori Usaha" required>
+                                                                        <input type="text" name="description"
+                                                                            value="{{ $umkm->description }}"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="Deskripsi UMKM" required>
+                                                                        <select name="status"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            required>
+                                                                            <option value="1"
+                                                                                {{ $umkm->status == 1 ? 'selected' : '' }}>
+                                                                                Aktif</option>
+                                                                            <option value="0"
+                                                                                {{ $umkm->status == 0 ? 'selected' : '' }}>
+                                                                                Tidak Aktif</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+
+                                                                <!-- Logo Upload Section -->
+                                                                <h4 class="font-semibold mb-3 mt-6">Logo Toko</h4>
+                                                                <input type="file" name="logo"
                                                                     class="border px-3 py-2 rounded w-full mb-4"
-                                                                    placeholder="Nama UMKM" required>
-                                                                <input type="text" name="owner_name"
-                                                                    value="{{ $umkm->owner_name }}"
-                                                                    class="border px-3 py-2 rounded w-full mb-4"
-                                                                    placeholder="Nama Pemilik" required>
-                                                                <input type="number" name="phone_number"
-                                                                    value="{{ $umkm->user->phone_number }}"
-                                                                    class="border px-3 py-2 rounded w-full mb-4"
-                                                                    placeholder="No.Telp" required>
-                                                                <input type="text" name="address"
-                                                                    value="{{ $umkm->address->address }}"
-                                                                    class="border px-3 py-2 rounded w-full mb-4"
-                                                                    placeholder="Alamat" required>
-                                                                <input type="text" name="business_type"
-                                                                    value="{{ $umkm->business_type }}"
-                                                                    class="border px-3 py-2 rounded w-full mb-4"
-                                                                    placeholder="Kategori" required>
+                                                                    accept="image/*">
+
+                                                                <!-- Submit Button -->
                                                                 <button type="submit"
-                                                                    class="bg-indigo-600 text-white px-4 py-2 rounded">Simpan
-                                                                    Perubahan Data</button>
+                                                                    class="bg-indigo-600 text-white px-4 py-2 rounded mt-4">
+                                                                    Simpan Perubahan Data
+                                                                </button>
                                                             </form>
                                                         </div>
                                                     </div>
                                                 </dialog>
                                                 <!-- End Edit Modal -->
 
-
-                                                <!-- Start Delete Modal -->
-                                                <dialog id="deleteModal{{ $umkm->id }}"
+                                                <!-- Start Show Detail Modal -->
+                                                <dialog id="viewModal{{ $umkm->id }}"
                                                     class="rounded-md shadow dark:shadow-gray-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
-                                                    <div class="relative h-auto md:w-[480px] w-300px">
+                                                    <div class="relative h-auto md:w-[960px] w-full">
+                                                        <!-- Adjusted width for larger modal -->
                                                         <!-- Modal Header with Close Button -->
                                                         <div
                                                             class="flex justify-between items-center px-6 py-4 border-b border-gray-100 dark:border-gray-700">
-                                                            <h3 class="font-bold text-lg text-red-600">Konfirmasi Hapus
-                                                                Data
-                                                            </h3>
+                                                            <h3 class="font-bold text-lg">Detail Data UMKM</h3>
                                                             <!-- Close Button (X) -->
                                                             <form method="dialog">
                                                                 <button
@@ -216,62 +262,181 @@
                                                         </div>
 
                                                         <!-- Modal Content -->
-                                                        <div class="p-6 text-center">
-                                                            <p>Apakah anda yakin menghapus data {{ $umkm->store_name }}?
-                                                            </p>
-                                                            <form
-                                                                action="{{ route('superadmin.data-master.store.destroy', $umkm->id) }}"
-                                                                method="POST">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit"
-                                                                    class="bg-red-600 mt-6 text-white px-4 py-2 rounded">Ya,
-                                                                    Hapus</button>
-                                                            </form>
+                                                        <div class="p-6">
+                                                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                                                <!-- Grid for 3 columns -->
+
+                                                                <!-- User Data Section -->
+                                                                <div>
+                                                                    <h4 class="font-semibold mb-3">Data Akun</h4>
+                                                                    <p class="mb-4"><strong>Nama Akun:</strong>
+                                                                        {{ $umkm->user->name }}</p>
+                                                                    <p class="mb-4"><strong>Username:</strong>
+                                                                        {{ $umkm->user->username }}</p>
+                                                                    <p class="mb-4"><strong>Email:</strong>
+                                                                        {{ $umkm->user->email }}</p>
+                                                                    <p class="mb-4"><strong>No. Telp:</strong>
+                                                                        {{ $umkm->user->phone_number }}</p>
+                                                                </div>
+
+                                                                <!-- Address Data Section -->
+                                                                <div>
+                                                                    <h4 class="font-semibold mb-3">Data Alamat</h4>
+                                                                    <p class="mb-4"><strong>Alamat:</strong>
+                                                                        {{ $umkm->address->address }}</p>
+                                                                    <p class="mb-4"><strong>Provinsi:</strong>
+                                                                        {{ $umkm->address->province }}</p>
+                                                                    <p class="mb-4"><strong>Kota:</strong>
+                                                                        {{ $umkm->address->city }}</p>
+                                                                    <p class="mb-4"><strong>Kecamatan:</strong>
+                                                                        {{ $umkm->address->district }}</p>
+                                                                    <p class="mb-4"><strong>Kode Pos:</strong>
+                                                                        {{ $umkm->address->post_code }}</p>
+                                                                    <p class="mb-4"><strong>Petunjuk Pengiriman:</strong>
+                                                                        {{ $umkm->address->delivery_instructions }}</p>
+                                                                </div>
+
+                                                                <!-- Store Data Section -->
+                                                                <div>
+                                                                    <h4 class="font-semibold mb-3">Data Toko</h4>
+                                                                    <p class="mb-4"><strong>Nama UMKM:</strong>
+                                                                        {{ $umkm->store_name }}</p>
+                                                                    <p class="mb-4"><strong>Nama Pemilik:</strong>
+                                                                        {{ $umkm->owner_name }}</p>
+                                                                    <p class="mb-4"><strong>Kategori Usaha:</strong>
+                                                                        {{ $umkm->business_type }}</p>
+                                                                    <p class="mb-4"><strong>Deskripsi UMKM:</strong>
+                                                                        {{ $umkm->description }}</p>
+                                                                    <p class="mb-4"><strong>Status:</strong>
+                                                                        {{ $umkm->status == 1 ? 'Aktif' : 'Tidak Aktif' }}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- Logo Section -->
+                                                            <h4 class="font-semibold mb-3 mt-6">Logo Toko</h4>
+                                                            @if ($umkm->logo)
+                                                                <img src="{{ asset('storage/logos/' . $umkm->logo) }}"
+                                                                    alt="Logo UMKM" class="mb-4 rounded-md"
+                                                                    style="max-width: 200px;">
+                                                            @else
+                                                                <p class="mb-4">Logo tidak tersedia</p>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </dialog>
-                                                <!-- End Delete Modal -->
+                                                <!-- End Show Detail Modal -->
                                             @endforeach
                                         </tbody>
                                     </table>
                                 </div>
+                                <!-- Start Add Modal -->
+                                <dialog id="addModal"
+                                    class="rounded-md shadow dark:shadow-gray-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
+                                    <div class="relative h-auto md:w-[960px] w-full">
+                                        <!-- Adjusted width for larger modal -->
+                                        <div
+                                            class="flex justify-between items-center px-6 py-4 border-b border-gray-100 dark:border-gray-700">
+                                            <h3 class="font-bold text-lg">Tambah Store Baru</h3>
+                                            <form method="dialog">
+                                                <button
+                                                    class="size-6 flex justify-center items-center shadow dark:shadow-gray-800 rounded-md btn-ghost bg-red-600">
+                                                    <i data-feather="x" class="size-4 text-white"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+
+                                        <div class="p-6">
+                                            <form action="{{ route('superadmin.data-master.store.store') }}"
+                                                method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                                    <!-- Grid for 3 columns -->
+                                                    <!-- User Data Section -->
+                                                    <div>
+                                                        <h4 class="font-semibold mb-3">Data Akun</h4>
+                                                        <input type="text" name="name"
+                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            placeholder="Nama Akun" required>
+                                                        <input type="text" name="username"
+                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            placeholder="Username" required>
+                                                        <input type="email" name="email"
+                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            placeholder="Email" required>
+                                                        <input type="number" name="phone_number"
+                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            placeholder="No. Telp" required>
+                                                        <input type="password" name="password"
+                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            placeholder="Password" required>
+                                                        <input type="password" name="password_confirmation"
+                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            placeholder="Konfirmasi Password" required>
+                                                    </div>
+
+                                                    <!-- Address Data Section -->
+                                                    <div>
+                                                        <h4 class="font-semibold mb-3">Data Alamat</h4>
+                                                        <input type="text" name="address"
+                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            placeholder="Alamat" required>
+                                                        <input type="text" name="province"
+                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            placeholder="Provinsi" required>
+                                                        <input type="text" name="city"
+                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            placeholder="Kota" required>
+                                                        <input type="text" name="district"
+                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            placeholder="Kecamatan" required>
+                                                        <input type="text" name="post_code"
+                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            placeholder="Kode Pos" required>
+                                                        <textarea name="delivery_instructions" class="border px-3 py-2 rounded w-full mb-4"
+                                                            placeholder="Petunjuk Pengiriman"></textarea>
+                                                    </div>
+
+                                                    <!-- Store Data Section -->
+                                                    <div>
+                                                        <h4 class="font-semibold mb-3">Data Toko</h4>
+                                                        <input type="text" name="store_name"
+                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            placeholder="Nama UMKM" required>
+                                                        <input type="text" name="owner_name"
+                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            placeholder="Nama Pemilik" required>
+                                                        <input type="text" name="business_type"
+                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            placeholder="Kategori Usaha" required>
+                                                        <input type="text" name="description"
+                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            placeholder="Deskripsi UMKM" required>
+                                                        <select name="status"
+                                                            class="border px-3 py-2 rounded w-full mb-4" required>
+                                                            <option value="1">Aktif</option>
+                                                            <option value="0">Tidak Aktif</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Logo Upload Section -->
+                                                <h4 class="font-semibold mb-3">Logo Toko</h4>
+                                                <input type="file" name="logo"
+                                                    class="border px-3 py-2 rounded w-full mb-4" accept="image/*">
+
+                                                <button type="submit"
+                                                    class="bg-indigo-600 text-white px-4 py-2 rounded">Tambah UMKM</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </dialog>
+                                <!-- End Add Modal -->
                             </div>
                         </div><!--end content-->
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Start Add Modal -->
-        <dialog id="addModal"
-            class="rounded-md shadow dark:shadow-gray-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
-            <div class="relative h-auto md:w-[480px] w-300px">
-                <div class="flex justify-between items-center px-6 py-4 border-b border-gray-100 dark:border-gray-700">
-                    <h3 class="font-bold text-lg">Tambah Store Baru</h3>
-                    <form method="dialog">
-                        <button
-                            class="size-6 flex justify-center items-center shadow dark:shadow-gray-800 rounded-md btn-ghost bg-red-600">
-                            <i data-feather="x" class="size-4 text-white"></i>
-                        </button>
-                    </form>
-                </div>
-
-                <div class="p-6">
-                    <form action="{{ route('superadmin.data-master.store.store') }}" method="POST">
-                        @csrf
-                        <input type="text" name="store_name" class="border px-3 py-2 rounded w-full mb-4"
-                            placeholder="Nama UMKM" required>
-                        <input type="text" name="owner_name" class="border px-3 py-2 rounded w-full mb-4"
-                            placeholder="Nama Pemilik" required>
-                        <input type="number" name="phone_number" class="border px-3 py-2 rounded w-full mb-4"
-                            placeholder="No.Telp" required>
-                        <input type="text" name="address" class="border px-3 py-2 rounded w-full mb-4"
-                            placeholder="Alamat" required>
-                        <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded">Tambah UMKM</button>
-                    </form>
-                </div>
-            </div>
-        </dialog>
-        <!-- End Add Modal -->
     </div>
 @endsection

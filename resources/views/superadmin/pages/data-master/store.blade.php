@@ -78,7 +78,7 @@
                                                 <tr class="border-t border-gray-100 dark:border-gray-700">
                                                     <td class="p-4">{{ $index + 1 }}</td>
                                                     <td class="p-4">
-                                                        <img src="{{ $umkm->logo }}" alt="Logo"
+                                                        <img src="{{ Storage::url($umkm->logo) }}" alt="Logo"
                                                             class="w-10 h-10 rounded-full">
                                                     </td>
                                                     <td class="p-4">{{ $umkm->store_name }}</td>
@@ -134,7 +134,7 @@
                                                         <!-- Modal Content -->
                                                         <div class="p-6">
                                                             <form
-                                                                action="{{ route('superadmin.data-master.store.update', $umkm->id) }}"
+                                                                action="{{ route('superadmin.data-master.umkm.update', $umkm->id) }}"
                                                                 method="POST" enctype="multipart/form-data">
                                                                 @csrf
                                                                 @method('PUT')
@@ -215,6 +215,14 @@
                                                                             value="{{ $umkm->description }}"
                                                                             class="border px-3 py-2 rounded w-full mb-4"
                                                                             placeholder="Deskripsi UMKM" required>
+                                                                        <input type="email" name="store_email"
+                                                                            value="{{ $umkm->email }}"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="Email" required>
+                                                                        <input type="number" name="store_phone_number"
+                                                                            value="{{ $umkm->phone_number }}"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="No. Telp" required>
                                                                         <select name="status"
                                                                             class="border px-3 py-2 rounded w-full mb-4"
                                                                             required>
@@ -318,7 +326,7 @@
                                                             <!-- Logo Section -->
                                                             <h4 class="font-semibold mb-3 mt-6">Logo Toko</h4>
                                                             @if ($umkm->logo)
-                                                                <img src="{{ asset('storage/logos/' . $umkm->logo) }}"
+                                                                <img src="{{ Storage::url($umkm->logo) }}"
                                                                     alt="Logo UMKM" class="mb-4 rounded-md"
                                                                     style="max-width: 200px;">
                                                             @else
@@ -328,6 +336,43 @@
                                                     </div>
                                                 </dialog>
                                                 <!-- End Show Detail Modal -->
+
+                                                <!-- Start Delete Modal -->
+                                                <dialog id="deleteModal{{ $umkm->id }}"
+                                                    class="rounded-md shadow dark:shadow-gray-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
+                                                    <div class="relative h-auto md:w-[480px] w-300px">
+                                                        <div
+                                                            class="flex justify-between items-center px-6 py-4 border-b border-gray-100 dark:border-gray-700">
+                                                            <h3 class="font-bold text-lg text-red-600">Konfirmasi Hapus
+                                                                Data
+                                                            </h3>
+                                                            <form method="dialog">
+                                                                <button
+                                                                    class="size-6 flex justify-center items-center shadow dark:shadow-gray-800 rounded-md btn-ghost bg-red-600">
+                                                                    <i data-feather="x" class="size-4 text-white"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
+
+                                                        <div class="p-6 text-center">
+                                                            <p>Apakah anda yakin menghapus data {{ $umkm->name }}?</p>
+                                                            <form
+                                                                action="{{ route('superadmin.data-master.umkm.destroy', $umkm->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit"
+                                                                    class="bg-red-600 mt-6 text-white px-4 py-2 rounded">Ya,
+                                                                    Hapus</button>
+                                                                <button type="button"
+                                                                    class="bg-gray-300 mt-6 text-black px-4 py-2 rounded"
+                                                                    onclick="deleteModal{{ $umkm->id }}.close()">Tidak,
+                                                                    Batalkan</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </dialog>
+                                                <!-- End Delete Modal -->
                                             @endforeach
                                         </tbody>
                                     </table>
@@ -349,8 +394,9 @@
                                         </div>
 
                                         <div class="p-6">
-                                            <form action="{{ route('superadmin.data-master.store.store') }}"
+                                            <form action="{{ route('superadmin.data-master.umkm.store') }}"
                                                 method="POST" enctype="multipart/form-data">
+                                                @method("POST")
                                                 @csrf
                                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                                                     <!-- Grid for 3 columns -->
@@ -414,6 +460,12 @@
                                                         <input type="text" name="description"
                                                             class="border px-3 py-2 rounded w-full mb-4"
                                                             placeholder="Deskripsi UMKM" required>
+                                                        <input type="email" name="store_email"
+                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            placeholder="Email" required>
+                                                        <input type="number" name="store_phone_number"
+                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            placeholder="No. Telp" required>
                                                         <select name="status"
                                                             class="border px-3 py-2 rounded w-full mb-4" required>
                                                             <option value="1">Aktif</option>

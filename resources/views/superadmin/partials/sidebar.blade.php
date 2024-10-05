@@ -14,8 +14,8 @@
                 <a href="javascript:void(0)"><i class="uil uil-browser me-2"></i>Data Master</a>
                 <div class="sidebar-submenu">
                     <ul>
-                        <li class="{{ request()->routeIs('superadmin.data-master.store.index') ? 'active' : '' }}">
-                            <a href="{{ route('superadmin.data-master.store.index') }}">Data UMKM</a>
+                        <li class="{{ request()->routeIs('superadmin.data-master.umkm.index') ? 'active' : '' }}">
+                            <a href="{{ route('superadmin.data-master.umkm.index') }}">Data UMKM</a>
                         </li>
                         <li class="{{ request()->routeIs('superadmin.data-master.customer.index') ? 'active' : '' }}">
                             <a href="{{ route('superadmin.data-master.customer.index') }}">Data Customer</a>

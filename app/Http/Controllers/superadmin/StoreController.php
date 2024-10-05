@@ -22,9 +22,7 @@ class StoreController extends Controller
      */
     public function index()
     {
-        $stores = Store::with(['user', 'address'])
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $stores = Store::with(['user', 'address'])->paginate(10);
         return view('superadmin.pages.data-master.store', compact('stores'));
     }
 

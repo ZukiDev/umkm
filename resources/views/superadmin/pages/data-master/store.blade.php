@@ -76,7 +76,7 @@
                                         <tbody>
                                             @foreach ($stores as $index => $umkm)
                                                 <tr class="border-t border-gray-100 dark:border-gray-700">
-                                                    <td class="p-4">{{ $index + 1 }}</td>
+                                                    <td class="p-4">{{ $loop->iteration + ($stores->currentPage() - 1) * $stores->perPage() }}</td>
                                                     <td class="p-4">
                                                         <img src="{{ Storage::url($umkm->logo) }}" alt="Logo"
                                                             class="w-10 h-10 rounded-full">
@@ -376,6 +376,10 @@
                                             @endforeach
                                         </tbody>
                                     </table>
+                                    <!-- Pagination Links -->
+                                </div>
+                                <div class="mt-4">
+                                    {{ $stores->links('pagination::simple-tailwind') }}
                                 </div>
                                 <!-- Start Add Modal -->
                                 <dialog id="addModal"

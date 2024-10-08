@@ -75,7 +75,7 @@
                                                     <td class="p-4">{{ $customer->name }}</td>
                                                     <td class="p-4">{{ $customer->email }}</td>
                                                     <td class="p-4">{{ $customer->phone_number }}</td>
-                                                    <td class="p-4">{{ $customer->address->address }}</td>
+                                                    <td class="p-4">{{ $customer->address->address ?? 'N/A' }}</td>
                                                     <td class="p-4 text-end">
                                                         <!-- View Button -->
                                                         <button class="text-blue-600 hover:text-blue-800 mr-2"
@@ -112,11 +112,41 @@
                                                             </form>
                                                         </div>
 
-                                                        <div class="p-6 text-justify">
-                                                            <p>Nama: {{ $customer->name }}</p>
-                                                            <p>Email: {{ $customer->email }}</p>
-                                                            <p>No.Telp: {{ $customer->phone_number }}</p>
-                                                            <p>Alamat: {{ $customer->address->address }}</p>
+                                                        <!-- Modal Content -->
+                                                        <div class="p-6">
+                                                            <!-- Grid for 2 columns -->
+                                                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-6 ">
+
+                                                                <!-- User Data Section -->
+                                                                <div>
+                                                                    <h4 class="font-semibold mb-3">Data Akun</h4>
+                                                                    <p class="mb-4"><strong>Nama Akun:</strong>
+                                                                        {{ $customer->name }}</p>
+                                                                    <p class="mb-4"><strong>Username:</strong>
+                                                                        {{ $customer->username }}</p>
+                                                                    <p class="mb-4"><strong>Email:</strong>
+                                                                        {{ $customer->email }}</p>
+                                                                    <p class="mb-4"><strong>No. Telp:</strong>
+                                                                        {{ $customer->phone_number }}</p>
+                                                                </div>
+
+                                                                <!-- Address Data Section -->
+                                                                <div>
+                                                                    <h4 class="font-semibold mb-3">Data Alamat</h4>
+                                                                    <p class="mb-4"><strong>Alamat:</strong>
+                                                                        {{ $customer->address->address ?? '' }}</p>
+                                                                    <p class="mb-4"><strong>Provinsi:</strong>
+                                                                        {{ $customer->address->province ?? '' }}</p>
+                                                                    <p class="mb-4"><strong>Kota:</strong>
+                                                                        {{ $customer->address->city ?? '' }}</p>
+                                                                    <p class="mb-4"><strong>Kecamatan:</strong>
+                                                                        {{ $customer->address->district ?? '' }}</p>
+                                                                    <p class="mb-4"><strong>Kode Pos:</strong>
+                                                                        {{ $customer->address->post_code ?? '' }}</p>
+                                                                    <p class="mb-4"><strong>Petunjuk Pengiriman:</strong>
+                                                                        {{ $customer->address->delivery_instructions ?? '' }}</p>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </dialog>
@@ -143,22 +173,64 @@
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('PUT')
-                                                                <input type="text" name="name"
-                                                                    value="{{ $customer->name }}"
-                                                                    class="border px-3 py-2 rounded w-full mb-4"
-                                                                    placeholder="Nama Customer" required>
-                                                                <input type="email" name="email"
-                                                                    value="{{ $customer->email }}"
-                                                                    class="border px-3 py-2 rounded w-full mb-4"
-                                                                    placeholder="Email" required>
-                                                                <input type="text" name="phone"
-                                                                    value="{{ $customer->phone_number }}"
-                                                                    class="border px-3 py-2 rounded w-full mb-4"
-                                                                    placeholder="No.Telp" required>
-                                                                <input type="text" name="address"
-                                                                    value="{{ $customer->address->address }}"
-                                                                    class="border px-3 py-2 rounded w-full mb-4"
-                                                                    placeholder="Alamat" required>
+                                                                <!-- Grid for 2 columns -->
+                                                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-6 ">
+                                                                    <!-- User Data Section -->
+                                                                    <div>
+                                                                        <h4 class="font-semibold mb-3">Data Akun</h4>
+                                                                        <input type="text" name="name"
+                                                                            value="{{ $customer->name }}"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="Nama Akun" required>
+                                                                        <input type="text" name="username"
+                                                                            value="{{ $customer->username }}"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="Username" required>
+                                                                        <input type="email" name="email"
+                                                                            value="{{ $customer->email }}"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="Email" required>
+                                                                        <input type="number" name="phone_number"
+                                                                            value="{{ $customer->phone_number }}"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="No. Telp" required>
+                                                                        <input type="password" name="password"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="Password (Opsional)">
+                                                                        <input type="password"
+                                                                            name="password_confirmation"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="Konfirmasi Password (Opsional)">
+                                                                    </div>
+
+                                                                    <!-- Address Data Section -->
+                                                                    <div>
+                                                                        <h4 class="font-semibold mb-3">Data Alamat</h4>
+                                                                        <input type="text" name="address"
+                                                                            value="{{ $customer->address->address ?? '' }}"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="Alamat" required>
+                                                                        <input type="text" name="province"
+                                                                            value="{{ $customer->address->province ?? '' }}"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="Provinsi" required>
+                                                                        <input type="text" name="city"
+                                                                            value="{{ $customer->address->city ?? '' }}"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="Kota" required>
+                                                                        <input type="text" name="district"
+                                                                            value="{{ $customer->address->district ?? '' }}"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="Kecamatan" required>
+                                                                        <input type="text" name="post_code"
+                                                                            value="{{ $customer->address->post_code ?? '' }}"
+                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="Kode Pos" required>
+                                                                        <textarea name="delivery_instructions" class="border px-3 py-2 rounded w-full mb-4"
+                                                                            placeholder="Petunjuk Pengiriman">{{ $customer->address->delivery_instructions ?? '' }}</textarea>
+                                                                    </div>
+
+                                                                </div>
                                                                 <button type="submit"
                                                                     class="bg-indigo-600 text-white px-4 py-2 rounded">Simpan
                                                                     Perubahan Data</button>
@@ -231,15 +303,55 @@
 
                 <div class="p-6">
                     <form action="{{ route('superadmin.data-master.customer.store') }}" method="POST">
+                        @method("POST")
                         @csrf
-                        <input type="text" name="name" class="border px-3 py-2 rounded w-full mb-4"
-                            placeholder="Nama Customer" required>
-                        <input type="email" name="email" class="border px-3 py-2 rounded w-full mb-4"
-                            placeholder="Email" required>
-                        <input type="text" name="phone_number" class="border px-3 py-2 rounded w-full mb-4"
-                            placeholder="No.Telp" required>
-                        <input type="text" name="address" class="border px-3 py-2 rounded w-full mb-4"
-                            placeholder="Alamat" required>
+                        <!-- Grid for 2 columns -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-6 ">
+                            <!-- User Data Section -->
+                            <div>
+                                <h4 class="font-semibold mb-4">Data Akun</h4>
+                                <input type="text" name="name"
+                                    class="border px-3 py-2 rounded w-full mb-4"
+                                    placeholder="Nama Akun" required>
+                                <input type="text" name="username"
+                                    class="border px-3 py-2 rounded w-full mb-4"
+                                    placeholder="Username" required>
+                                <input type="email" name="email"
+                                    class="border px-3 py-2 rounded w-full mb-4"
+                                    placeholder="Email" required>
+                                <input type="number" name="phone_number"
+                                    class="border px-3 py-2 rounded w-full mb-4"
+                                    placeholder="No. Telp" required>
+                                <input type="password" name="password"
+                                    class="border px-3 py-2 rounded w-full mb-4"
+                                    placeholder="Password" required>
+                                <input type="password" name="password_confirmation"
+                                    class="border px-3 py-2 rounded w-full mb-4"
+                                    placeholder="Konfirmasi Password" required>
+                            </div>
+
+                            <!-- Address Data Section -->
+                            <div>
+                                <h4 class="font-semibold mb-4">Data Alamat</h4>
+                                <input type="text" name="address"
+                                    class="border px-3 py-2 rounded w-full mb-4"
+                                    placeholder="Alamat" required>
+                                <input type="text" name="province"
+                                    class="border px-3 py-2 rounded w-full mb-4"
+                                    placeholder="Provinsi" required>
+                                <input type="text" name="city"
+                                    class="border px-3 py-2 rounded w-full mb-4"
+                                    placeholder="Kota" required>
+                                <input type="text" name="district"
+                                    class="border px-3 py-2 rounded w-full mb-4"
+                                    placeholder="Kecamatan" required>
+                                <input type="text" name="post_code"
+                                    class="border px-3 py-2 rounded w-full mb-4"
+                                    placeholder="Kode Pos" required>
+                                <textarea name="delivery_instructions" class="border px-3 py-2 rounded w-full mb-4"
+                                    placeholder="Petunjuk Pengiriman"></textarea>
+                            </div>
+                        </div>
                         <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded">Tambah Customer</button>
                     </form>
                 </div>

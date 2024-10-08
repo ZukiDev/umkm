@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\Log;
+use App\Models\Address;
 
 class CustomerController extends Controller
 {
@@ -14,7 +18,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = User::where('role_id', 1)->get();
+        $customers = User::where('role_id', 1)->with('address')->get();
         return view('superadmin.pages.data-master.customer', compact('customers'));
     }
 
@@ -31,12 +35,45 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validateCustomer($request);
-
         try {
-            User::create($request->all());
+            $validatedData = $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'username' => ['required', 'string', 'max:255', 'unique:users'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'phone_number' => ['required', 'string', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', Password::default(), 'confirmed'],
+                'address' => 'required|string|max:255',
+                'province' => 'required|string|max:255',
+                'city' => 'required|string|max:255',
+                'district' => 'required|string|max:255',
+                'post_code' => 'required|string|max:20',
+                'delivery_instructions' => 'nullable|string|max:500',
+            ]);
+
+            // Membuat User baru (akun pengguna/customer)
+            $user = User::create([
+                'name' => $validatedData['name'],
+                'username' => $validatedData['username'],
+                'email' => $validatedData['email'],
+                'phone_number' => $validatedData['phone_number'],
+                'role_id' => 1,  // 2 adalah role untuk pengguna/customer
+                'password' => Hash::make($validatedData['password']),
+            ]);
+
+            // Membuat Alamat baru
+            $address = Address::create([
+                'user_id' => $user->id,  // Set user_id untuk relasi dengan User
+                'address' => $validatedData['address'],
+                'province' => $validatedData['province'],
+                'city' => $validatedData['city'],
+                'district' => $validatedData['district'],
+                'post_code' => $validatedData['post_code'],
+                'delivery_instructions' => $validatedData['delivery_instructions'],
+            ]);
+
             return redirect()->route('superadmin.data-master.customer.index')->with('success', 'Customer created successfully.');
         } catch (Exception $e) {
+            Log::error('Failed to create store: ' . $e->getMessage());
             return redirect()->route('superadmin.data-master.customer.index')->with('error', 'Failed to create customer: ' . $e->getMessage());
         }
     }
@@ -60,14 +97,50 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $customer)
+    public function update(Request $request, $customer)
     {
-        $this->validateCustomer($request, $customer->id);
-
         try {
-            $customer->update($request->all());
+            // Cari user berdasarkan ID
+            $user = User::findOrFail($customer);
+
+            // Validasi data
+            $validatedData = $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'username' => ['required', 'string', 'max:255', 'unique:users,username,' . $user->id], // Ignore current user for unique validation
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
+                'phone_number' => ['required', 'string', 'max:255', 'unique:users,phone_number,' . $user->id],
+                'password' => ['nullable', 'string', Password::default(), 'confirmed'],
+                'address' => 'required|string|max:255',
+                'province' => 'required|string|max:255',
+                'city' => 'required|string|max:255',
+                'district' => 'required|string|max:255',
+                'post_code' => 'required|string|max:20',
+                'delivery_instructions' => 'nullable|string|max:500',
+            ]);
+
+            // Update data User
+            $user->update([
+                'name' => $validatedData['name'],
+                'username' => $validatedData['username'],
+                'email' => $validatedData['email'],
+                'phone_number' => $validatedData['phone_number'],
+                'password' => $request->password ? Hash::make($validatedData['password']) : $user->password,
+            ]);
+
+            // Update data Address
+            $address = Address::where('user_id', $user->id);
+            $address->update([
+                'address' => $validatedData['address'],
+                'province' => $validatedData['province'],
+                'city' => $validatedData['city'],
+                'district' => $validatedData['district'],
+                'post_code' => $validatedData['post_code'],
+                'delivery_instructions' => $validatedData['delivery_instructions'],
+            ]);
+
             return redirect()->route('superadmin.data-master.customer.index')->with('success', 'Customer updated successfully.');
         } catch (Exception $e) {
+            Log::error('Failed to update store: ' . $e->getMessage());
             return redirect()->route('superadmin.data-master.customer.index')->with('error', 'Failed to update customer: ' . $e->getMessage());
         }
     }
@@ -75,10 +148,11 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $customer)
+    public function destroy($customer)
     {
         try {
-            $customer->delete();
+            $user = User::findOrFail($customer);
+            $user->delete();
             return redirect()->route('superadmin.data-master.customer.index')->with('success', 'Customer deleted successfully.');
         } catch (Exception $e) {
             return redirect()->route('superadmin.data-master.customer.index')->with('error', 'Failed to delete customer: ' . $e->getMessage());
@@ -88,17 +162,17 @@ class CustomerController extends Controller
     /**
      * Validate the customer data.
      */
-    protected function validateCustomer(Request $request, $customerId = null)
-    {
-        $uniqueEmailRule = 'nullable|email|unique:users,email' . ($customerId ? ',' . $customerId : '');
-        $uniquePhoneRule = 'nullable|string|unique:users,phone_number' . ($customerId ? ',' . $customerId : '');
+    // protected function validateCustomer(Request $request, $customerId = null)
+    // {
+    //     $uniqueEmailRule = 'nullable|email|unique:users,email' . ($customerId ? ',' . $customerId : '');
+    //     $uniquePhoneRule = 'nullable|string|unique:users,phone_number' . ($customerId ? ',' . $customerId : '');
 
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => $uniqueEmailRule,
-            'phone_number' => $uniquePhoneRule,
-            'role_id' => 'required|exists:roles,id',
-            'status' => 'boolean',
-        ]);
-    }
+    //     $request->validate([
+    //         'name' => 'required|string|max:255',
+    //         'email' => $uniqueEmailRule,
+    //         'phone_number' => $uniquePhoneRule,
+    //         'role_id' => 'required|exists:roles,id',
+    //         'status' => 'boolean',
+    //     ]);
+    // }
 }

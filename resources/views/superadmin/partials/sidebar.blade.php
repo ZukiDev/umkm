@@ -20,6 +20,9 @@
                         <li class="{{ request()->routeIs('superadmin.data-master.customer.index') ? 'active' : '' }}">
                             <a href="{{ route('superadmin.data-master.customer.index') }}">Data Customer</a>
                         </li>
+                        <li class="{{ request()->routeIs('superadmin.data-master.category.index') ? 'active' : '' }}">
+                            <a href="{{ route('superadmin.data-master.category.index') }}">Data Kategori</a>
+                        </li>
                     </ul>
                 </div>
             </li>

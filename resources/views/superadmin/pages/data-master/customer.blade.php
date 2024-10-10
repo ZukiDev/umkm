@@ -75,7 +75,7 @@
                                                     <td class="p-4">{{ $customer->name }}</td>
                                                     <td class="p-4">{{ $customer->email }}</td>
                                                     <td class="p-4">{{ $customer->phone_number }}</td>
-                                                    <td class="p-4">{{ $customer->address->address ?? 'N/A' }}</td>
+                                                    <td class="p-4">{{ $customer->address->address ?? '' }}</td>
                                                     <td class="p-4 text-end">
                                                         <!-- View Button -->
                                                         <button class="text-blue-600 hover:text-blue-800 mr-2"

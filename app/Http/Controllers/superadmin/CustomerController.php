@@ -18,7 +18,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = User::where('role_id', 1)->with('address')->get();
+        $customers = User::where('role_id', 1)->get();
         return view('superadmin.pages.data-master.customer', compact('customers'));
     }
 

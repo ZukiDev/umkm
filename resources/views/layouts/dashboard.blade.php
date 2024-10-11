@@ -67,7 +67,14 @@
 
             @yield('content')
 
-            @include('superadmin.partials.footer')
+            @if (Auth::check() && Auth::user()->role->id == '3')
+                @include('superadmin.partials.footer')
+            @elseif (Auth::check() && Auth::user()->role->id == '2')
+                @include('admin.partials.footer')
+            @else
+                {{-- Optional: Fallback for other users or guests --}}
+                <p>User role not recognized</p>
+            @endif
         </main>
         <!--End page-content" -->
     </div>

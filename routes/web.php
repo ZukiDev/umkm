@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CustomerController;
@@ -23,7 +24,9 @@ Route::middleware([
         });
         Route::middleware(['admin'])->group(function () {
             Route::prefix('admin')->group(function () {
+                Route::get('/profile', [AdminController::class, 'profile'])->name('admin.profile');
                 Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.index');
+                Route::resource('/product', ProductController::class)->names('admin.product');
             });
         });
 

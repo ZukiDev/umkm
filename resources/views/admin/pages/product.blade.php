@@ -182,7 +182,7 @@
                                                 class="border px-3 py-2 rounded w-full mb-4"
                                                 placeholder="Kode Produk (SKU)" value="{{ old('sku', $product->sku) }}"
                                                 required>
-                                            <input name="price" type="text"
+                                            <input name="price" type="number"
                                                 class="border px-3 py-2 rounded w-full mb-4" placeholder="Harga Produk"
                                                 value="{{ old('price', $product->price) }}" required>
                                             <input name="stock" type="number"
@@ -193,7 +193,7 @@
                                         <!-- Additional Information Section -->
                                         <div class="flex flex-col">
                                             <h4 class="font-semibold mb-4">Detail Tambahan</h4>
-                                            <input name="weight" type="text"
+                                            <input name="weight" type="number"
                                                 class="border px-3 py-2 rounded w-full mb-4" placeholder="Berat (Kg)"
                                                 value="{{ old('weight', $product->weight) }}">
                                             <input name="dimensions" type="text"
@@ -321,7 +321,7 @@
                                 placeholder="Deskripsi Produk" required>
                             <input name="sku" type="text" class="border px-3 py-2 rounded w-full mb-4"
                                 placeholder="Kode Produk (SKU)" required>
-                            <input name="price" type="text" class="border px-3 py-2 rounded w-full mb-4"
+                            <input name="price" type="number" class="border px-3 py-2 rounded w-full mb-4"
                                 placeholder="Harga Produk" required>
                             <input name="stock" type="number" class="border px-3 py-2 rounded w-full mb-4"
                                 placeholder="Stok Produk" required>
@@ -330,7 +330,7 @@
                         <!-- Additional Information Section -->
                         <div class="flex flex-col">
                             <h4 class="font-semibold mb-4">Detail Tambahan</h4>
-                            <input name="weight" type="text" class="border px-3 py-2 rounded w-full mb-4"
+                            <input name="weight" type="number" class="border px-3 py-2 rounded w-full mb-4"
                                 placeholder="Berat (Kg)">
                             <input name="dimensions" type="text" class="border px-3 py-2 rounded w-full mb-4"
                                 placeholder="Dimensi Produk">

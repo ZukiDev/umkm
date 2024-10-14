@@ -30,493 +30,349 @@
             </div>
 
             <div class="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 mt-6 gap-6">
-                <div class="group">
-                    <div
-                        class="relative overflow-hidden shadow dark:shadow-gray-700 group-hover:shadow-lg group-hover:dark:shadow-gray-700 rounded-md duration-500">
-                        <img src="{{ asset('assets/images/shop/items/s1.jpg') }}" alt="">
+                @foreach ($products as $product)
+                    <div class="group">
+                        <div
+                            class="relative overflow-hidden shadow dark:shadow-gray-700 group-hover:shadow-lg group-hover:dark:shadow-gray-700 rounded-md duration-500">
+                            <img src="{{ $product->images }}" alt="{{ $product->name }}">
+                            <div class="absolute -bottom-20 group-hover:bottom-3 start-3 end-3 duration-500">
+                                <a href="javascript:void(0)" onclick="viewshopitem{{ $product->id }}.showModal()"
+                                    class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-slate-900 border-slate-900 text-white w-full rounded-md">Lihat
+                                    Detail</a>
+                            </div>
 
-                        <div class="absolute -bottom-20 group-hover:bottom-3 start-3 end-3 duration-500">
-                            <a href="shop-cart.html"
-                                class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-slate-900 border-slate-900 text-white w-full rounded-md">Add
-                                to Cart</a>
-                        </div>
+                            <ul class="list-none absolute top-[10px] end-4 opacity-0 group-hover:opacity-100 duration-500">
+                                <li>
+                                    <a href="javascript:void(0)" onclick="deleteshopitem{{ $product->id }}.showModal()"
+                                        class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-red-600 hover:bg-red-700 border-red-600 hover:border-red-700 text-white"><i
+                                            class="mdi mdi-delete"></i></a>
+                                </li>
+                                <li class="mt-1">
+                                    <a href="javascript:void(0)" onclick="editshopitem{{ $product->id }}.showModal()"
+                                        class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
+                                            class="mdi mdi-pencil"></i></a>
+                                </li>
+                            </ul>
 
-                        <ul class="list-none absolute top-[10px] end-4 opacity-0 group-hover:opacity-100 duration-500">
-                            <li><a href="javascript:void(0)"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-heart"></i></a></li>
-                            <li class="mt-1"><a href="shop-item-detail.html"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-eye-outline"></i></a></li>
-                            <li class="mt-1"><a href="javascript:void(0)"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-bookmark-outline"></i></a></li>
-                        </ul>
-
-                        <ul class="list-none absolute top-[10px] start-4">
-                            <li><a href="javascript:void(0)"
-                                    class="bg-orange-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded h-5">New</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="mt-4">
-                        <a href="shop-item-detail.html" class="hover:text-indigo-600 text-lg font-semibold">Branded
-                            T-Shirt</a>
-                        <div class="flex justify-between items-center mt-1">
-                            <p class="text-green-600">$16.00 <del class="text-red-600">$21.00</del></p>
-                            <ul class="font-medium text-amber-400 list-none">
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
+                            <ul class="list-none absolute top-[10px] start-4">
+                                <li>
+                                    @if ($product->status == 1)
+                                        <a href="javascript:void(0)"
+                                            class="bg-green-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded h-5">Aktif</a>
+                                    @else
+                                        <a href="javascript:void(0)"
+                                            class="bg-red-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded h-5">Nonaktif</a>
+                                    @endif
+                                </li>
                             </ul>
                         </div>
-                    </div>
-                </div><!--end content-->
 
-                <div class="group">
-                    <div
-                        class="relative overflow-hidden shadow dark:shadow-gray-700 group-hover:shadow-lg group-hover:dark:shadow-gray-700 rounded-md duration-500">
-                        <img src="{{ asset('assets/images/shop/items/s2.jpg') }}" alt="">
-
-                        <div class="absolute -bottom-20 group-hover:bottom-3 start-3 end-3 duration-500">
-                            <a href="shop-cart.html"
-                                class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-slate-900 border-slate-900 text-white w-full rounded-md">Add
-                                to Cart</a>
-                        </div>
-
-                        <ul class="list-none absolute top-[10px] end-4 opacity-0 group-hover:opacity-100 duration-500">
-                            <li><a href="javascript:void(0)"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-heart"></i></a></li>
-                            <li class="mt-1"><a href="shop-item-detail.html"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-eye-outline"></i></a></li>
-                            <li class="mt-1"><a href="javascript:void(0)"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-bookmark-outline"></i></a></li>
-                        </ul>
-
-                        <ul class="list-none absolute top-[10px] start-4">
-                            <li><a href="javascript:void(0)"
-                                    class="bg-green-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded h-5">Featured</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="mt-4">
-                        <a href="shop-item-detail.html" class="hover:text-indigo-600 text-lg font-semibold">Shopping Bag</a>
-                        <div class="flex justify-between items-center mt-1">
-                            <p class="text-green-600">$16.00 <del class="text-red-600">$21.00</del></p>
-                            <ul class="font-medium text-amber-400 list-none">
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                            </ul>
+                        <div class="mt-4">
+                            <a href="javascript:void(0)" onclick="viewshopitem{{ $product->id }}.showModal()"
+                                class="hover:text-indigo-600 text-lg font-semibold">{{ $product->name ?? 'Nama Produk' }}</a>
+                            <div class="flex justify-between items-center mt-1 font-semibold">
+                                <p class="text-green-600">Rp. {{ number_format($product->price ?? 0, 0, ',', '.') }}</p>
+                                <p class="text-red-600">Qty : {{ $product->stock ?? 0 }}</p>
+                            </div>
                         </div>
                     </div>
-                </div><!--end content-->
 
-                <div class="group">
-                    <div
-                        class="relative overflow-hidden shadow dark:shadow-gray-700 group-hover:shadow-lg group-hover:dark:shadow-gray-700 rounded-md duration-500">
-                        <img src="{{ asset('assets/images/shop/items/s3.jpg') }}" alt="">
+                    <!-- Start Delete Modal -->
+                    <dialog id="deleteshopitem{{ $product->id }}"
+                        class="rounded-md shadow dark:shadow-gray-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
+                        <div class="relative h-auto md:w-[480px] w-300px">
+                            <div
+                                class="flex justify-between items-center px-6 py-4 border-b border-gray-100 dark:border-gray-700">
+                                <h3 class="font-bold text-lg text-red-600">Konfirmasi Hapus
+                                    Data
+                                </h3>
+                                <form method="dialog">
+                                    <button
+                                        class="size-6 flex justify-center items-center shadow dark:shadow-gray-800 rounded-md btn-ghost bg-red-600">
+                                        <i data-feather="x" class="size-4 text-white"></i>
+                                    </button>
+                                </form>
+                            </div>
 
-                        <div class="absolute -bottom-20 group-hover:bottom-3 start-3 end-3 duration-500">
-                            <a href="shop-cart.html"
-                                class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-slate-900 border-slate-900 text-white w-full rounded-md">Add
-                                to Cart</a>
+                            <div class="p-6 text-center">
+                                <p>Apakah anda yakin menghapus data {{ $product->name }}?</p>
+                                <form action="{{ route('admin.product.destroy', $product->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="bg-red-600 mt-6 text-white px-4 py-2 rounded">Ya,
+                                        Hapus</button>
+                                    <button type="button" class="bg-gray-300 mt-6 text-black px-4 py-2 rounded"
+                                        onclick="deleteitemshop{{ $product->id }}.close()">Tidak,
+                                        Batalkan</button>
+                                </form>
+                            </div>
                         </div>
+                    </dialog>
+                    <!-- End Delete Modal -->
 
-                        <ul class="list-none absolute top-[10px] end-4 opacity-0 group-hover:opacity-100 duration-500">
-                            <li><a href="javascript:void(0)"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-heart"></i></a></li>
-                            <li class="mt-1"><a href="shop-item-detail.html"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-eye-outline"></i></a></li>
-                            <li class="mt-1"><a href="javascript:void(0)"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-bookmark-outline"></i></a></li>
-                        </ul>
-                    </div>
+                    <!-- Start Edit Product Modal -->
+                    <dialog id="editshopitem{{ $product->id }}"
+                        class="rounded-md shadow dark:shadow-gray-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
+                        <div class="relative h-auto md:w-[680px] w-[300px]">
+                            <div
+                                class="flex justify-between items-center px-6 py-4 border-b border-gray-100 dark:border-gray-700">
+                                <h3 class="font-bold text-lg">Edit Produk</h3>
+                                <form method="dialog">
+                                    <button
+                                        class="size-6 flex justify-center items-center shadow dark:shadow-gray-800 rounded-md btn-ghost bg-red-600">
+                                        <i data-feather="x" class="size-4 text-white"></i>
+                                    </button>
+                                </form>
+                            </div>
 
-                    <div class="mt-4">
-                        <a href="shop-item-detail.html" class="hover:text-indigo-600 text-lg font-semibold">Elegent
-                            Watch</a>
-                        <div class="flex justify-between items-center mt-1">
-                            <p class="text-green-600">$16.00 <del class="text-red-600">$21.00</del></p>
-                            <ul class="font-medium text-amber-400 list-none">
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                            </ul>
+                            <div class="p-6">
+                                <form action="{{ route('admin.product.update', $product->id) }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
+                                    <!-- Grid for 3 sections -->
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                                        <!-- Image Upload Section -->
+                                        <div class="flex flex-col">
+                                            <h4 class="font-semibold mb-4">Foto Produk <span class="text-red-600">*</span>
+                                            </h4>
+                                            <div id="preview-box-edit-{{ $product->id }}"
+                                                class="preview-box-edit flex justify-center rounded-md shadow dark:shadow-gray-800 overflow-hidden bg-gray-50 dark:bg-slate-800 text-slate-400 p-2 text-center small max-h-60 mb-4">
+                                                <img src="{{ $product->images }}" alt="Product Image"
+                                                    class="max-h-60 object-contain">
+                                            </div>
+                                            <input type="file" id="edit-images-{{ $product->id }}" name="images"
+                                                accept="image/*" onchange="handleChange('edit', {{ $product->id }})"
+                                                hidden>
+                                            <label
+                                                class="btn-upload py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md mt-6 cursor-pointer"
+                                                for="edit-images-{{ $product->id }}">Ganti Foto</label>
+                                        </div>
+
+                                        <!-- Product Details Section -->
+                                        <div class="flex flex-col">
+                                            <h4 class="font-semibold mb-4">Detail Produk</h4>
+                                            <input name="name" type="text"
+                                                class="border px-3 py-2 rounded w-full mb-4" placeholder="Nama Produk"
+                                                value="{{ old('name', $product->name) }}" required>
+                                            <input name="description" type="text"
+                                                class="border px-3 py-2 rounded w-full mb-4"
+                                                placeholder="Deskripsi Produk"
+                                                value="{{ old('description', $product->description) }}" required>
+                                            <input name="sku" type="text"
+                                                class="border px-3 py-2 rounded w-full mb-4"
+                                                placeholder="Kode Produk (SKU)" value="{{ old('sku', $product->sku) }}"
+                                                required>
+                                            <input name="price" type="text"
+                                                class="border px-3 py-2 rounded w-full mb-4" placeholder="Harga Produk"
+                                                value="{{ old('price', $product->price) }}" required>
+                                            <input name="stock" type="number"
+                                                class="border px-3 py-2 rounded w-full mb-4" placeholder="Stok Produk"
+                                                value="{{ old('stock', $product->stock) }}" required>
+                                        </div>
+
+                                        <!-- Additional Information Section -->
+                                        <div class="flex flex-col">
+                                            <h4 class="font-semibold mb-4">Detail Tambahan</h4>
+                                            <input name="weight" type="text"
+                                                class="border px-3 py-2 rounded w-full mb-4" placeholder="Berat (Kg)"
+                                                value="{{ old('weight', $product->weight) }}">
+                                            <input name="dimensions" type="text"
+                                                class="border px-3 py-2 rounded w-full mb-4" placeholder="Dimensi Produk"
+                                                value="{{ old('dimensions', $product->dimensions) }}">
+                                            <input name="brand" type="text"
+                                                class="border px-3 py-2 rounded w-full mb-4" placeholder="Merek Produk"
+                                                value="{{ old('brand', $product->brand) }}">
+                                            <select name="status" required class="border px-3 py-2 rounded w-full mb-4">
+                                                <option value="1" {{ $product->status == 1 ? 'selected' : '' }}>Aktif
+                                                </option>
+                                                <option value="0" {{ $product->status == 0 ? 'selected' : '' }}>Tidak
+                                                    Aktif</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <button type="submit"
+                                        class="bg-indigo-600 text-white px-4 py-2 w-full rounded mt-4">Perbarui
+                                        Produk</button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                </div><!--end content-->
+                    </dialog>
+                    <!-- End Edit Product Modal -->
 
-                <div class="group">
-                    <div
-                        class="relative overflow-hidden shadow dark:shadow-gray-700 group-hover:shadow-lg group-hover:dark:shadow-gray-700 rounded-md duration-500">
-                        <img src="{{ asset('assets/images/shop/items/s4.jpg') }}" alt="">
+                    <!-- Start View Product Modal -->
+                    <dialog id="viewshopitem{{ $product->id }}"
+                        class="rounded-md shadow dark:shadow-gray-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
+                        <div class="relative h-auto md:w-[680px] w-[300px]">
+                            <div
+                                class="flex justify-between items-center px-6 py-4 border-b border-gray-100 dark:border-gray-700">
+                                <h3 class="font-bold text-lg">Detail Produk</h3>
+                                <form method="dialog">
+                                    <button
+                                        class="size-6 flex justify-center items-center shadow dark:shadow-gray-800 rounded-md btn-ghost bg-red-600">
+                                        <i data-feather="x" class="size-4 text-white"></i>
+                                    </button>
+                                </form>
+                            </div>
 
-                        <div class="absolute -bottom-20 group-hover:bottom-3 start-3 end-3 duration-500">
-                            <a href="shop-cart.html"
-                                class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-slate-900 border-slate-900 text-white w-full rounded-md">Add
-                                to Cart</a>
+                            <div class="p-6">
+                                <!-- Grid for 3 sections -->
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                                    <!-- Image Section -->
+                                    <div class="flex flex-col">
+                                        <h4 class="font-semibold mb-4">Foto Produk</h4>
+                                        <div
+                                            class="flex justify-center rounded-md shadow dark:shadow-gray-800 overflow-hidden bg-gray-50 dark:bg-slate-800 text-slate-400 p-2 text-center small max-h-60 mb-4">
+                                            <img src="{{ $product->images }}" alt="{{ $product->name }}"
+                                                class="max-h-60 object-contain">
+                                        </div>
+                                    </div>
+
+                                    <!-- Product Details Section -->
+                                    <div class="flex flex-col">
+                                        <h4 class="font-semibold mb-4">Detail Produk</h4>
+                                        <p class="mb-2"><strong>Nama:</strong> {{ $product->name }}</p>
+                                        <p class="mb-2"><strong>Deskripsi:</strong> {{ $product->description }}</p>
+                                        <p class="mb-2"><strong>SKU:</strong> {{ $product->sku }}</p>
+                                        <p class="mb-2"><strong>Harga:</strong> Rp.
+                                            {{ number_format($product->price, 0, ',', '.') }}</p>
+                                        <p class="mb-2"><strong>Stok:</strong> {{ $product->stock }}</p>
+                                    </div>
+
+                                    <!-- Additional Information Section -->
+                                    <div class="flex flex-col">
+                                        <h4 class="font-semibold mb-4">Detail Tambahan</h4>
+                                        <p class="mb-2"><strong>Berat:</strong> {{ $product->weight }} Kg</p>
+                                        <p class="mb-2"><strong>Dimensi:</strong> {{ $product->dimensions }}</p>
+                                        <p class="mb-2"><strong>Merek:</strong> {{ $product->brand }}</p>
+                                        <p class="mb-2"><strong>Status:</strong>
+                                            {{ $product->status ? 'Aktif' : 'Tidak Aktif' }}</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
-                        <ul class="list-none absolute top-[10px] end-4 opacity-0 group-hover:opacity-100 duration-500">
-                            <li><a href="javascript:void(0)"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-heart"></i></a></li>
-                            <li class="mt-1"><a href="shop-item-detail.html"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-eye-outline"></i></a></li>
-                            <li class="mt-1"><a href="javascript:void(0)"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-bookmark-outline"></i></a></li>
-                        </ul>
-                    </div>
-
-                    <div class="mt-4">
-                        <a href="shop-item-detail.html" class="hover:text-indigo-600 text-lg font-semibold">Casual
-                            Shoes</a>
-                        <div class="flex justify-between items-center mt-1">
-                            <p class="text-green-600">$16.00 <del class="text-red-600">$21.00</del></p>
-                            <ul class="font-medium text-amber-400 list-none">
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div><!--end content-->
-
-                <div class="group">
-                    <div
-                        class="relative overflow-hidden shadow dark:shadow-gray-700 group-hover:shadow-lg group-hover:dark:shadow-gray-700 rounded-md duration-500">
-                        <img src="{{ asset('assets/images/shop/items/s5.jpg') }}" alt="">
-
-                        <div class="absolute -bottom-20 group-hover:bottom-3 start-3 end-3 duration-500">
-                            <a href="shop-cart.html"
-                                class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-slate-900 border-slate-900 text-white w-full rounded-md">Add
-                                to Cart</a>
-                        </div>
-
-                        <ul class="list-none absolute top-[10px] end-4 opacity-0 group-hover:opacity-100 duration-500">
-                            <li><a href="javascript:void(0)"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-heart"></i></a></li>
-                            <li class="mt-1"><a href="shop-item-detail.html"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-eye-outline"></i></a></li>
-                            <li class="mt-1"><a href="javascript:void(0)"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-bookmark-outline"></i></a></li>
-                        </ul>
-
-                        <ul class="list-none absolute top-[10px] start-4">
-                            <li><a href="javascript:void(0)"
-                                    class="bg-orange-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded h-5">New</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="mt-4">
-                        <a href="shop-item-detail.html" class="hover:text-indigo-600 text-lg font-semibold">Earphones</a>
-                        <div class="flex justify-between items-center mt-1">
-                            <p class="text-green-600">$16.00 <del class="text-red-600">$21.00</del></p>
-                            <ul class="font-medium text-amber-400 list-none">
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div><!--end content-->
-
-                <div class="group">
-                    <div
-                        class="relative overflow-hidden shadow dark:shadow-gray-700 group-hover:shadow-lg group-hover:dark:shadow-gray-700 rounded-md duration-500">
-                        <img src="{{ asset('assets/images/shop/items/s6.jpg') }}" alt="">
-
-                        <div class="absolute -bottom-20 group-hover:bottom-3 start-3 end-3 duration-500">
-                            <a href="shop-cart.html"
-                                class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-slate-900 border-slate-900 text-white w-full rounded-md">Add
-                                to Cart</a>
-                        </div>
-
-                        <ul class="list-none absolute top-[10px] end-4 opacity-0 group-hover:opacity-100 duration-500">
-                            <li><a href="javascript:void(0)"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-heart"></i></a></li>
-                            <li class="mt-1"><a href="shop-item-detail.html"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-eye-outline"></i></a></li>
-                            <li class="mt-1"><a href="javascript:void(0)"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-bookmark-outline"></i></a></li>
-                        </ul>
-                    </div>
-
-                    <div class="mt-4">
-                        <a href="shop-item-detail.html" class="hover:text-indigo-600 text-lg font-semibold">Elegent
-                            Mug</a>
-                        <div class="flex justify-between items-center mt-1">
-                            <p class="text-green-600">$16.00 <del class="text-red-600">$21.00</del></p>
-                            <ul class="font-medium text-amber-400 list-none">
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div><!--end content-->
-
-                <div class="group">
-                    <div
-                        class="relative overflow-hidden shadow dark:shadow-gray-700 group-hover:shadow-lg group-hover:dark:shadow-gray-700 rounded-md duration-500">
-                        <img src="{{ asset('assets/images/shop/items/s7.jpg') }}" alt="">
-
-                        <div class="absolute -bottom-20 group-hover:bottom-3 start-3 end-3 duration-500">
-                            <a href="shop-cart.html"
-                                class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-slate-900 border-slate-900 text-white w-full rounded-md">Add
-                                to Cart</a>
-                        </div>
-
-                        <ul class="list-none absolute top-[10px] end-4 opacity-0 group-hover:opacity-100 duration-500">
-                            <li><a href="javascript:void(0)"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-heart"></i></a></li>
-                            <li class="mt-1"><a href="shop-item-detail.html"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-eye-outline"></i></a></li>
-                            <li class="mt-1"><a href="javascript:void(0)"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-bookmark-outline"></i></a></li>
-                        </ul>
-                    </div>
-
-                    <div class="mt-4">
-                        <a href="shop-item-detail.html" class="hover:text-indigo-600 text-lg font-semibold">Sony
-                            Headphones</a>
-                        <div class="flex justify-between items-center mt-1">
-                            <p class="text-green-600">$16.00 <del class="text-red-600">$21.00</del></p>
-                            <ul class="font-medium text-amber-400 list-none">
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div><!--end content-->
-
-                <div class="group">
-                    <div
-                        class="relative overflow-hidden shadow dark:shadow-gray-700 group-hover:shadow-lg group-hover:dark:shadow-gray-700 rounded-md duration-500">
-                        <img src="{{ asset('assets/images/shop/items/s8.jpg') }}" alt="">
-
-                        <div class="absolute -bottom-20 group-hover:bottom-3 start-3 end-3 duration-500">
-                            <a href="shop-cart.html"
-                                class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-slate-900 border-slate-900 text-white w-full rounded-md">Add
-                                to Cart</a>
-                        </div>
-
-                        <ul class="list-none absolute top-[10px] end-4 opacity-0 group-hover:opacity-100 duration-500">
-                            <li><a href="javascript:void(0)"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-heart"></i></a></li>
-                            <li class="mt-1"><a href="shop-item-detail.html"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-eye-outline"></i></a></li>
-                            <li class="mt-1"><a href="javascript:void(0)"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-bookmark-outline"></i></a></li>
-                        </ul>
-
-                        <ul class="list-none absolute top-[10px] start-4">
-                            <li><a href="javascript:void(0)"
-                                    class="bg-blue-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded h-5">Sale</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="mt-4">
-                        <a href="shop-item-detail.html" class="hover:text-indigo-600 text-lg font-semibold">Wooden
-                            Stools</a>
-                        <div class="flex justify-between items-center mt-1">
-                            <p class="text-green-600">$16.00 <del class="text-red-600">$21.00</del></p>
-                            <ul class="font-medium text-amber-400 list-none">
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div><!--end content-->
-
-                <div class="group">
-                    <div
-                        class="relative overflow-hidden shadow dark:shadow-gray-700 group-hover:shadow-lg group-hover:dark:shadow-gray-700 rounded-md duration-500">
-                        <img src="{{ asset('assets/images/shop/items/s13.jpg') }}" alt="">
-
-                        <div class="absolute -bottom-20 group-hover:bottom-3 start-3 end-3 duration-500">
-                            <a href="shop-cart.html"
-                                class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-slate-900 border-slate-900 text-white w-full rounded-md">Add
-                                to Cart</a>
-                        </div>
-
-                        <ul class="list-none absolute top-[10px] end-4 opacity-0 group-hover:opacity-100 duration-500">
-                            <li><a href="javascript:void(0)"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-heart"></i></a></li>
-                            <li class="mt-1"><a href="shop-item-detail.html"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-eye-outline"></i></a></li>
-                            <li class="mt-1"><a href="javascript:void(0)"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-bookmark-outline"></i></a></li>
-                        </ul>
-                    </div>
-
-                    <div class="mt-4">
-                        <a href="shop-item-detail.html" class="hover:text-indigo-600 text-lg font-semibold">Wooden
-                            Chair</a>
-                        <div class="flex justify-between items-center mt-1">
-                            <p class="text-green-600">$16.00 <del class="text-red-600">$21.00</del></p>
-                            <ul class="font-medium text-amber-400 list-none">
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div><!--end content-->
-
-                <div class="group">
-                    <div
-                        class="relative overflow-hidden shadow dark:shadow-gray-700 group-hover:shadow-lg group-hover:dark:shadow-gray-700 rounded-md duration-500">
-                        <img src="{{ asset('assets/images/shop/items/s14.jpg') }}" alt="">
-
-                        <div class="absolute -bottom-20 group-hover:bottom-3 start-3 end-3 duration-500">
-                            <a href="shop-cart.html"
-                                class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-slate-900 border-slate-900 text-white w-full rounded-md">Add
-                                to Cart</a>
-                        </div>
-
-                        <ul class="list-none absolute top-[10px] end-4 opacity-0 group-hover:opacity-100 duration-500">
-                            <li><a href="javascript:void(0)"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-heart"></i></a></li>
-                            <li class="mt-1"><a href="shop-item-detail.html"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-eye-outline"></i></a></li>
-                            <li class="mt-1"><a href="javascript:void(0)"
-                                    class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
-                                        class="mdi mdi-bookmark-outline"></i></a></li>
-                        </ul>
-                    </div>
-
-                    <div class="mt-4">
-                        <a href="shop-item-detail.html" class="hover:text-indigo-600 text-lg font-semibold">Women Block
-                            Heels</a>
-                        <div class="flex justify-between items-center mt-1">
-                            <p class="text-green-600">$16.00 <del class="text-red-600">$21.00</del></p>
-                            <ul class="font-medium text-amber-400 list-none">
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div><!--end content-->
+                    </dialog>
+                    <!-- End View Product Modal -->
+                @endforeach
             </div><!--end grid-->
         </div>
     </div>
-    <!-- Start Modal -->
+
+    <!-- Start Add Product Modal -->
     <dialog id="addshopitem"
         class="rounded-md shadow dark:shadow-gray-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
-        <div class="relative h-auto md:w-[480px] w-300px">
+        <div class="relative h-auto md:w-[680px] w-[300px]">
             <div class="flex justify-between items-center px-6 py-4 border-b border-gray-100 dark:border-gray-700">
-                <h3 class="font-bold text-lg">Add shop item</h3>
+                <h3 class="font-bold text-lg">Tambah Produk Baru</h3>
                 <form method="dialog">
                     <button
-                        class="size-6 flex justify-center items-center shadow dark:shadow-gray-800 rounded-md btn-ghost"><i
-                            data-feather="x" class="size-4"></i></button>
+                        class="size-6 flex justify-center items-center shadow dark:shadow-gray-800 rounded-md btn-ghost bg-red-600">
+                        <i data-feather="x" class="size-4 text-white"></i>
+                    </button>
                 </form>
             </div>
-            <div class="p-4">
-                <div>
-                    <p class="font-semibold mb-4">Upload your shop image here, Please click "Upload Image" Button.
-                    </p>
-                    <div
-                        class="preview-box flex justify-center rounded-md shadow dark:shadow-gray-800 overflow-hidden bg-gray-50 dark:bg-slate-800 text-slate-400 p-2 text-center small w-auto max-h-60">
-                        Supports JPG, PNG and MP4 videos. Max file size : 10MB.</div>
-                    <input type="file" id="input-file" name="input-file" accept="image/*" onchange={handleChange()}
-                        hidden>
-                    <label
-                        class="btn-upload py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md mt-6 cursor-pointer"
-                        for="input-file">Upload Image</label>
-                </div>
 
-                <form class="mt-4">
-                    <div class="grid grid-cols-12 gap-3">
-                        <div class="col-span-12">
-                            <label class="font-semibold">Item Name <span class="text-red-600">*</span></label>
-                            <input name="name" id="name" type="text"
-                                class="form-input w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0 mt-2"
-                                placeholder="Name">
-                        </div><!--end col-->
+            <div class="p-6">
+                <form action="{{ route('admin.product.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <!-- Grid for 3 sections -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-                        <div class="md:col-span-6 col-span-12">
-                            <label class="form-label font-semibold">Price</label>
-                            <div class="relative mt-2">
-                                <span
-                                    class="absolute top-0.5 start-0.5 size-9 text-xl bg-gray-100 dark:bg-slate-800 inline-flex justify-center items-center text-dark dark:text-white rounded"
-                                    id="basic-addon1"><i class="uil uil-dollar-sign"></i></span>
-                                <input type="text"
-                                    class="form-input ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0"
-                                    placeholder="Price" required>
+                        <!-- Image Upload Section -->
+                        <div class="flex flex-col">
+                            <h4 class="font-semibold mb-4">Foto Produk <span class="text-red-600">*</span></h4>
+                            <div
+                                class="preview-box-add flex justify-center rounded-md shadow dark:shadow-gray-800 overflow-hidden bg-gray-50 dark:bg-slate-800 text-slate-400 p-2 text-center small max-h-60 mb-4">
+                                Maksimal Ukuran: 10MB.
                             </div>
-                        </div><!--end col-->
+                            <input type="file" id="add-images" name="images" accept="image/*"
+                                onchange="handleChange('add')" hidden>
+                            <label
+                                class="btn-upload py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md mt-6 cursor-pointer"
+                                for="add-images">Unggah Foto</label>
+                        </div>
 
-                        <div class="md:col-span-6 col-span-12">
-                            <label class="font-semibold">Label</label>
-                            <input name="name" id="name2" type="text"
-                                class="form-input w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0 mt-2"
-                                placeholder="Label">
-                        </div><!--end col-->
+                        <!-- Product Details Section -->
+                        <div class="flex flex-col">
+                            <h4 class="font-semibold mb-4">Detail Produk</h4>
+                            <input name="name" type="text" class="border px-3 py-2 rounded w-full mb-4"
+                                placeholder="Nama Produk" required>
+                            <input name="description" type="text" class="border px-3 py-2 rounded w-full mb-4"
+                                placeholder="Deskripsi Produk" required>
+                            <input name="sku" type="text" class="border px-3 py-2 rounded w-full mb-4"
+                                placeholder="Kode Produk (SKU)" required>
+                            <input name="price" type="text" class="border px-3 py-2 rounded w-full mb-4"
+                                placeholder="Harga Produk" required>
+                            <input name="stock" type="number" class="border px-3 py-2 rounded w-full mb-4"
+                                placeholder="Stok Produk" required>
+                        </div>
 
-                        <div class="col-span-12">
-                            <button type="submit"
-                                class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md">Add
-                                Item</button>
-                        </div><!--end col-->
+                        <!-- Additional Information Section -->
+                        <div class="flex flex-col">
+                            <h4 class="font-semibold mb-4">Detail Tambahan</h4>
+                            <input name="weight" type="text" class="border px-3 py-2 rounded w-full mb-4"
+                                placeholder="Berat (Kg)">
+                            <input name="dimensions" type="text" class="border px-3 py-2 rounded w-full mb-4"
+                                placeholder="Dimensi Produk">
+                            <input name="brand" type="text" class="border px-3 py-2 rounded w-full mb-4"
+                                placeholder="Merek Produk">
+                            <select name="status" required class="border px-3 py-2 rounded w-full mb-4">
+                                <option value="1">Aktif</option>
+                                <option value="0">Tidak Aktif</option>
+                            </select>
+                        </div>
                     </div>
+                    <button type="submit" class="bg-indigo-600 text-white px-4 py-2 w-full rounded mt-4">Tambah
+                        Produk</button>
                 </form>
             </div>
         </div>
     </dialog>
-    <!-- End Modal -->
+    <!-- End Add Product Modal -->
+
+    <script>
+        function handleChange(modalType, productId = null) {
+            let input;
+            let previewBox;
+
+            // Determine which input and preview box to use based on the modal type
+            if (modalType === 'add') {
+                input = document.getElementById('add-images');
+                previewBox = document.querySelector('.preview-box-add');
+            } else if (modalType === 'edit') {
+                input = document.getElementById(`edit-images-${productId}`);
+                previewBox = document.querySelector(`#preview-box-edit-${productId}`);
+            }
+
+            // Clear previous previews
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+
+                // Check file size (optional)
+                const maxSize = 10 * 1024 * 1024; // 10MB
+                if (file.size > maxSize) {
+                    alert('Ukuran foto melebihi 10 MB. Harap pilih ukuran yang lebih kecil.');
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // Create an image element and set its source to the file's data URL
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = 'Preview Image';
+                    img.className = 'max-h-60 object-contain'; // Apply any additional styling here
+
+                    // Append the image to the preview box
+                    previewBox.innerHTML = ''; // Clear previous image before adding the new one
+                    previewBox.appendChild(img);
+                };
+
+                // Read the file as a data URL
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
 @endsection

@@ -29,12 +29,30 @@
                 </div>
             </div>
 
+            <div class="mt-6">
+                <!-- Success Message -->
+                @if (session('success'))
+                    <div
+                        class="relative px-4 py-2 rounded-md font-medium bg-emerald-600/10 border border-emerald-600/10 text-emerald-600 block">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <!-- Error Message -->
+                @if (session('error'))
+                    <div
+                        class="relative px-4 py-2 rounded-md font-medium bg-red-600/10 border border-red-600/10 text-red-600 block">
+                        {{ session('error') }}
+                    </div>
+                @endif
+            </div>
+
             <div class="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 mt-6 gap-6">
                 @foreach ($products as $product)
                     <div class="group">
                         <div
                             class="relative overflow-hidden shadow dark:shadow-gray-700 group-hover:shadow-lg group-hover:dark:shadow-gray-700 rounded-md duration-500">
-                            <img src="{{ $product->images }}" alt="{{ $product->name }}">
+                            <img src="{{ asset('storage/products/' . $product->images) }}" alt="{{ $product->name }}">
                             <div class="absolute -bottom-20 group-hover:bottom-3 start-3 end-3 duration-500">
                                 <a href="javascript:void(0)" onclick="viewshopitem{{ $product->id }}.showModal()"
                                     class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-slate-900 border-slate-900 text-white w-full rounded-md">Lihat
@@ -139,8 +157,8 @@
                                             </h4>
                                             <div id="preview-box-edit-{{ $product->id }}"
                                                 class="preview-box-edit flex justify-center rounded-md shadow dark:shadow-gray-800 overflow-hidden bg-gray-50 dark:bg-slate-800 text-slate-400 p-2 text-center small max-h-60 mb-4">
-                                                <img src="{{ $product->images }}" alt="Product Image"
-                                                    class="max-h-60 object-contain">
+                                                <img src="{{ asset('storage/products/' . $product->images) }}"
+                                                    alt="{{ $product->name }}" class="max-h-60 object-contain">
                                             </div>
                                             <input type="file" id="edit-images-{{ $product->id }}" name="images"
                                                 accept="image/*" onchange="handleChange('edit', {{ $product->id }})"
@@ -225,8 +243,8 @@
                                         <h4 class="font-semibold mb-4">Foto Produk</h4>
                                         <div
                                             class="flex justify-center rounded-md shadow dark:shadow-gray-800 overflow-hidden bg-gray-50 dark:bg-slate-800 text-slate-400 p-2 text-center small max-h-60 mb-4">
-                                            <img src="{{ $product->images }}" alt="{{ $product->name }}"
-                                                class="max-h-60 object-contain">
+                                            <img src="{{ asset('storage/products/' . $product->images) }}"
+                                                alt="{{ $product->name }}" class="max-h-60 object-contain">
                                         </div>
                                     </div>
 

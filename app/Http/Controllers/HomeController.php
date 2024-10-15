@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin;
-use App\Models\Customer;
-use App\Models\SuperAdmin;
+use App\Models\Category;
+use App\Models\Product;
 use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -15,20 +14,25 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $allProduct = Product::all();
+        $allCategory = Category::all();
+        // $newProduct = Product::orderBy('created_at', 'desc')->take(4)->get();
+        // $popularProduct = Product::orderBy('sold', 'desc')->take(4)->get();
+        // $bestUMKM = Product::select('store_id')->groupBy('store_id')->orderByRaw('SUM(sold) DESC')->take(4)->get();
 
         if ($user == null) {
-            return view('welcome');
+            return view('welcome', compact('allProduct', 'allCategory'));
         }
 
         $role = Role::where('id', $user->role_id)->first();
 
         if ($role->role === 'customer') {
-            return view('welcome');
+            return view('welcome', compact('allProduct', 'allCategory'));
         } elseif ($role->role === 'admin') {
             return redirect('/admin/dashboard');
         } elseif ($role->role === 'superAdmin') {
             return redirect('/super-admin/dashboard');
-        } else{
+        } else {
             return Redirect('/');
         }
     }

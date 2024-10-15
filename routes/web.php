@@ -21,6 +21,7 @@ Route::middleware([
     Route::middleware(['auth'])->group(function () {
         Route::middleware(['customer'])->group(function () {
             Route::get('/profile', [CustomerController::class, 'profile'])->name('customer.profile');
+            Route::get('/cart', [CustomerController::class, 'cartprofile'])->name('customer.cart');
         });
         Route::middleware(['admin'])->group(function () {
             Route::prefix('admin')->group(function () {

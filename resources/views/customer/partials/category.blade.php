@@ -35,6 +35,8 @@
         </div>
     </div>
 
+    @include('customer.partials.category-product')
+
     @include('customer.partials.new-product')
 
     @include('customer.partials.popular-umkm')

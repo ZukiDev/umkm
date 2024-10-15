@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 use App\Models\Product;
 use App\Models\Store;
@@ -12,10 +13,12 @@ class ProductSeeder extends Seeder
     {
         // Get the store ID of the first store for the user (you can modify this as needed)
         $storeId = Store::first()->id; // Adjust as necessary to get the right store
+        $categoryId = Category::first()->id; // Adjust as necessary to get the right store
 
         // Create sample products
         Product::create([
             'store_id' => $storeId,
+            'category_id' => $categoryId,
             'name' => 'Produk A',
             'description' => 'Deskripsi Produk A',
             'sku' => 'SKU001',
@@ -30,6 +33,7 @@ class ProductSeeder extends Seeder
 
         Product::create([
             'store_id' => $storeId,
+            'category_id' => $categoryId,
             'name' => 'Produk B',
             'description' => 'Deskripsi Produk B',
             'sku' => 'SKU002',
@@ -44,6 +48,7 @@ class ProductSeeder extends Seeder
 
         Product::create([
             'store_id' => $storeId,
+            'category_id' => $categoryId,
             'name' => 'Produk C',
             'description' => 'Deskripsi Produk C',
             'sku' => 'SKU003',

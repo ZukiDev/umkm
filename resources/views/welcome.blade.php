@@ -7,5 +7,5 @@
 
     @include('customer.partials.cta')
 
-    @include('customer.partials.disc-product')
+    @include('customer.partials.all-product')
 @endsection

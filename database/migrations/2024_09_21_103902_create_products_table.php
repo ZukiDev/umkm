@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,6 +16,7 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Store::class);
+            $table->foreignIdFor(Category::class)->nullable();
             $table->string('name', 255);
             $table->string('description', 255);
             $table->string('sku', 255)->unique(); // Kode unik produk

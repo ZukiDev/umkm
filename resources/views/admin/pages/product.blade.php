@@ -208,6 +208,12 @@
                                                 <option value="0" {{ $product->status == 0 ? 'selected' : '' }}>Tidak
                                                     Aktif</option>
                                             </select>
+                                            <select name="category_id" required class="border px-3 py-2 rounded w-full mb-4">
+                                                <option value="{{ $product->category_id }}" selected>{{ $product->category->title }}</option>
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <button type="submit"
@@ -267,6 +273,7 @@
                                         <p class="mb-2"><strong>Merek:</strong> {{ $product->brand }}</p>
                                         <p class="mb-2"><strong>Status:</strong>
                                             {{ $product->status ? 'Aktif' : 'Tidak Aktif' }}</p>
+                                        <p class="mb-2"><strong>Kategori:</strong> {{ $product->category->title }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -339,6 +346,12 @@
                             <select name="status" required class="border px-3 py-2 rounded w-full mb-4">
                                 <option value="1">Aktif</option>
                                 <option value="0">Tidak Aktif</option>
+                            </select>
+                            <!-- Memilih Kategori produk -->
+                            <select name="category_id" class="border px-3 py-2 rounded w-full mb-4 select2" required>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}" class="text-black">{{ $category->title }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>

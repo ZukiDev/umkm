@@ -11,17 +11,18 @@ class Product extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'store_id',      
-        'name',          
-        'description',   
-        'sku',           
-        'price',         
-        'stock',        
-        'weight',        
-        'dimensions',    
-        'brand',         
-        'status',       
-        'images',       
+        'store_id',
+        'category_id',
+        'name',
+        'description',
+        'sku',
+        'price',
+        'stock',
+        'weight',
+        'dimensions',
+        'brand',
+        'status',
+        'images',
     ];
 
     /**
@@ -38,5 +39,13 @@ class Product extends Model
     public function setSkuAttribute($value)
     {
         $this->attributes['sku'] = strtoupper($value);
+    }
+
+    /**
+     * Relasi ke model Category
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

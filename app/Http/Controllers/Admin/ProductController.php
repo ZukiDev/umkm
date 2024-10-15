@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Store;
 use Illuminate\Http\Request;
@@ -19,7 +20,8 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('admin.pages.product', compact('products'));
+        $categories = Category::all();
+        return view('admin.pages.product', compact('products', 'categories'));
     }
 
     /**
@@ -36,6 +38,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'category_id' => 'required|exists:categories,id',
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'sku' => 'required|string|max:255|unique:products',
@@ -99,6 +102,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
+            'category_id' => 'required|exists:categories,id',
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'sku' => 'required|string|max:255|unique:products,sku,' . $id,

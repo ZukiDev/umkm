@@ -4,52 +4,14 @@
     </div><!--end grid-->
 
     <div class="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 mt-8 gap-[30px]">
-        <div
-            class="group relative overflow-hidden hover:shadow-lg hover:dark:shadow-gray-800 rounded-md duration-500 p-6 text-center">
-            <img src="{{ asset('asset/images/shop/categories/electronics.jpg') }}"
-                class="rounded-full shadow-md dark:shadow-gray-800 size-20 block mx-auto mb-2" alt="">
+        @foreach ($bestUMKM as $umkm)
+            <div
+                class="group relative overflow-hidden hover:shadow-lg hover:dark:shadow-gray-800 rounded-md duration-500 p-6 text-center">
+                <img src="{{ asset('asset/images/shop/categories/electronics.jpg') }}"
+                    class="rounded-full shadow-md dark:shadow-gray-800 size-20 block mx-auto mb-2" alt="">
 
-            <a href="" class="font-semibold hover:text-indigo-600 text-lg">Electronics</a>
-        </div><!--end content-->
-
-        <div
-            class="group relative overflow-hidden hover:shadow-lg hover:dark:shadow-gray-800 rounded-md duration-500 p-6 text-center">
-            <img src="{{ asset('asset/images/shop/categories/fashion.jpg') }}"
-                class="rounded-full shadow-md dark:shadow-gray-800 size-20 block mx-auto mb-2" alt="">
-
-            <a href="" class="font-semibold hover:text-indigo-600 text-lg">Fashion</a>
-        </div><!--end content-->
-
-        <div
-            class="group relative overflow-hidden hover:shadow-lg hover:dark:shadow-gray-800 rounded-md duration-500 p-6 text-center">
-            <img src="{{ asset('asset/images/shop/categories/furniture.jpg') }}"
-                class="rounded-full shadow-md dark:shadow-gray-800 size-20 block mx-auto mb-2" alt="">
-
-            <a href="" class="font-semibold hover:text-indigo-600 text-lg">Furniture</a>
-        </div><!--end content-->
-
-        <div
-            class="group relative overflow-hidden hover:shadow-lg hover:dark:shadow-gray-800 rounded-md duration-500 p-6 text-center">
-            <img src="{{ asset('asset/images/shop/categories/mobile.jpg') }}"
-                class="rounded-full shadow-md dark:shadow-gray-800 size-20 block mx-auto mb-2" alt="">
-
-            <a href="" class="font-semibold hover:text-indigo-600 text-lg">Mobile</a>
-        </div><!--end content-->
-
-        <div
-            class="group relative overflow-hidden hover:shadow-lg hover:dark:shadow-gray-800 rounded-md duration-500 p-6 text-center">
-            <img src="{{ asset('asset/images/shop/categories/music.jpg') }}"
-                class="rounded-full shadow-md dark:shadow-gray-800 size-20 block mx-auto mb-2" alt="">
-
-            <a href="" class="font-semibold hover:text-indigo-600 text-lg">Music</a>
-        </div><!--end content-->
-
-        <div
-            class="group relative overflow-hidden hover:shadow-lg hover:dark:shadow-gray-800 rounded-md duration-500 p-6 text-center">
-            <img src="{{ asset('asset/images/shop/categories/sports.jpg') }}"
-                class="rounded-full shadow-md dark:shadow-gray-800 size-20 block mx-auto mb-2" alt="">
-
-            <a href="" class="font-semibold hover:text-indigo-600 text-lg">Sports</a>
-        </div><!--end content-->
+                <p class="font-semibold hover:text-indigo-600 text-lg">{{ $umkm->store_name }}</p>
+            </div><!--end content-->
+        @endforeach
     </div><!--end grid-->
 </div><!--end container-->

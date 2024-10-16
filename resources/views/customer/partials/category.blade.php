@@ -1,6 +1,6 @@
 <!-- Start -->
 <section class="relative py-16">
-    <div class="container relative">
+    {{-- <div class="container relative">
         <div id="grid" class="md:flex w-full justify-center mx-auto mt-4">
             <div class="md:w-1/2 p-3 picture-item">
                 <div class="group relative overflow-hidden rounded-md shadow dark:shadow-gray-800">
@@ -33,7 +33,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     @include('customer.partials.category-product')
 

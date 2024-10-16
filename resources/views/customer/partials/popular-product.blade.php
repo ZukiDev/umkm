@@ -1,14 +1,6 @@
 <div class="container relative mt-16">
-    <div class="grid md:grid-cols-12 grid-cols-1 items-center">
-        <div class="lg:col-span-8 md:col-span-6 md:text-start text-center">
-            <h3 class="text-2xl leading-normal font-semibold">Produk Terpopuler</h3>
-        </div>
-
-        <div class="lg:col-span-4 md:col-span-6 md:text-end hidden md:block">
-            <a href="shop-grid-two.html"
-                class="relative inline-block font-semibold tracking-wide align-middle text-base text-center border-none after:content-[''] after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:duration-500 text-slate-400 hover:text-indigo-600 after:bg-indigo-600 duration-500 ease-in-out">Lihat
-                Semua <i class="uil uil-arrow-right align-middle"></i></a>
-        </div>
+    <div class="grid grid-cols-1 items-center">
+        <h3 class="text-2xl leading-normal font-semibold">Produk Terpopuler</h3>
     </div><!--end grid-->
 
     <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 mt-8 gap-[30px]">

@@ -21,7 +21,8 @@ Route::middleware([
     Route::middleware(['auth'])->group(function () {
         Route::middleware(['customer'])->group(function () {
             Route::get('/profile', [CustomerController::class, 'profile'])->name('customer.profile');
-            Route::get('/cart', [CustomerController::class, 'cartprofile'])->name('customer.cart');
+            Route::get('/cart', [CustomerController::class, 'cart'])->name('customer.cart');
+            Route::get('/checkout', [CustomerController::class, 'checkout'])->name('customer.checkout');
         });
         Route::middleware(['admin'])->group(function () {
             Route::prefix('admin')->group(function () {

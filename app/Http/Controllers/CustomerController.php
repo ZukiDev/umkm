@@ -15,4 +15,14 @@ class CustomerController extends Controller
     {
         return view('customer.pages.profile');
     }
+
+    public function cart()
+    {
+        return view('customer.pages.cart');
+    }
+
+    public function checkout()
+    {
+        return view('customer.pages.checkout');
+    }
 }

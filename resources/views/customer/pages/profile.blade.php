@@ -1,27 +1,27 @@
 @extends('layouts.landing')
 
 @section('content')
-    {{-- <!-- Start Hero -->
+    <!-- Start Hero -->
     <section class="relative table w-full py-20 lg:py-24 bg-gray-50 dark:bg-slate-800">
         <div class="container relative">
             <div class="grid grid-cols-1 mt-14">
-                <h3 class="text-3xl leading-normal font-semibold">Profil Saya</h3>
+                <h3 class="text-3xl leading-normal font-semibold">Profil</h3>
             </div><!--end grid-->
 
             <div class="relative mt-3">
                 <ul class="tracking-[0.5px] mb-0 inline-block">
                     <li class="inline-block uppercase text-[13px] font-bold duration-500 ease-in-out hover:text-indigo-600">
-                        <a href="index-shop.html">Techwind</a>
+                        <p href="index-shop.html">{{ config('app.name', 'UMKM Blitar') }}</p>
                     </li>
                     <li class="inline-block text-base text-slate-950 dark:text-white mx-0.5 ltr:rotate-0 rtl:rotate-180"><i
                             class="uil uil-angle-right-b"></i></li>
-                    <li class="inline-block uppercase text-[13px] font-bold text-indigo-600" aria-current="page">My Account
+                    <li class="inline-block uppercase text-[13px] font-bold text-indigo-600" aria-current="page">Profil
                     </li>
                 </ul>
             </div>
         </div><!--end container-->
     </section><!--end section-->
-    <!-- End Hero --> --}}
+    <!-- End Hero -->
 
     <!-- Start -->
     <section class="relative md:py-24 py-16">
@@ -125,57 +125,93 @@
                         </div>
 
                         <div class="hidden" id="address" role="tabpanel" aria-labelledby="address-tab">
-                            <h6 class="text-slate-400 mb-0">The following addresses will be used on the checkout page by
+                            <h6 class="text-slate-400 mb-4">Alamat berikut akan digunakan pada halaman pembayaran secara
                                 default.</h6>
-                            <div class="md:flex mt-6">
-                                <div class="md:w-1/2 md:px-3">
-                                    <div class="flex items-center mb-4 justify-between">
-                                        <h5 class="text-xl font-semibold">Billing Address:</h5>
-                                        <a href="#" class="text-indigo-600 text-lg"><i
-                                                class="uil uil-edit align-middle"></i></a>
+                            <form action="" method="POST">
+                                @csrf <!-- Token CSRF untuk keamanan -->
+                                <div class="md:w-full md:px-3">
+                                    <div class="grid lg:grid-cols-2 grid-cols-1 gap-6">
+                                        <!-- Nama -->
+                                        <div>
+                                            <label class="form-label font-semibold">Nama Lengkap: <span
+                                                    class="text-red-600">*</span></label>
+                                            <input type="text" name="name"
+                                                class="form-input w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0 mt-2"
+                                                placeholder="Nama Lengkap" required>
+                                        </div>
+
+                                        <!-- Phone Number -->
+                                        <div>
+                                            <label class="form-label font-semibold">Nomor Telepon: <span
+                                                    class="text-red-600">*</span></label>
+                                            <input type="text" name="phone_number"
+                                                class="form-input w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0 mt-2"
+                                                placeholder="Nomor Telepon" required>
+                                        </div>
+
+                                        <!-- Address -->
+                                        <div>
+                                            <label class="form-label font-semibold">Alamat: <span
+                                                    class="text-red-600">*</span></label>
+                                            <input type="text" name="address"
+                                                class="form-input w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0 mt-2"
+                                                placeholder="Alamat" required>
+                                        </div>
+
+                                        <!-- Province -->
+                                        <div>
+                                            <label class="form-label font-semibold">Provinsi: <span
+                                                    class="text-red-600">*</span></label>
+                                            <input type="text" name="province"
+                                                class="form-input w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0 mt-2"
+                                                placeholder="Provinsi" required>
+                                        </div>
+
+                                        <!-- City -->
+                                        <div>
+                                            <label class="form-label font-semibold">Kota: <span
+                                                    class="text-red-600">*</span></label>
+                                            <input type="text" name="city"
+                                                class="form-input w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0 mt-2"
+                                                placeholder="Kota" required>
+                                        </div>
+
+                                        <!-- District -->
+                                        <div>
+                                            <label class="form-label font-semibold">Kecamatan: <span
+                                                    class="text-red-600">*</span></label>
+                                            <input type="text" name="district"
+                                                class="form-input w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0 mt-2"
+                                                placeholder="Kecamatan" required>
+                                        </div>
+
+                                        <!-- Post Code -->
+                                        <div>
+                                            <label class="form-label font-semibold">Kode Pos: <span
+                                                    class="text-red-600">*</span></label>
+                                            <input type="text" name="post_code"
+                                                class="form-input w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0 mt-2"
+                                                placeholder="Kode Pos" required>
+                                        </div>
+
+                                        <!-- Delivery Instructions (optional) -->
+                                        <div class="lg:col-span-2">
+                                            <label class="form-label font-semibold">Instruksi Pengiriman:</label>
+                                            <textarea name="delivery_instructions"
+                                                class="form-input w-full py-2 px-3 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0 mt-2"
+                                                placeholder="Instruksi Pengiriman (opsional)"></textarea>
+                                        </div>
                                     </div>
-                                    <div class="pt-4 border-t border-gray-100 dark:border-gray-700">
-                                        <p class="text-lg font-semibold mb-2">Cally Joseph</p>
 
-                                        <ul class="list-none">
-                                            <li class="flex">
-                                                <i class="uil uil-map-marker text-lg me-2"></i>
-                                                <p class="text-slate-400">C/54 Northwest Freeway, Suite 558, <br> Houston,
-                                                    USA 485</p>
-                                            </li>
-
-                                            <li class="flex mt-1">
-                                                <i class="uil uil-phone text-lg me-2"></i>
-                                                <p class="text-slate-400">+123 897 5468</p>
-                                            </li>
-                                        </ul>
+                                    <!-- Tombol Submit -->
+                                    <div class="mt-6">
+                                        <button type="submit"
+                                            class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md">
+                                            Simpan Perubahan Alamat
+                                        </button>
                                     </div>
                                 </div>
-
-                                <div class="md:w-1/2 md:px-3 mt-[30] md:mt-0">
-                                    <div class="flex items-center mb-4 justify-between">
-                                        <h5 class="text-xl font-semibold">Shipping Address:</h5>
-                                        <a href="#" class="text-indigo-600 text-lg"><i
-                                                class="uil uil-edit align-middle"></i></a>
-                                    </div>
-                                    <div class="pt-4 border-t border-gray-100 dark:border-gray-700">
-                                        <p class="text-lg font-semibold mb-2">Cally Joseph</p>
-
-                                        <ul class="list-none">
-                                            <li class="flex">
-                                                <i class="uil uil-map-marker text-lg me-2"></i>
-                                                <p class="text-slate-400">C/54 Northwest Freeway, Suite 558, <br> Houston,
-                                                    USA 485</p>
-                                            </li>
-
-                                            <li class="flex mt-1">
-                                                <i class="uil uil-phone text-lg me-2"></i>
-                                                <p class="text-slate-400">+123 897 5468</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div><!--end col-->

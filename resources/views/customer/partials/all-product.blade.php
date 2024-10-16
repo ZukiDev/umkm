@@ -7,7 +7,7 @@
             </div>
 
             <div class="lg:col-span-4 md:col-span-6 md:text-end hidden md:block">
-                <a href="shop-grid-two.html"
+                <a href="{{ route('customer.all-product') }}"
                     class="relative inline-block font-semibold tracking-wide align-middle text-base text-center border-none after:content-[''] after:absolute after:h-px after:w-0 hover:after:w-full after:end-0 hover:after:end-auto after:bottom-0 after:start-0 after:duration-500 text-slate-400 hover:text-indigo-600 after:bg-indigo-600 duration-500 ease-in-out">Lihat
                     Semua <i class="uil uil-arrow-right align-middle"></i></a>
             </div>
@@ -26,7 +26,7 @@
                         </div>
 
                         <ul class="list-none absolute top-[10px] end-4 opacity-0 group-hover:opacity-100 duration-500">
-                            <li class="mt-1"><a href="shop-item-detail.html"
+                            <li class="mt-1"><a href="{{ route('customer.product.detail', $product->id) }}"
                                     class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
                                         class="mdi mdi-eye-outline"></i></a></li>
                         </ul>
@@ -39,7 +39,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <a href="javascript:void(0)" onclick="viewshopitem{{ $product->id }}.showModal()"
+                        <a href="{{ route('customer.product.detail', $product->id) }}"
                             class="hover:text-indigo-600 text-lg font-semibold">{{ $product->name ?? 'Nama Produk' }}</a>
                         <div class="flex justify-between items-center mt-1 font-semibold">
                             <p class="text-green-600">Rp. {{ number_format($product->price ?? 0, 0, ',', '.') }}</p>

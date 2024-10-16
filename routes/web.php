@@ -22,6 +22,8 @@ Route::middleware([
         Route::middleware(['customer'])->group(function () {
             Route::get('/profile', [CustomerController::class, 'profile'])->name('customer.profile');
             Route::get('/cart', [CustomerController::class, 'cart'])->name('customer.cart');
+            Route::get('/products', [CustomerController::class, 'allProduct'])->name('customer.all-product');
+            Route::get('/detail-product/{id}', [CustomerController::class, 'detailProduct'])->name('customer.product.detail');
             Route::get('/checkout', [CustomerController::class, 'checkout'])->name('customer.checkout');
         });
         Route::middleware(['admin'])->group(function () {

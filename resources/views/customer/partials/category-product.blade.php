@@ -7,7 +7,7 @@
         @foreach ($allCategory as $category)
             <div
                 class="group relative overflow-hidden hover:shadow-lg hover:dark:shadow-gray-800 rounded-md duration-500 p-6 text-center">
-                <img src="{{ 'storage/icon/' . $category->icon }}"
+                <img src="{{ asset('storage/' . $category->icon) }}"
                     class="rounded-full shadow-md dark:shadow-gray-800 size-20 block mx-auto mb-2"
                     alt="{{ $category->title }}">
 

@@ -101,7 +101,7 @@
 
                                     <ul
                                         class="list-none absolute top-[10px] end-4 opacity-0 group-hover:opacity-100 duration-500">
-                                        <li class="mt-1"><a href="{{ route('customer.product.detail', $product->id) }}"
+                                        <li class="mt-1"><a href="{{ route('customer.product.show', $product->id) }}"
                                                 class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
                                                     class="mdi mdi-eye-outline"></i></a></li>
                                     </ul>
@@ -114,7 +114,7 @@
                                 </div>
 
                                 <div class="mt-4">
-                                    <a href="{{ route('customer.product.detail', $product->id) }}"
+                                    <a href="{{ route('customer.product.show', $product->id) }}"
                                         class="hover:text-indigo-600 text-lg font-semibold">{{ $product->name ?? 'Nama Produk' }}</a>
                                     <div class="flex justify-between items-center mt-1 font-semibold">
                                         <p class="text-green-600">Rp. {{ number_format($product->price ?? 0, 0, ',', '.') }}

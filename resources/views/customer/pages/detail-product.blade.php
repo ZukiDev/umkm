@@ -50,30 +50,36 @@
                             <p class="text-slate-400 mt-2">{{ $product->description }}</p>
                         </div>
 
-                        <div class="grid lg:grid-cols-2 grid-cols-1 gap-[30px] mt-4">
-                            <div class="flex items-center">
-                                <h5 class="text-lg font-semibold me-2">Jumlah:</h5>
-                                <div class="qty-icons ms-3 flex items-center">
-                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                                        class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border-indigo-600/10 border hover:border-indigo-600 text-indigo-600 hover:text-white minus">-</button>
-                                    <input min="0" name="quantity" value="0" type="number"
-                                        class="h-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white pointer-events-none w-16 ps-4 quantity">
-                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                                        class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white plus">+</button>
-                                </div>
-                                <!-- Teks Stok tersedia -->
-                            </div><!--end content-->
-                            <span class="mt-2 text-indigo-600 text-md text-start">Stok tersedia : 90</span>
-                        </div><!--end grid-->
+                        <form action="{{ route('customer.cart.store', $product->id) }}" method="POST">
+                            @csrf
+                            @method('post')
+                            <div class="grid lg:grid-cols-2 grid-cols-1 gap-[30px] mt-4">
+                                <div class="flex items-center">
+                                    <h5 class="text-lg font-semibold me-2">Jumlah:</h5>
+                                    <div class="qty-icons ms-3 flex items-center">
+                                        <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                            class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border-indigo-600/10 border hover:border-indigo-600 text-indigo-600 hover:text-white minus">-</button>
+                                        <input min="1" name="quantity" value="1" type="number"
+                                            class="h-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white pointer-events-none w-16 ps-4 quantity">
+                                        <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                            class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white plus">+</button>
+                                    </div>
+                                    <!-- Teks Stok tersedia -->
+                                </div><!--end content-->
+                                <span class="mt-2 text-indigo-600 text-md text-start">Stok tersedia : 90</span>
+                            </div><!--end grid-->
 
-                        <div class="mt-4">
-                            <a href="{{ route('customer.checkout') }}"
-                                class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md me-2 mt-2">Pesan
-                                Sekarang</a>
-                            <a href="{{ route('customer.cart') }}"
-                                class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white mt-2">Tambahkan
-                                Ke Keranjang</a>
-                        </div>
+                            <input type="hidden" name="id_product" value="{{ $product->id }}">
+                            <input type="hidden" name="checkout" value="0">
+                            <div class="mt-4">
+                                <button type="submit" onclick="this.form.checkout.value=1"
+                                    class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md me-2 mt-2">Pesan
+                                    Sekarang</button>
+                                <button type="submit"
+                                    class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white mt-2">Tambahkan
+                                    Ke Keranjang</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div><!--end grid-->

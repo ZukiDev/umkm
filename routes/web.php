@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\customer\CartController;
+use App\Http\Controllers\customer\ProductController;
 use App\Http\Controllers\SuperAdmin\CategoryController;
 use App\Http\Controllers\SuperAdmin\StoreController;
 use App\Http\Controllers\SuperAdmin\CustomerController as SuperAdminCustomerController;
@@ -21,16 +23,16 @@ Route::middleware([
     Route::middleware(['auth'])->group(function () {
         Route::middleware(['customer'])->group(function () {
             Route::get('/profile', [CustomerController::class, 'profile'])->name('customer.profile');
-            Route::get('/cart', [CustomerController::class, 'cart'])->name('customer.cart');
-            Route::get('/products', [CustomerController::class, 'allProduct'])->name('customer.all-product');
-            Route::get('/detail-product/{id}', [CustomerController::class, 'detailProduct'])->name('customer.product.detail');
+            Route::resource('/cart', CartController::class)->names('customer.cart');
+            Route::resource('/product', ProductController::class)->names('customer.product');
+            // Route::get('/detail-product/{id}', [CustomerController::class, 'detailProduct'])->name('customer.product.detail');
             Route::get('/checkout', [CustomerController::class, 'checkout'])->name('customer.checkout');
         });
         Route::middleware(['admin'])->group(function () {
             Route::prefix('admin')->group(function () {
                 Route::get('/profile', [AdminController::class, 'profile'])->name('admin.profile');
                 Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.index');
-                Route::resource('/product', ProductController::class)->names('admin.product');
+                Route::resource('/product', AdminProductController::class)->names('admin.product');
             });
         });
 

@@ -7,7 +7,7 @@
         @foreach ($bestUMKM as $umkm)
             <div
                 class="group relative overflow-hidden hover:shadow-lg hover:dark:shadow-gray-800 rounded-md duration-500 p-6 text-center">
-                <img src="{{ asset('asset/images/shop/categories/electronics.jpg') }}"
+                <img src="{{ asset('storage/logos/' . $umkm->logo) }}" alt="{{ $umkm->logo }}"
                     class="rounded-full shadow-md dark:shadow-gray-800 size-20 block mx-auto mb-2" alt="">
 
                 <p class="font-semibold hover:text-indigo-600 text-lg">{{ $umkm->store_name }}</p>

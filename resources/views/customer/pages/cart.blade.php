@@ -39,31 +39,40 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="bg-white dark:bg-slate-900">
-                                <td class="p-4"><a href=""><i class="uil uil-trash text-red-600"></i></a>
-                                </td>
-                                <td class="p-4">
-                                    <span class="flex items-center">
-                                        <img src="../../assets/images/shop/items/s1.jpg"
-                                            class="rounded shadow dark:shadow-gray-800 w-12" alt="">
-                                        <span class="ms-3">
-                                            <span class="block font-semibold">Baju (M)</span>
+                            @foreach ($carts as $cart)
+                                <tr class="bg-white dark:bg-slate-900">
+                                    <form action="{{ route('customer.cart.destroy', $cart->id) }}" method="POST"
+                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus item ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <td><button type="submit">
+                                                <i class="uil uil-trash text-red-600"></i>
+                                            </button></td>
+                                    </form>
+                                    <td class="p-4">
+                                        <span class="flex items-center">
+                                            <img src="{{ asset('storage/products/' . $cart->product->images) }}"
+                                                class="rounded shadow dark:shadow-gray-800 w-12" alt="{{ $cart->name }}">
+                                            <span class="ms-3">
+                                                <span class="block font-semibold">{{ $cart->name }}</span>
+                                            </span>
                                         </span>
-                                    </span>
-                                </td>
-                                <td class="p-4 text-center">Rp 2.000.000</td>
-                                <td class="p-4 text-center">
-                                    <div class="qty-icons">
-                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                                            class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white minus">-</button>
-                                        <input min="0" name="quantity" value="3" type="number"
-                                            class="h-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white pointer-events-none w-16 ps-4 quantity">
-                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                                            class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white plus">+</button>
-                                    </div>
-                                </td>
-                                <td class="p-4  text-end">Rp. 5.000.000</td>
-                            </tr>
+                                    </td>
+                                    <td class="p-4 text-center">Rp. {{ number_format($cart->price ?? 0, 0, ',', '.') }}</td>
+                                    <td class="p-4 text-center">
+                                        <div class="qty-icons">
+                                            <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                                class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white minus">-</button>
+                                            <input min="0" name="quantity" value="{{ $cart->quantity ?? 0 }}"
+                                                type="number"
+                                                class="h-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white pointer-events-none w-16 ps-4 quantity">
+                                            <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                                class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white plus">+</button>
+                                        </div>
+                                    </td>
+                                    <td class="p-4  text-end">Rp. {{ number_format($cart->total ?? 0, 0, ',', '.') }}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -79,16 +88,18 @@
                         <ul class="list-none shadow dark:shadow-gray-800 rounded-md">
                             <li class="flex justify-between p-4">
                                 <span class="font-semibold text-lg">Subtotal :</span>
-                                <span class="text-slate-400">Rp 1500</span>
+                                <span class="text-slate-400">Rp. {{ number_format($cart->total ?? 0, 0, ',', '.') }}</span>
                             </li>
                             <li class="flex justify-between p-4 border-t border-gray-100 dark:border-gray-800">
-                                <span class="font-semibold text-lg">Ppn :</span>
-                                <span class="text-slate-400">Rp 150</span>
+                                <span class="font-semibold text-lg">PPN :</span>
+                                <span class="text-slate-400">Rp.
+                                    {{ number_format(($cart->total ?? 0) * 0.1, 0, ',', '.') }}</span>
                             </li>
                             <li
                                 class="flex justify-between font-semibold p-4 border-t border-gray-200 dark:border-gray-600">
                                 <span class="font-semibold text-lg">Total :</span>
-                                <span class="font-semibold">Rp 1650</span>
+                                <span class="font-semibold">Rp.
+                                    {{ number_format(($cart->total ?? 0) * 1.1, 0, ',', '.') }}</span>
                             </li>
                         </ul>
                     </div>

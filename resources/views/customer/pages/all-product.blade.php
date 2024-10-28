@@ -94,9 +94,18 @@
                                     class="relative overflow-hidden shadow dark:shadow-gray-700 group-hover:shadow-lg group-hover:dark:shadow-gray-700 rounded-md duration-500">
                                     <img src="{{ asset('asset/images/shop/items/s13.jpg') }}" alt="{{ $product->name }}">
                                     <div class="absolute -bottom-20 group-hover:bottom-3 start-3 end-3 duration-500">
-                                        <a href="javascript:void(0)" onclick="viewshopitem{{ $product->id }}.showModal()"
-                                            class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-slate-900 border-slate-900 text-white w-full rounded-md">Tambahkan
-                                            ke Keranjang</a>
+                                        <form action="{{ route('customer.cart.store', $product->id) }}" method="POST">
+                                            @csrf
+                                            @method('post')
+                                            <input type="hidden" name="id_product" value="{{ $product->id }}">
+                                            <input type="hidden" name="checkout" value="0">
+                                            <input type="hidden" name="quantity" value="1">
+
+                                            <button type="submit"
+                                                class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-slate-900 border-slate-900 text-white w-full rounded-md">
+                                                Tambahkan ke Keranjang
+                                            </button>
+                                        </form>
                                     </div>
 
                                     <ul
@@ -117,7 +126,8 @@
                                     <a href="{{ route('customer.product.show', $product->id) }}"
                                         class="hover:text-indigo-600 text-lg font-semibold">{{ $product->name ?? 'Nama Produk' }}</a>
                                     <div class="flex justify-between items-center mt-1 font-semibold">
-                                        <p class="text-green-600">Rp. {{ number_format($product->price ?? 0, 0, ',', '.') }}
+                                        <p class="text-green-600">Rp.
+                                            {{ number_format($product->price ?? 0, 0, ',', '.') }}
                                         </p>
                                         <p class="text-red-600">{{ $product->stock ?? 0 }} Terjual</p>
                                     </div>

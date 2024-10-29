@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
@@ -18,7 +19,22 @@ class CartController extends Controller
     {
         $user = Auth::user();
         $carts = Cart::where('user_id', $user->id)->get();
-        return view('customer.pages.cart', compact('carts'));
+
+        // Calculate the sub total payment
+        $subTotalPayment = $carts->sum(function ($cart) {
+            return $cart->price * $cart->quantity;
+        });
+
+        // Define the PPN percentage
+        $ppnPercentage = 10; // 10%
+
+        // Calculate the PPN
+        $ppn = ($subTotalPayment * $ppnPercentage) / 100;
+
+        // Calculate the total payment including PPN
+        $totalPayment = $subTotalPayment + $ppn;
+
+        return view('customer.pages.cart', compact('carts', 'subTotalPayment', 'ppn', 'totalPayment'));
     }
 
     /**
@@ -66,9 +82,8 @@ class CartController extends Controller
                 // Update the existing cart item
                 $newQuantity = $cart->quantity + $request->quantity;
                 if ($product->stock < $newQuantity) {
-                    $newQuantity = $product->stock;
                     DB::rollBack();
-                    return redirect()->route('customer.cart.index')->with('warning', 'The requested quantity exceeds the available stock. The quantity has been adjusted to the available stock.');
+                    return redirect()->route('customer.cart.index')->with('warning', 'The requested quantity exceeds the available stock.');
                 }
                 $cart->quantity = $newQuantity;
                 $cart->price = $product->price;
@@ -93,6 +108,7 @@ class CartController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
+            Log::error('Error adding product to cart: ' . $e->getMessage());
             return redirect()->route('customer.cart.index')->with('error', 'An error occurred while adding the product to the cart.');
         }
 
@@ -126,6 +142,7 @@ class CartController extends Controller
     {
         $request->validate([
             'quantity' => 'required|integer|min:1',
+            'checkout' => 'required|boolean',
         ]);
 
         $user = Auth::user();
@@ -158,10 +175,15 @@ class CartController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
+            Log::error('Error updating cart: ' . $e->getMessage());
             return redirect()->route('customer.cart.index')->with('error', 'An error occurred while updating the cart.');
         }
 
-        return redirect()->route('customer.cart.index')->with('success', 'Cart successfully updated.');
+        if ($request->checkout) {
+            return redirect()->route('customer.order.index')->with('success', 'Cart successfully updated and ready for checkout.');
+        } else {
+            return redirect()->route('customer.cart.index')->with('success', 'Cart successfully updated.');
+        }
     }
 
     /**
@@ -190,6 +212,7 @@ class CartController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
+            Log::error('Error removing product from cart: ' . $e->getMessage());
             return redirect()->route('customer.cart.index')->with('error', 'An error occurred while removing the product from the cart.');
         }
 

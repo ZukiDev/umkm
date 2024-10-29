@@ -120,7 +120,7 @@
                                     <button type="submit" class="bg-red-600 mt-6 text-white px-4 py-2 rounded">Ya,
                                         Hapus</button>
                                     <button type="button" class="bg-gray-300 mt-6 text-black px-4 py-2 rounded"
-                                        onclick="deleteitemshop{{ $product->id }}.close()">Tidak,
+                                        onclick="deleteshopitem{{ $product->id }}.close()">Tidak,
                                         Batalkan</button>
                                 </form>
                             </div>
@@ -208,8 +208,10 @@
                                                 <option value="0" {{ $product->status == 0 ? 'selected' : '' }}>Tidak
                                                     Aktif</option>
                                             </select>
-                                            <select name="category_id" required class="border px-3 py-2 rounded w-full mb-4">
-                                                <option value="{{ $product->category_id }}" selected>{{ $product->category->title }}</option>
+                                            <select name="category_id" required
+                                                class="border px-3 py-2 rounded w-full mb-4">
+                                                <option value="{{ $product->category_id }}" selected>
+                                                    {{ $product->category->title }}</option>
                                                 @foreach ($categories as $category)
                                                     <option value="{{ $category->id }}">{{ $category->title }}</option>
                                                 @endforeach
@@ -350,7 +352,8 @@
                             <!-- Memilih Kategori produk -->
                             <select name="category_id" class="border px-3 py-2 rounded w-full mb-4 select2" required>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" class="text-black">{{ $category->title }}</option>
+                                    <option value="{{ $category->id }}" class="text-black">{{ $category->title }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>

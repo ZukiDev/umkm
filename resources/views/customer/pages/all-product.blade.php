@@ -72,7 +72,8 @@
                 <div class="lg:col-span-8 md:col-span-6">
                     <div class="grid md:grid-cols-12 grid-cols-1 items-center gap-[30px]">
                         <div class="lg:col-span-9 md:col-span-8">
-                            <h3 class="text-xl leading-normal font-semibold">Menampilan 20 Produk</h3>
+                            <h3 class="text-xl leading-normal font-semibold">Menampilkan {{ $products->count() }} Produk
+                            </h3>
                         </div>
 
                         <div class="lg:col-span-3 md:col-span-4 md:text-end">
@@ -92,7 +93,8 @@
                             <div class="group">
                                 <div
                                     class="relative overflow-hidden shadow dark:shadow-gray-700 group-hover:shadow-lg group-hover:dark:shadow-gray-700 rounded-md duration-500">
-                                    <img src="{{ asset('asset/images/shop/items/s13.jpg') }}" alt="{{ $product->name }}">
+                                    <img src="{{ asset('storage/products/' . $product->images) }}"
+                                        alt="{{ $product->name }}">
                                     <div class="absolute -bottom-20 group-hover:bottom-3 start-3 end-3 duration-500">
                                         <form action="{{ route('customer.cart.store', $product->id) }}" method="POST">
                                             @csrf

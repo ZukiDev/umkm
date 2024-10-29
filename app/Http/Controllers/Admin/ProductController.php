@@ -19,8 +19,15 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $admin = Auth::user();  // Get the currently logged-in admin
+
+        // Get the store associated with the admin
+        $store = Store::where('user_id', $admin->id)->firstOrFail();
+
+        // Get products associated with the store
+        $products = Product::where('store_id', $store->id)->get();
         $categories = Category::all();
+
         return view('admin.pages.product', compact('products', 'categories'));
     }
 

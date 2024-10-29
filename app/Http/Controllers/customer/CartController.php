@@ -78,6 +78,13 @@ class CartController extends Controller
                     ->whereNull('deleted_at')
                     ->first();
 
+            // Check if the cart contains items from a different store
+            $existingCart = Cart::where('user_id', $user->id)->whereNull('deleted_at')->first();
+            if ($existingCart && $existingCart->product->store_id !== $product->store_id) {
+                DB::rollBack();
+                return redirect()->route('customer.cart.index')->with('warning', 'Your cart contains items from a different store. Please clear your cart before adding items from a new store.');
+            }
+
             if ($cart) {
                 // Update the existing cart item
                 $newQuantity = $cart->quantity + $request->quantity;
@@ -156,19 +163,19 @@ class CartController extends Controller
             $product = Product::lockForUpdate()->findOrFail($cart->product_id);
 
             // Check if the requested quantity is available in stock
-            if ($product->stock + $cart->quantity < $request->quantity) {
+            $availableStock = $product->stock + $cart->quantity;
+            if ($availableStock < $request->quantity) {
                 DB::rollBack();
                 return redirect()->route('customer.cart.index')->with('error', 'The requested quantity is not available in stock.');
             }
 
             // Update the cart item
-            $product->stock += $cart->quantity; // Revert the stock to the original state
             $cart->quantity = $request->quantity;
             $cart->total = $cart->price * $cart->quantity;
             $cart->save();
 
-            // Decrease the product stock
-            $product->stock -= $request->quantity;
+            // Update the product stock
+            $product->stock = $availableStock - $request->quantity;
             $product->save();
 
             // Commit the transaction

@@ -46,7 +46,7 @@ class OrderController extends Controller
         // Calculate the total payment including PPN
         $totalPayment = $subTotalPayment + $ppn;
 
-        return view('customer.pages.checkout', compact('carts', 'address', 'subTotalPayment', 'ppn', 'totalPayment'));
+        return view('customer.pages.checkout', compact('carts', 'address', 'subTotalPayment', 'ppn', 'totalPayment', 'user'));
     }
 
     /**

@@ -52,25 +52,31 @@
                                     <td class="p-4">
                                         <span class="flex items-center">
                                             <img src="{{ asset('storage/products/' . $cart->product->images) }}"
-                                                class="rounded shadow dark:shadow-gray-800 w-12" alt="{{ $cart->name }}">
+                                                class="rounded shadow dark:shadow-gray-800 w-12"
+                                                alt="{{ $cart->product->name }}">
                                             <span class="ms-3">
-                                                <span class="block font-semibold">{{ $cart->name }}</span>
+                                                <span class="block font-semibold">{{ $cart->product->name }}</span>
                                             </span>
                                         </span>
                                     </td>
                                     <td class="p-4 text-center">Rp. {{ number_format($cart->price ?? 0, 0, ',', '.') }}</td>
                                     <td class="p-4 text-center">
                                         <div class="qty-icons">
-                                            <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                            <button onclick="updateQuantity(this, -1)"
                                                 class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white minus">-</button>
+
+                                            <!-- Quantity Input with Data Attributes -->
                                             <input min="0" name="quantity" value="{{ $cart->quantity ?? 0 }}"
                                                 type="number"
-                                                class="h-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white pointer-events-none w-16 ps-4 quantity">
-                                            <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                                class="h-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white pointer-events-none w-16 ps-4 quantity"
+                                                data-cart-id="{{ $cart->id }}" onchange="updateQuantity(this)">
+
+                                            <button onclick="updateQuantity(this, 1)"
                                                 class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white plus">+</button>
                                         </div>
                                     </td>
-                                    <td class="p-4  text-end">Rp. {{ number_format($cart->total ?? 0, 0, ',', '.') }}</td>
+                                    <td class="p-4 text-end item-total">Rp.
+                                        {{ number_format($cart->total ?? 0, 0, ',', '.') }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -85,21 +91,23 @@
                     </div>
 
                     <div class="lg:col-span-5 md:order-2 order-1">
+                        <!-- Subtotal, PPN, and Total -->
                         <ul class="list-none shadow dark:shadow-gray-800 rounded-md">
                             <li class="flex justify-between p-4">
                                 <span class="font-semibold text-lg">Subtotal :</span>
-                                <span class="text-slate-400">Rp. {{ number_format($cart->total ?? 0, 0, ',', '.') }}</span>
+                                <span id="subtotal" class="text-slate-400">Rp.
+                                    {{ number_format($subTotalPayment ?? 0, 0, ',', '.') }}</span>
                             </li>
                             <li class="flex justify-between p-4 border-t border-gray-100 dark:border-gray-800">
                                 <span class="font-semibold text-lg">PPN :</span>
-                                <span class="text-slate-400">Rp.
-                                    {{ number_format(($cart->total ?? 0) * 0.1, 0, ',', '.') }}</span>
+                                <span id="ppn" class="text-slate-400">Rp.
+                                    {{ number_format($ppn ?? 0, 0, ',', '.') }}</span>
                             </li>
                             <li
                                 class="flex justify-between font-semibold p-4 border-t border-gray-200 dark:border-gray-600">
                                 <span class="font-semibold text-lg">Total :</span>
-                                <span class="font-semibold">Rp.
-                                    {{ number_format(($cart->total ?? 0) * 1.1, 0, ',', '.') }}</span>
+                                <span id="total" class="font-semibold">Rp.
+                                    {{ number_format($totalPayment ?? 0, 0, ',', '.') }}</span>
                             </li>
                         </ul>
                     </div>
@@ -108,4 +116,54 @@
         </div><!--end container-->
     </section><!--end section-->
     <!-- End -->
+
+    <script>
+        function updateQuantity(element, increment = 0) {
+            const quantityInput = element.closest('.qty-icons').querySelector('.quantity');
+            const cartId = quantityInput.getAttribute('data-cart-id');
+
+            // Calculate and set new quantity
+            let newQuantity = parseInt(quantityInput.value) + increment;
+            newQuantity = Math.max(1, newQuantity);
+            quantityInput.value = newQuantity;
+
+            // AJAX request to update quantity
+            fetch(`/cart/${cartId}`, {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
+                    },
+                    body: JSON.stringify({
+                        quantity: newQuantity
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(data => {
+                            // If there's an error message, display it and reload the page
+                            alert(data.error);
+                            location.reload(); // Reload the page
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("Response Data:", data); // Debugging: Check response data in console
+                    if (data.success) {
+                        // Update subtotal, PPN, and total in UI
+                        document.getElementById("subtotal").innerText = `Rp. ${data.subTotalPayment}`;
+                        document.getElementById("ppn").innerText = `Rp. ${data.ppn}`;
+                        document.getElementById("total").innerText = `Rp. ${data.totalPayment}`;
+
+                        // Update item-specific total
+                        quantityInput.closest('tr').querySelector('.item-total').innerText = `Rp. ${data.itemTotal}`;
+                    } else {
+                        console.error("Update Failed:", data.error);
+                        alert(data.error || "Failed to update cart.");
+                    }
+                })
+                .catch(error => console.error("Error:", error));
+        }
+    </script>
 @endsection

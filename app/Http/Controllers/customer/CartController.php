@@ -74,9 +74,9 @@ class CartController extends Controller
 
             // Check if the product is already in the cart
             $cart = Cart::where('user_id', $user->id)
-                    ->where('product_id', $product->id)
-                    ->whereNull('deleted_at')
-                    ->first();
+                ->where('product_id', $product->id)
+                ->whereNull('deleted_at')
+                ->first();
 
             // Check if the cart contains items from a different store
             $existingCart = Cart::where('user_id', $user->id)->whereNull('deleted_at')->first();
@@ -147,17 +147,13 @@ class CartController extends Controller
      */
     public function update(Request $request, Cart $cart)
     {
-        $request->validate([
-            'quantity' => 'required|integer|min:1',
-            'checkout' => 'required|boolean',
-        ]);
+        $request->validate(['quantity' => 'required|integer|min:1']);
 
         $user = Auth::user();
         if (!$user) {
-            return redirect()->route('login')->with('error', 'You must be logged in to update the cart.');
+            return response()->json(['error' => 'You must be logged in to update the cart.'], 403);
         }
 
-        // Start a database transaction
         DB::beginTransaction();
         try {
             $product = Product::lockForUpdate()->findOrFail($cart->product_id);
@@ -166,10 +162,11 @@ class CartController extends Controller
             $availableStock = $product->stock + $cart->quantity;
             if ($availableStock < $request->quantity) {
                 DB::rollBack();
-                return redirect()->route('customer.cart.index')->with('error', 'The requested quantity is not available in stock.');
+                return response()->json(['error' => 'The requested quantity is not available in stock.'], 400);
             }
 
             // Update the cart item
+            $product->stock += $cart->quantity; // Revert the stock to the original state
             $cart->quantity = $request->quantity;
             $cart->total = $cart->price * $cart->quantity;
             $cart->save();
@@ -178,18 +175,24 @@ class CartController extends Controller
             $product->stock = $availableStock - $request->quantity;
             $product->save();
 
-            // Commit the transaction
+            // Calculate totals
+            $subTotalPayment = Cart::where('user_id', $user->id)->sum('total');
+            $ppn = $subTotalPayment * 0.1;
+            $totalPayment = $subTotalPayment + $ppn;
+
             DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'subTotalPayment' => number_format($subTotalPayment, 0, ',', '.'),
+                'ppn' => number_format($ppn, 0, ',', '.'),
+                'totalPayment' => number_format($totalPayment, 0, ',', '.'),
+                'itemTotal' => number_format($cart->total, 0, ',', '.')
+            ]);
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Error updating cart: ' . $e->getMessage());
-            return redirect()->route('customer.cart.index')->with('error', 'An error occurred while updating the cart.');
-        }
-
-        if ($request->checkout) {
-            return redirect()->route('customer.order.index')->with('success', 'Cart successfully updated and ready for checkout.');
-        } else {
-            return redirect()->route('customer.cart.index')->with('success', 'Cart successfully updated.');
+            return response()->json(['error' => 'An error occurred while updating the cart.'], 500);
         }
     }
 

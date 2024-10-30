@@ -7,6 +7,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\customer\CartController;
 use App\Http\Controllers\customer\ProductController;
+use App\Http\Controllers\customer\OrderController;
 use App\Http\Controllers\SuperAdmin\CategoryController;
 use App\Http\Controllers\SuperAdmin\StoreController;
 use App\Http\Controllers\SuperAdmin\CustomerController as SuperAdminCustomerController;
@@ -26,7 +27,7 @@ Route::middleware([
             Route::resource('/cart', CartController::class)->names('customer.cart');
             Route::resource('/product', ProductController::class)->names('customer.product');
             // Route::get('/detail-product/{id}', [CustomerController::class, 'detailProduct'])->name('customer.product.detail');
-            Route::get('/checkout', [CustomerController::class, 'checkout'])->name('customer.checkout');
+            Route::resource('/checkout', OrderController::class)->names('customer.checkout');
         });
         Route::middleware(['admin'])->group(function () {
             Route::prefix('admin')->group(function () {

@@ -85,7 +85,7 @@
 
                 <div class="grid lg:grid-cols-12 md:grid-cols-2 grid-cols-1 mt-6 gap-6">
                     <div class="lg:col-span-7 md:order-1 order-3">
-                        <a href="{{ route('customer.checkout') }}"
+                        <a href="{{ route('customer.checkout.create') }}"
                             class="py-2 px-5 w-full inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md me-2 mt-2">Buat
                             Pemesanan</a>
                     </div>

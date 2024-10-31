@@ -1,4 +1,4 @@
-<div class="container relative mt-16">
+<div class="container relative">
     <div class="grid grid-cols-1 items-center">
         <h3 class="text-2xl leading-normal font-semibold">Kategori</h3>
     </div><!--end grid-->

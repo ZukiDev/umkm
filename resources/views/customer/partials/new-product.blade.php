@@ -1,4 +1,4 @@
-<div class="container relative mt-16">
+<div class="container relative py-16">
     <div class="grid grid-cols-1 items-center">
         <h3 class="text-2xl leading-normal font-semibold">Produk Terbaru</h3>
     </div><!--end grid-->
@@ -7,8 +7,10 @@
         @foreach ($allProduct as $product)
             <div class="group">
                 <div
-                    class="relative overflow-hidden shadow dark:shadow-gray-700 group-hover:shadow-lg group-hover:dark:shadow-gray-700 rounded-md duration-500">
-                    <img src="{{ asset('storage/products/' . $product->images) }}" alt="{{ $product->name }}">
+                    class="relative overflow-hidden shadow dark:shadow-gray-700 group-hover:shadow-lg group-hover:dark:shadow-gray-700 rounded-md duration-500 w-full h-full">
+                    <img src="{{ asset('storage/products/' . $product->images) }}" alt="{{ $product->name }}"
+                        class="w-full h-full object-cover">
+
                     <div class="absolute -bottom-20 group-hover:bottom-3 start-3 end-3 duration-500">
                         <form action="{{ route('customer.cart.store', $product->id) }}" method="POST">
                             @csrf
@@ -48,7 +50,7 @@
                         <p class="text-red-600">{{ $product->stock ?? 0 }} Terjual</p>
                     </div>
                 </div>
-            </div><!--end content-->
+            </div>
         @endforeach
     </div><!--end grid-->
 </div><!--end container-->

@@ -2,7 +2,7 @@
 <nav id="topnav" class="defaultscroll is-sticky bg-white dark:bg-slate-900">
     <div class="container relative">
         <!-- Logo container-->
-        <a class="logo" href="index.html">
+        <a class="logo" href="{{ route('home') }}">
             <img src="{{ asset('asset/images/logo-dark.png') }}" class="inline-block dark:hidden" alt="">
             <img src="{{ asset('asset/images/logo-light.png') }}" class="hidden dark:inline-block" alt="">
         </a>
@@ -79,7 +79,7 @@
                 <li class="inline-block">
                     <a href="{{ route('login') }}"
                         class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md">
-                        <i class="mdi mdi-account"></i> Masuk/Daftar
+                        <i class="mdi mdi-account"></i> Masuk
                     </a>
                 </li>
             @endguest

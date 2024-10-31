@@ -11,7 +11,7 @@
             <div class="relative mt-3">
                 <ul class="tracking-[0.5px] mb-0 inline-block">
                     <li class="inline-block uppercase text-[13px] font-bold duration-500 ease-in-out hover:text-indigo-600">
-                        <p href="index-shop.html">{{ config('app.name', 'UMKM Blitar') }}</p>
+                        <p href="{{ route('home') }}">{{ config('app.name', 'UMKM Blitar') }}</p>
                     </li>
                     <li class="inline-block text-base text-slate-950 dark:text-white mx-0.5 ltr:rotate-0 rtl:rotate-180"><i
                             class="uil uil-angle-right-b"></i></li>
@@ -25,7 +25,7 @@
     <!-- End Hero -->
 
     <!-- Start -->
-    <section class="relative md:py-24 py-16">
+    <section class="relative pb-16">
         <div class="container">
             <div class="grid md:grid-cols-12 grid-cols-1 gap-[30px] items-center">
                 <div class="lg:col-span-5 md:col-span-6">
@@ -57,11 +57,13 @@
                                 <div class="flex items-center">
                                     <h5 class="text-lg font-semibold me-2">Jumlah:</h5>
                                     <div class="qty-icons ms-3 flex items-center">
-                                        <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                        <button type="button"
+                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
                                             class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border-indigo-600/10 border hover:border-indigo-600 text-indigo-600 hover:text-white minus">-</button>
                                         <input min="1" name="quantity" value="1" type="number"
                                             class="h-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white pointer-events-none w-16 ps-4 quantity">
-                                        <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                        <button type="button"
+                                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
                                             class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white plus">+</button>
                                     </div>
                                     <!-- Teks Stok tersedia -->

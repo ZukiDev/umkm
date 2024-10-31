@@ -11,7 +11,7 @@
             <div class="relative mt-3">
                 <ul class="tracking-[0.5px] mb-0 inline-block">
                     <li class="inline-block uppercase text-[13px] font-bold duration-500 ease-in-out hover:text-indigo-600">
-                        <p href="index-shop.html">{{ config('app.name', 'UMKM Blitar') }}</p>
+                        <p href="{{ route('home') }}">{{ config('app.name', 'UMKM Blitar') }}</p>
                     </li>
                     <li class="inline-block text-base text-slate-950 dark:text-white mx-0.5 ltr:rotate-0 rtl:rotate-180"><i
                             class="uil uil-angle-right-b"></i></li>
@@ -24,7 +24,7 @@
     <!-- End Hero -->
 
     <!-- Start -->
-    <section class="relative md:py-24 py-16">
+    <section class="relative pb-16">
         <div class="container">
             <div class="grid lg:grid-cols-12 md:grid-cols-2 grid-cols-1 gap-[30px]">
                 <div class="lg:col-span-8">

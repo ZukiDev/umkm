@@ -11,7 +11,7 @@
             <div class="relative mt-3">
                 <ul class="tracking-[0.5px] mb-0 inline-block">
                     <li class="inline-block uppercase text-[13px] font-bold duration-500 ease-in-out hover:text-indigo-600">
-                        <p href="index-shop.html">{{ config('app.name', 'UMKM Blitar') }}</p>
+                        <p href="{{ route('home') }}">{{ config('app.name', 'UMKM Blitar') }}</p>
                     </li>
                     <li class="inline-block text-base text-slate-950 dark:text-white mx-0.5 ltr:rotate-0 rtl:rotate-180"><i
                             class="uil uil-angle-right-b"></i></li>
@@ -25,7 +25,7 @@
     <!-- End Hero -->
 
     <!-- Start -->
-    <section class="relative md:py-24 py-16">
+    <section class="relative pb-32">
         <div class="container">
             <div class="grid md:grid-cols-12 grid-cols-1 gap-[30px]">
                 <div class="lg:col-span-4 md:col-span-6">
@@ -92,9 +92,10 @@
                         @foreach ($products as $product)
                             <div class="group">
                                 <div
-                                    class="relative overflow-hidden shadow dark:shadow-gray-700 group-hover:shadow-lg group-hover:dark:shadow-gray-700 rounded-md duration-500">
+                                    class="relative overflow-hidden shadow dark:shadow-gray-700 group-hover:shadow-lg group-hover:dark:shadow-gray-700 rounded-md duration-500 w-full h-full">
                                     <img src="{{ asset('storage/products/' . $product->images) }}"
-                                        alt="{{ $product->name }}">
+                                        alt="{{ $product->name }}" class="w-full h-full object-cover">
+
                                     <div class="absolute -bottom-20 group-hover:bottom-3 start-3 end-3 duration-500">
                                         <form action="{{ route('customer.cart.store', $product->id) }}" method="POST">
                                             @csrf
@@ -129,12 +130,11 @@
                                         class="hover:text-indigo-600 text-lg font-semibold">{{ $product->name ?? 'Nama Produk' }}</a>
                                     <div class="flex justify-between items-center mt-1 font-semibold">
                                         <p class="text-green-600">Rp.
-                                            {{ number_format($product->price ?? 0, 0, ',', '.') }}
-                                        </p>
+                                            {{ number_format($product->price ?? 0, 0, ',', '.') }}</p>
                                         <p class="text-red-600">{{ $product->stock ?? 0 }} Terjual</p>
                                     </div>
                                 </div>
-                            </div><!--end content-->
+                            </div>
                         @endforeach
                     </div><!--end grid-->
                 </div>

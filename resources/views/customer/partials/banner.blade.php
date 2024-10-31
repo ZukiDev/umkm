@@ -10,13 +10,14 @@
                 <div class="grid grid-cols-1">
                     <div class="md:text-start text-center">
                         <h1 class="font-bold text-white lg:leading-normal leading-normal text-4xl lg:text-5xl mb-6">
-                            New Accessories <br> Collections</h1>
-                        <p class="text-white/70 text-xl max-w-xl">Start working with Tailwind CSS that can provide
-                            everything you need to generate awareness, drive traffic, connect.</p>
+                            Dukung UMKM Blitar, <br> Belanja Lokal dengan Mudah!</h1>
+                        <p class="text-white/70 text-xl max-w-xl">Temukan produk berkualitas dari para pengusaha lokal
+                            Blitar. Dengan setiap pembelian, Anda turut berkontribusi pada kemajuan UMKM Blitar,
+                            menciptakan peluang, dan memperkuat ekonomi lokal.</p>
                         <div class="mt-6">
-                            <a href=""
+                            <a href="{{ route('register') }}"
                                 class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md me-2 mt-2"><i
-                                    class="mdi mdi-cart-outline"></i> Shop Now</a>
+                                    class="mdi mdi-door"></i> Buat Akun</a>
                         </div>
                     </div>
                 </div><!--end grid-->

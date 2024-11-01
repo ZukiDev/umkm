@@ -31,7 +31,7 @@
                     <div class="p-6 rounded-md shadow dark:shadow-gray-800">
                         <h3 class="text-xl leading-normal font-semibold">Alamat Pengiriman</h3>
 
-                        <form action="{{ route('customer.checkout.store') }}" method="POST">
+                        <form action="{{ route('customer.order.store') }}" method="POST">
                             @csrf
                             <div class="grid lg:grid-cols-12 grid-cols-1 mt-6 gap-5">
                                 <div class="lg:col-span-6">

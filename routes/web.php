@@ -27,7 +27,8 @@ Route::middleware([
             Route::resource('/cart', CartController::class)->names('customer.cart');
             Route::resource('/product', ProductController::class)->names('customer.product');
             // Route::get('/detail-product/{id}', [CustomerController::class, 'detailProduct'])->name('customer.product.detail');
-            Route::resource('/checkout', OrderController::class)->names('customer.checkout');
+            Route::resource('/order', OrderController::class)->names('customer.order');
+            Route::get('/checkout', [OrderController::class, 'create'])->name('customer.checkout');
         });
         Route::middleware(['admin'])->group(function () {
             Route::prefix('admin')->group(function () {

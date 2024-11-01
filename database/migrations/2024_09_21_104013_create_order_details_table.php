@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('order_details', function (Blueprint $table) {
             $table->id();
-            $table->string('code_order',255)->unique();
+            $table->string('code_order',255);
             $table->foreignIdFor(Product::class);
             $table->integer('quantity'); // Jumlah produk
             $table->bigInteger('price'); // Harga produk saat dimasukkan ke keranjang

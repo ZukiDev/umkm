@@ -4,11 +4,13 @@ namespace App\Http\Controllers\customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Address;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
 use App\Models\OrderDetail;
 use App\Models\Payment;
+use Carbon\Carbon;
 
 class OrderController extends Controller
 {
@@ -54,13 +56,45 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedAddress = $request->validate([
+            'address' => 'required|string|max:255',
+            'province' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'district' => 'required|string|max:255',
+            'post_code' => 'required|string|max:20',
+            'delivery_instructions' => 'nullable|string|max:500',
+        ]);
+        $validatedPaymentMethod = $request->validate([
+            'payment_method' => 'required|string',
+        ]);
+
         $user = Auth::user();
         $address = $user->address;
+
+        // Update the user's address if it doesn't match the input
+        if (
+            $validatedAddress['address'] !== $address->address ||
+            $validatedAddress['province'] !== $address->province ||
+            $validatedAddress['city'] !== $address->city ||
+            $validatedAddress['district'] !== $address->district ||
+            $validatedAddress['post_code'] !== $address->post_code
+        ) {
+            $address->update($validatedAddress);
+        }
+        // Check if the user has an address
+        if (!$address) {
+            // Create a new address for the user
+            $address = Address::create(array_merge($validatedAddress, ['user_id' => $user->id]));
+        }
+
+
         $carts = Cart::where('user_id', $user->id)->get();
 
         if ($carts->isEmpty()) {
             return redirect()->back()->with('error', 'Your cart is empty.');
         }
+
+
 
         // Calculate the sub total payment
         $subTotalPayment = $carts->sum(fn($cart) => $cart->price * $cart->quantity);
@@ -97,7 +131,7 @@ class OrderController extends Controller
         // Create a new payment record
         Payment::create([
             'order_id' => $order->id,
-            'payment_method' => $request->input('payment_method'),
+            'payment_method' => $validatedPaymentMethod['payment_method'],
             'total_price' => $subTotalPayment,
             'total_payment' => $totalPayment,
             'status' => 0, // pending
@@ -108,20 +142,32 @@ class OrderController extends Controller
         Cart::where('user_id', $user->id)->delete();
 
         // Get the store phone number from the first cart item
-        $storePhoneNumber = $carts->first()->store->phone_number;
+        $storePhoneNumber = $carts->first()->product->store->phone_number;
 
         // Prepare the WhatsApp message
         $whatsappMessage = "Order Details:\n";
         $whatsappMessage .= "Order Code: $codeOrder\n";
-        $whatsappMessage .= "Total Payment: $totalPayment\n\n";
+        $whatsappMessage .= "Total Payment: Rp $totalPayment\n\n";
         $whatsappMessage .= "Order Items:\n";
         foreach ($orderDetails as $detail) {
-            $whatsappMessage .= "Product ID: {$detail['product_id']}, Quantity: {$detail['quantity']}, Price: {$detail['price']}, Total: {$detail['total']}\n";
+            $productName = $carts->firstWhere('product_id', $detail['product_id'])->product->name;
+            $whatsappMessage .= "Product Name: $productName, Quantity: {$detail['quantity']}, Price: Rp {$detail['price']}, Total: Rp {$detail['total']}\n";
         }
         $whatsappMessage .= "\nPayment Details:\n";
         $whatsappMessage .= "Payment Method: {$request->input('payment_method')}\n";
-        $whatsappMessage .= "Total Price: $subTotalPayment\n";
-        $whatsappMessage .= "Total Payment: $totalPayment\n";
+        $whatsappMessage .= "Total Price: Rp $subTotalPayment\n";
+        $whatsappMessage .= "PPN: Rp $ppn\n";
+        $whatsappMessage .= "Total Payment: Rp $totalPayment\n\n";
+        $whatsappMessage .= "Shipping Address:\n";
+        $whatsappMessage .= "Address: {$address->address}\n";
+        $whatsappMessage .= "Province: {$address->province}\n";
+        $whatsappMessage .= "City: {$address->city}\n";
+        $whatsappMessage .= "District: {$address->district}\n";
+        $whatsappMessage .= "Post Code: {$address->post_code}\n";
+
+        // Add order date and time using Carbon
+        $orderDateTime = Carbon::now()->format('l, d F Y H:i');
+        $whatsappMessage .= "\nOrder Date and Time: $orderDateTime\n";
 
         // Redirect to WhatsApp with the message
         $whatsappUrl = "https://wa.me/$storePhoneNumber?text=" . urlencode($whatsappMessage);

@@ -5,114 +5,50 @@
             <div class="col-span-12">
                 <div class="py-[60px] px-0">
                     <div class="grid md:grid-cols-12 grid-cols-1 gap-[30px]">
-                        <div class="lg:col-span-3 md:col-span-12">
+                        <div class="lg:col-span-5 md:col-span-12">
                             <a href="#" class="text-[22px] focus:outline-none">
                                 <img src="{{ asset('asset/images/logo-light.png') }}" alt="">
                             </a>
-                            <p class="mt-6 text-gray-300">Start working with Tailwind CSS that can provide
-                                everything you need to generate awareness, drive traffic, connect.</p>
+                            <p class="mt-6 text-gray-300">"Temukan produk berkualitas dari para pengusaha lokal Blitar.
+                                Dengan setiap pembelian, Anda turut berkontribusi pada kemajuan UMKM Blitar, menciptakan
+                                peluang, dan memperkuat ekonomi lokal.</p>
                         </div><!--end col-->
 
-                        <div class="lg:col-span-6 md:col-span-12">
+                        @php
+                            $categories = DB::table('categories')->get();
+                        @endphp
+
+                        <div class="lg:col-span-4 md:col-span-12">
                             <h5 class="tracking-[1px] text-gray-100 font-semibold">Kategori</h5>
 
                             <div class="grid md:grid-cols-12 grid-cols-1">
-                                <div class="md:col-span-4">
-                                    <ul class="list-none footer-list mt-6">
-                                        <li><a href=""
-                                                class="text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i
-                                                    class="uil uil-angle-right-b"></i> Men</a></li>
-                                        <li class="mt-[10px]"><a href=""
-                                                class="text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i
-                                                    class="uil uil-angle-right-b"></i> Jackets & Coats </a></li>
-                                        <li class="mt-[10px]"><a href=""
-                                                class="text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i
-                                                    class="uil uil-angle-right-b"></i> Jeans </a></li>
-                                        <li class="mt-[10px]"><a href=""
-                                                class="text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i
-                                                    class="uil uil-angle-right-b"></i> Loungewear </a></li>
-                                        <li class="mt-[10px]"><a href=""
-                                                class="text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i
-                                                    class="uil uil-angle-right-b"></i> Polo shirts </a></li>
-                                        <li class="mt-[10px]"><a href=""
-                                                class="text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i
-                                                    class="uil uil-angle-right-b"></i> Shirts</a></li>
-                                    </ul>
-                                </div><!--end col-->
-
-                                <div class="md:col-span-4">
-                                    <ul class="list-none footer-list mt-6">
-                                        <li><a href=""
-                                                class="text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i
-                                                    class="uil uil-angle-right-b"></i> Shorts </a></li>
-                                        <li class="mt-[10px]"><a href=""
-                                                class="text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i
-                                                    class="uil uil-angle-right-b"></i> Suits Swimwear </a></li>
-                                        <li class="mt-[10px]"><a href=""
-                                                class="text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i
-                                                    class="uil uil-angle-right-b"></i> T-shirts </a></li>
-                                        <li class="mt-[10px]"><a href=""
-                                                class="text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i
-                                                    class="uil uil-angle-right-b"></i> Tracksuits </a></li>
-                                        <li class="mt-[10px]"><a href=""
-                                                class="text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i
-                                                    class="uil uil-angle-right-b"></i> Trousers</a></li>
-                                        <li class="mt-[10px]"><a href=""
-                                                class="text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i
-                                                    class="uil uil-angle-right-b"></i> Shirts</a></li>
-                                    </ul>
-                                </div><!--end col-->
-
-                                <div class="md:col-span-4">
-                                    <ul class="list-none footer-list mt-6">
-                                        <li><a href=""
-                                                class="text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i
-                                                    class="uil uil-angle-right-b"></i> My account </a></li>
-                                        <li class="mt-[10px]"><a href=""
-                                                class="text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i
-                                                    class="uil uil-angle-right-b"></i> Order History </a></li>
-                                        <li class="mt-[10px]"><a href=""
-                                                class="text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i
-                                                    class="uil uil-angle-right-b"></i> Wish List </a></li>
-                                        <li class="mt-[10px]"><a href=""
-                                                class="text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i
-                                                    class="uil uil-angle-right-b"></i> Newsletter</a></li>
-                                        <li class="mt-[10px]"><a href=""
-                                                class="text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i
-                                                    class="uil uil-angle-right-b"></i> Affiliate</a></li>
-                                        <li class="mt-[10px]"><a href=""
-                                                class="text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i
-                                                    class="uil uil-angle-right-b"></i> Returns</a></li>
-                                    </ul>
-                                </div><!--end col-->
+                                @foreach ($categories->chunk(6) as $chunk)
+                                    <div class="md:col-span-4">
+                                        <ul class="list-none footer-list mt-6">
+                                            @foreach ($chunk as $category)
+                                                <li
+                                                    class="mt-[10px] text-gray-300 hover:text-gray-400 duration-500 ease-in-out">
+                                                    <i class="uil uil-angle-right-b"></i> {{ $category->title }}
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div><!--end col-->
+                                @endforeach
                             </div>
                         </div>
 
-                        <div class="lg:col-span-3 md:col-span-4">
+                        <div class="lg:col-span-2 md:col-span-4">
                             <h5 class="tracking-[1px] text-gray-100 font-semibold">Kontak Kami</h5>
                             <ul class="list-none mt-6">
-                                <li class="inline"><a href="https://1.envato.market/techwind" target="_blank"
-                                        class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center border-gray-800 rounded-md border hover:border-indigo-600 dark:hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-600"><i
-                                            class="uil uil-shopping-cart align-middle" title="Buy Now"></i></a>
-                                </li>
-                                <li class="inline"><a href="https://dribbble.com/shreethemes" target="_blank"
-                                        class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center border-gray-800 rounded-md border hover:border-indigo-600 dark:hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-600"><i
-                                            class="uil uil-dribbble align-middle" title="dribbble"></i></a></li>
-                                <li class="inline"><a href="https://www.behance.net/shreethemes" target="_blank"
-                                        class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center border-gray-800 rounded-md border hover:border-indigo-600 dark:hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-600"><i
-                                            class="uil uil-behance" title="Behance"></i></a></li>
-                                <li class="inline"><a href="http://linkedin.com/company/shreethemes" target="_blank"
-                                        class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center border-gray-800 rounded-md border hover:border-indigo-600 dark:hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-600"><i
-                                            class="uil uil-linkedin" title="Linkedin"></i></a></li>
-                                <li class="inline"><a href="https://www.facebook.com/shreethemes" target="_blank"
+                                <li class="inline"><a href="#" target="_blank"
                                         class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center border-gray-800 rounded-md border hover:border-indigo-600 dark:hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-600"><i
                                             class="uil uil-facebook-f align-middle" title="facebook"></i></a>
                                 </li>
-                                <li class="inline"><a href="https://www.instagram.com/shreethemes/" target="_blank"
+                                <li class="inline"><a href="#/" target="_blank"
                                         class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center border-gray-800 rounded-md border hover:border-indigo-600 dark:hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-600"><i
                                             class="uil uil-instagram align-middle" title="instagram"></i></a>
                                 </li>
-                                <li class="inline"><a href="https://twitter.com/shreethemes" target="_blank"
+                                <li class="inline"><a href="#" target="_blank"
                                         class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center border-gray-800 rounded-md border hover:border-indigo-600 dark:hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-600"><i
                                             class="uil uil-twitter align-middle" title="twitter"></i></a></li>
                             </ul><!--end icon-->
@@ -133,7 +69,7 @@
 
                     <div class="flex items-center lg:justify-center">
                         <i class="uil uil-archive align-middle text-lg mb-0 me-2"></i>
-                        <h6 class="mb-0 font-medium">Tanpa Kontak Fisik</h6>
+                        <h6 class="mb-0 font-medium">Produk Lokal</h6>
                     </div><!--end content-->
 
                     <div class="flex items-center lg:justify-center">

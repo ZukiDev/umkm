@@ -55,7 +55,8 @@
                                     {{ Auth::user()->name }}</p>
                             </li>
                             <li>
-                                <a href="#" class="block py-1.5 px-4 hover:text-indigo-600"><i
+                                <a href="{{ route('customer.order.index') }}"
+                                    class="block py-1.5 px-4 hover:text-indigo-600"><i
                                         class="uil uil-clipboard-notes align-middle me-1"></i> Pemesanan</a>
                                 <a href="{{ route('customer.profile.index') }}"
                                     class="block py-1.5 px-4 hover:text-indigo-600"><i

@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\customer\CartController;
 use App\Http\Controllers\customer\ProductController;
 use App\Http\Controllers\customer\OrderController;
+use App\Http\Controllers\customer\ProfileController;
 use App\Http\Controllers\SuperAdmin\CategoryController;
 use App\Http\Controllers\SuperAdmin\StoreController;
 use App\Http\Controllers\SuperAdmin\CustomerController as SuperAdminCustomerController;
@@ -23,7 +24,7 @@ Route::middleware([
 
     Route::middleware(['auth'])->group(function () {
         Route::middleware(['customer'])->group(function () {
-            Route::get('/profile', [CustomerController::class, 'profile'])->name('customer.profile');
+            Route::resource('/profile', ProfileController::class)->names('customer.profile');
             Route::resource('/cart', CartController::class)->names('customer.cart');
             Route::resource('/product', ProductController::class)->names('customer.product');
             // Route::get('/detail-product/{id}', [CustomerController::class, 'detailProduct'])->name('customer.product.detail');

@@ -40,35 +40,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Dummy Order 1 -->
+                            @foreach ($orders as $order)
+                            @php
+                                $orderDetails = App\Models\OrderDetail::where('code_order', $order->code_order)->get();
+                                $productUmkm = $orderDetails->first()->product;
+                                $umkm = $productUmkm->store;
+                            @endphp
                             <tr class="bg-white dark:bg-slate-900">
-                                <td class="p-4">1</td>
-                                <td class="p-4">2024-11-02</td>
-                                <td class="p-4">ORD123456</td>
-                                <td class="p-4">UMKM Blitar Jaya</td>
+                                <td class="p-4">{{ $loop->iteration }}</td>
+                                <td class="p-4">{{ $order->created_at }}</td>
+                                <td class="p-4">{{ $order->code_order }}</td>
+                                <td class="p-4">{{ $umkm->store_name }}</td>
                                 <td class="p-4">
                                     <ul class="list-disc list-inside">
-                                        <li>Product A - 2 pcs</li>
-                                        <li>Product B - 1 pc</li>
+                                        @foreach ($orderDetails as $orderDetail)
+                                            <li>{{ $orderDetail->product->name }} - {{ $orderDetail->quantity }} pcs</li>
+                                        @endforeach
                                     </ul>
                                 </td>
-                                <td class="p-4 text-end">Rp. 175,000</td>
+                                <td class="p-4 text-end">Rp. {{ number_format($order->total, 0, ',', '.') }}</td>
                             </tr>
-
-                            <!-- Dummy Order 2 -->
-                            <tr class="bg-white dark:bg-slate-900">
-                                <td class="p-4">2</td>
-                                <td class="p-4">2024-11-01</td>
-                                <td class="p-4">ORD123457</td>
-                                <td class="p-4">UMKM Sejahtera</td>
-                                <td class="p-4">
-                                    <ul class="list-disc list-inside">
-                                        <li>Product C - 3 pcs</li>
-                                        <li>Product D - 1 pc</li>
-                                    </ul>
-                                </td>
-                                <td class="p-4 text-end">Rp. 225,000</td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div><!--end table-->

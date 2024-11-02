@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CustomerController;
@@ -36,6 +37,7 @@ Route::middleware([
                 Route::get('/profile', [AdminController::class, 'profile'])->name('admin.profile');
                 Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.index');
                 Route::resource('/product', AdminProductController::class)->names('admin.product');
+                Route::resource('/order', AdminOrderController::class)->names('admin.order');
             });
         });
 

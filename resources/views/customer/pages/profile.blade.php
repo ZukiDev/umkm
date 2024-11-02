@@ -127,7 +127,7 @@
                         <div class="hidden" id="address" role="tabpanel" aria-labelledby="address-tab">
                             <h6 class="text-slate-400 mb-4">Alamat berikut akan digunakan pada halaman pembayaran secara
                                 default.</h6>
-                            <form action="" method="POST">
+                            <form action="{{ route('customer.profile.update') }}" method="POST">
                                 @csrf <!-- Token CSRF untuk keamanan -->
                                 <div class="md:w-full md:px-3">
                                     <div class="grid lg:grid-cols-2 grid-cols-1 gap-6">
@@ -137,7 +137,7 @@
                                                     class="text-red-600">*</span></label>
                                             <input type="text" name="name"
                                                 class="form-input w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0 mt-2"
-                                                placeholder="Nama Lengkap" required>
+                                                placeholder="Nama Lengkap" value="{{ $user->name }}" required>
                                         </div>
 
                                         <!-- Phone Number -->
@@ -146,7 +146,7 @@
                                                     class="text-red-600">*</span></label>
                                             <input type="text" name="phone_number"
                                                 class="form-input w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0 mt-2"
-                                                placeholder="Nomor Telepon" required>
+                                                placeholder="Nomor Telepon" value="{{ $user->phone_number }}" required>
                                         </div>
 
                                         <!-- Address -->
@@ -155,7 +155,7 @@
                                                     class="text-red-600">*</span></label>
                                             <input type="text" name="address"
                                                 class="form-input w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0 mt-2"
-                                                placeholder="Alamat" required>
+                                                placeholder="Alamat" value="{{ $address->address }}" required>
                                         </div>
 
                                         <!-- Province -->
@@ -164,7 +164,7 @@
                                                     class="text-red-600">*</span></label>
                                             <input type="text" name="province"
                                                 class="form-input w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0 mt-2"
-                                                placeholder="Provinsi" required>
+                                                placeholder="Provinsi" value="{{ $address->province }}" required>
                                         </div>
 
                                         <!-- City -->
@@ -173,7 +173,7 @@
                                                     class="text-red-600">*</span></label>
                                             <input type="text" name="city"
                                                 class="form-input w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0 mt-2"
-                                                placeholder="Kota" required>
+                                                placeholder="Kota" value="{{ $address->city }}" required>
                                         </div>
 
                                         <!-- District -->
@@ -182,7 +182,7 @@
                                                     class="text-red-600">*</span></label>
                                             <input type="text" name="district"
                                                 class="form-input w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0 mt-2"
-                                                placeholder="Kecamatan" required>
+                                                placeholder="Kecamatan" value="{{ $address->district }}" required>
                                         </div>
 
                                         <!-- Post Code -->
@@ -191,7 +191,7 @@
                                                     class="text-red-600">*</span></label>
                                             <input type="text" name="post_code"
                                                 class="form-input w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0 mt-2"
-                                                placeholder="Kode Pos" required>
+                                                placeholder="Kode Pos" value="{{ $address->post_code }}" required>
                                         </div>
 
                                         <!-- Delivery Instructions (optional) -->
@@ -199,7 +199,7 @@
                                             <label class="form-label font-semibold">Instruksi Pengiriman:</label>
                                             <textarea name="delivery_instructions"
                                                 class="form-input w-full py-2 px-3 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0 mt-2"
-                                                placeholder="Instruksi Pengiriman (opsional)"></textarea>
+                                                placeholder="Instruksi Pengiriman (opsional)">{{ $address->delivery_instructions }}</textarea>
                                         </div>
                                     </div>
 

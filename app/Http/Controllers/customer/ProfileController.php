@@ -5,8 +5,11 @@ namespace App\Http\Controllers\customer;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use App\Models\Address;
 
@@ -19,7 +22,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $address = $user->address;
-        
+
         return view('customer.pages.profile', compact('address'));
     }
 
@@ -42,9 +45,20 @@ class ProfileController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    // public function show(User $user)
+    // {
+
+    // }
+    public function show(Request $request)
     {
-        //
+        $user = Auth::user();
+        $address = $user->address;
+
+        return view('customer.pages.profile', [
+            'request' => $request,
+            'user' => $request->user(),
+            'address' => $address,
+        ]);
     }
 
     /**
@@ -58,14 +72,13 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
+        // dd($request);
+        $user = Auth::user();
         $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'max:255', 'unique:users,username,' . $user->id],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
             'phone_number' => ['required', 'string', 'max:255', 'unique:users,phone_number,' . $user->id],
-            'password' => ['nullable', 'string', Password::default(), 'confirmed'],
             'address' => 'required|string|max:255',
             'province' => 'required|string|max:255',
             'city' => 'required|string|max:255',
@@ -77,10 +90,7 @@ class ProfileController extends Controller
         // Update user information
         $user->update([
             'name' => $validatedData['name'],
-            'username' => $validatedData['username'],
-            'email' => $validatedData['email'],
             'phone_number' => $validatedData['phone_number'],
-            'password' => $request->password ? Hash::make($validatedData['password']) : $user->password,
         ]);
 
         // Update or create address
@@ -90,7 +100,7 @@ class ProfileController extends Controller
             'city' => $validatedData['city'],
             'district' => $validatedData['district'],
             'post_code' => $validatedData['post_code'],
-            'delivery_instructions' => $validatedData['delivery_instructions'],
+            'delivery_instructions' => $validatedData['delivery_instructions'] ?? $validatedData['address'],
         ];
 
         if ($user->address) {
@@ -99,7 +109,21 @@ class ProfileController extends Controller
             $user->address()->create($addressData);
         }
 
-        return redirect()->route('customer.profile.index')->with('success', 'Profile updated successfully.');
+        return redirect()->route('customer.profile')->with('success', 'Profile updated successfully.');
+    }
+
+    /**
+     * Update the verified user's information.
+     */
+    protected function updateVerifiedUser(User $user, Request $request)
+    {
+        $user->forceFill([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'email_verified_at' => null,
+        ])->save();
+
+        $user->sendEmailVerificationNotification();
     }
 
     /**

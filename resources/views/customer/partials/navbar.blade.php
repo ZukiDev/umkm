@@ -57,7 +57,7 @@
                             <li>
                                 <a href="#" class="block py-1.5 px-4 hover:text-indigo-600"><i
                                         class="uil uil-clipboard-notes align-middle me-1"></i> Pemesanan</a>
-                                <a href="{{ route('customer.profile.index') }}"
+                                <a href="{{ route('customer.profile') }}"
                                     class="block py-1.5 px-4 hover:text-indigo-600"><i
                                         class="uil uil-setting align-middle me-1"></i> Profil</a>
                             </li>

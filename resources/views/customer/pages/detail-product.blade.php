@@ -5,7 +5,7 @@
     <section class="relative table w-full py-20 lg:py-24 bg-gray-50 dark:bg-slate-800">
         <div class="container relative">
             <div class="grid grid-cols-1 mt-14">
-                <h3 class="text-3xl leading-normal font-semibold">Detail Produk {{ 'Nama Produk' }}</h3>
+                <h3 class="text-3xl leading-normal font-semibold">Detail {{ $product->name }}</h3>
             </div><!--end grid-->
 
             <div class="relative mt-3">
@@ -16,7 +16,7 @@
                     <li class="inline-block text-base text-slate-950 dark:text-white mx-0.5 ltr:rotate-0 rtl:rotate-180"><i
                             class="uil uil-angle-right-b"></i></li>
                     <li class="inline-block uppercase text-[13px] font-bold text-indigo-600" aria-current="page">Detail
-                        Produk {{ 'Nama Produk' }}
+                        {{ $product->name }}
                     </li>
                 </ul>
             </div>

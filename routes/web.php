@@ -15,6 +15,7 @@ use App\Http\Controllers\SuperAdmin\CustomerController as SuperAdminCustomerCont
 use App\Http\Controllers\SuperAdminController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::resource('/product', ProductController::class)->names('customer.product');
 
 Route::middleware([
     'auth:sanctum',
@@ -26,7 +27,6 @@ Route::middleware([
         Route::middleware(['customer'])->group(function () {
             Route::post('/address', [ProfileController::class, 'update'])->name('customer.profile.update');
             Route::resource('/cart', CartController::class)->names('customer.cart');
-            Route::resource('/product', ProductController::class)->names('customer.product');
             // Route::get('/detail-product/{id}', [CustomerController::class, 'detailProduct'])->name('customer.product.detail');
             Route::resource('/order', OrderController::class)->names('customer.order');
             Route::get('/checkout', [OrderController::class, 'create'])->name('customer.checkout');

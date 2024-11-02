@@ -20,9 +20,9 @@ class OrderController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $orders = Order::where('user_id', $user->id)->with(['orderDetails', 'payment'])->get();
+        // $orders = Order::where('user_id', $user->id)->with(['orderDetails', 'payment'])->get();
 
-        return view('customer.pages.orders', compact('orders'));
+        return view('customer.pages.order');
     }
 
     /**

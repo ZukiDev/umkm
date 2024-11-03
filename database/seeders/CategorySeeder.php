@@ -15,24 +15,34 @@ class CategorySeeder extends Seeder
     {
         $categories = [
             [
-                'title' => 'Technology',
-                'slug' => Str::slug('Technology'),
-                'icon' => 'https://example.com/icons/technology.png',
+                'title' => 'Teknologi',
+                'slug' => Str::slug('teknologi'),
+                'icon' => 'storage/asset/images/shop/items/s7.jpg',
             ],
             [
-                'title' => 'Education',
-                'slug' => Str::slug('Education'),
-                'icon' => 'https://example.com/icons/education.png',
+                'title' => 'Kesehatan',
+                'slug' => Str::slug('kesehatan'),
+                'icon' => 'storage/asset/images/shop/items/s16.jpg',
             ],
             [
-                'title' => 'Health',
-                'slug' => Str::slug('Health'),
-                'icon' => 'https://example.com/icons/health.png',
+                'title' => 'Bisnis',
+                'slug' => Str::slug('bisnis'),
+                'icon' => 'storage/asset/images/shop/items/s10.jpg',
             ],
             [
-                'title' => 'Business',
-                'slug' => Str::slug('Business'),
-                'icon' => 'https://example.com/icons/business.png',
+                'title' => 'Kuliner',
+                'slug' => Str::slug('kuliner'),
+                'icon' => 'storage/asset/images/shop/items/s13.jpg',
+            ],
+            [
+                'title' => 'Fashion',
+                'slug' => Str::slug('fashion'),
+                'icon' => 'storage/asset/images/shop/items/s1.jpg',
+            ],
+            [
+                'title' => 'Hobi',
+                'slug' => Str::slug('hobi'),
+                'icon' => 'storage/asset/images/shop/items/s3.jpg',
             ],
         ];
 

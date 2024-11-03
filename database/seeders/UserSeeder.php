@@ -15,7 +15,6 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        // Get roles (assuming role IDs are 1 for customer and 2 for admin)
         $customerRole = Role::where('role', 'customer')->first();
         $adminRole = Role::where('role', 'admin')->first();
 
@@ -24,38 +23,38 @@ class UserSeeder extends Seeder
             return;
         }
 
-        // Create 10 Customer users
-        for ($i = 1; $i <= 10; $i++) {
+        // Users
+        for ($i = 1; $i <= 4; $i++) {
             User::create([
                 'name' => 'Customer User ' . $i,
                 'username' => 'customer' . $i,
                 'email' => 'customer' . $i . '@gmail.com',
-                'phone_number' => '123456789' . $i,
+                'phone_number' => '08589264582' . $i,
                 'role_id' => $customerRole->id,
-                'address_id' => $i, // Assuming address seeder or static value will be used
-                'password' => Hash::make('password'), // hashed password
-            ]);
-        }
-
-        // Create 10 Admin users
-        for ($i = 1; $i <= 10; $i++) {
-            User::create([
-                'name' => 'Admin User ' . $i,
-                'username' => 'admin' . $i,
-                'email' => 'admin' . $i . '@gmail.com',
-                'phone_number' => '098765432' . $i,
-                'role_id' => $adminRole->id,
-                'address_id' => $i + 10, // Assuming address seeder or static value will be used
+                'address_id' => $i,
                 'password' => Hash::make('password'),
             ]);
         }
 
-        // Create Super Admin
+        // Admins
+        for ($i = 1; $i <= 8; $i++) {
+            User::create([
+                'name' => 'Admin User ' . $i,
+                'username' => 'admin' . $i,
+                'email' => 'admin' . $i . '@gmail.com',
+                'phone_number' => '08589264585' . $i,
+                'role_id' => $adminRole->id,
+                'address_id' => $i + 10,
+                'password' => Hash::make('password'),
+            ]);
+        }
+
+        // Super Admin
         User::create([
             'name' => 'Super Admin User',
             'username' => 'superadmin1',
             'email' => 'superadmin@gmail.com',
-            'phone_number' => '1122334455',
+            'phone_number' => '08589264581',
             'role_id' => 3,
             'address_id' => 3,
             'password' => Hash::make('password'),

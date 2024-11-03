@@ -5,16 +5,16 @@
             <div class="col-span-12">
                 <div class="py-[60px] px-0">
                     <div class="grid md:grid-cols-12 grid-cols-1 gap-[30px]">
-                        <div class="lg:col-span-5 md:col-span-12">
+                        <div class="lg:col-span-10 md:col-span-12">
                             <a href="#" class="text-[22px] focus:outline-none">
                                 <img src="{{ asset('asset/images/logo-light.png') }}" alt="">
                             </a>
-                            <p class="mt-6 text-gray-300">"Temukan produk berkualitas dari para pengusaha lokal Blitar.
+                            <p class="mt-6 text-gray-300">Temukan produk berkualitas dari para pengusaha lokal Blitar.
                                 Dengan setiap pembelian, Anda turut berkontribusi pada kemajuan UMKM Blitar, menciptakan
                                 peluang, dan memperkuat ekonomi lokal.</p>
                         </div><!--end col-->
 
-                        @php
+                        {{-- @php
                             $categories = DB::table('categories')->get();
                         @endphp
 
@@ -35,7 +35,7 @@
                                     </div><!--end col-->
                                 @endforeach
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="lg:col-span-2 md:col-span-4">
                             <h5 class="tracking-[1px] text-gray-100 font-semibold">Kontak Kami</h5>

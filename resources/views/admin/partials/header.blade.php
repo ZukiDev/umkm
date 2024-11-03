@@ -48,7 +48,7 @@
                     onclick="event.stopPropagation();">
                     <ul class="py-2 text-start">
                         <li>
-                            <a href="{{ route('superadmin.profile') }}"
+                            <a href="{{ route('admin.profile.index') }}"
                                 class="block font-medium py-1 px-4 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white"><i
                                     class="uil uil-user me-2"></i>Profil</a>
                         </li>

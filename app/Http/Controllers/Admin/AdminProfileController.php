@@ -84,8 +84,10 @@ class AdminProfileController extends Controller
             $user->updateProfilePhoto($request['photo']);
         }
 
-        if ($request['email'] !== $user->email &&
-            $user instanceof MustVerifyEmail) {
+        if (
+            $request['email'] !== $user->email &&
+            $user instanceof MustVerifyEmail
+        ) {
             $this->updateVerifiedUser($user, $request);
         } else {
             $user->forceFill([

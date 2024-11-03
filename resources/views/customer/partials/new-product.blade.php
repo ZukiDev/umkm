@@ -7,9 +7,9 @@
         @foreach ($allProduct as $product)
             <div class="group">
                 <div
-                    class="relative overflow-hidden shadow dark:shadow-gray-700 group-hover:shadow-lg group-hover:dark:shadow-gray-700 rounded-md duration-500 w-full h-full">
+                    class="relative overflow-hidden shadow dark:shadow-gray-700 group-hover:shadow-lg group-hover:dark:shadow-gray-700 rounded-md duration-500 w-full h-full min-h-full">
                     <img src="{{ asset('storage/products/' . $product->images) }}" alt="{{ $product->name }}"
-                        class="w-full h-full object-cover">
+                        class="w-full h-full min-h-full object-cover">
 
                     <div class="absolute -bottom-20 group-hover:bottom-3 start-3 end-3 duration-500">
                         <form action="{{ route('customer.cart.store', $product->id) }}" method="POST">

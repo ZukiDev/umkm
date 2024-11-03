@@ -53,7 +53,7 @@ class StoreSeeder extends Seeder
                 'phone_number' => '123-456-789' . $user->id,
                 'business_type' => 'Retail',
                 'status' => true,
-                'logo' => 'https://example.com/logo_umkm' . $user->id . '.png',
+                'logo' => 'http://127.0.0.1:8000/asset/images/shop/items/s' . $user->id . '.jpg',
                 'created_by' => $user->id,
             ]);
         }

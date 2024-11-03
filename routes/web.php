@@ -1,15 +1,18 @@
 <?php
 
-use App\Http\Controllers\Admin\ProductController as AdminProductController;
-use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\AdminController;
+//Admin
+use App\Http\Controllers\Admin\AdminProfileController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+//Customer
 use App\Http\Controllers\customer\CartController;
 use App\Http\Controllers\customer\ProductController;
 use App\Http\Controllers\customer\OrderController;
-use App\Http\Controllers\Customer\ProfileController;
+use App\Http\Controllers\customer\ProfileController;
+//SuperAdmin
 use App\Http\Controllers\SuperAdmin\CategoryController;
 use App\Http\Controllers\SuperAdmin\StoreController;
 use App\Http\Controllers\SuperAdmin\CustomerController as SuperAdminCustomerController;
@@ -28,14 +31,14 @@ Route::middleware([
         Route::middleware(['customer'])->group(function () {
             Route::post('/address', [ProfileController::class, 'update'])->name('customer.profile.update');
             Route::resource('/cart', CartController::class)->names('customer.cart');
-            // Route::get('/detail-product/{id}', [CustomerController::class, 'detailProduct'])->name('customer.product.detail');
             Route::resource('/order', OrderController::class)->names('customer.order');
             Route::get('/checkout', [OrderController::class, 'create'])->name('customer.checkout');
         });
         Route::middleware(['admin'])->group(function () {
             Route::prefix('admin')->group(function () {
-                Route::get('/profile', [AdminController::class, 'profile'])->name('admin.profile');
-                Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.index');
+                // Route::resource('/profile', AdminProfileController::class)->names('admin.profile');
+                Route::get('/profile', [AdminProfileController::class, 'index'])->name('admin.profile.index');
+                Route::resource('/dashboard', AdminDashboardController::class)->names('admin.dashboard');
                 Route::resource('/product', AdminProductController::class)->names('admin.product');
                 Route::resource('/order', AdminOrderController::class)->names('admin.order');
             });

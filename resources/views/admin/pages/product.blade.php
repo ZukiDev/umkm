@@ -194,10 +194,11 @@
                                         <div class="flex flex-col">
                                             <h4 class="font-semibold mb-4">Detail Tambahan</h4>
                                             <input name="weight" type="number"
-                                                class="border px-3 py-2 rounded w-full mb-4" placeholder="Berat (Kg)"
+                                                class="border px-3 py-2 rounded w-full mb-4" placeholder="Berat (Gram)"
                                                 value="{{ old('weight', $product->weight) }}">
                                             <input name="dimensions" type="text"
-                                                class="border px-3 py-2 rounded w-full mb-4" placeholder="Dimensi Produk"
+                                                class="border px-3 py-2 rounded w-full mb-4"
+                                                placeholder="Dimensi Produk (Cm)"
                                                 value="{{ old('dimensions', $product->dimensions) }}">
                                             <input name="brand" type="text"
                                                 class="border px-3 py-2 rounded w-full mb-4" placeholder="Merek Produk"
@@ -270,8 +271,8 @@
                                     <!-- Additional Information Section -->
                                     <div class="flex flex-col">
                                         <h4 class="font-semibold mb-4">Detail Tambahan</h4>
-                                        <p class="mb-2"><strong>Berat:</strong> {{ $product->weight }} Kg</p>
-                                        <p class="mb-2"><strong>Dimensi:</strong> {{ $product->dimensions }}</p>
+                                        <p class="mb-2"><strong>Berat(Gram):</strong> {{ $product->weight }} Gram</p>
+                                        <p class="mb-2"><strong>Dimensi(Cm):</strong> {{ $product->dimensions }}</p>
                                         <p class="mb-2"><strong>Merek:</strong> {{ $product->brand }}</p>
                                         <p class="mb-2"><strong>Status:</strong>
                                             {{ $product->status ? 'Aktif' : 'Tidak Aktif' }}</p>
@@ -340,9 +341,9 @@
                         <div class="flex flex-col">
                             <h4 class="font-semibold mb-4">Detail Tambahan</h4>
                             <input name="weight" type="number" class="border px-3 py-2 rounded w-full mb-4"
-                                placeholder="Berat (Kg)">
+                                placeholder="Berat (Gram)">
                             <input name="dimensions" type="text" class="border px-3 py-2 rounded w-full mb-4"
-                                placeholder="Dimensi Produk">
+                                placeholder="Dimensi Produk (Cm)">
                             <input name="brand" type="text" class="border px-3 py-2 rounded w-full mb-4"
                                 placeholder="Merek Produk">
                             <select name="status" required class="border px-3 py-2 rounded w-full mb-4">

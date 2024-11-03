@@ -37,7 +37,7 @@ Route::middleware([
         Route::middleware(['admin'])->group(function () {
             Route::prefix('admin')->group(function () {
                 // Route::resource('/profile', AdminProfileController::class)->names('admin.profile');
-                Route::get('/profile', [AdminProfileController::class, 'index'])->name('admin.profile.index');
+                Route::get('/profile', [AdminProfileController::class, 'index'])->name('admin.profile');
                 Route::resource('/dashboard', AdminDashboardController::class)->names('admin.dashboard');
                 Route::resource('/product', AdminProductController::class)->names('admin.product');
                 Route::resource('/order', AdminOrderController::class)->names('admin.order');

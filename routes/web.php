@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\OrderHistoryController;
 //Customer
 use App\Http\Controllers\customer\CartController;
 use App\Http\Controllers\customer\ProductController;
@@ -41,6 +42,7 @@ Route::middleware([
                 Route::resource('/dashboard', AdminDashboardController::class)->names('admin.dashboard');
                 Route::resource('/product', AdminProductController::class)->names('admin.product');
                 Route::resource('/order', AdminOrderController::class)->names('admin.order');
+                Route::resource('/history', OrderHistoryController::class)->names('admin.history');
             });
         });
 

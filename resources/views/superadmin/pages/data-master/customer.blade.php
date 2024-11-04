@@ -10,7 +10,7 @@
                     <ul class="tracking-[0.5px] inline-block sm:mt-0 mt-3">
                         <li
                             class="inline-block capitalize text-[14px] font-bold duration-500 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white">
-                            <a href="index.html">Data Master</a>
+                            <a href="#">Data Master</a>
                         </li>
                         <li
                             class="inline-block text-base text-slate-950 dark:text-white/70 mx-0.5 ltr:rotate-0 rtl:rotate-180">
@@ -115,7 +115,8 @@
                                                         <!-- Modal Content -->
                                                         <div class="p-6">
                                                             <!-- Grid for 2 columns -->
-                                                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-6 ">
+                                                            <div
+                                                                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-6 ">
 
                                                                 <!-- User Data Section -->
                                                                 <div>
@@ -144,7 +145,8 @@
                                                                     <p class="mb-4"><strong>Kode Pos:</strong>
                                                                         {{ $customer->address->post_code ?? '' }}</p>
                                                                     <p class="mb-4"><strong>Petunjuk Pengiriman:</strong>
-                                                                        {{ $customer->address->delivery_instructions ?? '' }}</p>
+                                                                        {{ $customer->address->delivery_instructions ?? '' }}
+                                                                    </p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -174,7 +176,8 @@
                                                                 @csrf
                                                                 @method('PUT')
                                                                 <!-- Grid for 2 columns -->
-                                                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-6 ">
+                                                                <div
+                                                                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-6 ">
                                                                     <!-- User Data Section -->
                                                                     <div>
                                                                         <h4 class="font-semibold mb-3">Data Akun</h4>
@@ -303,50 +306,40 @@
 
                 <div class="p-6">
                     <form action="{{ route('superadmin.data-master.customer.store') }}" method="POST">
-                        @method("POST")
+                        @method('POST')
                         @csrf
                         <!-- Grid for 2 columns -->
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-6 ">
                             <!-- User Data Section -->
                             <div>
                                 <h4 class="font-semibold mb-4">Data Akun</h4>
-                                <input type="text" name="name"
-                                    class="border px-3 py-2 rounded w-full mb-4"
+                                <input type="text" name="name" class="border px-3 py-2 rounded w-full mb-4"
                                     placeholder="Nama Akun" required>
-                                <input type="text" name="username"
-                                    class="border px-3 py-2 rounded w-full mb-4"
+                                <input type="text" name="username" class="border px-3 py-2 rounded w-full mb-4"
                                     placeholder="Username" required>
-                                <input type="email" name="email"
-                                    class="border px-3 py-2 rounded w-full mb-4"
+                                <input type="email" name="email" class="border px-3 py-2 rounded w-full mb-4"
                                     placeholder="Email" required>
-                                <input type="number" name="phone_number"
-                                    class="border px-3 py-2 rounded w-full mb-4"
+                                <input type="number" name="phone_number" class="border px-3 py-2 rounded w-full mb-4"
                                     placeholder="No. Telp" required>
-                                <input type="password" name="password"
-                                    class="border px-3 py-2 rounded w-full mb-4"
+                                <input type="password" name="password" class="border px-3 py-2 rounded w-full mb-4"
                                     placeholder="Password" required>
                                 <input type="password" name="password_confirmation"
-                                    class="border px-3 py-2 rounded w-full mb-4"
-                                    placeholder="Konfirmasi Password" required>
+                                    class="border px-3 py-2 rounded w-full mb-4" placeholder="Konfirmasi Password"
+                                    required>
                             </div>
 
                             <!-- Address Data Section -->
                             <div>
                                 <h4 class="font-semibold mb-4">Data Alamat</h4>
-                                <input type="text" name="address"
-                                    class="border px-3 py-2 rounded w-full mb-4"
+                                <input type="text" name="address" class="border px-3 py-2 rounded w-full mb-4"
                                     placeholder="Alamat" required>
-                                <input type="text" name="province"
-                                    class="border px-3 py-2 rounded w-full mb-4"
+                                <input type="text" name="province" class="border px-3 py-2 rounded w-full mb-4"
                                     placeholder="Provinsi" required>
-                                <input type="text" name="city"
-                                    class="border px-3 py-2 rounded w-full mb-4"
+                                <input type="text" name="city" class="border px-3 py-2 rounded w-full mb-4"
                                     placeholder="Kota" required>
-                                <input type="text" name="district"
-                                    class="border px-3 py-2 rounded w-full mb-4"
+                                <input type="text" name="district" class="border px-3 py-2 rounded w-full mb-4"
                                     placeholder="Kecamatan" required>
-                                <input type="text" name="post_code"
-                                    class="border px-3 py-2 rounded w-full mb-4"
+                                <input type="text" name="post_code" class="border px-3 py-2 rounded w-full mb-4"
                                     placeholder="Kode Pos" required>
                                 <textarea name="delivery_instructions" class="border px-3 py-2 rounded w-full mb-4"
                                     placeholder="Petunjuk Pengiriman"></textarea>

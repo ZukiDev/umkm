@@ -11,7 +11,7 @@
                     <ul class="tracking-[0.5px] inline-block mt-2">
                         <li
                             class="inline-block capitalize text-[14px] font-bold duration-500 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white">
-                            <a href="index.html">Produk</a>
+                            <a href="#">Produk</a>
                         </li>
                         <li
                             class="inline-block text-base text-slate-950 dark:text-white/70 mx-0.5 ltr:rotate-0 rtl:rotate-180">

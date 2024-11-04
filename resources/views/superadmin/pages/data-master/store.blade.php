@@ -10,7 +10,7 @@
                     <ul class="tracking-[0.5px] inline-block sm:mt-0 mt-3">
                         <li
                             class="inline-block capitalize text-[14px] font-bold duration-500 dark:text-white/70 hover:text-indigo-600 dark:hover:text-white">
-                            <a href="index.html">Data Master</a>
+                            <a href="#">Data Master</a>
                         </li>
                         <li
                             class="inline-block text-base text-slate-950 dark:text-white/70 mx-0.5 ltr:rotate-0 rtl:rotate-180">
@@ -76,10 +76,12 @@
                                         <tbody>
                                             @foreach ($stores as $index => $umkm)
                                                 <tr class="border-t border-gray-100 dark:border-gray-700">
-                                                    <td class="p-4">{{ $loop->iteration + ($stores->currentPage() - 1) * $stores->perPage() }}</td>
                                                     <td class="p-4">
-                                                        <img src="{{ asset('storage/logos/' . $umkm->logo) }}" alt="{{ $umkm->logo }}"
-                                                            class="w-10 h-10 rounded-full">
+                                                        {{ $loop->iteration + ($stores->currentPage() - 1) * $stores->perPage() }}
+                                                    </td>
+                                                    <td class="p-4">
+                                                        <img src="{{ asset('storage/logos/' . $umkm->logo) }}"
+                                                            alt="{{ $umkm->store_name }}" class="w-10 h-10 rounded-full">
                                                     </td>
                                                     <td class="p-4">{{ $umkm->store_name }}</td>
                                                     <td class="p-4">{{ $umkm->owner_name }}</td>
@@ -326,7 +328,8 @@
                                                             <!-- Logo Section -->
                                                             <h4 class="font-semibold mb-3 mt-6">Logo Toko</h4>
                                                             @if ($umkm->logo)
-                                                                <img src="{{ asset('storage/logos/' . $umkm->logo) }}" alt="{{ $umkm->logo }}" class="mb-4 rounded-md"
+                                                                <img src="{{ asset('storage/logos/' . $umkm->logo) }}"
+                                                                    alt="{{ $umkm->logo }}" class="mb-4 rounded-md"
                                                                     style="max-width: 200px;">
                                                             @else
                                                                 <p class="mb-4">Logo tidak tersedia</p>
@@ -399,7 +402,7 @@
                                         <div class="p-6">
                                             <form action="{{ route('superadmin.data-master.umkm.store') }}"
                                                 method="POST" enctype="multipart/form-data">
-                                                @method("POST")
+                                                @method('POST')
                                                 @csrf
                                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                                                     <!-- Grid for 3 columns -->

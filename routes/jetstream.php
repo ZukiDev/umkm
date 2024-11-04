@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\customer\ProfileController;
+use App\Http\Controllers\customer\ProfileController as CustomerProfileController;
+use App\Http\Controllers\Admin\AdminProfileController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Jetstream\Http\Controllers\CurrentTeamController;
 use Laravel\Jetstream\Http\Controllers\Livewire\ApiTokenController;
@@ -27,8 +28,8 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
 
     Route::group(['middleware' => array_values(array_filter([$authMiddleware, $authSessionMiddleware]))], function () {
         // User & Profile...
-        Route::get('/customer/profile', [ProfileController::class, 'show'])->name('customer.profile');
-        Route::get('/admin/profile', [ProfileController::class, 'show'])->name('customer.profile');
+        Route::get('/customer/profile', [CustomerProfileController::class, 'show'])->name('customer.profile');
+        Route::get('/admin/profile', [AdminProfileController::class, 'index'])->name('admin.profile');
 
         Route::group(['middleware' => 'verified'], function () {
             // API...

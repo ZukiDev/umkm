@@ -22,6 +22,22 @@ class OrderController extends Controller
         $user = Auth::user();
         $orders = Order::where('user_id', $user->id)->get();
 
+        // Proses setiap order untuk mendapatkan orderDetails dan umkm
+        $orders->map(function ($order) {
+            // Ambil order details berdasarkan code_order
+            $orderDetails = OrderDetail::where('code_order', $order->code_order)->get();
+
+            // Dapatkan produk pertama dari order details dan toko UMKM terkait
+            $productUmkm = $orderDetails->first()->product ?? null;
+            $umkm = $productUmkm ? $productUmkm->store : null;
+
+            // Tambahkan data tambahan ke dalam order
+            $order->orderDetails = $orderDetails;
+            $order->umkm = $umkm;
+
+            return $order;
+        });
+
         return view('customer.pages.order', compact('orders'));
     }
 

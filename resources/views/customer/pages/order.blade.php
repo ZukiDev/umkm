@@ -41,19 +41,14 @@
                         </thead>
                         <tbody>
                             @foreach ($orders as $order)
-                            @php
-                                $orderDetails = App\Models\OrderDetail::where('code_order', $order->code_order)->get();
-                                $productUmkm = $orderDetails->first()->product;
-                                $umkm = $productUmkm->store;
-                            @endphp
                             <tr class="bg-white dark:bg-slate-900">
                                 <td class="p-4">{{ $loop->iteration }}</td>
                                 <td class="p-4">{{ $order->created_at }}</td>
                                 <td class="p-4">{{ $order->code_order }}</td>
-                                <td class="p-4">{{ $umkm->store_name }}</td>
+                                <td class="p-4">{{ $order->umkm->store_name ?? 'N/A' }}</td>
                                 <td class="p-4">
                                     <ul class="list-disc list-inside">
-                                        @foreach ($orderDetails as $orderDetail)
+                                        @foreach ($order->orderDetails as $orderDetail)
                                             <li>{{ $orderDetail->product->name }} - {{ $orderDetail->quantity }} pcs</li>
                                         @endforeach
                                     </ul>

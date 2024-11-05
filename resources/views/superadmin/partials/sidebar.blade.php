@@ -2,7 +2,7 @@
 <nav id="sidebar" class="sidebar-wrapper sidebar-dark">
     <div class="sidebar-content">
         <div class="sidebar-brand">
-            <a href="index.html"><img src="{{ asset('assets/images/logo-light.png') }}" height="24" alt=""></a>
+            <a href="#"><img src="{{ asset('assets/images/logo-light.png') }}" height="24" alt=""></a>
         </div>
 
         <ul class="sidebar-menu border-t border-white/10" data-simplebar style="height: calc(100% - 70px);">

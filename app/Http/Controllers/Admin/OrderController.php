@@ -29,7 +29,8 @@ class OrderController extends Controller
                         ->pluck('order')
                         ->unique();
 
-        return dd($orders);
+        // return dd($orders);
+        return view('admin.pages.order', compact('orders'));
     }
 
     /**

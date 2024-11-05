@@ -54,7 +54,7 @@ class AdminProfileController extends Controller
         $user = Auth::user();
         $address = $user->address;
 
-        return view('customer.pages.profile', [
+        return view('admin.pages.profile', [
             'request' => $request,
             'user' => $request->user(),
             'address' => $address,

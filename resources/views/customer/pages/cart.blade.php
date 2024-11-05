@@ -26,6 +26,31 @@
     <!-- Start -->
     <section class="relative pb-16">
         <div class="container">
+            <div class="mt-4 mb-4">
+                <!-- Success Message -->
+                @if (session('success'))
+                    <div
+                        class="relative px-4 py-2 rounded-md font-medium bg-emerald-600/10 border border-emerald-600/10 text-emerald-600 block">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <!-- Warning Message -->
+                @if (session('warning'))
+                    <div
+                        class="relative px-4 py-2 rounded-md font-medium bg-orange-600/10 border border-orange-600/10 text-orange-600 block">
+                        {{ session('warning') }}
+                    </div>
+                @endif
+
+                <!-- Error Message -->
+                @if (session('error'))
+                    <div
+                        class="relative px-4 py-2 rounded-md font-medium bg-red-600/10 border border-red-600/10 text-red-600 block">
+                        {{ session('error') }}
+                    </div>
+                @endif
+            </div>
             <div class="grid lg:grid-cols-1">
                 <div class="relative overflow-x-auto shadow dark:shadow-gray-800 rounded-md">
                     <table class="w-full text-start">
@@ -45,7 +70,7 @@
                                         onsubmit="return confirm('Apakah Anda yakin ingin menghapus item ini?')">
                                         @csrf
                                         @method('DELETE')
-                                        <td><button type="submit">
+                                        <td class="p-4 text-start"><button type="submit">
                                                 <i class="uil uil-trash text-red-600"></i>
                                             </button></td>
                                     </form>

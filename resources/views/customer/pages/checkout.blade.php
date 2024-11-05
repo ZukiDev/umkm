@@ -125,21 +125,21 @@
                                         <label class="inline-flex items-center">
                                             <input type="radio" class="form-radio text-indigo-600"
                                                 name="payment_method" value="cod" checked>
-                                            <span class="text-slate-400"> Bayar di Tempat</span>
+                                            <span class="text-slate-400 p-2"> Bayar di Tempat</span>
                                         </label>
                                     </div>
                                     <div class="block mt-2">
                                         <label class="inline-flex items-center">
                                             <input type="radio" class="form-radio text-indigo-600"
                                                 name="payment_method" value="bank_transfer">
-                                            <span class="text-slate-400"> Transfer Rekening</span>
+                                            <span class="text-slate-400 p-2"> Transfer Rekening</span>
                                         </label>
                                     </div>
                                     <div class="block mt-2">
                                         <label class="inline-flex items-center">
                                             <input type="radio" class="form-radio text-indigo-600"
                                                 name="payment_method" value="qr_code">
-                                            <span class="text-slate-400"> Scan QR Code</span>
+                                            <span class="text-slate-400 p-2"> Scan QR Code</span>
                                         </label>
                                     </div>
                                 </div>

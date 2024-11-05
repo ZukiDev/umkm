@@ -106,7 +106,7 @@
                                                     <td class="p-4 text-end">
                                                         <!-- Chat WA Button -->
                                                         <a href="https://wa.me/{{ $order->user->phone_number }}"
-                                                            class="text-blue-600 hover:text-blue-800 mr-2">
+                                                            class="text-blue-600 hover:text-blue-800 mr-2" target="_blank">
                                                             <i class="uil uil-chat"></i> Chat WhatsApp
                                                         </a>
                                                         <br>

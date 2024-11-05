@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Store;
@@ -19,15 +20,22 @@ class OrderHistoryController extends Controller
         $store = Store::where('user_id', $admin->id)->firstOrFail();
 
         $orders = $store->products()
-            ->with('orderDetails.order')
+            ->with(['orderDetails' => function ($query) {
+            $query->whereHas('order', function ($query) {
+                $query->whereIn('status', [3, 4]);
+            });
+            }])
             ->get()
             ->pluck('orderDetails')
             ->flatten()
             ->pluck('order')
             ->unique();
 
-        $orders = $orders->whereIn('status', [3, 4]);
-
+        // Fetch order details for each order
+        $orders->each(function ($order) {
+            $order->orderDetails = OrderDetail::where('code_order', $order->code_order)->get();
+        });
+        
         return view('admin.pages.order-history', compact('orders'));
     }
 

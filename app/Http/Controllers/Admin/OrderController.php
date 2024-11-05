@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Store;
@@ -27,9 +28,15 @@ class OrderController extends Controller
             ->pluck('orderDetails')
             ->flatten()
             ->pluck('order')
-            ->unique();
+            ->unique()
+            ->filter(function ($order) {
+                return !in_array($order->status, [3, 4]); // Hanya ambil pesanan yang belum selesai atau batal
+            });
 
-        $orders = $orders->whereNotIn('status', [3, 4]);
+        // Fetch order details for each order
+        $orders->each(function ($order) {
+            $order->orderDetails = OrderDetail::where('code_order', $order->code_order)->get();
+        });
 
         return view('admin.pages.order', compact('orders'));
     }

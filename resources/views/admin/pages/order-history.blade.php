@@ -51,6 +51,7 @@
                                                 <th class="px-4 py-5 text-start">Nama Pembeli</th>
                                                 <th class="px-4 py-5 text-start">No.Telp</th>
                                                 <th class="px-4 py-5 text-start">Alamat</th>
+                                                <th class="px-4 py-5 text-start">Produk</th>
                                                 <th class="px-4 py-5 text-start">Total</th>
                                                 <th class="px-4 py-5 text-start">Status</th>
                                                 <th class="px-4 py-5 text-end">Tanggal Selesai/Batal</th>
@@ -70,6 +71,14 @@
                                                     <td class="p-4">{{ $order->user->name }}</td>
                                                     <td class="p-4">{{ $order->user->phone_number }}</td>
                                                     <td class="p-4">{{ $order->address->address }}</td>
+                                                    <!-- Tampilkan Produk -->
+                                                    <td class="p-4">
+                                                        <ul class="list-disc list-inside">
+                                                            @foreach ($order->orderDetails as $orderDetail)
+                                                                    <li>{{ $orderDetail->product->name }} - {{ $orderDetail->quantity }} pcs</li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </td>
                                                     <td class="p-4">Rp. {{ number_format($order->total, 0, ',', '.') }}
                                                     </td>
                                                     <td class="p-4">

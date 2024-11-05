@@ -111,7 +111,18 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Order $order) {}
+    public function update(Request $request, Order $order) {
+        // Validate the request
+        $request->validate([
+            'status' => 'required|integer|in:0,1,2,3,4', // Assuming status can be 0 to 4
+        ]);
+
+        // Update the order status
+        $order->status = $request->input('status');
+        $order->save();
+
+        return redirect()->route('admin.order.index')->with('success', 'Order status updated successfully.');
+    }
 
     /**
      * Remove the specified resource from storage.

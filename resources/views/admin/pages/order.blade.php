@@ -105,7 +105,7 @@
 
                                                     <td class="p-4 text-end">
                                                         <!-- Chat WA Button -->
-                                                        <a href="{{ route('admin.order.create', ['id' => $order->id]) }}"
+                                                        <a href="https://wa.me/{{ $order->user->phone_number }}"
                                                             class="text-blue-600 hover:text-blue-800 mr-2">
                                                             <i class="uil uil-chat"></i> Chat WhatsApp
                                                         </a>

@@ -24,7 +24,7 @@
     <!-- End Hero -->
 
     <!-- Start -->
-    <section class="relative pb-16">
+    <section class="relative py-12">
         <div class="container">
             <div class="grid lg:grid-cols-1">
                 <div class="relative overflow-x-auto shadow dark:shadow-gray-800 rounded-md">
@@ -41,20 +41,21 @@
                         </thead>
                         <tbody>
                             @foreach ($orders as $order)
-                            <tr class="bg-white dark:bg-slate-900">
-                                <td class="p-4">{{ $loop->iteration }}</td>
-                                <td class="p-4">{{ $order->created_at }}</td>
-                                <td class="p-4">{{ $order->code_order }}</td>
-                                <td class="p-4">{{ $order->umkm->store_name ?? 'N/A' }}</td>
-                                <td class="p-4">
-                                    <ul class="list-disc list-inside">
-                                        @foreach ($order->orderDetails as $orderDetail)
-                                            <li>{{ $orderDetail->product->name }} - {{ $orderDetail->quantity }} pcs</li>
-                                        @endforeach
-                                    </ul>
-                                </td>
-                                <td class="p-4 text-end">Rp. {{ number_format($order->total, 0, ',', '.') }}</td>
-                            </tr>
+                                <tr class="bg-white dark:bg-slate-900">
+                                    <td class="p-4">{{ $loop->iteration }}</td>
+                                    <td class="p-4">{{ $order->created_at }}</td>
+                                    <td class="p-4">{{ $order->code_order }}</td>
+                                    <td class="p-4">{{ $order->umkm->store_name ?? 'N/A' }}</td>
+                                    <td class="p-4">
+                                        <ul class="list-disc list-inside">
+                                            @foreach ($order->orderDetails as $orderDetail)
+                                                <li>{{ $orderDetail->product->name }} - {{ $orderDetail->quantity }} pcs
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </td>
+                                    <td class="p-4 text-end">Rp. {{ number_format($order->total, 0, ',', '.') }}</td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>

@@ -25,7 +25,7 @@
     <!-- End Hero -->
 
     <!-- Start -->
-    <section class="relative pb-16">
+    <section class="relative py-12">
         <div class="container">
             <div class="grid md:grid-cols-12 grid-cols-1 gap-[30px] items-center">
                 <div class="lg:col-span-5 md:col-span-6">

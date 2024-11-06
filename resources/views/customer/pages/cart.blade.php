@@ -24,7 +24,7 @@
     <!-- End Hero -->
 
     <!-- Start -->
-    <section class="relative pb-16">
+    <section class="relative py-12">
         <div class="container">
             <div class="mt-4 mb-4">
                 <!-- Success Message -->

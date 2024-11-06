@@ -31,23 +31,33 @@
                 <div class="lg:col-span-5 md:col-span-6">
                     <div>
                         <img src="{{ asset('storage/products/' . $product->images) }}" alt="{{ $product->name }}"
-                            class="rounded-md shadow dark:shadow-gray-800" alt="">
-                    </div><!--end content-->
-                </div><!--end col-->
+                            class="rounded-md shadow dark:shadow-gray-800">
+                    </div>
+                </div>
 
                 <div class="lg:col-span-7 md:col-span-6">
                     <div class="lg:ms-6">
                         <h5 class="text-3xl font-bold">{{ $product->name }}</h5>
                         <div class="mt-2">
-                            <span class="text-slate-400 text-2xl font-semibold me-1">Rp. {{ $product->price }}</span>
-                            <span class="text-red-600 text-nowrap text-end">(90
-                                Terjual)
-                            </span>
+                            <span class="text-slate-400 text-2xl font-semibold me-1">Rp.
+                                {{ number_format($product->price, 0, ',', '.') }}</span>
+                            <span class="text-red-600 text-nowrap text-end">({{ $product->stock }} Terjual)</span>
                         </div>
 
                         <div class="mt-4">
                             <h5 class="text-lg font-semibold">Deskripsi :</h5>
                             <p class="text-slate-400 mt-2">{{ $product->description }}</p>
+                        </div>
+
+                        <div class="mt-4">
+                            <h5 class="text-lg font-semibold">Detail Produk :</h5>
+                            <ul class="text-slate-400 mt-2">
+                                <li><strong>Kategori:</strong> {{ $product->category->title ?? 'Tidak ada kategori' }}</li>
+                                <li><strong>SKU:</strong> {{ $product->sku }}</li>
+                                <li><strong>Berat:</strong> {{ $product->weight ?? 'N/A' }} kg</li>
+                                <li><strong>Dimensi:</strong> {{ $product->dimensions ?? 'N/A' }}</li>
+                                <li><strong>Merek:</strong> {{ $product->brand ?? 'Tidak ada merek' }}</li>
+                            </ul>
                         </div>
 
                         <form action="{{ route('customer.cart.store', $product->id) }}" method="POST">
@@ -66,10 +76,10 @@
                                             onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
                                             class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white plus">+</button>
                                     </div>
-                                    <!-- Teks Stok tersedia -->
-                                </div><!--end content-->
-                                <span class="mt-2 text-indigo-600 text-md text-start">Stok tersedia : 90</span>
-                            </div><!--end grid-->
+                                </div>
+                                <span class="mt-2 text-indigo-600 text-md text-start">Stok tersedia:
+                                    {{ $product->stock }}</span>
+                            </div>
 
                             <input type="hidden" name="id_product" value="{{ $product->id }}">
                             <input type="hidden" name="checkout" value="0">
@@ -84,8 +94,8 @@
                         </form>
                     </div>
                 </div>
-            </div><!--end grid-->
-        </div><!--end container-->
-    </section><!--end section-->
+            </div>
+        </div>
+    </section>
     <!-- End -->
 @endsection

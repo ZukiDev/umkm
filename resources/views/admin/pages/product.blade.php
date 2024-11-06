@@ -49,10 +49,13 @@
 
             <div class="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 mt-6 gap-6">
                 @foreach ($products as $product)
-                    <div class="group">
+                    <div class="group w-full flex flex-col min-h-full">
+                        <!-- Image Container (80%) -->
                         <div
-                            class="relative overflow-hidden shadow dark:shadow-gray-700 group-hover:shadow-lg group-hover:dark:shadow-gray-700 rounded-md duration-500">
-                            <img src="{{ asset('storage/products/' . $product->images) }}" alt="{{ $product->name }}">
+                            class="relative overflow-hidden shadow dark:shadow-gray-800 group-hover:shadow-lg group-hover:dark:shadow-gray-800 rounded-md duration-500 w-full h-full">
+                            <img src="{{ asset('storage/products/' . $product->images) }}" alt="{{ $product->name }}"
+                                class="object-cover w-full h-full">
+
                             <div class="absolute -bottom-20 group-hover:bottom-3 start-3 end-3 duration-500">
                                 <a href="javascript:void(0)" onclick="viewshopitem{{ $product->id }}.showModal()"
                                     class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-slate-900 border-slate-900 text-white w-full rounded-md">Lihat
@@ -85,7 +88,8 @@
                             </ul>
                         </div>
 
-                        <div class="mt-4">
+                        <!-- Product Details (20%) -->
+                        <div class="mt-4 h-[20%] flex flex-col justify-between">
                             <a href="javascript:void(0)" onclick="viewshopitem{{ $product->id }}.showModal()"
                                 class="hover:text-indigo-600 text-lg font-semibold">{{ $product->name ?? 'Nama Produk' }}</a>
                             <div class="flex justify-between items-center mt-1 font-semibold">
@@ -313,10 +317,10 @@
                             <h4 class="font-semibold mb-4">Foto Produk <span class="text-red-600">*</span></h4>
                             <div
                                 class="preview-box-add flex justify-center rounded-md shadow dark:shadow-gray-800 overflow-hidden bg-gray-50 dark:bg-slate-800 text-slate-400 p-2 text-center small max-h-60 mb-4">
-                                Maksimal Ukuran: 10MB.
+                                Maksimal Ukuran: 2 MB.
                             </div>
                             <input type="file" id="add-images" name="images" accept="image/*"
-                                onchange="handleChange('add')" hidden>
+                                onchange="handleChange('add')" hidden required>
                             <label
                                 class="btn-upload py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md mt-6 cursor-pointer"
                                 for="add-images">Unggah Foto</label>
@@ -386,9 +390,9 @@
                 const file = input.files[0];
 
                 // Check file size (optional)
-                const maxSize = 10 * 1024 * 1024; // 10MB
+                const maxSize = 2 * 1024 * 1024; // 2MB
                 if (file.size > maxSize) {
-                    alert('Ukuran foto melebihi 10 MB. Harap pilih ukuran yang lebih kecil.');
+                    alert('Ukuran foto melebihi 2 MB. Harap pilih ukuran yang lebih kecil.');
                     return;
                 }
 

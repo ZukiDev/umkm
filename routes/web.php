@@ -21,6 +21,7 @@ use App\Http\Controllers\SuperAdminController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::resource('/product', ProductController::class)->names('customer.product');
+Route::get('/product/filter', [ProductController::class, 'filter'])->name('customer.product.filter');
 
 Route::middleware([
     'auth:sanctum',

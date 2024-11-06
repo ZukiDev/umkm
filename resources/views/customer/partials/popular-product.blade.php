@@ -4,7 +4,7 @@
     </div><!--end grid-->
 
     <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 mt-8 gap-[30px]">
-        @foreach ($allProduct as $product)
+        @foreach ($popularProducts as $product)
             <div class="group w-full flex flex-col min-h-3 max-h-3">
                 <!-- Image Container (80%) -->
                 <div

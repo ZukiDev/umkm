@@ -4,7 +4,7 @@
     </div><!--end grid-->
 
     <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 mt-8 gap-[30px]">
-        @foreach ($allProduct as $product)
+        @foreach ($latestProducts as $product)
             <div class="group w-full flex flex-col min-h-3 max-h-3">
                 <!-- Image Container (80%) -->
                 <div
@@ -54,7 +54,7 @@
                         class="hover:text-indigo-600 text-lg font-semibold">{{ $product->name ?? 'Nama Produk' }}</a>
                     <div class="flex justify-between items-center mt-1 font-semibold">
                         <p class="text-green-600">Rp. {{ number_format($product->price ?? 0, 0, ',', '.') }}</p>
-                        <p class="text-red-600">{{ $product->stock ?? 0 }} Terjual</p>
+                        <p class="text-red-600">{{ $product->sold ?? 0 }} Terjual</p>
                     </div>
                 </div>
             </div>

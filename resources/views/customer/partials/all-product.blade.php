@@ -60,7 +60,7 @@
                             class="hover:text-indigo-600 text-lg font-semibold">{{ $product->name ?? 'Nama Produk' }}</a>
                         <div class="flex justify-between items-center mt-1 font-semibold">
                             <p class="text-green-600">Rp. {{ number_format($product->price ?? 0, 0, ',', '.') }}</p>
-                            <p class="text-red-600">{{ $product->stock ?? 0 }} Terjual</p>
+                            <p class="text-red-600">{{ $product->sold ?? 0 }} Terjual</p>
                         </div>
                     </div>
                 </div>

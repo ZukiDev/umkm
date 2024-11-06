@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Models\Store;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
@@ -39,7 +40,24 @@ class HomeController extends Controller
         $allProduct = Product::inRandomOrder()->get();
         $allCategory = Category::all();
         $latestProducts = Product::orderBy('created_at', 'desc')->take(10)->get();
-        $popularProducts = Product::orderBy('created_at', 'desc')->take(10)->get();
+        $popularProducts = Product::leftJoin('order_details', 'products.id', '=', 'order_details.product_id')
+            ->select('products.*', DB::raw('SUM(order_details.quantity) as total_quantity'))
+            ->groupBy('products.id')
+            ->orderBy('total_quantity', 'desc')
+            ->take(10)
+            ->get();
+
+        // Calculate sold quantity for each product
+        foreach ($allProduct as $product) {
+            $product->sold = $product->orderDetails->sum('quantity');
+        }
+        foreach ($latestProducts as $product) {
+            $product->sold = $product->orderDetails->sum('quantity');
+        }
+        foreach ($popularProducts as $product) {
+            $product->sold = $product->orderDetails->sum('quantity');
+        }
+
         $bestUMKM = Store::orderBy('created_at', 'desc')->take(6)->get();
 
         return compact('allProduct', 'allCategory', 'latestProducts', 'popularProducts', 'bestUMKM');

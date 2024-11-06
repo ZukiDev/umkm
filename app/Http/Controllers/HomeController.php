@@ -58,8 +58,14 @@ class HomeController extends Controller
             $product->sold = $product->orderDetails->sum('quantity');
         }
 
-        $bestUMKM = Store::orderBy('created_at', 'desc')->take(6)->get();
-
+        $bestUMKM = Store::leftJoin('products', 'stores.id', '=', 'products.store_id')
+            ->leftJoin('order_details', 'products.id', '=', 'order_details.product_id')
+            ->select('stores.*', DB::raw('SUM(order_details.quantity) as total_quantity'))
+            ->groupBy('stores.id')
+            ->orderBy('total_quantity', 'desc')
+            ->take(6)
+            ->get();
+            
         return compact('allProduct', 'allCategory', 'latestProducts', 'popularProducts', 'bestUMKM');
     }
 }

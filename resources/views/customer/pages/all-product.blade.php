@@ -11,7 +11,7 @@
             <div class="relative mt-3">
                 <ul class="tracking-[0.5px] mb-0 inline-block">
                     <li class="inline-block uppercase text-[13px] font-bold duration-500 ease-in-out hover:text-indigo-600">
-                        <p href="{{ route('home') }}">{{ config('app.name', 'UMKM Blitar') }}</p>
+                        <a href="{{ route('home') }}">{{ config('app.name', 'UMKM Blitar') }}</a>
                     </li>
                     <li class="inline-block text-base text-slate-950 dark:text-white mx-0.5 ltr:rotate-0 rtl:rotate-180"><i
                             class="uil uil-angle-right-b"></i></li>
@@ -30,7 +30,7 @@
             <div class="grid md:grid-cols-12 grid-cols-1 gap-[30px]">
                 <div class="lg:col-span-4 md:col-span-6">
                     <div class="shadow dark:shadow-gray-800 p-6 rounded-md bg-white dark:bg-slate-900 sticky top-20">
-                        <form>
+                        <form action="{{ route('customer.product.index') }}" method="GET">
                             <div class="grid grid-cols-1 gap-3">
                                 <div>
                                     <label for="searchname" class="hidden font-semibold"></label>
@@ -39,7 +39,7 @@
 
                                         <input name="search" id="searchname" type="text"
                                             class="form-input w-full py-2 px-3 h-10 ps-9 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0"
-                                            placeholder="Cari...">
+                                            placeholder="Cari..." value="{{ request('search') }}">
                                     </div>
                                 </div>
 
@@ -51,7 +51,7 @@
                                                 <label class="inline-flex items-center">
                                                     <input type="radio"
                                                         class="form-radio border-gray-200 dark:border-gray-800 text-indigo-600 focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50 me-2"
-                                                        name="radio-colors" value="1" checked>
+                                                        name="category" value="{{ $category->id }}" {{ request('category') == $category->id ? 'checked' : '' }}>
                                                     <span class="text-slate-400">{{ $category->title }}</span>
                                                 </label>
                                             </div>
@@ -78,13 +78,16 @@
 
                         <div class="lg:col-span-3 md:col-span-4 md:text-end">
                             <label class="font-semibold hidden"></label>
-                            <select
-                                class="form-select form-input w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0">
-                                <option selected>Urutkan</option>
-                                <option>Terpopuler</option>
-                                <option>Harga Tertinggi</option>
-                                <option>Harga Terendah</option>
-                            </select>
+                            <form action="{{ route('customer.product.index') }}" method="GET">
+                                <select name="sort"
+                                    class="form-select form-input w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0"
+                                    onchange="this.form.submit()">
+                                    <option value="" {{ request('sort') == '' ? 'selected' : '' }}>Urutkan</option>
+                                    <option value="popular" {{ request('sort') == 'popular' ? 'selected' : '' }}>Terpopuler</option>
+                                    <option value="high_price" {{ request('sort') == 'high_price' ? 'selected' : '' }}>Harga Tertinggi</option>
+                                    <option value="low_price" {{ request('sort') == 'low_price' ? 'selected' : '' }}>Harga Terendah</option>
+                                </select>
+                            </form>
                         </div>
                     </div><!--end grid-->
 

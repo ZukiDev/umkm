@@ -75,6 +75,8 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::findOrFail($id);
+        $product->sold = $product->orderDetails->sum('quantity');
+
         return view('customer.pages.detail-product', compact('product'));
     }
 

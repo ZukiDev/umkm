@@ -41,7 +41,7 @@
                         <div class="mt-2">
                             <span class="text-slate-400 text-2xl font-semibold me-1">Rp.
                                 {{ number_format($product->price, 0, ',', '.') }}</span>
-                            <span class="text-red-600 text-nowrap text-end">({{ $product->stock }} Terjual)</span>
+                            <span class="text-red-600 text-nowrap text-end">({{ $product->sold }} Terjual)</span>
                         </div>
 
                         <div class="mt-4">

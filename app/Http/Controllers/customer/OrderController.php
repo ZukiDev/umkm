@@ -50,6 +50,10 @@ class OrderController extends Controller
         $address = $user->address;
         $carts = Cart::where('user_id', $user->id)->get();
 
+        if ($carts->isEmpty()) {
+            return redirect()->route('cart.index')->with('error', 'Your cart is empty.');
+        }
+
         // Calculate the sub total payment
         $subTotalPayment = $carts->sum(function ($cart) {
             return $cart->price * $cart->quantity;
@@ -72,6 +76,15 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
+        $address = $user->address;
+
+        $carts = Cart::where('user_id', $user->id)->get();
+
+        if ($carts->isEmpty()) {
+            return redirect()->back()->with('error', 'Your cart is empty.');
+        }
+
         $validatedAddress = $request->validate([
             'address' => 'required|string|max:255',
             'province' => 'required|string|max:255',
@@ -83,9 +96,6 @@ class OrderController extends Controller
         $validatedPaymentMethod = $request->validate([
             'payment_method' => 'required|string',
         ]);
-
-        $user = Auth::user();
-        $address = $user->address;
 
         // Update the user's address if it doesn't match the input
         if (

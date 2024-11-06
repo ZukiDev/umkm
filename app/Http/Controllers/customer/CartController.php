@@ -61,68 +61,10 @@ class CartController extends Controller
             return redirect()->route('login')->with('error', 'You must be logged in to add items to the cart.');
         }
 
-        // Start a database transaction
-        DB::beginTransaction();
-        try {
-            $product = Product::lockForUpdate()->findOrFail($request->id_product);
-
-            // Check if the requested quantity is available in stock
-            if ($product->stock < $request->quantity) {
-                DB::rollBack();
-                return redirect()->route('customer.cart.index')->with('error', 'The requested quantity is not available in stock.');
-            }
-
-            // Check if the product is already in the cart
-            $cart = Cart::where('user_id', $user->id)
-                ->where('product_id', $product->id)
-                ->whereNull('deleted_at')
-                ->first();
-
-            // Check if the cart contains items from a different store
-            $existingCart = Cart::where('user_id', $user->id)->whereNull('deleted_at')->first();
-            if ($existingCart && $existingCart->product->store_id !== $product->store_id) {
-                DB::rollBack();
-                return redirect()->route('customer.cart.index')->with('warning', 'Your cart contains items from a different store. Please clear your cart before adding items from a new store.');
-            }
-
-            if ($cart) {
-                // Update the existing cart item
-                $newQuantity = $cart->quantity + $request->quantity;
-                if ($product->stock < $newQuantity) {
-                    DB::rollBack();
-                    return redirect()->route('customer.cart.index')->with('warning', 'The requested quantity exceeds the available stock.');
-                }
-                $cart->quantity = $newQuantity;
-                $cart->price = $product->price;
-                $cart->total = $cart->price * $cart->quantity;
-                $cart->save();
-            } else {
-                // Create a new cart item
-                $cart = new Cart();
-                $cart->user_id = $user->id;
-                $cart->product_id = $product->id;
-                $cart->quantity = $request->quantity;
-                $cart->price = $product->price;
-                $cart->total = $product->price * $request->quantity;
-                $cart->save();
-            }
-
-            // Decrease the product stock
-            $product->stock -= $request->quantity;
-            $product->save();
-
-            // Commit the transaction
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
-            Log::error('Error adding product to cart: ' . $e->getMessage());
-            return redirect()->route('customer.cart.index')->with('error', 'An error occurred while adding the product to the cart.');
-        }
-
         if ($request->checkout) {
-            return redirect()->route('customer.order.index')->with('success', 'Product successfully added to the cart and ready for checkout.');
+            return $this->directCheckout($request, $user);
         } else {
-            return redirect()->route('customer.cart.index')->with('success', 'Product successfully added to the cart.');
+            return $this->addToCart($request, $user);
         }
     }
 
@@ -226,6 +168,115 @@ class CartController extends Controller
             return redirect()->route('customer.cart.index')->with('error', 'An error occurred while removing the product from the cart.');
         }
 
-        return redirect()->route('customer.cart.index')->with('success', 'Product successfully removed from the cart.');
+        return redirect()->back()->with('success', 'Product successfully removed from the cart.');
     }
+
+    private function directCheckout(Request $request, $user)
+    {
+        DB::beginTransaction();
+        try {
+            $product = Product::lockForUpdate()->findOrFail($request->id_product);
+
+            if ($product->stock < $request->quantity) {
+                DB::rollBack();
+                return redirect()->route('customer.cart.index')->with('error', 'The requested quantity is not available in stock.');
+            }
+
+            // Clear the user's cart and restock products
+            $this->clearCart($user);
+
+            // Add the new product for direct checkout
+            $this->createCartItem($user, $product, $request->quantity);
+
+            // Update product stock
+            $product->stock -= $request->quantity;
+            $product->save();
+
+            DB::commit();
+            return redirect()->route('customer.order.create')->with('success', 'Product successfully added to the cart and ready for checkout.');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Error during single product checkout: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while checking out the product.');
+        }
+    }
+
+    private function addToCart(Request $request, $user)
+    {
+        DB::beginTransaction();
+        try {
+            $product = Product::lockForUpdate()->findOrFail($request->id_product);
+
+            if ($product->stock < $request->quantity) {
+                DB::rollBack();
+                return redirect()->route('customer.cart.index')->with('error', 'The requested quantity is not available in stock.');
+            }
+
+            // Check for different store items in the cart
+            if ($this->hasDifferentStoreItems($user, $product)) {
+                DB::rollBack();
+                return redirect()->route('customer.cart.index')->with('warning', 'Your cart contains items from a different store. Please clear your cart before adding items from a new store.');
+            }
+
+            $existingCartItem = Cart::where('user_id', $user->id)
+                ->where('product_id', $product->id)
+                ->first();
+
+            if ($existingCartItem) {
+                // Update quantity if already in cart
+                $newQuantity = $existingCartItem->quantity + $request->quantity;
+                if ($product->stock < $newQuantity) {
+                    DB::rollBack();
+                    return redirect()->route('customer.cart.index')->with('warning', 'The requested quantity exceeds the available stock.');
+                }
+                $existingCartItem->quantity = $newQuantity;
+                $existingCartItem->total = $existingCartItem->price * $newQuantity;
+                $existingCartItem->save();
+            } else {
+                // Add new product to cart
+                $this->createCartItem($user, $product, $request->quantity);
+            }
+
+            $product->stock -= $request->quantity;
+            $product->save();
+
+            DB::commit();
+            return redirect()->back()->with('success', 'Product successfully added to the cart.');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Error adding product to cart: ' . $e->getMessage());
+            return redirect()->route('customer.cart.index')->with('error', 'An error occurred while adding the product to the cart.');
+        }
+    }
+
+    private function clearCart($user)
+    {
+        $existingCarts = Cart::where('user_id', $user->id)->get();
+        foreach ($existingCarts as $existingCart) {
+            $product = Product::lockForUpdate()->findOrFail($existingCart->product_id);
+            $product->stock += $existingCart->quantity;
+            $product->save();
+        }
+        Cart::where('user_id', $user->id)->delete();
+    }
+
+    private function createCartItem($user, $product, $quantity)
+    {
+        $cart = new Cart();
+        $cart->user_id = $user->id;
+        $cart->product_id = $product->id;
+        $cart->quantity = $quantity;
+        $cart->price = $product->price;
+        $cart->total = $product->price * $quantity;
+        $cart->save();
+    }
+
+    private function hasDifferentStoreItems($user, $product)
+    {
+        $existingCartItem = Cart::where('user_id', $user->id)->first();
+        return $existingCartItem && $existingCartItem->product->store_id !== $product->store_id;
+    }
+
 }

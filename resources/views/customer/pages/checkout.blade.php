@@ -158,6 +158,10 @@
                         <h3 class="text-xl leading-normal font-semibold">Detail Pemesanan</h3>
                         <div class="flex justify-between items-center mt-6">
                             <p class="text-slate-400">Total Barang:</p>
+                            <h6 class="text-lg font-semibold">{{ $carts->sum('quantity') }}</h6>
+                        </div>
+                        <div class="flex justify-between items-center mt-6">
+                            <p class="text-slate-400">Total Jenis Barang:</p>
                             <h6 class="text-lg font-semibold">{{ $carts->count() }}</h6>
                         </div>
                         <div class="flex justify-between items-center mt-6">

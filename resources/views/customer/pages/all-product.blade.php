@@ -51,7 +51,8 @@
                                                 <label class="inline-flex items-center">
                                                     <input type="radio"
                                                         class="form-radio border-gray-200 dark:border-gray-800 text-indigo-600 focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50 me-2"
-                                                        name="category" value="{{ $category->id }}" {{ request('category') == $category->id ? 'checked' : '' }}>
+                                                        name="category" value="{{ $category->id }}"
+                                                        {{ request('category') == $category->id ? 'checked' : '' }}>
                                                     <span class="text-slate-400">{{ $category->title }}</span>
                                                 </label>
                                             </div>
@@ -83,9 +84,12 @@
                                     class="form-select form-input w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0"
                                     onchange="this.form.submit()">
                                     <option value="" {{ request('sort') == '' ? 'selected' : '' }}>Urutkan</option>
-                                    <option value="popular" {{ request('sort') == 'popular' ? 'selected' : '' }}>Terpopuler</option>
-                                    <option value="high_price" {{ request('sort') == 'high_price' ? 'selected' : '' }}>Harga Tertinggi</option>
-                                    <option value="low_price" {{ request('sort') == 'low_price' ? 'selected' : '' }}>Harga Terendah</option>
+                                    <option value="popular" {{ request('sort') == 'popular' ? 'selected' : '' }}>Terpopuler
+                                    </option>
+                                    <option value="high_price" {{ request('sort') == 'high_price' ? 'selected' : '' }}>
+                                        Harga Tertinggi</option>
+                                    <option value="low_price" {{ request('sort') == 'low_price' ? 'selected' : '' }}>Harga
+                                        Terendah</option>
                                 </select>
                             </form>
                         </div>
@@ -98,7 +102,8 @@
                                 <div
                                     class="relative overflow-hidden shadow dark:shadow-gray-800 group-hover:shadow-lg group-hover:dark:shadow-gray-800 rounded-md duration-500 w-full h-full">
                                     <img src="{{ asset('storage/products/' . $product->images) }}"
-                                        alt="{{ $product->name }}" class="object-cover w-full h-full" style="min-height: 300px; max-height: 300;">
+                                        alt="{{ $product->name }}" class="object-cover w-full h-full"
+                                        style="min-height: 300px; max-height: 300px;">
 
                                     <div class="absolute -bottom-20 group-hover:bottom-3 start-3 end-3 duration-500">
                                         <form action="{{ route('customer.cart.store', $product->id) }}" method="POST">

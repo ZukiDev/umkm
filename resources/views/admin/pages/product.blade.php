@@ -49,12 +49,12 @@
 
             <div class="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 mt-6 gap-6">
                 @foreach ($products as $product)
-                    <div class="group w-full flex flex-col min-h-full">
+                    <div class="group w-full flex flex-col min-h-3 max-h-3">
                         <!-- Image Container (80%) -->
                         <div
                             class="relative overflow-hidden shadow dark:shadow-gray-800 group-hover:shadow-lg group-hover:dark:shadow-gray-800 rounded-md duration-500 w-full h-full">
                             <img src="{{ asset('storage/products/' . $product->images) }}" alt="{{ $product->name }}"
-                                class="object-cover w-full h-full">
+                                class="object-cover w-full h-full" style="min-height: 300px; max-height: 300px;">
 
                             <div class="absolute -bottom-20 group-hover:bottom-3 start-3 end-3 duration-500">
                                 <a href="javascript:void(0)" onclick="viewshopitem{{ $product->id }}.showModal()"

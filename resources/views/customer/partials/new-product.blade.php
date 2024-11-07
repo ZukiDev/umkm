@@ -10,7 +10,7 @@
                 <div
                     class="relative overflow-hidden shadow dark:shadow-gray-800 group-hover:shadow-lg group-hover:dark:shadow-gray-800 rounded-md duration-500 w-full h-full">
                     <img src="{{ asset('storage/products/' . $product->images) }}" alt="{{ $product->name }}"
-                        class="object-cover w-full h-full" style="min-height: 300px; max-height: 300;">
+                        class="object-cover w-full h-full" style="min-height: 300px; max-height: 300px;">
 
                     <div class="absolute -bottom-20 group-hover:bottom-3 start-3 end-3 duration-500">
                         <form action="{{ route('customer.cart.store', $product->id) }}" method="POST">

@@ -13,13 +13,16 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request){
-        $query = Product::query();
+    public function index(Request $request)
+    {
+        $query = Product::where('status', 1); // Menyaring hanya produk dengan status 1
 
         // Filter berdasarkan kata kunci pencarian (jika ada)
         if ($request->filled('search')) {
-            $query->where('name', 'like', '%' . $request->search . '%')
-                ->orWhere('description', 'like', '%' . $request->search . '%');
+            $query->where(function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->search . '%')
+                    ->orWhere('description', 'like', '%' . $request->search . '%');
+            });
         }
 
         // Filter berdasarkan kategori (jika ada)
@@ -51,7 +54,6 @@ class ProductController extends Controller
 
         return view('customer.pages.all-product', compact('products', 'categories'));
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -108,7 +110,7 @@ class ProductController extends Controller
      */
     public function filter(Request $request)
     {
-        $query = Product::query();
+        $query = Product::where('status', 1);
 
         if ($request->has('category_id') && $request->category_id != '') {
             $query->where('category_id', $request->category_id);

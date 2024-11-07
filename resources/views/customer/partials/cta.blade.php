@@ -1,6 +1,6 @@
 <!-- Start -->
 <section class="py-28 w-full table relative bg-center bg-no-repeat bg-cover jarallax"
-    style="background-image: url('{{ asset('asset/images/shop/cta.jpg') }}');" data-jarallax data-speed="0.5">
+    style="background-image: url('{{ asset('asset/images/shop/blitar.jpg') }}');" data-jarallax data-speed="0.5">
     <div class="absolute inset-0 bg-slate-900/30"></div>
     <div class="container relative">
         <div class="grid grid-cols-1 text-center">

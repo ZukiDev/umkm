@@ -6,8 +6,8 @@
                 <p class="mb-0 text-slate-400">©
                     <script>
                         document.write(new Date().getFullYear())
-                    </script> UMKM Blitar. Developed by <a href="#" target="_blank"
-                        class="text-reset">Novadev</a>.
+                    </script> UMKM Blitar. Developed by <a href="https://www.instagram.com/naffe.id"
+                        target="_blank" class="text-reset">Naffe ID</a>.
                 </p>
             </div><!--end col-->
         </div><!--end grid-->

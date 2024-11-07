@@ -37,6 +37,7 @@
                                 <th scope="col" class="text-start p-4 min-w-[140px]">Nama UMKM</th>
                                 <th scope="col" class="text-start p-4 min-w-[240px]">Nama Produk</th>
                                 <th scope="col" class="p-4 w-24 min-w-[160px]">Total</th>
+                                <th scope="col" class="p-4 min-w-[120px]">Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -55,6 +56,27 @@
                                         </ul>
                                     </td>
                                     <td class="p-4 text-end">Rp. {{ number_format($order->total, 0, ',', '.') }}</td>
+                                    <td class="p-4">
+                                        <span
+                                            class="text-white text-[12px] font-semibold px-2.5 py-0.5 rounded h-5
+                                            @if ($order->status == 0) bg-red-600
+                                            @elseif($order->status == 1) bg-orange-600
+                                            @elseif($order->status == 2) bg-indigo-600
+                                            @elseif($order->status == 3) bg-green-600
+                                            @elseif($order->status == 4) bg-gray-500 @endif">
+                                            @if ($order->status == 0)
+                                                Belum Bayar
+                                            @elseif($order->status == 1)
+                                                Proses
+                                            @elseif($order->status == 2)
+                                                Pengiriman
+                                            @elseif($order->status == 3)
+                                                Selesai
+                                            @elseif($order->status == 4)
+                                                Batal
+                                            @endif
+                                        </span>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

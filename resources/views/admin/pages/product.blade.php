@@ -82,7 +82,8 @@
                                             class="bg-green-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded h-5">Aktif</a>
                                     @else
                                         <a href="javascript:void(0)"
-                                            class="bg-red-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded h-5">Nonaktif</a>
+                                            class="bg-red-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded h-5">Tidak
+                                            Aktif</a>
                                     @endif
                                 </li>
                             </ul>

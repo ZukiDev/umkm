@@ -14,41 +14,18 @@
                                 peluang, dan memperkuat ekonomi lokal.</p>
                         </div><!--end col-->
 
-                        {{-- @php
-                            $categories = DB::table('categories')->get();
-                        @endphp
-
-                        <div class="lg:col-span-4 md:col-span-12">
-                            <h5 class="tracking-[1px] text-gray-100 font-semibold">Kategori</h5>
-
-                            <div class="grid md:grid-cols-12 grid-cols-1">
-                                @foreach ($categories->chunk(6) as $chunk)
-                                    <div class="md:col-span-4">
-                                        <ul class="list-none footer-list mt-6">
-                                            @foreach ($chunk as $category)
-                                                <li
-                                                    class="mt-[10px] text-gray-300 hover:text-gray-400 duration-500 ease-in-out">
-                                                    <i class="uil uil-angle-right-b"></i> {{ $category->title }}
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div><!--end col-->
-                                @endforeach
-                            </div>
-                        </div> --}}
-
                         <div class="lg:col-span-2 md:col-span-4">
                             <h5 class="tracking-[1px] text-gray-100 font-semibold">Kontak Kami</h5>
                             <ul class="list-none mt-6">
-                                <li class="inline"><a href="#" target="_blank"
+                                <li class="inline"><a href="https://www.facebook.com/pemkabblitar" target="_blank"
                                         class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center border-gray-800 rounded-md border hover:border-indigo-600 dark:hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-600"><i
                                             class="uil uil-facebook-f align-middle" title="facebook"></i></a>
                                 </li>
-                                <li class="inline"><a href="#/" target="_blank"
+                                <li class="inline"><a href="https://www.instagram.com/pemkab_blitar" target="_blank"
                                         class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center border-gray-800 rounded-md border hover:border-indigo-600 dark:hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-600"><i
                                             class="uil uil-instagram align-middle" title="instagram"></i></a>
                                 </li>
-                                <li class="inline"><a href="#" target="_blank"
+                                <li class="inline"><a href="#" target="https://twitter.com/pemkab_blitar"
                                         class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center border-gray-800 rounded-md border hover:border-indigo-600 dark:hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-600"><i
                                             class="uil uil-twitter align-middle" title="twitter"></i></a></li>
                             </ul><!--end icon-->
@@ -94,24 +71,9 @@
                         <script>
                             document.write(new Date().getFullYear())
                         </script> UMKM Blitar. Developed
-                        by <a href="#" target="_blank" class="text-reset">NovaDev</a>.
+                        by <a href="https://www.instagram.com/naffe.id" target="_blank" class="text-reset">Naffe ID</a>.
                     </p>
                 </div>
-
-                {{-- <ul class="list-none md:text-end text-center mt-6 md:mt-0">
-                    <li class="inline"><a href=""><img
-                                src="{{ asset('asset/images/payments/american-ex.png') }}" class="max-h-6 inline"
-                                title="American Express" alt=""></a></li>
-                    <li class="inline"><a href=""><img src="{{ asset('asset/images/payments/discover.png') }}"
-                                class="max-h-6 inline" title="Discover" alt=""></a></li>
-                    <li class="inline"><a href=""><img
-                                src="{{ asset('asset/images/payments/master-card.png') }}" class="max-h-6 inline"
-                                title="Master Card" alt=""></a></li>
-                    <li class="inline"><a href=""><img src="{{ asset('asset/images/payments/paypal.png') }}"
-                                class="max-h-6 inline" title="Paypal" alt=""></a></li>
-                    <li class="inline"><a href=""><img src="{{ asset('asset/images/payments/visa.png') }}"
-                                class="max-h-6 inline" title="Visa" alt=""></a></li>
-                </ul> --}}
             </div><!--end grid-->
         </div><!--end container-->
     </div>

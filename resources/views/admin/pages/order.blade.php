@@ -49,7 +49,6 @@
                                                 <th class="px-4 py-5 text-start">No.</th>
                                                 <th class="px-4 py-5 text-start">Tanggal Pembelian</th>
                                                 <th class="px-4 py-5 text-start">Nama Pembeli</th>
-                                                <th class="px-4 py-5 text-start">No.Telp</th>
                                                 <th class="px-4 py-5 text-start">Alamat</th>
                                                 <th class="px-4 py-5 text-start">Produk</th>
                                                 <th class="px-4 py-5 text-start">Total</th>
@@ -69,13 +68,13 @@
                                                     </td>
                                                     <td class="p-4">{{ $order->created_at }}</td>
                                                     <td class="p-4">{{ $order->user->name }}</td>
-                                                    <td class="p-4">{{ $order->user->phone_number }}</td>
                                                     <td class="p-4">{{ $order->address->address }}</td>
                                                     <!-- Tampilkan Produk -->
                                                     <td class="p-4">
                                                         <ul class="list-disc list-inside">
                                                             @foreach ($order->orderDetails as $orderDetail)
-                                                                    <li>{{ $orderDetail->product->name }} - {{ $orderDetail->quantity }} pcs</li>
+                                                                <li>{{ $orderDetail->product->name }} -
+                                                                    {{ $orderDetail->quantity }} pcs</li>
                                                             @endforeach
                                                         </ul>
                                                     </td>

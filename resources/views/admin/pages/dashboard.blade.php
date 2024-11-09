@@ -22,7 +22,7 @@
                         <span class="ms-3">
                             <span class="text-slate-400 font-semibold block">Konfirmasi Pesanan</span>
                             <span class="flex items-center justify-between mt-1">
-                                <span class="text-xl font-semibold">10</span>
+                                <span class="text-xl font-semibold">{{ $ordersConfirmCount }}</span>
                             </span>
                     </div>
 
@@ -43,7 +43,7 @@
                         <span class="ms-3">
                             <span class="text-slate-400 font-semibold block">Total Pesanan</span>
                             <span class="flex items-center justify-between mt-1">
-                                <span class="text-xl font-semibold">10</span>
+                                <span class="text-xl font-semibold">{{ $ordersCount }}</span>
                             </span>
                     </div>
 
@@ -64,7 +64,7 @@
                         <span class="ms-3">
                             <span class="text-slate-400 font-semibold block">Total Produk</span>
                             <span class="flex items-center justify-between mt-1">
-                                <span class="text-xl font-semibold">10</span>
+                                <span class="text-xl font-semibold">{{ $totalProduct }}</span>
                             </span>
                     </div>
 
@@ -85,7 +85,7 @@
                         <span class="ms-3">
                             <span class="text-slate-400 font-semibold block">Total Pendapatan</span>
                             <span class="flex items-center justify-between mt-1">
-                                <span class="text-xl font-semibold">Rp. 100.000.000</span>
+                                <span class="text-xl font-semibold">Rp. {{ number_format($totalIncome ?? 0, 0, ',', '.') }}</span>
                             </span>
                     </div>
 
@@ -125,19 +125,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($ordersConfirm as $order)
                                     <tr>
                                         <th
                                             class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
-                                            1.</th>
-                                        <td class="text-start border-t border-gray-100 dark:border-gray-800 p-4">Ahnaf</td>
+                                            {{ $loop->iteration }}.</th>
+                                        <td class="text-start border-t border-gray-100 dark:border-gray-800 p-4">{{ $order->user->name }}</td>
                                         <td class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
-                                            <span class="text-slate-400">10th Aug 2023</span>
+                                            <span class="text-slate-400">{{ $order->created_at }}</span>
                                         </td>
                                         <td class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
-                                            <span class="text-slate-400">Rp. 100.000</span>
+                                            <span class="text-slate-400">Rp. {{ number_format($order->total ?? 0, 0, ',', '.') }}</span>
                                         </td>
                                         <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
-                                            {{-- <span
+                                            <span
                                                 class="
                                                 @if ($order->status == 0) bg-red-600 text-white
                                                 @elseif($order->status == 1) bg-orange-600 text-white
@@ -156,13 +157,14 @@
                                                 @elseif($order->status == 4)
                                                     Batal
                                                 @endif
-                                            </span> --}}
-                                            <!-- Dummy badges with hardcoded statuses -->
-                                            <span
-                                                class="bg-green-600 text-white text-[12px] font-bold px-2.5 py-0.5 rounded h-5 ms-1">Selesai
                                             </span>
+                                            <!-- Dummy badges with hardcoded statuses -->
+                                            {{-- <span
+                                                class="bg-green-600 text-white text-[12px] font-bold px-2.5 py-0.5 rounded h-5 ms-1">Selesai
+                                            </span> --}}
                                         </td>
-                                    </tr>
+                                    </tr>   
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -189,17 +191,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($bestSellingProducts as $product)
                                     <tr>
                                         <th
                                             class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
-                                            Bakpia Ahnaf</th>
+                                            {{ $product->name }}</th>
                                         <td
                                             class="text-start text-emerald-600 border-t border-gray-100 dark:border-gray-800 p-4">
-                                            100</td>
+                                            {{ $product->sold }}</td>
                                         <td class="text-end border-t border-gray-100 dark:border-gray-800 p-4">
-                                            <span class="text-sm ms-1 font-semibold">5</span>
+                                            <span class="text-sm ms-1 font-semibold">{{ $product->stock }}</span>
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

@@ -50,9 +50,7 @@ class HomeController extends Controller
             ->get();
 
         $popularProducts = Product::where('status', 1)
-            ->leftJoin('order_details', 'products.id', '=', 'order_details.product_id')
-            ->select('products.*', DB::raw('SUM(order_details.quantity) as total_quantity'))
-            ->groupBy('products.id')
+            ->withSum('orderDetails as total_quantity', 'quantity')
             ->orderBy('total_quantity', 'desc')
             ->take(8)
             ->get();

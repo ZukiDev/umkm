@@ -22,6 +22,53 @@
                     </ul>
                 </div>
 
+                <div class="grid xl:grid-cols-3 md:grid-cols-3 grid-cols-1 mt-6 gap-6">
+                    <div class="relative overflow-hidden rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
+                        <div class="p-5 flex items-center">
+                            <span
+                                class="flex justify-center items-center rounded-md size-14 min-w-[56px] bg-indigo-600/5 dark:bg-indigo-600/10 shadow shadow-indigo-600/5 dark:shadow-indigo-600/10 text-red-600">
+                                <i data-feather="x" class="h-5 w-5"></i>
+                            </span>
+
+                            <span class="ms-3">
+                                <span class="text-slate-400 font-semibold block">Pesanan Batal</span>
+                                <span class="flex items-center justify-between mt-1">
+                                    <span class="text-xl font-semibold">10</span>
+                                </span>
+                        </div>
+                    </div><!--end-->
+
+                    <div class="relative overflow-hidden rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
+                        <div class="p-5 flex items-center">
+                            <span
+                                class="flex justify-center items-center rounded-md size-14 min-w-[56px] bg-indigo-600/5 dark:bg-indigo-600/10 shadow shadow-indigo-600/5 dark:shadow-indigo-600/10 text-green-600">
+                                <i data-feather="check" class="h-5 w-5"></i>
+                            </span>
+
+                            <span class="ms-3">
+                                <span class="text-slate-400 font-semibold block">Pesanan Selesai</span>
+                                <span class="flex items-center justify-between mt-1">
+                                    <span class="text-xl font-semibold">10</span>
+                                </span>
+                        </div>
+                    </div><!--end-->
+
+                    <div class="relative overflow-hidden rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
+                        <div class="p-5 flex items-center">
+                            <span
+                                class="flex justify-center items-center rounded-md size-14 min-w-[56px] bg-indigo-600/5 dark:bg-indigo-600/10 shadow shadow-indigo-600/5 dark:shadow-indigo-600/10 text-indigo-600">
+                                <i data-feather="dollar-sign" class="h-5 w-5"></i>
+                            </span>
+
+                            <span class="ms-3">
+                                <span class="text-slate-400 font-semibold block">Total Pendapatan</span>
+                                <span class="flex items-center justify-between mt-1">
+                                    <span class="text-xl font-semibold">Rp. 100.000.000</span>
+                                </span>
+                        </div>
+                    </div><!--end-->
+                </div>
+
                 <div class="mt-6" id="tables">
                     <div class="grid grid-cols-1 gap-6">
                         <div class="shadow dark:shadow-slate-800 rounded bg-white dark:bg-slate-900">

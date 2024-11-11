@@ -33,7 +33,7 @@
                             <span class="ms-3">
                                 <span class="text-slate-400 font-semibold block">Belum Bayar</span>
                                 <span class="flex items-center justify-between mt-1">
-                                    <span class="text-xl font-semibold">10</span>
+                                    <span class="text-xl font-semibold">{{ $unpaidCount }}</span>
                                 </span>
                         </div>
                     </div><!--end-->
@@ -48,7 +48,7 @@
                             <span class="ms-3">
                                 <span class="text-slate-400 font-semibold block">Proses</span>
                                 <span class="flex items-center justify-between mt-1">
-                                    <span class="text-xl font-semibold">10</span>
+                                    <span class="text-xl font-semibold">{{ $processCount }}</span>
                                 </span>
                         </div>
                     </div><!--end-->
@@ -63,7 +63,7 @@
                             <span class="ms-3">
                                 <span class="text-slate-400 font-semibold block">Pengiriman</span>
                                 <span class="flex items-center justify-between mt-1">
-                                    <span class="text-xl font-semibold">10</span>
+                                    <span class="text-xl font-semibold">{{ $onDeliveryCount }}</span>
                                 </span>
                         </div>
                     </div><!--end-->

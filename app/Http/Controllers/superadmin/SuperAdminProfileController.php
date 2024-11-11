@@ -23,7 +23,7 @@ class SuperAdminProfileController extends Controller
         $user = Auth::user();
         $address = $user->address;
 
-        return view('customer.pages.profile', compact('address'));
+        return view('superadmin.pages.profile', compact('address'));
     }
 
     /**
@@ -54,7 +54,7 @@ class SuperAdminProfileController extends Controller
         $user = Auth::user();
         $address = $user->address;
 
-        return view('customer.pages.profile', [
+        return view('superadmin.pages.profile', [
             'request' => $request,
             'user' => $request->user(),
             'address' => $address,

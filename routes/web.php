@@ -12,12 +12,13 @@ use App\Http\Controllers\Admin\OrderHistoryController;
 use App\Http\Controllers\customer\CartController;
 use App\Http\Controllers\customer\ProductController;
 use App\Http\Controllers\customer\OrderController;
-use App\Http\Controllers\customer\ProfileController;
+use App\Http\Controllers\customer\CustomerProfileController;
 //SuperAdmin
 use App\Http\Controllers\SuperAdmin\CategoryController;
 use App\Http\Controllers\SuperAdmin\StoreController;
 use App\Http\Controllers\SuperAdmin\CustomerController as SuperAdminCustomerController;
-use App\Http\Controllers\SuperAdminController;
+use App\Http\Controllers\SuperAdmin\SuperAdminProfileController;
+use App\Http\Controllers\SuperAdmin\DashboardController as SuperAdminDashboardController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::resource('/product', ProductController::class)->names('customer.product');
@@ -31,7 +32,7 @@ Route::middleware([
 
     Route::middleware(['auth'])->group(function () {
         Route::middleware(['customer'])->group(function () {
-            Route::post('/address', [ProfileController::class, 'update'])->name('customer.profile.update');
+            Route::post('/address', [CustomerProfileController::class, 'update'])->name('customer.profile.update');
             Route::resource('/cart', CartController::class)->names('customer.cart');
             Route::resource('/order', OrderController::class)->names('customer.order');
             Route::get('/checkout', [OrderController::class, 'create'])->name('customer.checkout');
@@ -49,8 +50,8 @@ Route::middleware([
 
         Route::middleware(['super-admin'])->group(function () {
             Route::prefix('super-admin')->group(function () {
-                Route::get('/profile', [SuperAdminController::class, 'profile'])->name('superadmin.profile');
-                Route::get('/dashboard', [SuperAdminController::class, 'index'])->name('superadmin.index');
+                Route::get('/profile', [SuperAdminProfileController::class, 'profile'])->name('superadmin.profile');
+                Route::get('/dashboard', [SuperAdminDashboardController::class, 'index'])->name('superadmin.index');
                 Route::resource('/dashboard/data-master/umkm', StoreController::class)->names('superadmin.data-master.umkm');
                 Route::resource('/dashboard/data-master/customer', SuperAdminCustomerController::class)->names('superadmin.data-master.customer');
                 Route::resource('/dashboard/data-master/category', CategoryController::class)->names('superadmin.data-master.category');

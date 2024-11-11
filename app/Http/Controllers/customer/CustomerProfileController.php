@@ -13,7 +13,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use App\Models\Address;
 
-class ProfileController extends Controller
+class CustomerProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -88,7 +88,8 @@ class ProfileController extends Controller
         ]);
 
         // Update user information
-        $user->update([
+        $userUpdate = User::where('id', $user->id);
+        $userUpdate->update([
             'name' => $validatedData['name'],
             'phone_number' => $validatedData['phone_number'],
         ]);
@@ -106,7 +107,8 @@ class ProfileController extends Controller
         if ($user->address) {
             $user->address->update($addressData);
         } else {
-            $user->address()->create($addressData);
+            $userAddress = User::where('id', $user->id);
+            $userAddress->address()->create($addressData);
         }
 
         return redirect()->route('customer.profile')->with('success', 'Profile updated successfully.');

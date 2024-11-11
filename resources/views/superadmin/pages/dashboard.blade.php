@@ -22,7 +22,7 @@
                         <span class="ms-3">
                             <span class="text-slate-400 font-semibold block">Total Customer</span>
                             <span class="flex items-center justify-between mt-1">
-                                <span class="text-xl font-semibold">10</span>
+                                <span class="text-xl font-semibold">{{ $totalCustomer }}</span>
                             </span>
                         </span>
                     </div>
@@ -38,7 +38,7 @@
                         <span class="ms-3">
                             <span class="text-slate-400 font-semibold block">Total UMKM</span>
                             <span class="flex items-center justify-between mt-1">
-                                <span class="text-xl font-semibold">10</span>
+                                <span class="text-xl font-semibold">{{ $totalUMKM }}</span>
                             </span>
                     </div>
                 </div><!--end-->
@@ -53,7 +53,7 @@
                         <span class="ms-3">
                             <span class="text-slate-400 font-semibold block">Total Kategori</span>
                             <span class="flex items-center justify-between mt-1">
-                                <span class="text-xl font-semibold">10</span>
+                                <span class="text-xl font-semibold">{{ $totalKategori }}</span>
                             </span>
                     </div>
                 </div><!--end-->
@@ -68,7 +68,7 @@
                         <span class="ms-3">
                             <span class="text-slate-400 font-semibold block">Total Produk</span>
                             <span class="flex items-center justify-between mt-1">
-                                <span class="text-xl font-semibold">10
+                                <span class="text-xl font-semibold">{{ $totalProduk }}
                                 </span>
                             </span>
                     </div>
@@ -95,17 +95,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th
-                                            class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
-                                            1.</th>
-                                        <td class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
-                                            <span class="text-slate-400">Ahnaf S.Tr. Kom</span>
-                                        </td>
-                                        <td class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
-                                            <span class="text-slate-400">10</span>
-                                        </td>
-                                    </tr>
+                                    @foreach ($topCustomers as $customer)
+                                        <tr>
+                                            <th
+                                                class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                {{ $loop->iteration }}.</th>
+                                            <td class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                <span class="text-slate-400">{{ $customer->name }}</span>
+                                            </td>
+                                            <td class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                <span class="text-slate-400">{{ $customer->total }}</span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -131,17 +133,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th
-                                            class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
-                                            1.</th>
-                                        <td class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
-                                            <span class="text-slate-400">Ahnaf S.Tr. Kom</span>
-                                        </td>
-                                        <td class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
-                                            <span class="text-slate-400">Rp. 10.000.000</span>
-                                        </td>
-                                    </tr>
+                                    @foreach ($topPricedOrders as $customer)
+                                        <tr>
+                                            <th
+                                                class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                {{ $loop->iteration }}.</th>
+                                            <td class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                <span class="text-slate-400">{{ $customer->name }}</span>
+                                            </td>
+                                            <td class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                <span class="text-slate-400">Rp. {{ number_format($customer->total_spent, 0, ',', '.') }}</span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -169,17 +173,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th
-                                            class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
-                                            1.</th>
-                                        <td class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
-                                            <span class="text-slate-400">Naffe ID</span>
-                                        </td>
-                                        <td class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
-                                            <span class="text-slate-400">1000</span>
-                                        </td>
-                                    </tr>
+                                    @foreach ($topUMKMs as $umkm)
+                                        <tr>
+                                            <th
+                                                class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
+                                                {{ $loop->iteration }}.</th>
+                                            <td class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                <span class="text-slate-400">{{ $umkm->store_name }}</span>
+                                            </td>
+                                            <td class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
+                                                <span class="text-slate-400">{{ $umkm->total_orders }}</span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -205,17 +211,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($topIncomeUMKMs as $umkm)
                                     <tr>
                                         <th
                                             class="text-start border-t border-gray-100 dark:border-gray-800 p-4 font-semibold">
-                                            1.</th>
+                                            {{ $loop->iteration }}.</th>
                                         <td class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
-                                            <span class="text-slate-400">Naffe ID</span>
+                                            <span class="text-slate-400">{{ $umkm->store_name }}</span>
                                         </td>
                                         <td class="text-start border-t border-gray-100 dark:border-gray-800 p-4">
-                                            <span class="text-slate-400">Rp. 10.000.000</span>
+                                            <span class="text-slate-400">Rp. {{ number_format($umkm->total_income, 0, ',', '.') }}</span>
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

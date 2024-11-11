@@ -33,7 +33,7 @@
                             <span class="ms-3">
                                 <span class="text-slate-400 font-semibold block">Pesanan Batal</span>
                                 <span class="flex items-center justify-between mt-1">
-                                    <span class="text-xl font-semibold">10</span>
+                                    <span class="text-xl font-semibold">{{ $countOrderCancelled }}</span>
                                 </span>
                         </div>
                     </div><!--end-->
@@ -48,7 +48,7 @@
                             <span class="ms-3">
                                 <span class="text-slate-400 font-semibold block">Pesanan Selesai</span>
                                 <span class="flex items-center justify-between mt-1">
-                                    <span class="text-xl font-semibold">10</span>
+                                    <span class="text-xl font-semibold">{{ $countOrderSuccess }}</span>
                                 </span>
                         </div>
                     </div><!--end-->
@@ -63,7 +63,7 @@
                             <span class="ms-3">
                                 <span class="text-slate-400 font-semibold block">Total Pendapatan</span>
                                 <span class="flex items-center justify-between mt-1">
-                                    <span class="text-xl font-semibold">Rp. 100.000.000</span>
+                                    <span class="text-xl font-semibold">Rp. {{ number_format($storeIncome, 0, ',', '.') }}</span>
                                 </span>
                         </div>
                     </div><!--end-->

@@ -38,7 +38,47 @@ class OrderController extends Controller
             $order->orderDetails = OrderDetail::where('code_order', $order->code_order)->get();
         });
 
-        return view('admin.pages.order', compact('orders'));
+        // Get Belum Bayar
+        $unpaidCount = $store->products()
+            ->with('orderDetails.order')
+            ->get()
+            ->pluck('orderDetails')
+            ->flatten()
+            ->pluck('order')
+            ->unique()
+            ->filter(function ($order) {
+                return in_array($order->status, [0]); // Only take orders that are not completed or canceled
+            })->count();
+
+            // dd($unpaidCount);
+
+        // Get Proses
+        // Get Proses
+        $processCount = $store->products()
+            ->with('orderDetails.order')
+            ->get()
+            ->pluck('orderDetails')
+            ->flatten()
+            ->pluck('order')
+            ->unique()
+            ->filter(function ($order) {
+                return in_array($order->status, [1]); // Only take orders that are not completed or canceled
+            })->count();
+
+        // Get On Delivery
+        $onDeliveryCount = $store->products()
+            ->with('orderDetails.order')
+            ->get()
+            ->pluck('orderDetails')
+            ->flatten()
+            ->pluck('order')
+            ->unique()
+            ->filter(function ($order) {
+                return in_array($order->status, [2]); // Only take orders that are not completed or canceled
+            })->count();
+
+
+        return view('admin.pages.order', compact('orders', 'unpaidCount', 'processCount', 'onDeliveryCount'));
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\Store;
@@ -40,7 +41,7 @@ class DashboardController extends Controller
         //     ->filter(function ($order) {
         //         return !in_array($order->status, [3, 4]); // Hanya ambil pesanan yang belum selesai atau batal
         //     });
-        
+
         // Konfirmasi Pesanan dengan status 0, 1, 2
         $ordersConfirm = $orders->whereIn('status', [0, 1, 2]);
         // dd($ordersConfirm);
@@ -48,15 +49,15 @@ class DashboardController extends Controller
         // Total Jumlah Pesanan dengan status 0, 1, 2
         $ordersConfirmCount = $ordersConfirm->count();
         // dd($ordersConfirmCount);
-    
+
         // Total Jumlah Pesanan
         $ordersCount = $orders->count();
         // dd($ordersCount);
-    
+
         // Total Pendapatan
-        $totalIncome = $orderDetails->sum('total');
+        $totalIncome = Order::whereIn('code_order', $orders->pluck('code_order'))->where('status', 3)->sum('total');
         // dd($totalIncome);
-    
+
         // Total Produk
         $totalProduct = $products->count();
         // dd($totalProduct);

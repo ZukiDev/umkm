@@ -20,13 +20,19 @@ use App\Http\Controllers\SuperAdmin\CustomerController as SuperAdminCustomerCont
 use App\Http\Controllers\SuperAdmin\SuperAdminProfileController;
 use App\Http\Controllers\SuperAdmin\SuperAdminDashboardController;
 
+use Illuminate\Support\Facades\Artisan;
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::resource('/product', ProductController::class)->names('customer.product');
 Route::get('/product/filter', [ProductController::class, 'filter'])->name('customer.product.filter');
 
-Route::get('generate', function (){
-    \Illuminate\Support\Facades\Artisan::call('storage:link');
-    echo 'ok';
+Route::get('/make-storage-link', function () {
+    try {
+        Artisan::call('storage:link');
+        return 'Symlink storage berhasil dibuat.';
+    } catch (Exception $e) {
+        return 'Gagal membuat symlink: ' . $e->getMessage();
+    }
 });
 
 Route::middleware([

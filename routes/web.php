@@ -18,7 +18,7 @@ use App\Http\Controllers\SuperAdmin\CategoryController;
 use App\Http\Controllers\SuperAdmin\StoreController;
 use App\Http\Controllers\SuperAdmin\CustomerController as SuperAdminCustomerController;
 use App\Http\Controllers\SuperAdmin\SuperAdminProfileController;
-use App\Http\Controllers\SuperAdmin\DashboardController as SuperAdminDashboardController;
+use App\Http\Controllers\SuperAdmin\SuperAdminDashboardController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::resource('/product', ProductController::class)->names('customer.product');

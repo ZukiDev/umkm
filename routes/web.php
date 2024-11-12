@@ -29,7 +29,7 @@ Route::get('/product/filter', [ProductController::class, 'filter'])->name('custo
 Route::get('/make-storage-link', function () {
     try {
         Artisan::call('storage:link');
-        return 'Symlink storage berhasil dibuat di hosting.';
+        return 'Symlink storage berhasil dibuat.';
     } catch (Exception $e) {
         return 'Gagal membuat symlink: ' . $e->getMessage();
     }

@@ -26,8 +26,8 @@ class DashboardController extends Controller
 
         $orderDetails = OrderDetail::whereIn('product_id', $products->pluck('id'))->get();
 
-        $orders = $orderDetails->map(function ($detail) {
-            return $detail->order;
+        $orders = $orderDetails->map(function ($orderDetail) {
+            return $orderDetail->order;
         })->unique();
 
         // Get orders associated with the store from order details

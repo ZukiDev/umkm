@@ -69,8 +69,8 @@ class HomeController extends Controller
         $bestUMKM = Store::where('stores.status', 1)
             ->leftJoin('products', 'stores.id', '=', 'products.store_id')
             ->leftJoin('order_details', 'products.id', '=', 'order_details.product_id')
-            ->select('stores.*', DB::raw('SUM(order_details.quantity) as total_quantity'))
-            ->groupBy('stores.id')
+            ->select('stores.id', 'stores.user_id', 'stores.status', 'stores.created_at', 'stores.updated_at', 'stores.deleted_at', DB::raw('SUM(order_details.quantity) as total_quantity'))
+            ->groupBy('stores.id', 'stores.user_id', 'stores.status', 'stores.created_at', 'stores.updated_at', 'stores.deleted_at')
             ->orderBy('total_quantity', 'desc')
             ->take(6)
             ->get();

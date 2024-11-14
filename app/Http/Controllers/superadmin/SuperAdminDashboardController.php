@@ -32,6 +32,7 @@ class SuperAdminDashboardController extends Controller
 
         // Get Top 10 Customer Highest Order
         $topCustomers = Order::select('user_id', DB::raw('count(*) as total_orders'))
+            ->where('status', 3)
             ->groupBy('user_id')
             ->orderBy('total_orders', 'desc')
             ->take(10)
@@ -47,6 +48,7 @@ class SuperAdminDashboardController extends Controller
 
         // Get Top 10 Customer Highest Priced Order
         $topPricedOrders = Order::select('user_id', DB::raw('sum(total) as total_spent'))
+            ->where('status', 3)
             ->groupBy('user_id')
             ->orderBy('total_spent', 'desc')
             ->take(10)
@@ -65,6 +67,7 @@ class SuperAdminDashboardController extends Controller
             ->join('order_details', 'orders.code_order', '=', 'order_details.code_order')
             ->join('products', 'order_details.product_id', '=', 'products.id')
             ->join('stores', 'products.store_id', '=', 'stores.id')
+            ->where('orders.status', 3)
             ->groupBy('stores.store_name')
             ->orderBy('total_orders', 'desc')
             ->take(10)
@@ -82,13 +85,14 @@ class SuperAdminDashboardController extends Controller
             ->join('order_details', 'orders.code_order', '=', 'order_details.code_order')
             ->join('products', 'order_details.product_id', '=', 'products.id')
             ->join('stores', 'products.store_id', '=', 'stores.id')
+            ->where('orders.status', 3)
             ->groupBy('stores.store_name')
             ->orderBy('total_income', 'desc')
             ->take(10)
             ->get();
-            foreach ($topIncomeUMKMs as $store) {
-                $store->store = $store->store_name;
-            }
+        foreach ($topIncomeUMKMs as $store) {
+            $store->store = $store->store_name;
+        }
 
         // $topIncomeUMKMs = $topIncomeUMKMs->map(function ($store) {
         //     return [

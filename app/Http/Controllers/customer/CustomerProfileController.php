@@ -107,8 +107,7 @@ class CustomerProfileController extends Controller
         if ($user->address) {
             $user->address->update($addressData);
         } else {
-            $userAddress = User::where('id', $user->id);
-            $userAddress->address()->create($addressData);
+            $user->address()->create($addressData);
         }
 
         return redirect()->route('customer.profile')->with('success', 'Profile updated successfully.');

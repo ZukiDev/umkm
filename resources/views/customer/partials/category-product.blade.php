@@ -5,15 +5,14 @@
 
     <div class="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 mt-8 gap-[30px]">
         @foreach ($allCategory as $category)
-            <div
+            <a href="{{ route('customer.product.index', ['category' => $category->id]) }}"
                 class="relative p-6 overflow-hidden text-center duration-500 rounded-md group hover:shadow-lg hover:dark:shadow-gray-800">
                 <img src="{{ asset('storage/' . $category->icon) }}"
                     class="block mx-auto mb-2 rounded-full shadow-md dark:shadow-gray-800 size-20"
                     alt="{{ $category->title }}">
-
-                <a href="{{ route('customer.product.index', ['category' => $category->id]) }}"
-                    class="text-lg font-semibold hover:text-indigo-600">{{ $category->title }}</a>
-            </div><!--end content-->
+                <p
+                    class="text-lg font-semibold hover:text-indigo-600">{{ $category->title }}</p>
+            </a><!--end content-->
         @endforeach
     </div><!--end grid-->
 </div><!--end container-->

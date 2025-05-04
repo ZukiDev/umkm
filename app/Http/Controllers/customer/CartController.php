@@ -58,7 +58,7 @@ class CartController extends Controller
 
         $user = Auth::user();
         if (!$user) {
-            return redirect()->route('login')->with('error', 'You must be logged in to add items to the cart.');
+            return redirect()->route('login')->with('error', 'Anda harus masuk untuk menambahkan item ke keranjang.');
         }
 
         if ($request->checkout) {
@@ -93,7 +93,7 @@ class CartController extends Controller
 
         $user = Auth::user();
         if (!$user) {
-            return response()->json(['error' => 'You must be logged in to update the cart.'], 403);
+            return response()->json(['error' => 'Anda harus masuk untuk memperbarui keranjang.'], 403);
         }
 
         DB::beginTransaction();
@@ -104,7 +104,7 @@ class CartController extends Controller
             $availableStock = $product->stock + $cart->quantity;
             if ($availableStock < $request->quantity) {
                 DB::rollBack();
-                return response()->json(['error' => 'The requested quantity is not available in stock.'], 400);
+                return response()->json(['error' => 'Jumlah yang diminta tidak tersedia dalam stok.'], 400);
             }
 
             // Update the cart item
@@ -133,8 +133,8 @@ class CartController extends Controller
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error('Error updating cart: ' . $e->getMessage());
-            return response()->json(['error' => 'An error occurred while updating the cart.'], 500);
+            Log::error('Terjadi kesalahan saat memperbarui keranjang: ' . $e->getMessage());
+            return response()->json(['error' => 'Terjadi kesalahan saat memperbarui keranjang.'], 500);
         }
     }
 
@@ -145,7 +145,7 @@ class CartController extends Controller
     {
         $user = Auth::user();
         if (!$user) {
-            return redirect()->route('login')->with('error', 'You must be logged in to remove items from the cart.');
+            return redirect()->route('login')->with('error', 'Anda harus masuk untuk menghapus item dari keranjang.');
         }
 
         // Start a database transaction
@@ -164,11 +164,11 @@ class CartController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error('Error removing product from cart: ' . $e->getMessage());
-            return redirect()->route('customer.cart.index')->with('error', 'An error occurred while removing the product from the cart.');
+            Log::error('Terjadi kesalahan saat menghapus produk dari keranjang: ' . $e->getMessage());
+            return redirect()->route('customer.cart.index')->with('error', 'Terjadi kesalahan saat menghapus produk dari keranjang.');
         }
 
-        return redirect()->back()->with('success', 'Product successfully removed from the cart.');
+        return redirect()->back()->with('success', 'Produk berhasil dihapus dari keranjang.');
     }
 
     private function directCheckout(Request $request, $user)
@@ -179,7 +179,7 @@ class CartController extends Controller
 
             if ($product->stock < $request->quantity) {
                 DB::rollBack();
-                return redirect()->route('customer.cart.index')->with('error', 'The requested quantity is not available in stock.');
+                return redirect()->route('customer.cart.index')->with('error', 'Jumlah yang diminta tidak tersedia dalam stok.');
             }
 
             // Clear the user's cart and restock products
@@ -193,12 +193,12 @@ class CartController extends Controller
             $product->save();
 
             DB::commit();
-            return redirect()->route('customer.order.create')->with('success', 'Product successfully added to the cart and ready for checkout.');
+            return redirect()->route('customer.order.create')->with('success', 'Produk berhasil ditambahkan ke keranjang dan siap untuk checkout.');
 
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error('Error during single product checkout: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'An error occurred while checking out the product.');
+            Log::error('Terjadi kesalahan saat checkout produk tunggal: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat melakukan checkout produk.');
         }
     }
 
@@ -210,13 +210,13 @@ class CartController extends Controller
 
             if ($product->stock < $request->quantity) {
                 DB::rollBack();
-                return redirect()->route('customer.cart.index')->with('error', 'The requested quantity is not available in stock.');
+                return redirect()->route('customer.cart.index')->with('error', 'Jumlah yang diminta tidak tersedia dalam stok.');
             }
 
             // Check for different store items in the cart
             if ($this->hasDifferentStoreItems($user, $product)) {
                 DB::rollBack();
-                return redirect()->route('customer.cart.index')->with('warning', 'Your cart contains items from a different store. Please clear your cart before adding items from a new store.');
+                return redirect()->route('customer.cart.index')->with('warning', 'Keranjang Anda berisi item dari toko yang berbeda. Harap kosongkan keranjang Anda sebelum menambahkan item dari toko baru.');
             }
 
             $existingCartItem = Cart::where('user_id', $user->id)
@@ -228,7 +228,7 @@ class CartController extends Controller
                 $newQuantity = $existingCartItem->quantity + $request->quantity;
                 if ($product->stock < $newQuantity) {
                     DB::rollBack();
-                    return redirect()->route('customer.cart.index')->with('warning', 'The requested quantity exceeds the available stock.');
+                    return redirect()->route('customer.cart.index')->with('warning', 'Jumlah yang diminta melebihi stok yang tersedia.');
                 }
                 $existingCartItem->quantity = $newQuantity;
                 $existingCartItem->total = $existingCartItem->price * $newQuantity;
@@ -242,13 +242,12 @@ class CartController extends Controller
             $product->save();
 
             DB::commit();
-            return redirect()->back()->with('success', 'Product successfully added to the cart.');
+            return redirect()->back()->with('success', 'Produk berhasil ditambahkan ke keranjang.');
 
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error('Error adding product to cart: ' . $e->getMessage());
-            return redirect()->route('customer.cart.index')->with('error', 'An error occurred while adding the product to the cart.');
-        }
+            Log::error('Terjadi kesalahan saat menambahkan produk ke keranjang: ' . $e->getMessage());
+            return redirect()->route('customer.cart.index')->with('error', 'Terjadi kesalahan saat menambahkan produk ke keranjang.');}
     }
 
     private function clearCart($user)

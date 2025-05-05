@@ -71,7 +71,7 @@
                         <script>
                             document.write(new Date().getFullYear())
                         </script> UMKM Blitar. Developed
-                        by <a href="https://www.instagram.com/naffe.id" target="_blank" class="text-reset">Naffe ID</a>.
+                        by <a href="#" class="text-reset">AYU ROUDHOTUL JANNAH</a>.
                     </p>
                 </div>
             </div><!--end grid-->

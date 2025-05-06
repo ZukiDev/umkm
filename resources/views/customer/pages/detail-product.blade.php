@@ -5,7 +5,7 @@
     <section class="relative table w-full py-20 lg:py-24 bg-gray-50 dark:bg-slate-800">
         <div class="container relative">
             <div class="grid grid-cols-1 mt-14">
-                <h3 class="text-3xl leading-normal font-semibold">Detail {{ $product->name }}</h3>
+                <h3 class="text-3xl font-semibold leading-normal">Detail {{ $product->name }}</h3>
             </div><!--end grid-->
 
             <div class="relative mt-3">
@@ -27,6 +27,30 @@
     <!-- Start -->
     <section class="relative py-12">
         <div class="container">
+            <!-- Success Message -->
+            @if (session('success'))
+                <div
+                    class="relative block px-4 py-2 mb-4 font-medium border rounded-md bg-emerald-600/10 border-emerald-600/10 text-emerald-600">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            <!-- Warning Message -->
+            @if (session('warning'))
+                <div
+                    class="relative block px-4 py-2 mb-4 font-medium text-orange-600 border rounded-md bg-orange-600/10 border-orange-600/10">
+                    {{ session('warning') }}
+                </div>
+            @endif
+
+            <!-- Error Message -->
+            @if (session('error'))
+                <div
+                    class="relative block px-4 py-2 mb-4 font-medium text-red-600 border rounded-md bg-red-600/10 border-red-600/10">
+                    {{ session('error') }}
+                </div>
+            @endif
+
             <div class="grid md:grid-cols-12 grid-cols-1 gap-[30px] items-center">
                 <div class="lg:col-span-5 md:col-span-6">
                     <div>
@@ -39,19 +63,19 @@
                     <div class="lg:ms-6">
                         <h5 class="text-3xl font-bold">{{ $product->name }}</h5>
                         <div class="mt-2">
-                            <span class="text-slate-400 text-2xl font-semibold me-1">Rp.
+                            <span class="text-2xl font-semibold text-slate-400 me-1">Rp.
                                 {{ number_format($product->price, 0, ',', '.') }}</span>
                             <span class="text-red-600 text-nowrap text-end">({{ $product->sold }} Terjual)</span>
                         </div>
 
                         <div class="mt-4">
                             <h5 class="text-lg font-semibold">Deskripsi :</h5>
-                            <p class="text-slate-400 mt-2">{{ $product->description }}</p>
+                            <p class="mt-2 text-slate-400">{{ $product->description }}</p>
                         </div>
 
                         <div class="mt-4">
                             <h5 class="text-lg font-semibold">Detail Produk :</h5>
-                            <ul class="text-slate-400 mt-2">
+                            <ul class="mt-2 text-slate-400">
                                 <li><strong>Kategori:</strong> {{ $product->category->title ?? 'Tidak ada kategori' }}</li>
                                 <li><strong>SKU:</strong> {{ $product->sku }}</li>
                                 <li><strong>Berat:</strong> {{ $product->weight ?? 'N/A' }} kg</li>
@@ -66,15 +90,15 @@
                             <div class="grid lg:grid-cols-2 grid-cols-1 gap-[30px] mt-4">
                                 <div class="flex items-center">
                                     <h5 class="text-lg font-semibold me-2">Jumlah:</h5>
-                                    <div class="qty-icons ms-3 flex items-center">
+                                    <div class="flex items-center qty-icons ms-3">
                                         <button type="button"
                                             onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                                            class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border-indigo-600/10 border hover:border-indigo-600 text-indigo-600 hover:text-white minus">-</button>
+                                            class="inline-flex items-center justify-center text-base tracking-wide text-center text-indigo-600 align-middle duration-500 border rounded-md size-9 bg-indigo-600/5 hover:bg-indigo-600 border-indigo-600/10 hover:border-indigo-600 hover:text-white minus">-</button>
                                         <input min="1" name="quantity" value="1" type="number"
-                                            class="h-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white pointer-events-none w-16 ps-4 quantity">
+                                            class="inline-flex items-center justify-center w-16 text-base tracking-wide text-center text-indigo-600 align-middle duration-500 border rounded-md pointer-events-none h-9 bg-indigo-600/5 hover:bg-indigo-600 border-indigo-600/10 hover:border-indigo-600 hover:text-white ps-4 quantity">
                                         <button type="button"
                                             onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                                            class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white plus">+</button>
+                                            class="inline-flex items-center justify-center text-base tracking-wide text-center text-indigo-600 align-middle duration-500 border rounded-md size-9 bg-indigo-600/5 hover:bg-indigo-600 border-indigo-600/10 hover:border-indigo-600 hover:text-white plus">+</button>
                                     </div>
                                 </div>
                                 <span class="mt-2 text-indigo-600 text-md text-start">Stok tersedia:
@@ -85,10 +109,10 @@
                             <input type="hidden" name="checkout" value="0">
                             <div class="mt-4">
                                 <button type="submit" onclick="this.form.checkout.value=1"
-                                    class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md me-2 mt-2">Pesan
+                                    class="inline-block px-5 py-2 mt-2 text-base font-semibold tracking-wide text-center text-white align-middle duration-500 bg-indigo-600 border border-indigo-600 rounded-md hover:bg-indigo-700 hover:border-indigo-700 me-2">Pesan
                                     Sekarang</button>
                                 <button type="submit"
-                                    class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white mt-2">Tambahkan
+                                    class="inline-block px-5 py-2 mt-2 text-base font-semibold tracking-wide text-center text-indigo-600 align-middle duration-500 border rounded-md bg-indigo-600/5 hover:bg-indigo-600 border-indigo-600/10 hover:border-indigo-600 hover:text-white">Tambahkan
                                     Ke Keranjang</button>
                             </div>
                         </form>

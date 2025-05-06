@@ -179,7 +179,7 @@ class CartController extends Controller
 
             if ($product->stock < $request->quantity) {
                 DB::rollBack();
-                return redirect()->route('customer.cart.index')->with('error', 'Jumlah yang diminta tidak tersedia dalam stok.');
+                return redirect()->back()->with('error', 'Jumlah yang diminta tidak tersedia dalam stok.');
             }
 
             // Clear the user's cart and restock products
@@ -210,13 +210,13 @@ class CartController extends Controller
 
             if ($product->stock < $request->quantity) {
                 DB::rollBack();
-                return redirect()->route('customer.cart.index')->with('error', 'Jumlah yang diminta tidak tersedia dalam stok.');
+                return redirect()->back()->with('error', 'Jumlah yang diminta tidak tersedia dalam stok.');
             }
 
             // Check for different store items in the cart
             if ($this->hasDifferentStoreItems($user, $product)) {
                 DB::rollBack();
-                return redirect()->route('customer.cart.index')->with('warning', 'Keranjang Anda berisi item dari toko yang berbeda. Harap kosongkan keranjang Anda sebelum menambahkan item dari toko baru.');
+                return redirect()->back()->with('warning', 'Keranjang Anda berisi item dari toko yang berbeda. Harap kosongkan keranjang Anda sebelum menambahkan item dari toko baru.');
             }
 
             $existingCartItem = Cart::where('user_id', $user->id)
@@ -226,9 +226,9 @@ class CartController extends Controller
             if ($existingCartItem) {
                 // Update quantity if already in cart
                 $newQuantity = $existingCartItem->quantity + $request->quantity;
-                if ($product->stock < $newQuantity) {
+                if (($product->stock + $existingCartItem->quantity) < $newQuantity) {
                     DB::rollBack();
-                    return redirect()->route('customer.cart.index')->with('warning', 'Jumlah yang diminta melebihi stok yang tersedia.');
+                    return redirect()->back()->with('warning', 'Jumlah yang diminta melebihi stok yang tersedia.');
                 }
                 $existingCartItem->quantity = $newQuantity;
                 $existingCartItem->total = $existingCartItem->price * $newQuantity;

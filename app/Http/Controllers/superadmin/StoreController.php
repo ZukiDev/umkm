@@ -158,7 +158,7 @@ class StoreController extends Controller
                 'store_name' => 'required|string|max:255',
                 'description' => 'required|string|max:255',
                 'owner_name' => 'nullable|string|max:255',
-                'store_email' => 'nullable|string|email|max:255|unique:stores,email,' . $store->id, // Ignore current store
+                'store_email' => 'nullable|string|email|max:255|unique:stores,email,' . $store->id . ',id,deleted_at,NULL', // Ignore current store and consider soft deletes
                 'store_phone_number' => 'nullable|string|max:20|unique:stores,phone_number,' . $store->id, // Ignore current store
                 'business_type' => 'nullable|string|max:255',
                 'status' => 'required|boolean',

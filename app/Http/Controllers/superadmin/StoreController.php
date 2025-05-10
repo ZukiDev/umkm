@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\Rule;
 
 class StoreController extends Controller
 {
@@ -56,7 +55,7 @@ class StoreController extends Controller
                 'store_name' => 'required|string|max:255',
                 'description' => 'required|string|max:255',
                 'owner_name' => 'nullable|string|max:255',
-                'store_email' => ['nullable', 'string', 'email', 'max:255', Rule::unique('stores', 'email')->whereNull('deleted_at')],
+                'store_email' => 'nullable|string|email|max:255|unique:stores,email,NULL,id,deleted_at,NULL',
                 'store_phone_number' => 'nullable|string|max:20|unique:stores,phone_number',
                 'business_type' => 'nullable|string|max:255',
                 'status' => 'required|boolean',

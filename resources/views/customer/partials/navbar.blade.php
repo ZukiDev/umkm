@@ -58,8 +58,7 @@
                                 <a href="{{ route('customer.order.index') }}"
                                     class="block py-1.5 px-4 hover:text-indigo-600"><i
                                         class="uil uil-clipboard-notes align-middle me-1"></i> Pemesanan</a>
-                                <a href="{{ route('customer.profile') }}"
-                                    class="block py-1.5 px-4 hover:text-indigo-600"><i
+                                <a href="{{ route('customer.profile') }}" class="block py-1.5 px-4 hover:text-indigo-600"><i
                                         class="uil uil-setting align-middle me-1"></i> Profil</a>
                             </li>
                             <li class="border-t border-gray-100 dark:border-gray-800 my-2"></li>

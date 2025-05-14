@@ -51,7 +51,13 @@ class OrderController extends Controller
         $carts = Cart::where('user_id', $user->id)->get();
 
         if ($carts->isEmpty()) {
-            return redirect()->route('cart.index')->with('error', 'Your cart is empty.');
+            return redirect()->route('customer.cart.index')->with('error', 'Your cart is empty.');
+        }
+
+        // Check if the user has an address
+        if (!$address) {
+            return redirect()->route('customer.profile', ['tab' => 'address'])
+                ->with('error', 'Please update your address before proceeding to checkout.');
         }
 
         // Calculate the sub total payment

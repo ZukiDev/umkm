@@ -39,6 +39,32 @@
                 </div><!--end col-->
 
                 <div class="lg:col-span-9 md:col-span-7">
+                    <div class="mt-4 mb-4">
+                        <!-- Success Message -->
+                        @if (session('success'))
+                            <div
+                                class="relative px-4 py-2 rounded-md font-medium bg-emerald-600/10 border border-emerald-600/10 text-emerald-600 block">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        <!-- Warning Message -->
+                        @if (session('warning'))
+                            <div
+                                class="relative px-4 py-2 rounded-md font-medium bg-orange-600/10 border border-orange-600/10 text-orange-600 block">
+                                {{ session('warning') }}
+                            </div>
+                        @endif
+
+                        <!-- Error Message -->
+                        @if (session('error'))
+                            <div
+                                class="relative px-4 py-2 rounded-md font-medium bg-red-600/10 border border-red-600/10 text-red-600 block">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                    </div>
+
                     <p class="max-w-xl text-slate-400">Anda dapat mengelola informasi pribadi, mengubah kata sandi, dan
                         menyesuaikan preferensi akun Anda. Pastikan semua detail terbaru agar kami dapat memberikan
                         pengalaman yang lebih baik sesuai dengan kebutuhan Anda.</p>
@@ -219,4 +245,27 @@
         </div><!--end container-->
     </section><!--end section-->
     <!-- End -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const tab = urlParams.get('tab');
+
+            if (tab) {
+                const tabButton = document.querySelector(`[data-tabs-target="#${tab}"]`);
+                const tabContent = document.querySelector(`#${tab}`);
+
+                if (tabButton && tabContent) {
+                    // Nonaktifkan semua tab
+                    document.querySelectorAll('[role="tabpanel"]').forEach(el => el.classList.add('hidden'));
+                    document.querySelectorAll('[role="tab"]').forEach(el => el.setAttribute('aria-selected',
+                        'false'));
+
+                    // Aktifkan tab yang sesuai
+                    tabContent.classList.remove('hidden');
+                    tabButton.setAttribute('aria-selected', 'true');
+                }
+            }
+        });
+    </script>
 @endsection

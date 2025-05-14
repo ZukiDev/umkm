@@ -57,8 +57,8 @@
                                 <label class="font-semibold" for="password_confirmation">Konfirmasi Kata Sandi:</label>
                                 <x-input id="password_confirmation"
                                     class="form-input mt-3 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0"
-                                    type="password_confirmation" name="password_confirmation" :value="old('password_confirmation')" required
-                                    autofocus autocomplete="new-password" placeholder="Masukkan ulang kata sandi anda" />
+                                    type="password" name="password_confirmation" :value="old('password_confirmation')" required autofocus
+                                    autocomplete="new-password" placeholder="Masukkan ulang kata sandi anda" />
                             </div>
 
                             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())

@@ -101,7 +101,7 @@ class CustomerProfileController extends Controller
             'city' => $validatedData['city'],
             'district' => $validatedData['district'],
             'post_code' => $validatedData['post_code'],
-            'delivery_instructions' => $validatedData['delivery_instructions'] ?? $validatedData['address'],
+            'delivery_instructions' => $validatedData['delivery_instructions'] ?? 'Tidak ada',
         ];
 
         if ($user->address) {

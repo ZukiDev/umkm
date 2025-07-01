@@ -9,8 +9,8 @@
                             <a href="#" class="text-[22px] focus:outline-none">
                                 <img src="{{ asset('asset/images/logo-light.png') }}" alt="">
                             </a>
-                            <p class="mt-6 text-gray-300">Temukan produk berkualitas dari para pengusaha lokal Blitar.
-                                Dengan setiap pembelian, Anda turut berkontribusi pada kemajuan UMKM Blitar, menciptakan
+                            <p class="mt-6 text-gray-300">Temukan produk berkualitas dari para pengusaha lokal Desa Kepanjen Lor.
+                                Dengan setiap pembelian, Anda turut berkontribusi pada kemajuan UMKM Desa Kepanjen Lor, menciptakan
                                 peluang, dan memperkuat ekonomi lokal.</p>
                         </div><!--end col-->
 
@@ -70,7 +70,7 @@
                     <p class="mb-0">©
                         <script>
                             document.write(new Date().getFullYear())
-                        </script> UMKM Blitar. Developed
+                        </script> UMKM Kepanjen Lor. Developed
                         by <a href="#" class="text-reset">AYU ROUDHOTUL JANNAH</a>.
                     </p>
                 </div>

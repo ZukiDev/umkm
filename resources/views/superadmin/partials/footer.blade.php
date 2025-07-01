@@ -6,7 +6,7 @@
                 <p class="mb-0 text-slate-400">©
                     <script>
                         document.write(new Date().getFullYear())
-                    </script> UMKM Blitar. Developed by <a href="#" class="text-reset">AYU ROUDHOTUL
+                    </script> UMKM Kepanjen Lor. Developed by <a href="#" class="text-reset">AYU ROUDHOTUL
                         JANNAH</a>.
                 </p>
             </div><!--end col-->

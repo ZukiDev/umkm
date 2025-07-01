@@ -99,8 +99,9 @@
                                                 <th class="px-4 py-5 text-start">Alamat</th>
                                                 <th class="px-4 py-5 text-start">Produk</th>
                                                 <th class="px-4 py-5 text-start">Total</th>
+                                                <th class="px-4 py-5 text-start">Metode Bayar</th>
                                                 <th class="px-4 py-5 text-start">Status</th>
-                                                <th class="px-4 py-5 text-end">Action</th>
+                                                <th class="px-4 py-5 text-start">Action</th>
                                             </tr>
                                         </thead>
 
@@ -125,7 +126,11 @@
                                                             @endforeach
                                                         </ul>
                                                     </td>
-                                                    <td class="p-4">Rp. {{ number_format($order->total, 0, ',', '.') }}
+                                                    <td class="p-4">
+                                                        Rp. {{ number_format($order->total, 0, ',', '.') }}
+                                                    </td>
+                                                    <td class="p-4">
+                                                         {{ $order->payment->last()?->payment_method ?? '-' }}
                                                     </td>
                                                     <td class="p-4">
                                                         <span
@@ -152,12 +157,12 @@
                                                     <td class="p-4 text-end">
                                                         <!-- Chat WA Button -->
                                                         <a href="https://wa.me/{{ $order->user->phone_number }}"
-                                                            class="text-blue-600 hover:text-blue-800 mr-2" target="_blank">
+                                                            class="text-blue-600 hover:text-blue-800" target="_blank">
                                                             <i class="uil uil-chat"></i> Chat WhatsApp
                                                         </a>
                                                         <br>
                                                         <!-- Edit Button -->
-                                                        <button class="text-yellow-600 hover:text-yellow-800 mr-2"
+                                                        <button class="text-yellow-600 hover:text-yellow-800"
                                                             onclick="editModal{{ $order->id }}.showModal()">
                                                             <i class="uil uil-edit">Ubah Status</i>
                                                         </button>

@@ -82,6 +82,11 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        // Atur Timestamp UTC+7 
+        $inaTime = Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s');
+        
+        // print_r($inaTime);
+         
         $user = Auth::user();
         $address = $user->address;
 
@@ -164,6 +169,7 @@ class OrderController extends Controller
         Payment::create([
             'order_id' => $order->id,
             'payment_method' => $validatedPaymentMethod['payment_method'],
+            'payment_date'  => $inaTime,
             'total_price' => $subTotalPayment,
             'total_payment' => $totalPayment,
             'status' => 0, // pending
@@ -197,9 +203,9 @@ class OrderController extends Controller
         $whatsappMessage .= "District: {$address->district}\n";
         $whatsappMessage .= "Post Code: {$address->post_code}\n";
 
-        // Add order date and time using Carbon
-        $orderDateTime = Carbon::now()->format('l, d F Y H:i');
-        $whatsappMessage .= "\nOrder Date and Time: $orderDateTime\n";
+        // // Add order date and time using Carbon
+        // $orderDateTime = Carbon::now()->format('l, d F Y H:i');
+        $whatsappMessage .= "\nOrder Date and Time: $inaTime\n";
 
         // Redirect to WhatsApp with the message
         $whatsappUrl = "https://wa.me/$storePhoneNumber?text=" . urlencode($whatsappMessage);

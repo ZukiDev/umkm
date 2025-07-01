@@ -161,7 +161,7 @@
                                                                         <input type="number" name="phone_number"
                                                                             value="{{ $umkm->user->phone_number }}"
                                                                             class="border px-3 py-2 rounded w-full mb-4"
-                                                                            placeholder="No. Telp" required>
+                                                                            placeholder="Contoh: 6287755819001" required>
                                                                         <input type="password" name="password"
                                                                             class="border px-3 py-2 rounded w-full mb-4"
                                                                             placeholder="Password (Opsional)">
@@ -224,7 +224,7 @@
                                                                         <input type="number" name="store_phone_number"
                                                                             value="{{ $umkm->phone_number }}"
                                                                             class="border px-3 py-2 rounded w-full mb-4"
-                                                                            placeholder="No. Telp" required>
+                                                                            placeholder="Contoh: 6287755819001" required>
                                                                         <select name="status"
                                                                             class="border px-3 py-2 rounded w-full mb-4"
                                                                             required>
@@ -420,7 +420,7 @@
                                                             placeholder="Email" required>
                                                         <input type="number" name="phone_number"
                                                             class="border px-3 py-2 rounded w-full mb-4"
-                                                            placeholder="No. Telp" required>
+                                                            placeholder="Contoh: 6287755819001" required>
                                                         <input type="password" name="password"
                                                             class="border px-3 py-2 rounded w-full mb-4"
                                                             placeholder="Password" required>
@@ -471,7 +471,7 @@
                                                             placeholder="Email" required>
                                                         <input type="number" name="store_phone_number"
                                                             class="border px-3 py-2 rounded w-full mb-4"
-                                                            placeholder="No. Telp" required>
+                                                            placeholder="Contoh: 6287755819001" required>
                                                         <select name="status"
                                                             class="border px-3 py-2 rounded w-full mb-4" required>
                                                             <option value="1">Aktif</option>

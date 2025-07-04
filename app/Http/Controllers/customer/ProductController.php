@@ -122,6 +122,11 @@ class ProductController extends Controller
 
         $products = $query->get();
         $categories = Category::all();
+        
+        // Calculate sold quantity for each product
+        // foreach ($products as $product) {
+        //     $product->sold = $product->orderDetails->sum('quantity');
+        // }
 
         return view('customer.pages.all-product', compact('products', 'categories'));
     }

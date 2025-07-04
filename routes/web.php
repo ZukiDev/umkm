@@ -12,6 +12,8 @@ use App\Http\Controllers\Admin\OrderHistoryController;
 use App\Http\Controllers\customer\CartController;
 use App\Http\Controllers\customer\ProductController;
 use App\Http\Controllers\customer\OrderController;
+use App\Http\Controllers\customer\PaymentController;
+use App\Http\Controllers\customer\MidtransController;
 use App\Http\Controllers\customer\CustomerProfileController;
 //SuperAdmin
 use App\Http\Controllers\SuperAdmin\CategoryController;
@@ -33,12 +35,18 @@ Route::middleware([
     'verified',
 ])->group(function () {
 
+    Route::post('/midtrans/webhook', [MidtransController::class, 'callback'])->name('customer.midtrans.callback');
     Route::middleware(['auth'])->group(function () {
         Route::middleware(['customer'])->group(function () {
             Route::post('/address', [CustomerProfileController::class, 'update'])->name('customer.profile.update');
             Route::resource('/cart', CartController::class)->names('customer.cart');
             Route::resource('/order', OrderController::class)->names('customer.order');
             Route::get('/checkout', [OrderController::class, 'create'])->name('customer.checkout');
+            Route::resource('/payment', PaymentController::class)->names('customer.payment');
+            Route::get('/midtrans-callback', function () {
+                return response()->json(['message' => 'Callback route is working, but only accepts POST'], 405);
+            });
+
         });
         Route::middleware(['admin'])->group(function () {
             Route::prefix('admin')->group(function () {

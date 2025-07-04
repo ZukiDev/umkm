@@ -145,7 +145,7 @@
                                     <div class="flex justify-between items-center mt-1 font-semibold">
                                         <p class="text-green-600">Rp.
                                             {{ number_format($product->price ?? 0, 0, ',', '.') }}</p>
-                                        <p class="text-red-600">{{ $product->stock ?? 0 }} Terjual</p>
+                                        <p class="text-red-600">{{ $product->stock ?? 0 }} Tersedia</p>
                                     </div>
                                 </div>
                             </div>

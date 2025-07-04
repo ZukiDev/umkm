@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>{{ config('app.name', 'UMKM Blitar') }}</title>
+    <title>{{ config('app.name', 'UMKM Kepanjen Lor') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="E-Commerce UMKM Blitar">
@@ -94,6 +94,30 @@
     @stack('modals')
 
     @livewireScripts
+    
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script>
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: "{{ session('success') }}",
+                confirmButtonColor: '#16a34a',
+            });
+        @elseif (session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Mohon Maaf!',
+                text: "{{ session('error') }}",
+                confirmButtonColor: '#dc2626',
+            });
+        @endif
+    </script>
+
 </body>
+
+
 
 </html>

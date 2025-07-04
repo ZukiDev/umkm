@@ -127,7 +127,7 @@
                                     class="w-full px-5 py-2 text-white bg-indigo-600 rounded-md"
                                     value="Lanjutkan Pembayaran">
 
-                                <pre><div id="result-json">JSON result will appear here after payment:<br></div></pre>
+                                {{-- <pre><div id="result-json">JSON result will appear here after payment:<br></div></pre> --}}
 
                                 <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}">
                                 </script>
@@ -139,7 +139,7 @@
                                             onSuccess: function(result) {
                                                 /* You may add your own js here, this is just example */
                                                 document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-                                                
+
                                                 fetch('/midtrans/webhook', {
                                                         method: 'POST',
                                                         headers: {

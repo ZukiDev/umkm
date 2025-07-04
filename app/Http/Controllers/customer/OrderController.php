@@ -82,11 +82,11 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        // Atur Timestamp UTC+7 
+        // Atur Timestamp UTC+7
         $inaTime = Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s');
-        
+
         // print_r($inaTime);
-         
+
         $user = Auth::user();
         $address = $user->address;
 
@@ -166,7 +166,7 @@ class OrderController extends Controller
         OrderDetail::insert($orderDetails);
 
         // Create a new payment record
-        Payment::create([
+        $payment = Payment::create([
             'order_id' => $order->id,
             'payment_method' => $validatedPaymentMethod['payment_method'],
             'payment_date'  => $inaTime,
@@ -179,38 +179,44 @@ class OrderController extends Controller
         // Clear the user's cart
         Cart::where('user_id', $user->id)->delete();
 
-        // Get the store phone number from the first cart item
-        $storePhoneNumber = $carts->first()->product->store->phone_number;
+        // Redirect to the payment page with the snap token
 
-        // Prepare the WhatsApp message
-        $whatsappMessage = "Order Details:\n";
-        $whatsappMessage .= "Order Code: $codeOrder\n";
-        $whatsappMessage .= "Total Payment: Rp $totalPayment\n\n";
-        $whatsappMessage .= "Order Items:\n";
-        foreach ($orderDetails as $detail) {
-            $productName = $carts->firstWhere('product_id', $detail['product_id'])->product->name;
-            $whatsappMessage .= "Product Name: $productName, Quantity: {$detail['quantity']}, Price: Rp {$detail['price']}, Total: Rp {$detail['total']}\n";
-        }
-        $whatsappMessage .= "\nPayment Details:\n";
-        $whatsappMessage .= "Payment Method: {$request->input('payment_method')}\n";
-        $whatsappMessage .= "Total Price: Rp $subTotalPayment\n";
-        $whatsappMessage .= "PPN: Rp $ppn\n";
-        $whatsappMessage .= "Total Payment: Rp $totalPayment\n\n";
-        $whatsappMessage .= "Shipping Address:\n";
-        $whatsappMessage .= "Address: {$address->address}\n";
-        $whatsappMessage .= "Province: {$address->province}\n";
-        $whatsappMessage .= "City: {$address->city}\n";
-        $whatsappMessage .= "District: {$address->district}\n";
-        $whatsappMessage .= "Post Code: {$address->post_code}\n";
+        return redirect()->route('customer.payment.show', ['payment' => $payment]);
 
-        // // Add order date and time using Carbon
-        // $orderDateTime = Carbon::now()->format('l, d F Y H:i');
-        $whatsappMessage .= "\nOrder Date and Time: $inaTime\n";
+        // return view('customer.pages.payment.snap', compact('snapToken', 'order'));
 
-        // Redirect to WhatsApp with the message
-        $whatsappUrl = "https://wa.me/$storePhoneNumber?text=" . urlencode($whatsappMessage);
+        // // Get the store phone number from the first cart item
+        // $storePhoneNumber = $carts->first()->product->store->phone_number;
 
-        return redirect()->away($whatsappUrl)->with('success', 'Order placed successfully.');
+        // // Prepare the WhatsApp message
+        // $whatsappMessage = "Order Details:\n";
+        // $whatsappMessage .= "Order Code: $codeOrder\n";
+        // $whatsappMessage .= "Total Payment: Rp $totalPayment\n\n";
+        // $whatsappMessage .= "Order Items:\n";
+        // foreach ($orderDetails as $detail) {
+        //     $productName = $carts->firstWhere('product_id', $detail['product_id'])->product->name;
+        //     $whatsappMessage .= "Product Name: $productName, Quantity: {$detail['quantity']}, Price: Rp {$detail['price']}, Total: Rp {$detail['total']}\n";
+        // }
+        // $whatsappMessage .= "\nPayment Details:\n";
+        // $whatsappMessage .= "Payment Method: {$request->input('payment_method')}\n";
+        // $whatsappMessage .= "Total Price: Rp $subTotalPayment\n";
+        // $whatsappMessage .= "PPN: Rp $ppn\n";
+        // $whatsappMessage .= "Total Payment: Rp $totalPayment\n\n";
+        // $whatsappMessage .= "Shipping Address:\n";
+        // $whatsappMessage .= "Address: {$address->address}\n";
+        // $whatsappMessage .= "Province: {$address->province}\n";
+        // $whatsappMessage .= "City: {$address->city}\n";
+        // $whatsappMessage .= "District: {$address->district}\n";
+        // $whatsappMessage .= "Post Code: {$address->post_code}\n";
+
+        // // // Add order date and time using Carbon
+        // // $orderDateTime = Carbon::now()->format('l, d F Y H:i');
+        // $whatsappMessage .= "\nOrder Date and Time: $inaTime\n";
+
+        // // Redirect to WhatsApp with the message
+        // $whatsappUrl = "https://wa.me/$storePhoneNumber?text=" . urlencode($whatsappMessage);
+
+        // return redirect()->away($whatsappUrl)->with('success', 'Order placed successfully.');
     }
 
     /**
@@ -232,19 +238,19 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Order $order)
-    {
-        // Check if the order status is pending
-        if ($order->status == 0) {
-            // Update the order status to cancelled
-            $order->status = 2; // 2 for cancelled
-            $order->save();
+    public function update(Request $request, Order $order) {
+        // Validate the request
+        $request->validate([
+            'status' => 'required|integer|in:0,1,2,3,4', // Assuming status can be 0 to 4
+        ]);
 
-            return redirect()->back()->with('success', 'Order has been cancelled successfully.');
-        }
+        // Update the order status
+        $order->status = $request->input('status');
+        $order->save();
 
-        return redirect()->back()->with('error', 'Only pending orders can be cancelled.');
+        return redirect()->route('customer.order.index')->with('success', 'Order status updated successfully.');
     }
+
 
     /**
      * Remove the specified resource from storage.

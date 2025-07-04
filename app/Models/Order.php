@@ -35,6 +35,22 @@ class Order extends Model
     }
 
     /**
+     * Relasi ke model OrderDetail
+     */
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class, 'code_order', 'code_order');
+    }   
+
+    /**
+     * Relasi ke model Payment
+     */
+    public function payment()
+    {
+        return $this->hasOne(Payment::class);
+    }
+
+    /**
      * Mengubah status order menjadi string yang lebih mudah dipahami.
      */
     public function getStatusLabelAttribute()

@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Store::class);
-            $table->foreignIdFor(Category::class)->nullable();
+            $table->foreignIdFor(Store::class)->constrained()->onDelete('cascade'); // Relasi ke tabel UMKM
+            $table->foreignIdFor(Category::class)->nullable(); // Relasi ke tabel kategori, nullable jika tidak ada kategori
             $table->string('name', 255);
             $table->string('description', 255);
             $table->string('sku', 255)->unique(); // Kode unik produk

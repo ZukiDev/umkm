@@ -38,6 +38,8 @@
                                 <th scope="col" class="text-start p-4 min-w-[240px]">Nama Produk</th>
                                 <th scope="col" class="p-4 w-24 min-w-[160px]">Total</th>
                                 <th scope="col" class="p-4 min-w-[120px]">Status</th>
+                                {{-- Liha detail --}}
+                                {{-- <th scope="col" class="p-4 min-w-[120px]">Aksi</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -50,7 +52,8 @@
                                     <td class="p-4">
                                         <ul class="list-disc list-inside">
                                             @foreach ($order->orderDetails as $orderDetail)
-                                                <li>{{ $orderDetail->product->name }} - {{ $orderDetail->quantity }} pcs
+                                                <li>
+                                                    {{ $orderDetail->product ? $orderDetail->product->name : 'Produk telah dihapus' }} - {{ $orderDetail->quantity }} pcs
                                                 </li>
                                             @endforeach
                                         </ul>
@@ -77,6 +80,10 @@
                                             @endif
                                         </span>
                                     </td>
+                                    {{-- <td class="p-4">
+                                        <a href="{{ route('customer.payment.show', $order->id) }}"
+                                            class="text-indigo-600 hover:text-indigo-900">Detail</a>
+                                    </td> --}}
                                 </tr>
                             @endforeach
                         </tbody>

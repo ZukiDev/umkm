@@ -4,11 +4,11 @@
         <div class="flex items-center space-x-1">
             <!-- Logo -->
             <a href="" class="xl:hidden block me-2">
-                <img src="{{ asset('assets/images/logo-icon-32.png') }}" class="md:hidden block" alt="">
+                <img src="https://i1.sndcdn.com/artworks-000032330403-41dvx8-t1080x1080.jpg" class="md:hidden block" alt="">
                 <span class="md:block hidden">
-                    <img src="{{ asset('assets/images/logo-dark.png') }}" class="inline-block dark:hidden"
+                    <img src="https://i1.sndcdn.com/artworks-000032330403-41dvx8-t1080x1080.jpg" class="inline-block dark:hidden"
                         alt="">
-                    <img src="{{ asset('assets/images/logo-light.png') }}" class="hidden dark:inline-block"
+                    <img src="https://i1.sndcdn.com/artworks-000032330403-41dvx8-t1080x1080.jpg" class="hidden dark:inline-block"
                         alt="">
                 </span>
             </a>

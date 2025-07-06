@@ -2,7 +2,11 @@
 <nav id="sidebar" class="sidebar-wrapper sidebar-dark">
     <div class="sidebar-content">
         <div class="sidebar-brand">
-            <a href="#"><img src="{{ asset('assets/images/logo-light.png') }}" height="24" alt=""></a>
+            <a href="#">
+                <img src="https://i1.sndcdn.com/artworks-000032330403-41dvx8-t1080x1080.jpg"
+                    style="height: 48px; border-radius: 8px;"
+                    alt="Logo" class="bg-transparent" />
+            </a>
         </div>
 
         <ul class="sidebar-menu border-t border-white/10" data-simplebar style="height: calc(100% - 70px);">

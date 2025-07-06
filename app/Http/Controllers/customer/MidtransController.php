@@ -36,50 +36,6 @@ class MidtransController extends Controller
 
     public function callback(Request $request)
     {
-    //     $notif = new \Midtrans\Notification();
-
-    //     $transaction = $notif->transaction_status;
-    //     $fraud = $notif->fraud_status;
-
-    //     error_log("Order ID $notif->order_id: "."transaction status = $transaction, fraud staus = $fraud");
-
-    //     $order = Order::where('id', $notif->order_id)->first();
-    //     if (!$order) {
-    //         return response()->json(['message' => 'Order not found'], 404);
-    //     }
-
-    //     $payment = $order->payment;
-    //     if (!$payment) {
-    //         return response()->json(['message' => 'Payment not found'], 404);
-    //     }
-
-    //     if ($transaction == 'capture') {
-    //         if ($fraud == 'challenge') {
-    //         $payment->status = 0; // challenge/pending
-    //         $order->status = 0; // pending
-    //         } else if ($fraud == 'accept') {
-    //         $payment->status = 1; // paid
-    //         $order->status = 1; // processed
-    //         }
-    //     } else if ($transaction == 'settlement') {
-    //         $payment->status = 1; // paid
-    //         $order->status = 1; // processed
-    //     } else if ($transaction == 'cancel' || $transaction == 'deny' || $transaction == 'expire') {
-    //         $payment->status = 2; // cancelled/failed
-    //         $order->status = 4; // cancelled
-    //     } else if ($transaction == 'pending') {
-    //         $payment->status = 0; // pending
-    //         $order->status = 0; // pending
-    //     }
-
-    //     $payment->save();
-    //     $order->save();
-        // $serverKey = config('midtrans.server_key');
-        // $signatureKey = hash("sha512", $request->order_id . $request->status_code . $request->gross_amount . $serverKey);
-
-        // if ($signatureKey !== $request->signature_key) {
-        //     return response()->json(['message' => 'Invalid signature key'], 403);
-        // }
 
         $payload = $request->getContent();
         $notification = json_decode($payload);
@@ -118,7 +74,56 @@ class MidtransController extends Controller
 
         $payment->save();
         $order->save();
+        // Kirim pesan WhatsApp hanya jika pembayaran sukses
+        if ($payment->status == 1 && $order->status == 1) {
+            // Ambil detail order
+            $orderDetails = $order->orderDetails;
+            $address = $order->address;
+            $paymentMethod = $payment->payment_method ?? '-';
+            $subTotalPayment = $order->subtotal ?? 0;
+            $ppn = $order->ppn ?? 0;
+            $totalPayment = $order->total ?? 0;
+            $codeOrder = $order->code_order;
+            $inaTime = Carbon::now()->locale('id')->isoFormat('LLLL');
 
-        return response()->json(['message' => 'Callback handled'], 200);
+            // Ambil nomor WA toko dari produk pertama
+            $firstDetail = $orderDetails->first();
+            $storePhoneNumber = $firstDetail && $firstDetail->product && $firstDetail->product->store
+                ? $firstDetail->product->store->phone_number
+                : null;
+
+            if ($storePhoneNumber) {
+                // Siapkan pesan WhatsApp
+                $whatsappMessage = "Order Details:\n";
+                $whatsappMessage .= "Order Code: $codeOrder\n";
+                $whatsappMessage .= "Total Payment: Rp $totalPayment\n\n";
+                $whatsappMessage .= "Order Items:\n";
+                foreach ($orderDetails as $detail) {
+                    $productName = $detail->product->name ?? '-';
+                    $whatsappMessage .= "Product Name: $productName, Quantity: {$detail->quantity}, Price: Rp {$detail->price}, Total: Rp {$detail->total}\n";
+                }
+                $whatsappMessage .= "\nPayment Details:\n";
+                $whatsappMessage .= "Payment Method: $paymentMethod\n";
+                $whatsappMessage .= "Total Price: Rp $subTotalPayment\n";
+                $whatsappMessage .= "PPN: Rp $ppn\n";
+                $whatsappMessage .= "Total Payment: Rp $totalPayment\n\n";
+                if ($address) {
+                    $whatsappMessage .= "Shipping Address:\n";
+                    $whatsappMessage .= "Address: {$address->address}\n";
+                    $whatsappMessage .= "Province: {$address->province}\n";
+                    $whatsappMessage .= "City: {$address->city}\n";
+                    $whatsappMessage .= "District: {$address->district}\n";
+                    $whatsappMessage .= "Post Code: {$address->post_code}\n";
+                }
+                $whatsappMessage .= "\nOrder Date and Time: $inaTime\n";
+
+                // Redirect ke WhatsApp
+                $whatsappUrl = "https://wa.me/$storePhoneNumber?text=" . urlencode($whatsappMessage);
+
+                return redirect()->away($whatsappUrl)->with('success', 'Order placed successfully.');
+            }
+        }
+
+        return redirect()->route('customer.order.index');
     }
 }

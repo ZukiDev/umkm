@@ -14,13 +14,13 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Order::class);
+            $table->foreignIdFor(Order::class)->constrained()->onDelete('cascade'); // Relasi ke tabel pesanan
             $table->string('payment_method', 255);   // Metode pembayaran
             $table->bigInteger('total_price');       // Total harga dari pesanan
             $table->bigInteger('total_payment');     // Total pembayaran yang dilakukan
             $table->integer('status')->default(0); // Status pembayaran (0: Pending, 1: Success, 2: Failed)
             $table->timestamp('payment_date')->nullable();     // Tanggal pembayaran
-            $table->softDeletes(); 
+            $table->softDeletes();
             $table->timestamps();
         });
     }

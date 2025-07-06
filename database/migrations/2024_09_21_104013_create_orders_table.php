@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('code_order',255)->unique();
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(User::class)->constrained()->onDelete('cascade'); // Relasi ke tabel pengguna (pembeli)
             $table->foreignIdFor(Address::class);
             $table->integer('status')->default(0);
             $table->bigInteger('total');

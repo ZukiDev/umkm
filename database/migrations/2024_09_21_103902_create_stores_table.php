@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(User::class)->constrained()->onDelete('cascade'); // Relasi ke tabel pengguna (UMKM)
             $table->string('store_name', 255); // Nama UMKM
             $table->string('description', 255); // Nama UMKM
             $table->string('owner_name', 255)->nullable(); // Nama pemilik

@@ -3,8 +3,10 @@
     <div class="container relative">
         <!-- Logo container-->
         <a class="logo" href="{{ route('home') }}">
-            <img src="{{ asset('asset/images/logo-dark.png') }}" class="inline-block dark:hidden" alt="">
-            <img src="{{ asset('asset/images/logo-light.png') }}" class="hidden dark:inline-block" alt="">
+            <img src="https://i1.sndcdn.com/artworks-000032330403-41dvx8-t1080x1080.jpg"
+                class="inline-block dark:hidden mx-auto bg-transparent" alt="" style="height: 48px;">
+            <img src="https://i1.sndcdn.com/artworks-000032330403-41dvx8-t1080x1080.jpg"
+                class="hidden dark:inline-block mx-auto bg-transparent" alt="" style="height: 48px;">
         </a>
 
         <!--Login button Start-->

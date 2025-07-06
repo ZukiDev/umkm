@@ -5,8 +5,7 @@
 
     <div class="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 mt-8 gap-[30px]">
         @foreach ($bestUMKM as $umkm)
-            <div
-                class="group relative overflow-hidden rounded-md duration-500 p-6 text-center">
+            <div class="group relative overflow-hidden rounded-md duration-500 p-6 text-center">
                 <img src="{{ asset('storage/logos/' . $umkm->logo) }}" alt="{{ $umkm->store_name }}"
                     class="rounded-full shadow-md dark:shadow-gray-800 size-20 block mx-auto mb-2" alt="">
 

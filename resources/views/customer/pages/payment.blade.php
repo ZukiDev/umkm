@@ -138,7 +138,10 @@
                                             // Optional
                                             onSuccess: function(result) {
                                                 /* You may add your own js here, this is just example */
-                                                document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                                                var resultJsonElem = document.getElementById('result-json');
+                                                if (resultJsonElem) {
+                                                    resultJsonElem.innerHTML += JSON.stringify(result, null, 2);
+                                                }
 
                                                 fetch('/midtrans/webhook', {
                                                         method: 'POST',
@@ -158,20 +161,20 @@
                                                             const text = await response.text();
                                                             console.error("Unexpected response (HTML?):", text);
                                                         }
+                                                        // Redirect after fetch is done
+                                                        window.location.href = "{{ route('customer.order.index') }}";
                                                     })
                                                     .catch(error => {
                                                         console.error("Fetch error:", error);
+                                                        // Redirect even if fetch fails
+                                                        window.location.href = "{{ route('customer.order.index') }}";
                                                     });
-                                            },
-                                            // Optional
-                                            onPending: function(result) {
-                                                /* You may add your own js here, this is just example */
-                                                document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
                                             },
                                             // Optional
                                             onError: function(result) {
                                                 /* You may add your own js here, this is just example */
                                                 document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                                                window.location.href = "{{ route('customer.order.index') }}";
                                             }
                                         });
                                     };

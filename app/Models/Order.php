@@ -18,6 +18,17 @@ class Order extends Model
         'total',
     ];
 
+    // Override the setCreatedAt and setUpdatedAt methods to use Carbon
+    public function setCreatedAt($value)
+    {
+        $this->attributes['created_at'] = \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s');
+    }
+
+    public function setUpdatedAt($value)
+    {
+        $this->attributes['updated_at'] = \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s');;
+    }
+
     /**
      * Relasi ke model User
      */
@@ -40,7 +51,7 @@ class Order extends Model
     public function orderDetails()
     {
         return $this->hasMany(OrderDetail::class, 'code_order', 'code_order');
-    }   
+    }
 
     /**
      * Relasi ke model Payment

@@ -9,25 +9,22 @@
                             <a href="#" class="text-[22px] focus:outline-none">
                                 <img src="{{ asset('asset/images/logo-light.png') }}" alt="">
                             </a>
-                            <p class="mt-6 text-gray-300">Temukan produk berkualitas dari para pengusaha lokal Desa Kepanjen Lor.
-                                Dengan setiap pembelian, Anda turut berkontribusi pada kemajuan UMKM Desa Kepanjen Lor, menciptakan
+                            <p class="mt-6 text-gray-300">Temukan produk berkualitas dari para pengusaha lokal Daerah Blitar.
+                                Dengan setiap pembelian, Anda turut berkontribusi pada kemajuan UMKM Blitar, menciptakan
                                 peluang, dan memperkuat ekonomi lokal.</p>
                         </div><!--end col-->
 
                         <div class="lg:col-span-2 md:col-span-4">
                             <h5 class="tracking-[1px] text-gray-100 font-semibold">Kontak Kami</h5>
                             <ul class="list-none mt-6">
-                                <li class="inline"><a href="https://www.facebook.com/pemkabblitar" target="_blank"
+                                <li class="inline"><a href="https://www.facebook.com/share/1EL9vVUQWJ/?mibextid=wwXIfr" target="_blank"
                                         class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center border-gray-800 rounded-md border hover:border-indigo-600 dark:hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-600"><i
                                             class="uil uil-facebook-f align-middle" title="facebook"></i></a>
                                 </li>
-                                <li class="inline"><a href="https://www.instagram.com/pemkab_blitar" target="_blank"
+                                <li class="inline"><a href="https://www.instagram.com/kelurahankepanjenlor?igsh=Y3BrczdhcDRqaWE4" target="_blank"
                                         class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center border-gray-800 rounded-md border hover:border-indigo-600 dark:hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-600"><i
                                             class="uil uil-instagram align-middle" title="instagram"></i></a>
                                 </li>
-                                <li class="inline"><a href="#" target="https://twitter.com/pemkab_blitar"
-                                        class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center border-gray-800 rounded-md border hover:border-indigo-600 dark:hover:border-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-600"><i
-                                            class="uil uil-twitter align-middle" title="twitter"></i></a></li>
                             </ul><!--end icon-->
                             </form>
                         </div><!--end col-->

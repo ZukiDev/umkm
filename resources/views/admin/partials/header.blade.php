@@ -3,15 +3,15 @@
     <div class="header-bar flex justify-between">
         <div class="flex items-center space-x-1">
             <!-- Logo -->
-            <a href="" class="xl:hidden block me-2">
-                <img src="https://i1.sndcdn.com/artworks-000032330403-41dvx8-t1080x1080.jpg" class="md:hidden block" alt="">
-                <span class="md:block hidden">
-                    <img src="https://i1.sndcdn.com/artworks-000032330403-41dvx8-t1080x1080.jpg" class="inline-block dark:hidden"
-                        alt="">
-                    <img src="https://i1.sndcdn.com/artworks-000032330403-41dvx8-t1080x1080.jpg" class="hidden dark:inline-block"
-                        alt="">
-                </span>
-            </a>
+            <!--<a href="" class="xl:hidden block me-2">-->
+            <!--    <img src="https://i1.sndcdn.com/artworks-000032330403-41dvx8-t1080x1080.jpg" class="md:hidden block" alt="">-->
+            <!--    <span class="md:block hidden">-->
+            <!--        <img src="https://i1.sndcdn.com/artworks-000032330403-41dvx8-t1080x1080.jpg" class="inline-block dark:hidden"-->
+            <!--            alt="">-->
+            <!--        <img src="https://i1.sndcdn.com/artworks-000032330403-41dvx8-t1080x1080.jpg" class="hidden dark:inline-block"-->
+            <!--            alt="">-->
+            <!--    </span>-->
+            <!--</a>-->
             <!-- Logo -->
 
             <!-- show or close sidebar -->

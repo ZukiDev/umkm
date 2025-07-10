@@ -7,7 +7,8 @@
             <div class="flex justify-center">
                 <div
                     class="max-w-[400px] w-full m-auto p-6 bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-800 rounded-md">
-                    <a href="index.html"><img src="https://i1.sndcdn.com/artworks-000032330403-41dvx8-t1080x1080.jpg" class="mx-auto" alt="" style="height: 108px"></a>
+                      <img src="https://i1.sndcdn.com/artworks-000032330403-41dvx8-t1080x1080.jpg" class="mx-auto" alt="" style="height: 108px">
+
                     <h5 class="my-6 text-xl text-center font-semibold">Selamat Datang!</h5>
                     <x-validation-errors class="mb-4" />
                     @session('status')

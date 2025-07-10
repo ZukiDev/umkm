@@ -7,8 +7,8 @@
             <h3 class="mb-4 md:text-4xl text-3xl text-white font-bold">Satu Klik Lagi<br> untuk Dampak Besar!</h3>
 
             <p class="text-white/80 max-w-xl mx-auto">
-                Checkout ini lebih dari sekadar belanja—ini adalah langkah untuk menghidupkan UMKM Kepanjen Lor. Terima kasih
-                telah mendukung ekonomi lokal, mari kita bawa Desa Kepanjen Lor ke masa depan yang lebih cerah!
+                Checkout ini lebih dari sekadar belanja—ini adalah langkah untuk menghidupkan UMKM Blitar. Terima kasih
+                telah mendukung ekonomi lokal, mari kita bawa Blitar ke masa depan yang lebih cerah!
             </p>
 
             <div class="mt-6">

@@ -50,6 +50,7 @@ class HomeController extends Controller
             ->get();
 
         $popularProducts = Product::where('status', 1)
+            ->with(['store'])
             ->withSum('orderDetails as total_quantity', 'quantity')
             ->orderBy('total_quantity', 'desc')
             ->take(8)

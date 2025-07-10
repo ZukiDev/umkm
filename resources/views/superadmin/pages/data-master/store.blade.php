@@ -29,8 +29,8 @@
                                 <div class="md:flex justify-between items-center">
                                     <!-- Search Box -->
                                     <div class="flex-grow">
-                                        <input type="text" placeholder="Cari UMKM..."
-                                            class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600">
+                                        <!--<input type="text" placeholder="Cari UMKM..."-->
+                                        <!--    class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600">-->
                                     </div>
                                     <!-- Add UMKM Button -->
                                     <button

@@ -3,16 +3,16 @@
     <div class="container-fluid relative">
         <div class="relative py-48 table w-full shadow-md overflow-hidden">
             <div class="absolute inset-0 bg-no-repeat md:bg-left bg-center bg-cover"
-                style="background-image: url('{{ asset('asset/images/shop/blitar3.jpg') }}')">
+                style="background-image: url('{{ asset('asset/images/shop/blitar2.jpg') }}')">
             </div>
             <div class="absolute inset-0 bg-black/60"></div>
             <div class="container relative">
                 <div class="grid grid-cols-1">
                     <div class="md:text-start text-center">
                         <h1 class="font-bold text-white lg:leading-normal leading-normal text-4xl lg:text-5xl mb-6">
-                            Dukung UMKM   Kepanjen Lor, <br> Belanja Lokal dengan Mudah!</h1>
+                            Dukung UMKM Blitar, <br> Belanja Lokal dengan Mudah!</h1>
                         <p class="text-white/70 text-xl max-w-xl">Temukan produk berkualitas dari para pengusaha lokal
-                              Kepanjen Lor. Dengan setiap pembelian, Anda turut berkontribusi pada kemajuan UMKM   Kepanjen Lor,
+                                Blitar. Dengan setiap pembelian, Anda turut berkontribusi pada kemajuan UMKM Blitar,
                             menciptakan peluang, dan memperkuat ekonomi lokal.</p>
                         <div class="mt-6">
                             <a href="{{ route('register') }}"

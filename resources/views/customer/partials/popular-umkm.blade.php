@@ -9,7 +9,7 @@
                 <img src="{{ asset('storage/logos/' . $umkm->logo) }}" alt="{{ $umkm->store_name }}"
                     class="rounded-full shadow-md dark:shadow-gray-800 size-20 block mx-auto mb-2" alt="">
 
-                <p class="font-semibold hover:text-indigo-600 text-lg">{{ $umkm->store_name }}</p>
+                <p class="font-semibold text-lg">{{ $umkm->store_name }}</p>
             </div><!--end content-->
         @endforeach
     </div><!--end grid-->

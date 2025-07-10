@@ -25,10 +25,10 @@
             <!-- Searchbar -->
             <div class="ps-1.5">
                 <div class="form-icon relative sm:block hidden">
-                    <i class="uil uil-search absolute top-1/2 -translate-y-1/2 start-3"></i>
-                    <input type="text"
-                        class="form-input w-56 ps-9 py-2 px-3 h-8 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded-3xl outline-none border border-gray-100 dark:border-gray-800 focus:ring-0 bg-white"
-                        name="s" id="searchItem" placeholder="Cari...">
+                    <!--<i class="uil uil-search absolute top-1/2 -translate-y-1/2 start-3"></i>-->
+                    <!--<input type="text"-->
+                    <!--    class="form-input w-56 ps-9 py-2 px-3 h-8 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded-3xl outline-none border border-gray-100 dark:border-gray-800 focus:ring-0 bg-white"-->
+                    <!--    name="s" id="searchItem" placeholder="Cari...">-->
                 </div>
             </div>
             <!-- Searchbar -->

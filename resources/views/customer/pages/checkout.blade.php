@@ -44,71 +44,81 @@
                                 <div class="lg:col-span-6">
                                     <label class="font-semibold form-label">Nama:</label>
                                     <input type="text"
+                                        name="name"
                                         class="w-full h-10 px-3 py-2 mt-2 bg-gray-100 border border-gray-200 rounded outline-none form-input dark:bg-slate-700 dark:text-slate-200"
-                                        value="{{ $user->name }}" readonly disabled>
+                                        value="{{ $user->name }}" readonly>
                                 </div>
 
                                 <div class="lg:col-span-6">
                                     <label class="font-semibold form-label">Username:</label>
                                     <input type="text"
+                                        name="username"
                                         class="w-full h-10 px-3 py-2 mt-2 bg-gray-100 border border-gray-200 rounded outline-none form-input dark:bg-slate-700 dark:text-slate-200"
-                                        value="{{ $user->username }}" readonly disabled>
+                                        value="{{ $user->username }}" readonly>
                                 </div>
 
                                 <div class="lg:col-span-6">
                                     <label class="font-semibold form-label">Email:</label>
                                     <input type="email"
+                                        name="email"
                                         class="w-full h-10 px-3 py-2 mt-2 bg-gray-100 border border-gray-200 rounded outline-none form-input dark:bg-slate-700 dark:text-slate-200"
-                                        value="{{ $user->email }}" readonly disabled>
+                                        value="{{ $user->email }}" readonly>
                                 </div>
 
                                 <div class="lg:col-span-6">
                                     <label class="font-semibold form-label">Nomer Telepon:</label>
                                     <input type="text"
+                                        name="phone_number"
                                         class="w-full h-10 px-3 py-2 mt-2 bg-gray-100 border border-gray-200 rounded outline-none form-input dark:bg-slate-700 dark:text-slate-200"
-                                        value="{{ $user->phone_number }}" readonly disabled>
+                                        value="{{ $user->phone_number }}" readonly>
                                 </div>
 
                                 <div class="lg:col-span-6">
                                     <label class="font-semibold form-label">Alamat Lengkap:</label>
                                     <input type="text"
+                                        name="address"
                                         class="w-full h-10 px-3 py-2 mt-2 bg-gray-100 border border-gray-200 rounded outline-none form-input dark:bg-slate-700 dark:text-slate-200"
-                                        value="{{ $address->address }}" readonly disabled>
+                                        value="{{ $address->address }}" readonly>
                                 </div>
 
                                 <div class="lg:col-span-4">
                                     <label class="font-semibold form-label">Provinsi:</label>
                                     <input type="text"
+                                        name="province"
                                         class="w-full h-10 px-3 py-2 mt-2 bg-gray-100 border border-gray-200 rounded outline-none form-input dark:bg-slate-700 dark:text-slate-200"
-                                        value="{{ $address->province }}" readonly disabled>
+                                        value="{{ $address->province }}" readonly>
                                 </div>
 
                                 <div class="lg:col-span-4">
                                     <label class="font-semibold form-label">Kota:</label>
                                     <input type="text"
+                                        name="city"
                                         class="w-full h-10 px-3 py-2 mt-2 bg-gray-100 border border-gray-200 rounded outline-none form-input dark:bg-slate-700 dark:text-slate-200"
-                                        value="{{ $address->city }}" readonly disabled>
+                                        value="{{ $address->city }}" readonly>
                                 </div>
 
                                 <div class="lg:col-span-4">
                                     <label class="font-semibold form-label">Kecamatan:</label>
                                     <input type="text"
+                                        name="district"
                                         class="w-full h-10 px-3 py-2 mt-2 bg-gray-100 border border-gray-200 rounded outline-none form-input dark:bg-slate-700 dark:text-slate-200"
-                                        value="{{ $address->district }}" readonly disabled>
+                                        value="{{ $address->district }}" readonly>
                                 </div>
 
                                 <div class="lg:col-span-4">
                                     <label class="font-semibold form-label">Kode Pos:</label>
                                     <input type="text"
+                                        name="post_code"
                                         class="w-full h-10 px-3 py-2 mt-2 bg-gray-100 border border-gray-200 rounded outline-none form-input dark:bg-slate-700 dark:text-slate-200"
-                                        value="{{ $address->post_code }}" readonly disabled>
+                                        value="{{ $address->post_code }}" readonly>
                                 </div>
 
                                 <div class="lg:col-span-12">
                                     <label class="font-semibold form-label">Instruksi Pengiriman:</label>
                                     <textarea
+                                        name="delivery_instructions"
                                         class="w-full px-3 py-2 mt-2 bg-gray-100 border border-gray-200 rounded outline-none form-input dark:bg-slate-700 dark:text-slate-200"
-                                        readonly disabled>{{ $address->delivery_instructions }}</textarea>
+                                        readonly>{{ $address->delivery_instructions }}</textarea>
                                 </div>
                             </div>
 

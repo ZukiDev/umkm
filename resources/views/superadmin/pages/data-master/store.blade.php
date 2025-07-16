@@ -1,11 +1,11 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <div class="layout-specing mx-6 sm:mx-6 md:mx-8 lg:mx-12">
-        <div class="grid md:grid-cols-12 mt-2 gap-6 relative">
+    <div class="mx-6 layout-specing sm:mx-6 md:mx-8 lg:mx-12">
+        <div class="relative grid gap-6 mt-2 md:grid-cols-12">
             <!-- Start Content -->
             <div class="md:col-span-12">
-                <div class="md:flex justify-between items-center">
+                <div class="items-center justify-between md:flex">
                     <h5 class="text-lg font-semibold">Data UMKM</h5>
                     <ul class="tracking-[0.5px] inline-block sm:mt-0 mt-3">
                         <li
@@ -24,9 +24,9 @@
 
                 <div class="mt-6" id="tables">
                     <div class="grid grid-cols-1 gap-6">
-                        <div class="shadow dark:shadow-slate-800 rounded bg-white dark:bg-slate-900">
+                        <div class="bg-white rounded shadow dark:shadow-slate-800 dark:bg-slate-900">
                             <div class="p-5">
-                                <div class="md:flex justify-between items-center">
+                                <div class="items-center justify-between md:flex">
                                     <!-- Search Box -->
                                     <div class="flex-grow">
                                         <!--<input type="text" placeholder="Cari UMKM..."-->
@@ -34,16 +34,16 @@
                                     </div>
                                     <!-- Add UMKM Button -->
                                     <button
-                                        class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition ml-4"
+                                        class="px-4 py-2 ml-4 text-white transition bg-indigo-600 rounded hover:bg-indigo-700"
                                         onclick="addModal.showModal()">
-                                        <i class="uil uil-plus mr-1"></i> Tambah UMKM Baru
+                                        <i class="mr-1 uil uil-plus"></i> Tambah UMKM Baru
                                     </button>
                                 </div>
                             </div>
                             <!-- Success Message -->
                             @if (session('success'))
                                 <div
-                                    class="relative px-4 py-2 rounded-md font-medium bg-emerald-600/10 border border-emerald-600/10 text-emerald-600 block">
+                                    class="relative block px-4 py-2 font-medium border rounded-md bg-emerald-600/10 border-emerald-600/10 text-emerald-600">
                                     {{ session('success') }}
                                 </div>
                             @endif
@@ -51,13 +51,13 @@
                             <!-- Error Message -->
                             @if (session('error'))
                                 <div
-                                    class="relative px-4 py-2 rounded-md font-medium bg-red-600/10 border border-red-600/10 text-red-600 block">
+                                    class="relative block px-4 py-2 font-medium text-red-600 border rounded-md bg-red-600/10 border-red-600/10">
                                     {{ session('error') }}
                                 </div>
                             @endif
                             <div class="p-5 border-t border-gray-100 dark:border-slate-800">
                                 <div
-                                    class="relative overflow-x-auto block w-full bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 rounded-md">
+                                    class="relative block w-full overflow-x-auto bg-white rounded-md shadow dark:bg-slate-900 dark:shadow-gray-700">
                                     <table class="w-full text-start">
                                         <thead>
                                             <tr>
@@ -96,13 +96,13 @@
                                                     </td>
                                                     <td class="p-4 text-end">
                                                         <!-- View Button -->
-                                                        <button class="text-blue-600 hover:text-blue-800 mr-2"
+                                                        <button class="mr-2 text-blue-600 hover:text-blue-800"
                                                             onclick="viewModal{{ $umkm->id }}.showModal()">
                                                             <i class="uil uil-eye"></i>
                                                         </button>
 
                                                         <!-- Edit Button -->
-                                                        <button class="text-yellow-600 hover:text-yellow-800 mr-2"
+                                                        <button class="mr-2 text-yellow-600 hover:text-yellow-800"
                                                             onclick="editModal{{ $umkm->id }}.showModal()">
                                                             <i class="uil uil-edit"></i>
                                                         </button>
@@ -117,18 +117,18 @@
 
                                                 <!-- Start Edit Modal -->
                                                 <dialog id="editModal{{ $umkm->id }}"
-                                                    class="rounded-md shadow dark:shadow-gray-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
+                                                    class="bg-white rounded-md shadow dark:shadow-gray-800 dark:bg-slate-900 text-slate-900 dark:text-white">
                                                     <div class="relative h-auto md:w-[960px] w-full">
                                                         <!-- Adjusted width for larger modal -->
                                                         <!-- Modal Header with Close Button -->
                                                         <div
-                                                            class="flex justify-between items-center px-6 py-4 border-b border-gray-100 dark:border-gray-700">
-                                                            <h3 class="font-bold text-lg">Ubah Data UMKM</h3>
+                                                            class="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-700">
+                                                            <h3 class="text-lg font-bold">Ubah Data UMKM</h3>
                                                             <!-- Close Button (X) -->
                                                             <form method="dialog">
                                                                 <button
-                                                                    class="size-6 flex justify-center items-center shadow dark:shadow-gray-800 rounded-md btn-ghost bg-red-600">
-                                                                    <i data-feather="x" class="size-4 text-white"></i>
+                                                                    class="flex items-center justify-center bg-red-600 rounded-md shadow size-6 dark:shadow-gray-800 btn-ghost">
+                                                                    <i data-feather="x" class="text-white size-4"></i>
                                                                 </button>
                                                             </form>
                                                         </div>
@@ -141,92 +141,92 @@
                                                                 @csrf
                                                                 @method('PUT')
 
-                                                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                                                <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
                                                                     <!-- Grid for 3 columns -->
                                                                     <!-- User Data Section -->
                                                                     <div>
-                                                                        <h4 class="font-semibold mb-3">Data Akun</h4>
+                                                                        <h4 class="mb-3 font-semibold">Data Akun</h4>
                                                                         <input type="text" name="name"
                                                                             value="{{ $umkm->user->name }}"
-                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                                             placeholder="Nama Akun" required>
                                                                         <input type="text" name="username"
                                                                             value="{{ $umkm->user->username }}"
-                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                                             placeholder="Username" required>
                                                                         <input type="email" name="email"
                                                                             value="{{ $umkm->user->email }}"
-                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                                             placeholder="Email" required>
                                                                         <input type="number" name="phone_number"
                                                                             value="{{ $umkm->user->phone_number }}"
-                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                                             placeholder="Contoh: 6287755819001" required>
                                                                         <input type="password" name="password"
-                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                                             placeholder="Password (Opsional)">
                                                                         <input type="password"
                                                                             name="password_confirmation"
-                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                                             placeholder="Konfirmasi Password (Opsional)">
                                                                     </div>
 
                                                                     <!-- Address Data Section -->
                                                                     <div>
-                                                                        <h4 class="font-semibold mb-3">Data Alamat</h4>
+                                                                        <h4 class="mb-3 font-semibold">Data Alamat</h4>
                                                                         <input type="text" name="address"
                                                                             value="{{ $umkm->address->address }}"
-                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                                             placeholder="Alamat" required>
                                                                         <input type="text" name="province"
                                                                             value="{{ $umkm->address->province }}"
-                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                                             placeholder="Provinsi" required>
                                                                         <input type="text" name="city"
                                                                             value="{{ $umkm->address->city }}"
-                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                                             placeholder="Kota" required>
                                                                         <input type="text" name="district"
                                                                             value="{{ $umkm->address->district }}"
-                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                                             placeholder="Kecamatan" required>
                                                                         <input type="text" name="post_code"
                                                                             value="{{ $umkm->address->post_code }}"
-                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                                             placeholder="Kode Pos" required>
-                                                                        <textarea name="delivery_instructions" class="border px-3 py-2 rounded w-full mb-4"
+                                                                        <textarea name="delivery_instructions" class="w-full px-3 py-2 mb-4 border rounded"
                                                                             placeholder="Petunjuk Pengiriman">{{ $umkm->address->delivery_instructions }}</textarea>
                                                                     </div>
 
                                                                     <!-- Store Data Section -->
                                                                     <div>
-                                                                        <h4 class="font-semibold mb-3">Data Toko</h4>
+                                                                        <h4 class="mb-3 font-semibold">Data Toko</h4>
                                                                         <input type="text" name="store_name"
                                                                             value="{{ $umkm->store_name }}"
-                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                                             placeholder="Nama UMKM" required>
                                                                         <input type="text" name="owner_name"
                                                                             value="{{ $umkm->owner_name }}"
-                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                                             placeholder="Nama Pemilik" required>
                                                                         <input type="text" name="business_type"
                                                                             value="{{ $umkm->business_type }}"
-                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                                             placeholder="Kategori Usaha" required>
                                                                         <input type="text" name="description"
                                                                             value="{{ $umkm->description }}"
-                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                                             placeholder="Deskripsi UMKM" required>
                                                                         <input type="email" name="store_email"
                                                                             value="{{ $umkm->email }}"
-                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                                             placeholder="Email" required>
                                                                         <input type="number" name="store_phone_number"
                                                                             value="{{ $umkm->phone_number }}"
-                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                                             placeholder="Contoh: 6287755819001" required>
                                                                         <select name="status"
-                                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                                             required>
                                                                             <option value="1"
                                                                                 {{ $umkm->status == 1 ? 'selected' : '' }}>
@@ -239,14 +239,14 @@
                                                                 </div>
 
                                                                 <!-- Logo Upload Section -->
-                                                                <h4 class="font-semibold mb-3 mt-6">Logo Toko</h4>
+                                                                <h4 class="mt-6 mb-3 font-semibold">Logo Toko</h4>
                                                                 <input type="file" name="logo"
-                                                                    class="border px-3 py-2 rounded w-full mb-4"
+                                                                    class="w-full px-3 py-2 mb-4 border rounded"
                                                                     accept="image/*">
 
                                                                 <!-- Submit Button -->
                                                                 <button type="submit"
-                                                                    class="bg-indigo-600 text-white px-4 py-2 rounded mt-4">
+                                                                    class="px-4 py-2 mt-4 text-white bg-indigo-600 rounded">
                                                                     Simpan Perubahan Data
                                                                 </button>
                                                             </form>
@@ -257,30 +257,30 @@
 
                                                 <!-- Start Show Detail Modal -->
                                                 <dialog id="viewModal{{ $umkm->id }}"
-                                                    class="rounded-md shadow dark:shadow-gray-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
+                                                    class="bg-white rounded-md shadow dark:shadow-gray-800 dark:bg-slate-900 text-slate-900 dark:text-white">
                                                     <div class="relative h-auto md:w-[960px] w-full">
                                                         <!-- Adjusted width for larger modal -->
                                                         <!-- Modal Header with Close Button -->
                                                         <div
-                                                            class="flex justify-between items-center px-6 py-4 border-b border-gray-100 dark:border-gray-700">
-                                                            <h3 class="font-bold text-lg">Detail Data UMKM</h3>
+                                                            class="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-700">
+                                                            <h3 class="text-lg font-bold">Detail Data UMKM</h3>
                                                             <!-- Close Button (X) -->
                                                             <form method="dialog">
                                                                 <button
-                                                                    class="size-6 flex justify-center items-center shadow dark:shadow-gray-800 rounded-md btn-ghost bg-red-600">
-                                                                    <i data-feather="x" class="size-4 text-white"></i>
+                                                                    class="flex items-center justify-center bg-red-600 rounded-md shadow size-6 dark:shadow-gray-800 btn-ghost">
+                                                                    <i data-feather="x" class="text-white size-4"></i>
                                                                 </button>
                                                             </form>
                                                         </div>
 
                                                         <!-- Modal Content -->
                                                         <div class="p-6">
-                                                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                                            <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
                                                                 <!-- Grid for 3 columns -->
 
                                                                 <!-- User Data Section -->
                                                                 <div>
-                                                                    <h4 class="font-semibold mb-3">Data Akun</h4>
+                                                                    <h4 class="mb-3 font-semibold">Data Akun</h4>
                                                                     <p class="mb-4"><strong>Nama Akun:</strong>
                                                                         {{ $umkm->user->name }}</p>
                                                                     <p class="mb-4"><strong>Username:</strong>
@@ -293,7 +293,7 @@
 
                                                                 <!-- Address Data Section -->
                                                                 <div>
-                                                                    <h4 class="font-semibold mb-3">Data Alamat</h4>
+                                                                    <h4 class="mb-3 font-semibold">Data Alamat</h4>
                                                                     <p class="mb-4"><strong>Alamat:</strong>
                                                                         {{ $umkm->address->address }}</p>
                                                                     <p class="mb-4"><strong>Provinsi:</strong>
@@ -310,7 +310,7 @@
 
                                                                 <!-- Store Data Section -->
                                                                 <div>
-                                                                    <h4 class="font-semibold mb-3">Data Toko</h4>
+                                                                    <h4 class="mb-3 font-semibold">Data Toko</h4>
                                                                     <p class="mb-4"><strong>Nama UMKM:</strong>
                                                                         {{ $umkm->store_name }}</p>
                                                                     <p class="mb-4"><strong>Nama Pemilik:</strong>
@@ -326,7 +326,7 @@
                                                             </div>
 
                                                             <!-- Logo Section -->
-                                                            <h4 class="font-semibold mb-3 mt-6">Logo Toko</h4>
+                                                            <h4 class="mt-6 mb-3 font-semibold">Logo Toko</h4>
                                                             @if ($umkm->logo)
                                                                 <img src="{{ asset('storage/logos/' . $umkm->logo) }}"
                                                                     alt="{{ $umkm->logo }}" class="mb-4 rounded-md"
@@ -341,17 +341,17 @@
 
                                                 <!-- Start Delete Modal -->
                                                 <dialog id="deleteModal{{ $umkm->id }}"
-                                                    class="rounded-md shadow dark:shadow-gray-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
+                                                    class="bg-white rounded-md shadow dark:shadow-gray-800 dark:bg-slate-900 text-slate-900 dark:text-white">
                                                     <div class="relative h-auto md:w-[480px] w-300px">
                                                         <div
-                                                            class="flex justify-between items-center px-6 py-4 border-b border-gray-100 dark:border-gray-700">
-                                                            <h3 class="font-bold text-lg text-red-600">Konfirmasi Hapus
+                                                            class="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-700">
+                                                            <h3 class="text-lg font-bold text-red-600">Konfirmasi Hapus
                                                                 Data
                                                             </h3>
                                                             <form method="dialog">
                                                                 <button
-                                                                    class="size-6 flex justify-center items-center shadow dark:shadow-gray-800 rounded-md btn-ghost bg-red-600">
-                                                                    <i data-feather="x" class="size-4 text-white"></i>
+                                                                    class="flex items-center justify-center bg-red-600 rounded-md shadow size-6 dark:shadow-gray-800 btn-ghost">
+                                                                    <i data-feather="x" class="text-white size-4"></i>
                                                                 </button>
                                                             </form>
                                                         </div>
@@ -364,10 +364,10 @@
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit"
-                                                                    class="bg-red-600 mt-6 text-white px-4 py-2 rounded">Ya,
+                                                                    class="px-4 py-2 mt-6 text-white bg-red-600 rounded">Ya,
                                                                     Hapus</button>
                                                                 <button type="button"
-                                                                    class="bg-gray-300 mt-6 text-black px-4 py-2 rounded"
+                                                                    class="px-4 py-2 mt-6 text-black bg-gray-300 rounded"
                                                                     onclick="deleteModal{{ $umkm->id }}.close()">Tidak,
                                                                     Batalkan</button>
                                                             </form>
@@ -385,16 +385,16 @@
                                 </div>
                                 <!-- Start Add Modal -->
                                 <dialog id="addModal"
-                                    class="rounded-md shadow dark:shadow-gray-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
+                                    class="bg-white rounded-md shadow dark:shadow-gray-800 dark:bg-slate-900 text-slate-900 dark:text-white">
                                     <div class="relative h-auto md:w-[960px] w-full">
                                         <!-- Adjusted width for larger modal -->
                                         <div
-                                            class="flex justify-between items-center px-6 py-4 border-b border-gray-100 dark:border-gray-700">
-                                            <h3 class="font-bold text-lg">Tambah Store Baru</h3>
+                                            class="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-700">
+                                            <h3 class="text-lg font-bold">Tambah Store Baru</h3>
                                             <form method="dialog">
                                                 <button
-                                                    class="size-6 flex justify-center items-center shadow dark:shadow-gray-800 rounded-md btn-ghost bg-red-600">
-                                                    <i data-feather="x" class="size-4 text-white"></i>
+                                                    class="flex items-center justify-center bg-red-600 rounded-md shadow size-6 dark:shadow-gray-800 btn-ghost">
+                                                    <i data-feather="x" class="text-white size-4"></i>
                                                 </button>
                                             </form>
                                         </div>
@@ -404,76 +404,76 @@
                                                 method="POST" enctype="multipart/form-data">
                                                 @method('POST')
                                                 @csrf
-                                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                                <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
                                                     <!-- Grid for 3 columns -->
                                                     <!-- User Data Section -->
                                                     <div>
-                                                        <h4 class="font-semibold mb-3">Data Akun</h4>
+                                                        <h4 class="mb-3 font-semibold">Data Akun</h4>
                                                         <input type="text" name="name"
-                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                             placeholder="Nama Akun" required>
                                                         <input type="text" name="username"
-                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                             placeholder="Username" required>
                                                         <input type="email" name="email"
-                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                             placeholder="Email" required>
                                                         <input type="number" name="phone_number"
-                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                             placeholder="Contoh: 6287755819001" required>
                                                         <input type="password" name="password"
-                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                             placeholder="Password" required>
                                                         <input type="password" name="password_confirmation"
-                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                             placeholder="Konfirmasi Password" required>
                                                     </div>
 
                                                     <!-- Address Data Section -->
                                                     <div>
-                                                        <h4 class="font-semibold mb-3">Data Alamat</h4>
+                                                        <h4 class="mb-3 font-semibold">Data Alamat</h4>
                                                         <input type="text" name="address"
-                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                             placeholder="Alamat" required>
                                                         <input type="text" name="province"
-                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                             placeholder="Provinsi" required>
                                                         <input type="text" name="city"
-                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                             placeholder="Kota" required>
                                                         <input type="text" name="district"
-                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                             placeholder="Kecamatan" required>
                                                         <input type="text" name="post_code"
-                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                             placeholder="Kode Pos" required>
-                                                        <textarea name="delivery_instructions" class="border px-3 py-2 rounded w-full mb-4"
-                                                            placeholder="Petunjuk Pengiriman"></textarea>
+                                                        <textarea name="delivery_instructions" class="w-full px-3 py-2 mb-4 border rounded" placeholder="Petunjuk Pengiriman"
+                                                            required></textarea>
                                                     </div>
 
                                                     <!-- Store Data Section -->
                                                     <div>
-                                                        <h4 class="font-semibold mb-3">Data Toko</h4>
+                                                        <h4 class="mb-3 font-semibold">Data Toko</h4>
                                                         <input type="text" name="store_name"
-                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                             placeholder="Nama UMKM" required>
                                                         <input type="text" name="owner_name"
-                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                             placeholder="Nama Pemilik" required>
                                                         <input type="text" name="business_type"
-                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                             placeholder="Kategori Usaha" required>
                                                         <input type="text" name="description"
-                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                             placeholder="Deskripsi UMKM" required>
                                                         <input type="email" name="store_email"
-                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                             placeholder="Email" required>
                                                         <input type="number" name="store_phone_number"
-                                                            class="border px-3 py-2 rounded w-full mb-4"
+                                                            class="w-full px-3 py-2 mb-4 border rounded"
                                                             placeholder="Contoh: 6287755819001" required>
                                                         <select name="status"
-                                                            class="border px-3 py-2 rounded w-full mb-4" required>
+                                                            class="w-full px-3 py-2 mb-4 border rounded" required>
                                                             <option value="1">Aktif</option>
                                                             <option value="0">Tidak Aktif</option>
                                                         </select>
@@ -481,12 +481,12 @@
                                                 </div>
 
                                                 <!-- Logo Upload Section -->
-                                                <h4 class="font-semibold mb-3">Logo Toko</h4>
+                                                <h4 class="mb-3 font-semibold">Logo Toko</h4>
                                                 <input type="file" name="logo"
-                                                    class="border px-3 py-2 rounded w-full mb-4" accept="image/*">
+                                                    class="w-full px-3 py-2 mb-4 border rounded" accept="image/*">
 
                                                 <button type="submit"
-                                                    class="bg-indigo-600 text-white px-4 py-2 rounded">Tambah UMKM</button>
+                                                    class="px-4 py-2 text-white bg-indigo-600 rounded">Tambah UMKM</button>
                                             </form>
                                         </div>
                                     </div>

@@ -51,7 +51,7 @@ class StoreController extends Controller
                 'city' => 'required|string|max:255',
                 'district' => 'required|string|max:255',
                 'post_code' => 'required|string|max:20',
-                'delivery_instructions' => 'nullable|string|max:500',
+                'delivery_instructions' => 'required|string|max:500',
                 'store_name' => 'required|string|max:255',
                 'description' => 'required|string|max:255',
                 'owner_name' => 'nullable|string|max:255',

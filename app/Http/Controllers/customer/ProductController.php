@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -76,10 +77,36 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::findOrFail($id);
+        $product = Product::with('orderDetails')->findOrFail($id);
         $product->sold = $product->orderDetails->sum('quantity');
+        $blitarOnly = $product->is_blitar_only;
 
-        return view('customer.pages.detail-product', compact('product'));
+        $user = Auth::user();
+
+        // Default: tidak bisa ditambahkan ke keranjang
+        $isCanAddToCart = false;
+
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Anda harus masuk untuk menambahkan item ke keranjang.');
+        }
+
+        // Cek apakah user sudah punya alamat
+        if (!$user->address) {
+            return redirect()->route('customer.profile')->with('error', 'Anda harus menambahkan alamat terlebih dahulu.');
+        }
+
+        $address = $user->address;
+
+        // Jika produk hanya untuk Blitar dan alamat user bukan Blitar, flash error dan tidak bisa add to cart
+        if ($blitarOnly && stripos($address->city, 'blitar') === false) {
+            session()->flash('error', 'Maaf, produk ini hanya tersedia untuk pengiriman di daerah Blitar.');
+            $isCanAddToCart = false;
+        } else {
+            // Jika lolos semua pengecekan, bisa ditambahkan ke keranjang
+            $isCanAddToCart = true;
+        }
+
+        return view('customer.pages.detail-product', compact('product', 'isCanAddToCart'));
     }
 
     /**
@@ -122,7 +149,7 @@ class ProductController extends Controller
 
         $products = $query->get();
         $categories = Category::all();
-        
+
         // Calculate sold quantity for each product
         // foreach ($products as $product) {
         //     $product->sold = $product->orderDetails->sum('quantity');

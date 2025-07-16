@@ -1,10 +1,10 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <div class="container-fluid relative px-3">
+    <div class="relative px-3 container-fluid">
         <div class="layout-specing">
             <!-- Start Content -->
-            <div class="md:flex justify-between items-center">
+            <div class="items-center justify-between md:flex">
                 <div>
                     <h5 class="text-lg font-semibold">Semua Produk</h5>
 
@@ -25,7 +25,7 @@
                 <div>
                     <a href="javascript:void(0)"
                         class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[20px] text-center bg-gray-800/5 hover:bg-gray-800/10 dark:bg-gray-800 border border-gray-800/5 dark:border-gray-800 text-slate-900 dark:text-white rounded-full"
-                        onclick="addshopitem.showModal()" title="Add New"><i data-feather="plus" class="h-4 w-4"></i></a>
+                        onclick="addshopitem.showModal()" title="Add New"><i data-feather="plus" class="w-4 h-4"></i></a>
                 </div>
             </div>
 
@@ -33,7 +33,7 @@
                 <!-- Success Message -->
                 @if (session('success'))
                     <div
-                        class="relative px-4 py-2 rounded-md font-medium bg-emerald-600/10 border border-emerald-600/10 text-emerald-600 block">
+                        class="relative block px-4 py-2 font-medium border rounded-md bg-emerald-600/10 border-emerald-600/10 text-emerald-600">
                         {{ session('success') }}
                     </div>
                 @endif
@@ -41,36 +41,36 @@
                 <!-- Error Message -->
                 @if (session('error'))
                     <div
-                        class="relative px-4 py-2 rounded-md font-medium bg-red-600/10 border border-red-600/10 text-red-600 block">
+                        class="relative block px-4 py-2 font-medium text-red-600 border rounded-md bg-red-600/10 border-red-600/10">
                         {{ session('error') }}
                     </div>
                 @endif
             </div>
 
-            <div class="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 mt-6 gap-6">
+            <div class="grid grid-cols-1 gap-6 mt-6 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
                 @foreach ($products as $product)
-                    <div class="group w-full flex flex-col min-h-3 max-h-3">
+                    <div class="flex flex-col w-full group min-h-3 max-h-3">
                         <!-- Image Container (80%) -->
                         <div
-                            class="relative overflow-hidden shadow dark:shadow-gray-800 group-hover:shadow-lg group-hover:dark:shadow-gray-800 rounded-md duration-500 w-full h-full">
+                            class="relative w-full h-full overflow-hidden duration-500 rounded-md shadow dark:shadow-gray-800 group-hover:shadow-lg group-hover:dark:shadow-gray-800">
                             <img src="{{ asset('storage/products/' . $product->images) }}" alt="{{ $product->name }}"
                                 class="object-cover w-full h-full" style="min-height: 300px; max-height: 300px;">
 
-                            <div class="absolute -bottom-20 group-hover:bottom-3 start-3 end-3 duration-500">
+                            <div class="absolute duration-500 -bottom-20 group-hover:bottom-3 start-3 end-3">
                                 <a href="javascript:void(0)" onclick="viewshopitem{{ $product->id }}.showModal()"
-                                    class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-slate-900 border-slate-900 text-white w-full rounded-md">Lihat
+                                    class="inline-block w-full px-5 py-2 text-base font-semibold tracking-wide text-center text-white align-middle duration-500 border rounded-md bg-slate-900 border-slate-900">Lihat
                                     Detail</a>
                             </div>
 
                             <ul class="list-none absolute top-[10px] end-4 opacity-0 group-hover:opacity-100 duration-500">
                                 <li>
                                     <a href="javascript:void(0)" onclick="deleteshopitem{{ $product->id }}.showModal()"
-                                        class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-red-600 hover:bg-red-700 border-red-600 hover:border-red-700 text-white"><i
+                                        class="inline-flex items-center justify-center w-8 h-8 text-base tracking-wide text-center text-white align-middle duration-500 bg-red-600 border-red-600 rounded-full hover:bg-red-700 hover:border-red-700"><i
                                             class="mdi mdi-delete"></i></a>
                                 </li>
                                 <li class="mt-1">
                                     <a href="javascript:void(0)" onclick="editshopitem{{ $product->id }}.showModal()"
-                                        class="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white"><i
+                                        class="inline-flex items-center justify-center w-8 h-8 text-base tracking-wide text-center text-white align-middle duration-500 bg-indigo-600 border-indigo-600 rounded-full hover:bg-indigo-700 hover:border-indigo-700"><i
                                             class="mdi mdi-pencil"></i></a>
                                 </li>
                             </ul>
@@ -92,8 +92,8 @@
                         <!-- Product Details (20%) -->
                         <div class="mt-4 h-[20%] flex flex-col justify-between">
                             <a href="javascript:void(0)" onclick="viewshopitem{{ $product->id }}.showModal()"
-                                class="hover:text-indigo-600 text-lg font-semibold">{{ $product->name ?? 'Nama Produk' }}</a>
-                            <div class="flex justify-between items-center mt-1 font-semibold">
+                                class="text-lg font-semibold hover:text-indigo-600">{{ $product->name ?? 'Nama Produk' }}</a>
+                            <div class="flex items-center justify-between mt-1 font-semibold">
                                 <p class="text-green-600">Rp. {{ number_format($product->price ?? 0, 0, ',', '.') }}</p>
                                 <p class="text-red-600">Qty : {{ $product->stock ?? 0 }}</p>
                             </div>
@@ -102,17 +102,17 @@
 
                     <!-- Start Delete Modal -->
                     <dialog id="deleteshopitem{{ $product->id }}"
-                        class="rounded-md shadow dark:shadow-gray-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
+                        class="bg-white rounded-md shadow dark:shadow-gray-800 dark:bg-slate-900 text-slate-900 dark:text-white">
                         <div class="relative h-auto md:w-[480px] w-300px">
                             <div
-                                class="flex justify-between items-center px-6 py-4 border-b border-gray-100 dark:border-gray-700">
-                                <h3 class="font-bold text-lg text-red-600">Konfirmasi Hapus
+                                class="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-700">
+                                <h3 class="text-lg font-bold text-red-600">Konfirmasi Hapus
                                     Data
                                 </h3>
                                 <form method="dialog">
                                     <button
-                                        class="size-6 flex justify-center items-center shadow dark:shadow-gray-800 rounded-md btn-ghost bg-red-600">
-                                        <i data-feather="x" class="size-4 text-white"></i>
+                                        class="flex items-center justify-center bg-red-600 rounded-md shadow size-6 dark:shadow-gray-800 btn-ghost">
+                                        <i data-feather="x" class="text-white size-4"></i>
                                     </button>
                                 </form>
                             </div>
@@ -122,9 +122,9 @@
                                 <form action="{{ route('admin.product.destroy', $product->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="bg-red-600 mt-6 text-white px-4 py-2 rounded">Ya,
+                                    <button type="submit" class="px-4 py-2 mt-6 text-white bg-red-600 rounded">Ya,
                                         Hapus</button>
-                                    <button type="button" class="bg-gray-300 mt-6 text-black px-4 py-2 rounded"
+                                    <button type="button" class="px-4 py-2 mt-6 text-black bg-gray-300 rounded"
                                         onclick="deleteshopitem{{ $product->id }}.close()">Tidak,
                                         Batalkan</button>
                                 </form>
@@ -135,15 +135,15 @@
 
                     <!-- Start Edit Product Modal -->
                     <dialog id="editshopitem{{ $product->id }}"
-                        class="rounded-md shadow dark:shadow-gray-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
+                        class="bg-white rounded-md shadow dark:shadow-gray-800 dark:bg-slate-900 text-slate-900 dark:text-white">
                         <div class="relative h-auto md:w-[680px] w-[300px]">
                             <div
-                                class="flex justify-between items-center px-6 py-4 border-b border-gray-100 dark:border-gray-700">
-                                <h3 class="font-bold text-lg">Edit Produk</h3>
+                                class="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-700">
+                                <h3 class="text-lg font-bold">Edit Produk</h3>
                                 <form method="dialog">
                                     <button
-                                        class="size-6 flex justify-center items-center shadow dark:shadow-gray-800 rounded-md btn-ghost bg-red-600">
-                                        <i data-feather="x" class="size-4 text-white"></i>
+                                        class="flex items-center justify-center bg-red-600 rounded-md shadow size-6 dark:shadow-gray-800 btn-ghost">
+                                        <i data-feather="x" class="text-white size-4"></i>
                                     </button>
                                 </form>
                             </div>
@@ -154,68 +154,81 @@
                                     @csrf
                                     @method('PUT')
                                     <!-- Grid for 3 sections -->
-                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
 
                                         <!-- Image Upload Section -->
                                         <div class="flex flex-col">
-                                            <h4 class="font-semibold mb-4">Foto Produk <span class="text-red-600">*</span>
+                                            <h4 class="mb-4 font-semibold">Foto Produk <span class="text-red-600">*</span>
                                             </h4>
                                             <div id="preview-box-edit-{{ $product->id }}"
-                                                class="preview-box-edit flex justify-center rounded-md shadow dark:shadow-gray-800 overflow-hidden bg-gray-50 dark:bg-slate-800 text-slate-400 p-2 text-center small max-h-60 mb-4">
+                                                class="flex justify-center p-2 mb-4 overflow-hidden text-center rounded-md shadow preview-box-edit dark:shadow-gray-800 bg-gray-50 dark:bg-slate-800 text-slate-400 small max-h-60">
                                                 <img src="{{ asset('storage/products/' . $product->images) }}"
-                                                    alt="{{ $product->name }}" class="max-h-60 object-contain">
+                                                    alt="{{ $product->name }}" class="object-contain max-h-60">
                                             </div>
                                             <input type="file" id="edit-images-{{ $product->id }}" name="images"
                                                 accept="image/*" onchange="handleChange('edit', {{ $product->id }})"
                                                 hidden>
                                             <label
-                                                class="btn-upload py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md mt-6 cursor-pointer"
+                                                class="inline-block px-5 py-2 mt-6 text-base font-semibold tracking-wide text-center text-white align-middle duration-500 bg-indigo-600 border border-indigo-600 rounded-md cursor-pointer btn-upload hover:bg-indigo-700 hover:border-indigo-700"
                                                 for="edit-images-{{ $product->id }}">Ganti Foto</label>
+                                            {{--  Memilih hanya pengiriman kota blitar --}}
+                                            <div class="flex flex-col mt-4">
+                                                <h4 class="mb-4 font-semibold">Wilayah Pengiriman</h4>
+                                                <select name="is_blitar_only" class="w-full px-3 py-2 mb-4 border rounded"
+                                                    required>
+                                                    <option value="1"
+                                                        {{ $product->is_blitar_only ? 'selected' : '' }}>Kota Blitar
+                                                    </option>
+                                                    <option value="0"
+                                                        {{ !$product->is_blitar_only ? 'selected' : '' }}>Semua kota
+                                                    </option>
+                                                </select>
+                                            </div>
                                         </div>
 
                                         <!-- Product Details Section -->
                                         <div class="flex flex-col">
-                                            <h4 class="font-semibold mb-4">Detail Produk</h4>
+                                            <h4 class="mb-4 font-semibold">Detail Produk</h4>
                                             <input name="name" type="text"
-                                                class="border px-3 py-2 rounded w-full mb-4" placeholder="Nama Produk"
+                                                class="w-full px-3 py-2 mb-4 border rounded" placeholder="Nama Produk"
                                                 value="{{ old('name', $product->name) }}" required>
                                             <input name="description" type="text"
-                                                class="border px-3 py-2 rounded w-full mb-4"
+                                                class="w-full px-3 py-2 mb-4 border rounded"
                                                 placeholder="Deskripsi Produk"
                                                 value="{{ old('description', $product->description) }}" required>
                                             <input name="sku" type="text"
-                                                class="border px-3 py-2 rounded w-full mb-4"
+                                                class="w-full px-3 py-2 mb-4 border rounded"
                                                 placeholder="Kode Produk (SKU)" value="{{ old('sku', $product->sku) }}"
                                                 required>
                                             <input name="price" type="number"
-                                                class="border px-3 py-2 rounded w-full mb-4" placeholder="Harga Produk"
+                                                class="w-full px-3 py-2 mb-4 border rounded" placeholder="Harga Produk"
                                                 value="{{ old('price', $product->price) }}" required>
                                             <input name="stock" type="number"
-                                                class="border px-3 py-2 rounded w-full mb-4" placeholder="Stok Produk"
+                                                class="w-full px-3 py-2 mb-4 border rounded" placeholder="Stok Produk"
                                                 value="{{ old('stock', $product->stock) }}" required>
                                         </div>
 
                                         <!-- Additional Information Section -->
                                         <div class="flex flex-col">
-                                            <h4 class="font-semibold mb-4">Detail Tambahan</h4>
+                                            <h4 class="mb-4 font-semibold">Detail Tambahan</h4>
                                             <input name="weight" type="number"
-                                                class="border px-3 py-2 rounded w-full mb-4" placeholder="Berat (Gram)"
+                                                class="w-full px-3 py-2 mb-4 border rounded" placeholder="Berat (Gram)"
                                                 value="{{ old('weight', $product->weight) }}">
                                             <input name="dimensions" type="text"
-                                                class="border px-3 py-2 rounded w-full mb-4"
+                                                class="w-full px-3 py-2 mb-4 border rounded"
                                                 placeholder="Dimensi Produk (Cm)"
                                                 value="{{ old('dimensions', $product->dimensions) }}">
                                             <input name="brand" type="text"
-                                                class="border px-3 py-2 rounded w-full mb-4" placeholder="Merek Produk"
+                                                class="w-full px-3 py-2 mb-4 border rounded" placeholder="Merek Produk"
                                                 value="{{ old('brand', $product->brand) }}">
-                                            <select name="status" required class="border px-3 py-2 rounded w-full mb-4">
+                                            <select name="status" required class="w-full px-3 py-2 mb-4 border rounded">
                                                 <option value="1" {{ $product->status == 1 ? 'selected' : '' }}>Aktif
                                                 </option>
                                                 <option value="0" {{ $product->status == 0 ? 'selected' : '' }}>Tidak
                                                     Aktif</option>
                                             </select>
                                             <select name="category_id" required
-                                                class="border px-3 py-2 rounded w-full mb-4">
+                                                class="w-full px-3 py-2 mb-4 border rounded">
                                                 <option value="{{ $product->category_id }}" selected>
                                                     {{ $product->category->title }}</option>
                                                 @foreach ($categories as $category)
@@ -225,7 +238,7 @@
                                         </div>
                                     </div>
                                     <button type="submit"
-                                        class="bg-indigo-600 text-white px-4 py-2 w-full rounded mt-4">Perbarui
+                                        class="w-full px-4 py-2 mt-4 text-white bg-indigo-600 rounded">Perbarui
                                         Produk</button>
                                 </form>
                             </div>
@@ -235,47 +248,51 @@
 
                     <!-- Start View Product Modal -->
                     <dialog id="viewshopitem{{ $product->id }}"
-                        class="rounded-md shadow dark:shadow-gray-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
+                        class="bg-white rounded-md shadow dark:shadow-gray-800 dark:bg-slate-900 text-slate-900 dark:text-white">
                         <div class="relative h-auto md:w-[680px] w-[300px]">
                             <div
-                                class="flex justify-between items-center px-6 py-4 border-b border-gray-100 dark:border-gray-700">
-                                <h3 class="font-bold text-lg">Detail Produk</h3>
+                                class="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-700">
+                                <h3 class="text-lg font-bold">Detail Produk</h3>
                                 <form method="dialog">
                                     <button
-                                        class="size-6 flex justify-center items-center shadow dark:shadow-gray-800 rounded-md btn-ghost bg-red-600">
-                                        <i data-feather="x" class="size-4 text-white"></i>
+                                        class="flex items-center justify-center bg-red-600 rounded-md shadow size-6 dark:shadow-gray-800 btn-ghost">
+                                        <i data-feather="x" class="text-white size-4"></i>
                                     </button>
                                 </form>
                             </div>
 
                             <div class="p-6">
                                 <!-- Grid for 3 sections -->
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
 
                                     <!-- Image Section -->
                                     <div class="flex flex-col">
-                                        <h4 class="font-semibold mb-4">Foto Produk</h4>
+                                        <h4 class="mb-4 font-semibold">Foto Produk</h4>
                                         <div
-                                            class="flex justify-center rounded-md shadow dark:shadow-gray-800 overflow-hidden bg-gray-50 dark:bg-slate-800 text-slate-400 p-2 text-center small max-h-60 mb-4">
+                                            class="flex justify-center p-2 mb-4 overflow-hidden text-center rounded-md shadow dark:shadow-gray-800 bg-gray-50 dark:bg-slate-800 text-slate-400 small max-h-60">
                                             <img src="{{ asset('storage/products/' . $product->images) }}"
-                                                alt="{{ $product->name }}" class="max-h-60 object-contain">
+                                                alt="{{ $product->name }}" class="object-contain max-h-60">
                                         </div>
                                     </div>
 
                                     <!-- Product Details Section -->
                                     <div class="flex flex-col">
-                                        <h4 class="font-semibold mb-4">Detail Produk</h4>
+                                        <h4 class="mb-4 font-semibold">Detail Produk</h4>
                                         <p class="mb-2"><strong>Nama:</strong> {{ $product->name }}</p>
                                         <p class="mb-2"><strong>Deskripsi:</strong> {{ $product->description }}</p>
                                         <p class="mb-2"><strong>SKU:</strong> {{ $product->sku }}</p>
                                         <p class="mb-2"><strong>Harga:</strong> Rp.
                                             {{ number_format($product->price, 0, ',', '.') }}</p>
                                         <p class="mb-2"><strong>Stok:</strong> {{ $product->stock }}</p>
+                                        {{-- Detail Pengiriman --}}
+                                        <h4 class="mt-4 mb-4 font-semibold">Detail Pengiriman</h4>
+                                        <p class="mb-2"><strong>Area pengiriman:</strong>
+                                            {{ $product->is_blitar_only ? 'Kota Blitar' : 'Semua kota' }}</p>
                                     </div>
 
                                     <!-- Additional Information Section -->
                                     <div class="flex flex-col">
-                                        <h4 class="font-semibold mb-4">Detail Tambahan</h4>
+                                        <h4 class="mb-4 font-semibold">Detail Tambahan</h4>
                                         <p class="mb-2"><strong>Berat(Gram):</strong> {{ $product->weight }} Gram</p>
                                         <p class="mb-2"><strong>Dimensi(Cm):</strong> {{ $product->dimensions }}</p>
                                         <p class="mb-2"><strong>Merek:</strong> {{ $product->brand }}</p>
@@ -295,14 +312,14 @@
 
     <!-- Start Add Product Modal -->
     <dialog id="addshopitem"
-        class="rounded-md shadow dark:shadow-gray-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
+        class="bg-white rounded-md shadow dark:shadow-gray-800 dark:bg-slate-900 text-slate-900 dark:text-white">
         <div class="relative h-auto md:w-[680px] w-[300px]">
-            <div class="flex justify-between items-center px-6 py-4 border-b border-gray-100 dark:border-gray-700">
-                <h3 class="font-bold text-lg">Tambah Produk Baru</h3>
+            <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-700">
+                <h3 class="text-lg font-bold">Tambah Produk Baru</h3>
                 <form method="dialog">
                     <button
-                        class="size-6 flex justify-center items-center shadow dark:shadow-gray-800 rounded-md btn-ghost bg-red-600">
-                        <i data-feather="x" class="size-4 text-white"></i>
+                        class="flex items-center justify-center bg-red-600 rounded-md shadow size-6 dark:shadow-gray-800 btn-ghost">
+                        <i data-feather="x" class="text-white size-4"></i>
                     </button>
                 </form>
             </div>
@@ -311,60 +328,69 @@
                 <form action="{{ route('admin.product.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <!-- Grid for 3 sections -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
 
                         <!-- Image Upload Section -->
                         <div class="flex flex-col">
-                            <h4 class="font-semibold mb-4">Foto Produk <span class="text-red-600">*</span></h4>
+                            <h4 class="mb-4 font-semibold">Foto Produk <span class="text-red-600">*</span></h4>
                             <div
-                                class="preview-box-add flex justify-center rounded-md shadow dark:shadow-gray-800 overflow-hidden bg-gray-50 dark:bg-slate-800 text-slate-400 p-2 text-center small max-h-60 mb-4">
+                                class="flex justify-center p-2 mb-4 overflow-hidden text-center rounded-md shadow preview-box-add dark:shadow-gray-800 bg-gray-50 dark:bg-slate-800 text-slate-400 small max-h-60">
                                 Maksimal Ukuran: 2 MB.
                             </div>
                             <input type="file" id="add-images" name="images" accept="image/*"
                                 onchange="handleChange('add')" hidden required>
                             <label
-                                class="btn-upload py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md mt-6 cursor-pointer"
+                                class="inline-block px-5 py-2 mt-6 text-base font-semibold tracking-wide text-center text-white align-middle duration-500 bg-indigo-600 border border-indigo-600 rounded-md cursor-pointer btn-upload hover:bg-indigo-700 hover:border-indigo-700"
                                 for="add-images">Unggah Foto</label>
+                            <!-- Memilih hanya pengiriman kota blitar -->
+                            <div class="flex flex-col mt-4">
+                                <h4 class="mb-4 font-semibold">Wilayah Pengiriman</h4>
+                                <select name="is_blitar_only" class="w-full px-3 py-2 mb-4 border rounded" required>
+                                    <option value="1">Kota Blitar</option>
+                                    <option value="0">Semua kota</option>
+                                </select>
+                            </div>
                         </div>
 
                         <!-- Product Details Section -->
                         <div class="flex flex-col">
-                            <h4 class="font-semibold mb-4">Detail Produk</h4>
-                            <input name="name" type="text" class="border px-3 py-2 rounded w-full mb-4"
+                            <h4 class="mb-4 font-semibold">Detail Produk</h4>
+                            <input name="name" type="text" class="w-full px-3 py-2 mb-4 border rounded"
                                 placeholder="Nama Produk" required>
-                            <input name="description" type="text" class="border px-3 py-2 rounded w-full mb-4"
+                            <input name="description" type="text" class="w-full px-3 py-2 mb-4 border rounded"
                                 placeholder="Deskripsi Produk" required>
-                            <input name="sku" type="text" class="border px-3 py-2 rounded w-full mb-4"
+                            <input name="sku" type="text" class="w-full px-3 py-2 mb-4 border rounded"
                                 placeholder="Kode Produk (SKU)" required>
-                            <input name="price" type="number" class="border px-3 py-2 rounded w-full mb-4"
+                            <input name="price" type="number" class="w-full px-3 py-2 mb-4 border rounded"
                                 placeholder="Harga Produk" required>
-                            <input name="stock" type="number" class="border px-3 py-2 rounded w-full mb-4"
+                            <input name="stock" type="number" class="w-full px-3 py-2 mb-4 border rounded"
                                 placeholder="Stok Produk" required>
                         </div>
 
                         <!-- Additional Information Section -->
                         <div class="flex flex-col">
-                            <h4 class="font-semibold mb-4">Detail Tambahan</h4>
-                            <input name="weight" type="number" class="border px-3 py-2 rounded w-full mb-4"
+                            <h4 class="mb-4 font-semibold">Detail Tambahan</h4>
+                            <input name="weight" type="number" class="w-full px-3 py-2 mb-4 border rounded"
                                 placeholder="Berat (Gram)">
-                            <input name="dimensions" type="text" class="border px-3 py-2 rounded w-full mb-4"
+                            <input name="dimensions" type="text" class="w-full px-3 py-2 mb-4 border rounded"
                                 placeholder="Dimensi Produk (Cm)">
-                            <input name="brand" type="text" class="border px-3 py-2 rounded w-full mb-4"
+                            <input name="brand" type="text" class="w-full px-3 py-2 mb-4 border rounded"
                                 placeholder="Merek Produk">
-                            <select name="status" required class="border px-3 py-2 rounded w-full mb-4">
+                            <select name="status" required class="w-full px-3 py-2 mb-4 border rounded">
                                 <option value="1">Aktif</option>
                                 <option value="0">Tidak Aktif</option>
                             </select>
                             <!-- Memilih Kategori produk -->
-                            <select name="category_id" class="border px-3 py-2 rounded w-full mb-4 select2" required>
+                            <select name="category_id" class="w-full px-3 py-2 mb-4 border rounded select2" required>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}" class="text-black">{{ $category->title }}
                                     </option>
                                 @endforeach
                             </select>
+
                         </div>
                     </div>
-                    <button type="submit" class="bg-indigo-600 text-white px-4 py-2 w-full rounded mt-4">Tambah
+                    <button type="submit" class="w-full px-4 py-2 mt-4 text-white bg-indigo-600 rounded">Tambah
                         Produk</button>
                 </form>
             </div>

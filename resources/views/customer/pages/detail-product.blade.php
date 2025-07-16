@@ -84,38 +84,46 @@
                             </ul>
                         </div>
 
-                        <form action="{{ route('customer.cart.store', $product->id) }}" method="POST">
-                            @csrf
-                            @method('post')
-                            <div class="grid lg:grid-cols-2 grid-cols-1 gap-[30px] mt-4">
-                                <div class="flex items-center">
-                                    <h5 class="text-lg font-semibold me-2">Jumlah:</h5>
-                                    <div class="flex items-center qty-icons ms-3">
-                                        <button type="button"
-                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                                            class="inline-flex items-center justify-center text-base tracking-wide text-center text-indigo-600 align-middle duration-500 border rounded-md size-9 bg-indigo-600/5 hover:bg-indigo-600 border-indigo-600/10 hover:border-indigo-600 hover:text-white minus">-</button>
-                                        <input min="1" name="quantity" value="1" type="number"
-                                            class="inline-flex items-center justify-center w-16 text-base tracking-wide text-center text-indigo-600 align-middle duration-500 border rounded-md pointer-events-none h-9 bg-indigo-600/5 hover:bg-indigo-600 border-indigo-600/10 hover:border-indigo-600 hover:text-white ps-4 quantity">
-                                        <button type="button"
-                                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                                            class="inline-flex items-center justify-center text-base tracking-wide text-center text-indigo-600 align-middle duration-500 border rounded-md size-9 bg-indigo-600/5 hover:bg-indigo-600 border-indigo-600/10 hover:border-indigo-600 hover:text-white plus">+</button>
+                        @if ($isCanAddToCart)
+                            <form action="{{ route('customer.cart.store', $product->id) }}" method="POST">
+                                @csrf
+                                @method('post')
+                                <div class="grid lg:grid-cols-2 grid-cols-1 gap-[30px] mt-4">
+                                    <div class="flex items-center">
+                                        <h5 class="text-lg font-semibold me-2">Jumlah:</h5>
+                                        <div class="flex items-center qty-icons ms-3">
+                                            <button type="button"
+                                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                                class="inline-flex items-center justify-center text-base tracking-wide text-center text-indigo-600 align-middle duration-500 border rounded-md size-9 bg-indigo-600/5 hover:bg-indigo-600 border-indigo-600/10 hover:border-indigo-600 hover:text-white minus">-</button>
+                                            <input min="1" name="quantity" value="1" type="number"
+                                                class="inline-flex items-center justify-center w-16 text-base tracking-wide text-center text-indigo-600 align-middle duration-500 border rounded-md pointer-events-none h-9 bg-indigo-600/5 hover:bg-indigo-600 border-indigo-600/10 hover:border-indigo-600 hover:text-white ps-4 quantity">
+                                            <button type="button"
+                                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                                class="inline-flex items-center justify-center text-base tracking-wide text-center text-indigo-600 align-middle duration-500 border rounded-md size-9 bg-indigo-600/5 hover:bg-indigo-600 border-indigo-600/10 hover:border-indigo-600 hover:text-white plus">+</button>
+                                        </div>
                                     </div>
+                                    <span class="mt-2 text-indigo-600 text-md text-start">Stok tersedia:
+                                        {{ $product->stock }}</span>
                                 </div>
-                                <span class="mt-2 text-indigo-600 text-md text-start">Stok tersedia:
-                                    {{ $product->stock }}</span>
-                            </div>
 
-                            <input type="hidden" name="id_product" value="{{ $product->id }}">
-                            <input type="hidden" name="checkout" value="0">
+                                <input type="hidden" name="id_product" value="{{ $product->id }}">
+                                <input type="hidden" name="checkout" value="0">
+                                <div class="mt-4">
+                                    <button type="submit" onclick="this.form.checkout.value=1"
+                                        class="inline-block px-5 py-2 mt-2 text-base font-semibold tracking-wide text-center text-white align-middle duration-500 bg-indigo-600 border border-indigo-600 rounded-md hover:bg-indigo-700 hover:border-indigo-700 me-2">Pesan
+                                        Sekarang</button>
+                                    <button type="submit"
+                                        class="inline-block px-5 py-2 mt-2 text-base font-semibold tracking-wide text-center text-indigo-600 align-middle duration-500 border rounded-md bg-indigo-600/5 hover:bg-indigo-600 border-indigo-600/10 hover:border-indigo-600 hover:text-white">Tambahkan
+                                        Ke Keranjang</button>
+                                </div>
+                            </form>
+                        @else
                             <div class="mt-4">
-                                <button type="submit" onclick="this.form.checkout.value=1"
-                                    class="inline-block px-5 py-2 mt-2 text-base font-semibold tracking-wide text-center text-white align-middle duration-500 bg-indigo-600 border border-indigo-600 rounded-md hover:bg-indigo-700 hover:border-indigo-700 me-2">Pesan
-                                    Sekarang</button>
-                                <button type="submit"
-                                    class="inline-block px-5 py-2 mt-2 text-base font-semibold tracking-wide text-center text-indigo-600 align-middle duration-500 border rounded-md bg-indigo-600/5 hover:bg-indigo-600 border-indigo-600/10 hover:border-indigo-600 hover:text-white">Tambahkan
-                                    Ke Keranjang</button>
+                                <span
+                                    class="inline-block px-5 py-2 text-base font-semibold tracking-wide text-center text-white align-middle duration-500 bg-gray-400 border border-gray-400 rounded-md cursor-not-allowed">Tidak
+                                    dapat menambahkan ke keranjang</span>
                             </div>
-                        </form>
+                        @endif
                     </div>
                 </div>
             </div>

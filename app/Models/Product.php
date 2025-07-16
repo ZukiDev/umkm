@@ -23,6 +23,7 @@ class Product extends Model
         'brand',
         'status',
         'images',
+        'is_blitar_only', // New field to indicate if the product is only available in Blitar
     ];
 
     /**

@@ -60,6 +60,7 @@ class ProductController extends Controller
             'brand' => 'nullable|string|max:255',
             'status' => 'required|boolean',
             'images' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'is_blitar_only' => 'nullable|boolean', // New field to indicate if the product is only available in Blitar
         ]);
 
         try {
@@ -124,6 +125,7 @@ class ProductController extends Controller
             'brand' => 'nullable|string|max:255',
             'status' => 'required|boolean',
             'images' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'is_blitar_only' => 'nullable|boolean', // New field to indicate if the product is only available in Blitar
         ]);
 
         try {

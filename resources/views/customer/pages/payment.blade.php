@@ -161,13 +161,34 @@
                                                             const text = await response.text();
                                                             console.error("Unexpected response (HTML?):", text);
                                                         }
-                                                        // Redirect after fetch is done
-                                                        window.location.href = "{{ route('customer.order.index') }}";
+                                                        // Redirect to WhatsApp after fetch is done
+                                                        // Create and submit a hidden form for POST redirect
+                                                        var form = document.createElement('form');
+                                                        form.method = 'POST';
+                                                        form.action =
+                                                            "{{ route('customer.payment.redirect-whatsapp', ['orderId' => $order->code_order]) }}";
+                                                        var csrfInput = document.createElement('input');
+                                                        csrfInput.type = 'hidden';
+                                                        csrfInput.name = '_token';
+                                                        csrfInput.value = "{{ csrf_token() }}";
+                                                        form.appendChild(csrfInput);
+                                                        document.body.appendChild(form);
+                                                        form.submit();
                                                     })
                                                     .catch(error => {
                                                         console.error("Fetch error:", error);
                                                         // Redirect even if fetch fails
-                                                        window.location.href = "{{ route('customer.order.index') }}";
+                                                        var form = document.createElement('form');
+                                                        form.method = 'POST';
+                                                        form.action =
+                                                            "{{ route('customer.payment.redirect-whatsapp', ['orderId' => $order->code_order]) }}";
+                                                        var csrfInput = document.createElement('input');
+                                                        csrfInput.type = 'hidden';
+                                                        csrfInput.name = '_token';
+                                                        csrfInput.value = "{{ csrf_token() }}";
+                                                        form.appendChild(csrfInput);
+                                                        document.body.appendChild(form);
+                                                        form.submit();
                                                     });
                                             },
                                             // Optional

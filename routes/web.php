@@ -36,6 +36,7 @@ Route::middleware([
 ])->group(function () {
 
     Route::post('/midtrans/webhook', [MidtransController::class, 'callback'])->name('customer.midtrans.callback');
+
     Route::middleware(['auth'])->group(function () {
         Route::middleware(['customer'])->group(function () {
             Route::post('/address', [CustomerProfileController::class, 'update'])->name('customer.profile.update');
@@ -43,6 +44,7 @@ Route::middleware([
             Route::resource('/order', OrderController::class)->names('customer.order');
             Route::get('/checkout', [OrderController::class, 'create'])->name('customer.checkout');
             Route::resource('/payment', PaymentController::class)->names('customer.payment');
+            Route::post('/payment/redirect-whatsapp/{orderId}', [PaymentController::class, 'redirectWhatsapp'])->name('customer.payment.redirect-whatsapp');
             Route::get('/midtrans-callback', function () {
                 return response()->json(['message' => 'Callback route is working, but only accepts POST'], 405);
             });

@@ -175,7 +175,7 @@ class PaymentController extends Controller
             return redirect()->back()->with('error', 'Invalid status update.');
         }
 
-        return redirect()->route('customer.order.index')->with('success', 'Order status updated successfully.');
+        return redirect()->route('customer.cart.index')->with('success', 'Order status updated successfully.');
     }
 
 
@@ -185,6 +185,79 @@ class PaymentController extends Controller
     public function destroy(Order $order)
     {
         //
+    }
+
+    public function redirectWhatsapp($orderId)
+    {
+        $order = Order::where('code_order', $orderId)->first();
+        if (!$order) {
+            return redirect()->route('customer.order.index')->with('error', 'Order not found.');
+        }
+
+        $orderDetails = $order->orderDetails;
+        $address = $order->address;
+        $payment = $order->payment;
+        // Format payment method
+        if ($payment->payment_method === 'bank_transfer') {
+            $paymentMethod = 'Bank Transfer';
+        } elseif ($payment->payment_method === 'cod') {
+            $paymentMethod = 'COD';
+        } else {
+            $paymentMethod = '-';
+        }
+        $subTotalPayment = $payment->total_price ?? 0;
+        $ppn = ($subTotalPayment * 10) / 100;
+        $totalPayment = $payment->total_payment ?? 0;
+        $codeOrder = $order->code_order;
+        $inaTime = Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s');
+
+        // Fungsi format rupiah
+        function formatRupiah($angka) {
+            return 'Rp ' . number_format($angka, 0, ',', '.');
+        }
+
+        $firstDetail = $orderDetails->first();
+        $storePhoneNumber = $firstDetail && $firstDetail->product && $firstDetail->product->store
+            ? $firstDetail->product->store->phone_number
+            : null;
+
+        $buyerName = $order->user->name ?? '-';
+        $buyerPhone = $order->user->phone_number ?? '-';
+
+        if ($storePhoneNumber) {
+            $whatsappMessage = "Detail Pesanan:\n";
+            $whatsappMessage .= "Kode Pesanan: $codeOrder\n";
+            $whatsappMessage .= "Nama Pembeli: $buyerName\n";
+            // Tambahkan '62' di depan nomor telepon jika belum ada
+            $formattedBuyerPhone = preg_replace('/^(0|62)?/', '62', preg_replace('/\D/', '', $buyerPhone));
+            $whatsappMessage .= "Nomor HP Pembeli: $formattedBuyerPhone\n";
+            $whatsappMessage .= "Total Pembayaran: " . formatRupiah($totalPayment) . "\n\n";
+            $whatsappMessage .= "Daftar Produk:\n";
+            foreach ($orderDetails as $detail) {
+            $productName = $detail->product->name ?? '-';
+            $whatsappMessage .= "Nama Produk: $productName, Jumlah: {$detail->quantity}, Harga: " . formatRupiah($detail->price) . ", Total: " . formatRupiah($detail->total) . "\n";
+            }
+            $whatsappMessage .= "\nDetail Pembayaran:\n";
+            $whatsappMessage .= "Metode Pembayaran: $paymentMethod\n";
+            $whatsappMessage .= "Total Harga: " . formatRupiah($subTotalPayment) . "\n";
+            $whatsappMessage .= "PPN: " . formatRupiah($ppn) . "\n";
+            $whatsappMessage .= "Total Pembayaran: " . formatRupiah($totalPayment) . "\n\n";
+            if ($address) {
+            $whatsappMessage .= "Alamat Pengiriman:\n";
+            $whatsappMessage .= "Alamat: {$address->address}\n";
+            $whatsappMessage .= "Provinsi: {$address->province}\n";
+            $whatsappMessage .= "Kota: {$address->city}\n";
+            $whatsappMessage .= "Kecamatan: {$address->district}\n";
+            $whatsappMessage .= "Kode Pos: {$address->post_code}\n";
+            }
+            $whatsappMessage .= "\nTanggal & Waktu Pesanan: $inaTime\n";
+
+            $whatsappUrl = "https://wa.me/$storePhoneNumber?text=" . urlencode($whatsappMessage);
+
+            return redirect()->away($whatsappUrl)->with('success', 'Order placed successfully.');
+        }
+
+        return redirect()->route('customer.order.index');
     }
 
 //     public function callback(Request $request)

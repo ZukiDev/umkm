@@ -60,6 +60,17 @@ class OrderController extends Controller
                 ->with('error', 'Please update your address before proceeding to checkout.');
         }
 
+        // Cek apakah ada produk yang hanya bisa dikirim ke Blitar
+        $blitarOnlyProduct = $carts->first(function ($cart) {
+            return $cart->product && $cart->product->is_blitar_only;
+        });
+
+        // Jika ada produk khusus Blitar dan alamat user bukan Blitar, redirect dengan error
+        if ($blitarOnlyProduct && stripos($address->city, 'blitar') === false) {
+            return redirect()->route('customer.cart.index')
+                ->with('error', 'Maaf, terdapat produk yang hanya tersedia untuk pengiriman di daerah Blitar. Silakan ubah alamat Anda atau hapus produk tersebut dari keranjang.');
+        }
+
         // Calculate the sub total payment
         $subTotalPayment = $carts->sum(function ($cart) {
             return $cart->price * $cart->quantity;

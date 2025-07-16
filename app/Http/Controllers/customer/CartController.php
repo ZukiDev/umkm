@@ -18,23 +18,40 @@ class CartController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $carts = Cart::where('user_id', $user->id)->get();
+        $address = $user->address;
 
-        // Calculate the sub total payment
-        $subTotalPayment = $carts->sum(function ($cart) {
+        $carts = Cart::with('product')->where('user_id', $user->id)->get();
+
+        // Pisahkan produk yang hanya bisa dikirim ke Blitar dan alamat user bukan Blitar
+        $blitarOnlyCarts = collect();
+        $checkoutableCarts = collect();
+
+        foreach ($carts as $cart) {
+            $product = $cart->product;
+            if ($product->is_blitar_only && (!$address || stripos($address->city, 'blitar') === false)) {
+                $blitarOnlyCarts->push($cart);
+            } else {
+                $checkoutableCarts->push($cart);
+            }
+        }
+
+        // Hitung subtotal hanya untuk produk yang bisa di-checkout
+        $subTotalPayment = $checkoutableCarts->sum(function ($cart) {
             return $cart->price * $cart->quantity;
         });
 
-        // Define the PPN percentage
         $ppnPercentage = 10; // 10%
-
-        // Calculate the PPN
         $ppn = ($subTotalPayment * $ppnPercentage) / 100;
-
-        // Calculate the total payment including PPN
         $totalPayment = $subTotalPayment + $ppn;
 
-        return view('customer.pages.cart', compact('carts', 'subTotalPayment', 'ppn', 'totalPayment'));
+        return view('customer.pages.cart', [
+            'carts' => $carts,
+            'checkoutableCarts' => $checkoutableCarts,
+            'blitarOnlyCarts' => $blitarOnlyCarts,
+            'subTotalPayment' => $subTotalPayment,
+            'ppn' => $ppn,
+            'totalPayment' => $totalPayment
+        ]);
     }
 
     /**
@@ -99,6 +116,12 @@ class CartController extends Controller
         DB::beginTransaction();
         try {
             $product = Product::lockForUpdate()->findOrFail($cart->product_id);
+
+            // Cek apakah produk hanya untuk Blitar dan alamat user bukan Blitar
+            if ($product->is_blitar_only && stripos($user->address->city, 'blitar') === false) {
+                DB::rollBack();
+                return response()->json(['error' => 'Maaf, produk ini hanya tersedia untuk pengiriman di daerah Blitar.'], 400);
+            }
 
             // Check if the requested quantity is available in stock
             $availableStock = $product->stock + $cart->quantity;
@@ -204,9 +227,20 @@ class CartController extends Controller
 
     private function addToCart(Request $request, $user)
     {
+        // Cek apakah user sudah punya alamat
+        if (!$user->address) {
+            return redirect()->route('customer.profile')->with('error', 'Anda harus menambahkan alamat terlebih dahulu.');
+        }
+
         DB::beginTransaction();
         try {
             $product = Product::lockForUpdate()->findOrFail($request->id_product);
+
+            // Cek apakah produk hanya untuk Blitar dan alamat user bukan Blitar
+            if ($product->is_blitar_only && stripos($user->address->city, 'blitar') === false) {
+                DB::rollBack();
+                return redirect()->back()->with('error', 'Maaf, produk ini hanya tersedia untuk pengiriman di daerah Blitar.');
+            }
 
             if ($product->stock < $request->quantity) {
                 DB::rollBack();
@@ -247,7 +281,8 @@ class CartController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Terjadi kesalahan saat menambahkan produk ke keranjang: ' . $e->getMessage());
-            return redirect()->route('customer.cart.index')->with('error', 'Terjadi kesalahan saat menambahkan produk ke keranjang.');}
+            return redirect()->route('customer.cart.index')->with('error', 'Terjadi kesalahan saat menambahkan produk ke keranjang.');
+        }
     }
 
     private function clearCart($user)

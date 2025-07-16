@@ -29,90 +29,86 @@
             <div class="grid lg:grid-cols-12 md:grid-cols-2 grid-cols-1 gap-[30px]">
                 <div class="lg:col-span-8">
                     <div class="p-6 rounded-md shadow dark:shadow-gray-800">
-                        <h3 class="text-xl font-semibold leading-normal">Alamat Pengiriman</h3>
 
                         <form action="{{ route('customer.order.store') }}" method="POST">
                             @csrf
-                            <div class="grid grid-cols-1 gap-5 mt-6 lg:grid-cols-12">
-                                <div class="lg:col-span-6">
-                                    <label class="font-semibold form-label">Nama: <span
-                                            class="text-red-600">*</span></label>
-                                    <input type="text"
-                                        class="w-full h-10 px-3 py-2 mt-2 bg-transparent border border-gray-200 rounded outline-none form-input dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0"
-                                        placeholder="Nama" name="name" value="{{ $user->name }}" required>
+                            <div class="grid grid-cols-1 gap-5 lg:grid-cols-12">
+                                <div class="mb-4 lg:col-span-12">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-xl font-semibold leading-normal">Alamat Pengiriman</h3>
+                                        <a href="{{ route('customer.profile') }}"
+                                            class="text-sm text-indigo-600 hover:underline">Edit Alamat</a>
+                                    </div>
                                 </div>
 
                                 <div class="lg:col-span-6">
-                                    <label class="font-semibold form-label">Username: <span
-                                            class="text-red-600">*</span></label>
+                                    <label class="font-semibold form-label">Nama:</label>
                                     <input type="text"
-                                        class="w-full h-10 px-3 py-2 mt-2 bg-transparent border border-gray-200 rounded outline-none form-input dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0"
-                                        placeholder="Username" name="username" value="{{ $user->username }}" required>
+                                        class="w-full h-10 px-3 py-2 mt-2 bg-gray-100 border border-gray-200 rounded outline-none form-input dark:bg-slate-700 dark:text-slate-200"
+                                        value="{{ $user->name }}" readonly disabled>
                                 </div>
 
                                 <div class="lg:col-span-6">
-                                    <label class="font-semibold form-label">Email: <span
-                                            class="text-red-600">*</span></label>
+                                    <label class="font-semibold form-label">Username:</label>
+                                    <input type="text"
+                                        class="w-full h-10 px-3 py-2 mt-2 bg-gray-100 border border-gray-200 rounded outline-none form-input dark:bg-slate-700 dark:text-slate-200"
+                                        value="{{ $user->username }}" readonly disabled>
+                                </div>
+
+                                <div class="lg:col-span-6">
+                                    <label class="font-semibold form-label">Email:</label>
                                     <input type="email"
-                                        class="w-full h-10 px-3 py-2 mt-2 bg-transparent border border-gray-200 rounded outline-none form-input dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0"
-                                        placeholder="Email" name="email" value="{{ $user->email }}" required>
+                                        class="w-full h-10 px-3 py-2 mt-2 bg-gray-100 border border-gray-200 rounded outline-none form-input dark:bg-slate-700 dark:text-slate-200"
+                                        value="{{ $user->email }}" readonly disabled>
                                 </div>
 
                                 <div class="lg:col-span-6">
-                                    <label class="font-semibold form-label">Nomer Telepon: <span
-                                            class="text-red-600">*</span></label>
+                                    <label class="font-semibold form-label">Nomer Telepon:</label>
                                     <input type="text"
-                                        class="w-full h-10 px-3 py-2 mt-2 bg-transparent border border-gray-200 rounded outline-none form-input dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0"
-                                        placeholder="Nomer Telepon" name="phone_number" value="{{ $user->phone_number }}"
-                                        required>
+                                        class="w-full h-10 px-3 py-2 mt-2 bg-gray-100 border border-gray-200 rounded outline-none form-input dark:bg-slate-700 dark:text-slate-200"
+                                        value="{{ $user->phone_number }}" readonly disabled>
                                 </div>
 
                                 <div class="lg:col-span-6">
-                                    <label class="font-semibold form-label">Alamat Lengkap: <span
-                                            class="text-red-600">*</span></label>
+                                    <label class="font-semibold form-label">Alamat Lengkap:</label>
                                     <input type="text"
-                                        class="w-full h-10 px-3 py-2 mt-2 bg-transparent border border-gray-200 rounded outline-none form-input dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0"
-                                        placeholder="Alamat Lengkap" name="address" value="{{ $address->address }}"
-                                        required>
+                                        class="w-full h-10 px-3 py-2 mt-2 bg-gray-100 border border-gray-200 rounded outline-none form-input dark:bg-slate-700 dark:text-slate-200"
+                                        value="{{ $address->address }}" readonly disabled>
                                 </div>
 
                                 <div class="lg:col-span-4">
-                                    <label class="font-semibold form-label">Provinsi: <span
-                                            class="text-red-600">*</span></label>
+                                    <label class="font-semibold form-label">Provinsi:</label>
                                     <input type="text"
-                                        class="w-full h-10 px-3 py-2 mt-2 bg-transparent border border-gray-200 rounded outline-none form-input dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0"
-                                        placeholder="Provinsi" name="province" value="{{ $address->province }}" required>
+                                        class="w-full h-10 px-3 py-2 mt-2 bg-gray-100 border border-gray-200 rounded outline-none form-input dark:bg-slate-700 dark:text-slate-200"
+                                        value="{{ $address->province }}" readonly disabled>
                                 </div>
 
                                 <div class="lg:col-span-4">
-                                    <label class="font-semibold form-label">Kota: <span
-                                            class="text-red-600">*</span></label>
+                                    <label class="font-semibold form-label">Kota:</label>
                                     <input type="text"
-                                        class="w-full h-10 px-3 py-2 mt-2 bg-transparent border border-gray-200 rounded outline-none form-input dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0"
-                                        placeholder="Kota" name="city" value="{{ $address->city }}" required>
+                                        class="w-full h-10 px-3 py-2 mt-2 bg-gray-100 border border-gray-200 rounded outline-none form-input dark:bg-slate-700 dark:text-slate-200"
+                                        value="{{ $address->city }}" readonly disabled>
                                 </div>
 
                                 <div class="lg:col-span-4">
-                                    <label class="font-semibold form-label">Kecamatan: <span
-                                            class="text-red-600">*</span></label>
+                                    <label class="font-semibold form-label">Kecamatan:</label>
                                     <input type="text"
-                                        class="w-full h-10 px-3 py-2 mt-2 bg-transparent border border-gray-200 rounded outline-none form-input dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0"
-                                        placeholder="Kecamatan" name="district" value="{{ $address->district }}" required>
+                                        class="w-full h-10 px-3 py-2 mt-2 bg-gray-100 border border-gray-200 rounded outline-none form-input dark:bg-slate-700 dark:text-slate-200"
+                                        value="{{ $address->district }}" readonly disabled>
                                 </div>
 
                                 <div class="lg:col-span-4">
-                                    <label class="font-semibold form-label">Kode Pos: <span
-                                            class="text-red-600">*</span></label>
+                                    <label class="font-semibold form-label">Kode Pos:</label>
                                     <input type="text"
-                                        class="w-full h-10 px-3 py-2 mt-2 bg-transparent border border-gray-200 rounded outline-none form-input dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0"
-                                        placeholder="Kode Pos" name="post_code" value="{{ $address->post_code }}" required>
+                                        class="w-full h-10 px-3 py-2 mt-2 bg-gray-100 border border-gray-200 rounded outline-none form-input dark:bg-slate-700 dark:text-slate-200"
+                                        value="{{ $address->post_code }}" readonly disabled>
                                 </div>
 
                                 <div class="lg:col-span-12">
                                     <label class="font-semibold form-label">Instruksi Pengiriman:</label>
                                     <textarea
-                                        class="w-full px-3 py-2 mt-2 bg-transparent border border-gray-200 rounded outline-none form-input dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0"
-                                        placeholder="Instruksi Pengiriman" name="delivery_instructions">{{ $address->delivery_instructions }}</textarea>
+                                        class="w-full px-3 py-2 mt-2 bg-gray-100 border border-gray-200 rounded outline-none form-input dark:bg-slate-700 dark:text-slate-200"
+                                        readonly disabled>{{ $address->delivery_instructions }}</textarea>
                                 </div>
                             </div>
 
@@ -123,15 +119,15 @@
                                 <div class="lg:col-span-12">
                                     <div class="block">
                                         <label class="inline-flex items-center">
-                                            <input type="radio" class="text-indigo-600 form-radio"
-                                                name="payment_method" value="cod" checked>
+                                            <input type="radio" class="text-indigo-600 form-radio" name="payment_method"
+                                                value="cod" checked>
                                             <span class="p-2 text-slate-400"> Bayar di Tempat</span>
                                         </label>
                                     </div>
                                     <div class="block mt-2">
                                         <label class="inline-flex items-center">
-                                            <input type="radio" class="text-indigo-600 form-radio"
-                                                name="payment_method" value="bank_transfer">
+                                            <input type="radio" class="text-indigo-600 form-radio" name="payment_method"
+                                                value="bank_transfer">
                                             <span class="p-2 text-slate-400"> Transfer Rekening</span>
                                         </label>
                                     </div>

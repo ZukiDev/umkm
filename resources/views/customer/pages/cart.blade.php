@@ -5,9 +5,8 @@
     <section class="relative table w-full py-20 lg:py-24 bg-gray-50 dark:bg-slate-800">
         <div class="container relative">
             <div class="grid grid-cols-1 mt-14">
-                <h3 class="text-3xl leading-normal font-semibold">Keranjang</h3>
-            </div><!--end grid-->
-
+                <h3 class="text-3xl font-semibold leading-normal">Keranjang</h3>
+            </div>
             <div class="relative mt-3">
                 <ul class="tracking-[0.5px] mb-0 inline-block">
                     <li class="inline-block uppercase text-[13px] font-bold duration-500 ease-in-out hover:text-indigo-600">
@@ -19,44 +18,41 @@
                     </li>
                 </ul>
             </div>
-        </div><!--end container-->
-    </section><!--end section-->
+        </div>
+    </section>
     <!-- End Hero -->
 
     <!-- Start -->
     <section class="relative py-12">
         <div class="container">
             <div class="mt-4 mb-4">
-                <!-- Success Message -->
                 @if (session('success'))
                     <div
-                        class="relative px-4 py-2 rounded-md font-medium bg-emerald-600/10 border border-emerald-600/10 text-emerald-600 block">
+                        class="relative block px-4 py-2 font-medium border rounded-md bg-emerald-600/10 border-emerald-600/10 text-emerald-600">
                         {{ session('success') }}
                     </div>
                 @endif
-
-                <!-- Warning Message -->
                 @if (session('warning'))
                     <div
-                        class="relative px-4 py-2 rounded-md font-medium bg-orange-600/10 border border-orange-600/10 text-orange-600 block">
+                        class="relative block px-4 py-2 font-medium text-orange-600 border rounded-md bg-orange-600/10 border-orange-600/10">
                         {{ session('warning') }}
                     </div>
                 @endif
-
-                <!-- Error Message -->
                 @if (session('error'))
                     <div
-                        class="relative px-4 py-2 rounded-md font-medium bg-red-600/10 border border-red-600/10 text-red-600 block">
+                        class="relative block px-4 py-2 font-medium text-red-600 border rounded-md bg-red-600/10 border-red-600/10">
                         {{ session('error') }}
                     </div>
                 @endif
             </div>
-            <div class="grid lg:grid-cols-1">
-                <div class="relative overflow-x-auto shadow dark:shadow-gray-800 rounded-md">
+
+            {{-- Produk yang bisa di-checkout --}}
+            <div class="grid mb-8 lg:grid-cols-1">
+                <div class="relative overflow-x-auto rounded-md shadow dark:shadow-gray-800">
                     <table class="w-full text-start">
                         <thead class="text-sm uppercase bg-slate-50 dark:bg-slate-800">
                             <tr>
-                                <th scope="col" class="p-4 w-4"></th>
+                                <th scope="col" class="w-4 p-4"></th>
                                 <th scope="col" class="text-start p-4 min-w-[140px]">Nama Produk</th>
                                 <th scope="col" class="p-4 w-24 min-w-[160px]">Harga</th>
                                 <th scope="col" class="p-4 w-56 min-w-[220px]">Jumlah</th>
@@ -64,20 +60,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($carts as $cart)
+                            @forelse ($checkoutableCarts as $cart)
                                 <tr class="bg-white dark:bg-slate-900">
                                     <form action="{{ route('customer.cart.destroy', $cart->id) }}" method="POST"
                                         onsubmit="return confirm('Apakah Anda yakin ingin menghapus item ini?')">
                                         @csrf
                                         @method('DELETE')
                                         <td class="p-4 text-start"><button type="submit">
-                                                <i class="uil uil-trash text-red-600"></i>
+                                                <i class="text-red-600 uil uil-trash"></i>
                                             </button></td>
                                     </form>
                                     <td class="p-4">
                                         <span class="flex items-center">
                                             <img src="{{ asset('storage/products/' . $cart->product->images) }}"
-                                                class="rounded shadow dark:shadow-gray-800 w-12"
+                                                class="w-12 rounded shadow dark:shadow-gray-800"
                                                 alt="{{ $cart->product->name }}">
                                             <span class="ms-3">
                                                 <span class="block font-semibold">{{ $cart->product->name }}</span>
@@ -88,58 +84,122 @@
                                     <td class="p-4 text-center">
                                         <div class="qty-icons">
                                             <button onclick="updateQuantity(this, -1)"
-                                                class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white minus">-</button>
-
-                                            <!-- Quantity Input with Data Attributes -->
+                                                class="inline-flex items-center justify-center text-base tracking-wide text-center text-indigo-600 align-middle duration-500 border rounded-md size-9 bg-indigo-600/5 hover:bg-indigo-600 border-indigo-600/10 hover:border-indigo-600 hover:text-white minus">-</button>
                                             <input min="0" name="quantity" value="{{ $cart->quantity ?? 0 }}"
                                                 type="number"
-                                                class="h-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white pointer-events-none w-16 ps-4 quantity"
+                                                class="inline-flex items-center justify-center w-16 text-base tracking-wide text-center text-indigo-600 align-middle duration-500 border rounded-md pointer-events-none h-9 bg-indigo-600/5 hover:bg-indigo-600 border-indigo-600/10 hover:border-indigo-600 hover:text-white ps-4 quantity"
                                                 data-cart-id="{{ $cart->id }}" onchange="updateQuantity(this)">
-
                                             <button onclick="updateQuantity(this, 1)"
-                                                class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-md bg-indigo-600/5 hover:bg-indigo-600 border border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white plus">+</button>
+                                                class="inline-flex items-center justify-center text-base tracking-wide text-center text-indigo-600 align-middle duration-500 border rounded-md size-9 bg-indigo-600/5 hover:bg-indigo-600 border-indigo-600/10 hover:border-indigo-600 hover:text-white plus">+</button>
                                         </div>
                                     </td>
                                     <td class="p-4 text-end item-total">Rp.
                                         {{ number_format($cart->total ?? 0, 0, ',', '.') }}</td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="p-4 text-center">Tidak ada produk yang bisa di-checkout.</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
+            </div>
 
-                <div class="grid lg:grid-cols-12 md:grid-cols-2 grid-cols-1 mt-6 gap-6">
-                    <div class="lg:col-span-7 md:order-1 order-3">
-                        <a href="{{ route('customer.checkout') }}"
-                            class="py-2 px-5 w-full inline-block font-semibold tracking-wide border align-middle duration-500 text-base text-center bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded-md me-2 mt-2">Buat
-                            Pemesanan</a>
-                    </div>
-
-                    <div class="lg:col-span-5 md:order-2 order-1">
-                        <!-- Subtotal, PPN, and Total -->
-                        <ul class="list-none shadow dark:shadow-gray-800 rounded-md">
-                            <li class="flex justify-between p-4">
-                                <span class="font-semibold text-lg">Subtotal :</span>
-                                <span id="subtotal" class="text-slate-400">Rp.
-                                    {{ number_format($subTotalPayment ?? 0, 0, ',', '.') }}</span>
-                            </li>
-                            <li class="flex justify-between p-4 border-t border-gray-100 dark:border-gray-800">
-                                <span class="font-semibold text-lg">PPN :</span>
-                                <span id="ppn" class="text-slate-400">Rp.
-                                    {{ number_format($ppn ?? 0, 0, ',', '.') }}</span>
-                            </li>
-                            <li
-                                class="flex justify-between font-semibold p-4 border-t border-gray-200 dark:border-gray-600">
-                                <span class="font-semibold text-lg">Total :</span>
-                                <span id="total" class="font-semibold">Rp.
-                                    {{ number_format($totalPayment ?? 0, 0, ',', '.') }}</span>
-                            </li>
-                        </ul>
+            {{-- Produk hanya untuk Blitar --}}
+            @if ($blitarOnlyCarts->count())
+                <div class="grid mb-8 lg:grid-cols-1">
+                    <div class="relative overflow-x-auto border border-orange-400 rounded-md shadow dark:shadow-gray-800">
+                        <h4 class="p-4 text-lg font-semibold text-orange-600">Produk hanya bisa dikirim ke Blitar</h4>
+                        <div class="p-4 text-orange-600">
+                            Produk berikut hanya bisa dikirim ke Blitar. Silakan ubah alamat Anda ke Blitar untuk
+                            melanjutkan checkout produk ini.
+                        </div>
+                        <table class="w-full text-start">
+                            <thead class="text-sm uppercase bg-slate-50 dark:bg-slate-800">
+                                <tr>
+                                    <th scope="col" class="w-4 p-4"></th>
+                                    <th scope="col" class="text-start p-4 min-w-[140px]">Nama Produk</th>
+                                    <th scope="col" class="p-4 w-24 min-w-[160px]">Harga</th>
+                                    <th scope="col" class="p-4 w-56 min-w-[220px]">Jumlah</th>
+                                    <th scope="col" class="p-4 w-24 min-w-[160px]">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($blitarOnlyCarts as $cart)
+                                    <tr class="bg-white dark:bg-slate-900">
+                                        <form action="{{ route('customer.cart.destroy', $cart->id) }}" method="POST"
+                                            onsubmit="return confirm('Apakah Anda yakin ingin menghapus item ini?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <td class="p-4 text-start"><button type="submit">
+                                                    <i class="text-red-600 uil uil-trash"></i>
+                                                </button></td>
+                                        </form>
+                                        <td class="p-4">
+                                            <span class="flex items-center">
+                                                <img src="{{ asset('storage/products/' . $cart->product->images) }}"
+                                                    class="w-12 rounded shadow dark:shadow-gray-800"
+                                                    alt="{{ $cart->product->name }}">
+                                                <span class="ms-3">
+                                                    <span class="block font-semibold">{{ $cart->product->name }}</span>
+                                                </span>
+                                            </span>
+                                        </td>
+                                        <td class="p-4 text-center">Rp. {{ number_format($cart->price ?? 0, 0, ',', '.') }}
+                                        </td>
+                                        <td class="p-4 text-center">
+                                            <div class="qty-icons">
+                                                <input min="0" name="quantity" value="{{ $cart->quantity ?? 0 }}"
+                                                    type="number"
+                                                    class="inline-flex items-center justify-center w-16 text-base tracking-wide text-center text-orange-600 align-middle duration-500 bg-orange-100 border border-orange-400 rounded-md pointer-events-none h-9 ps-4 quantity"
+                                                    data-cart-id="{{ $cart->id }}" readonly>
+                                            </div>
+                                        </td>
+                                        <td class="p-4 text-end item-total">Rp.
+                                            {{ number_format($cart->total ?? 0, 0, ',', '.') }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+            @endif
+
+            <div class="grid grid-cols-1 gap-6 mt-6 lg:grid-cols-12 md:grid-cols-2">
+                <div class="order-3 lg:col-span-7 md:order-1">
+                    @if ($checkoutableCarts->count())
+                        <a href="{{ route('customer.checkout') }}"
+                            class="inline-block w-full px-5 py-2 mt-2 text-base font-semibold tracking-wide text-center text-white align-middle duration-500 bg-indigo-600 border border-indigo-600 rounded-md hover:bg-indigo-700 hover:border-indigo-700 me-2">Buat
+                            Pemesanan</a>
+                    @else
+                        <button disabled
+                            class="inline-block w-full px-5 py-2 mt-2 text-base font-semibold tracking-wide text-center text-white align-middle duration-500 bg-gray-400 border border-gray-400 rounded-md cursor-not-allowed me-2">Buat
+                            Pemesanan</button>
+                    @endif
+                </div>
+                <div class="order-1 lg:col-span-5 md:order-2">
+                    <ul class="list-none rounded-md shadow dark:shadow-gray-800">
+                        <li class="flex justify-between p-4">
+                            <span class="text-lg font-semibold">Subtotal :</span>
+                            <span id="subtotal" class="text-slate-400">Rp.
+                                {{ number_format($subTotalPayment ?? 0, 0, ',', '.') }}</span>
+                        </li>
+                        <li class="flex justify-between p-4 border-t border-gray-100 dark:border-gray-800">
+                            <span class="text-lg font-semibold">PPN :</span>
+                            <span id="ppn" class="text-slate-400">Rp.
+                                {{ number_format($ppn ?? 0, 0, ',', '.') }}</span>
+                        </li>
+                        <li class="flex justify-between p-4 font-semibold border-t border-gray-200 dark:border-gray-600">
+                            <span class="text-lg font-semibold">Total :</span>
+                            <span id="total" class="font-semibold">Rp.
+                                {{ number_format($totalPayment ?? 0, 0, ',', '.') }}</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div><!--end container-->
-    </section><!--end section-->
+        </div>
+    </section>
     <!-- End -->
 
     <script>

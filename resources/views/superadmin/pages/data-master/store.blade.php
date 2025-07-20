@@ -220,35 +220,184 @@
                                                                             class="block mb-4 text-xs text-gray-500">Alamat
                                                                             lengkap UMKM.</small>
 
-                                                                        <label class="block mb-1 font-medium">Provinsi
-                                                                            <span class="text-red-600">*</span></label>
-                                                                        <input type="text" name="province"
-                                                                            value="{{ $umkm->address->province }}"
-                                                                            class="w-full px-3 py-2 mb-2 border rounded"
-                                                                            placeholder="Provinsi" required>
-                                                                        <small
-                                                                            class="block mb-4 text-xs text-gray-500">Provinsi
-                                                                            lokasi UMKM.</small>
+                                                                        <!-- Province -->
+                                                                        <div>
+                                                                            <label class="font-semibold form-label">Provinsi: <span
+                                                                                    class="text-red-600">*</span></label>
+                                                                            <select id="province-select-{{ $umkm->id }}" name="province"
+                                                                                class="w-full h-10 px-3 py-2 mt-2 border border-gray-200 rounded form-select dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600"
+                                                                                required>
+                                                                                <option value="">Pilih Provinsi</option>
+                                                                                <!-- Options will be populated by JS -->
+                                                                            </select>
+                                                                        </div>
 
-                                                                        <label class="block mb-1 font-medium">Kota <span
-                                                                                class="text-red-600">*</span></label>
-                                                                        <input type="text" name="city"
-                                                                            value="{{ $umkm->address->city }}"
-                                                                            class="w-full px-3 py-2 mb-2 border rounded"
-                                                                            placeholder="Kota" required>
-                                                                        <small
-                                                                            class="block mb-4 text-xs text-gray-500">Kota/kabupaten
-                                                                            lokasi UMKM.</small>
+                                                                        <!-- City -->
+                                                                        <div>
+                                                                            <label class="font-semibold form-label">Kota: <span
+                                                                                    class="text-red-600">*</span></label>
+                                                                            <select id="city-select-{{ $umkm->id }}" name="city"
+                                                                                class="w-full h-10 px-3 py-2 mt-2 border border-gray-200 rounded form-select dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600"
+                                                                                required disabled>
+                                                                                <option value="">Pilih Kota/Kabupaten</option>
+                                                                                <!-- Options will be populated by JS -->
+                                                                            </select>
+                                                                        </div>
 
-                                                                        <label class="block mb-1 font-medium">Kecamatan
-                                                                            <span class="text-red-600">*</span></label>
-                                                                        <input type="text" name="district"
-                                                                            value="{{ $umkm->address->district }}"
-                                                                            class="w-full px-3 py-2 mb-2 border rounded"
-                                                                            placeholder="Kecamatan" required>
-                                                                        <small
-                                                                            class="block mb-4 text-xs text-gray-500">Kecamatan
-                                                                            lokasi UMKM.</small>
+                                                                        <!-- District -->
+                                                                        <div>
+                                                                            <label class="font-semibold form-label">Kecamatan: <span
+                                                                                    class="text-red-600">*</span></label>
+                                                                            <select id="district-select-{{ $umkm->id }}" name="district"
+                                                                                class="w-full h-10 px-3 py-2 mt-2 border border-gray-200 rounded form-select dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600"
+                                                                                required disabled>
+                                                                                <option value="">Pilih Kecamatan</option>
+                                                                                <!-- Options will be populated by JS -->
+                                                                            </select>
+                                                                        </div>
+
+                                                                        <script>
+                                                                            document.addEventListener('DOMContentLoaded', function() {
+                                                                                const provinceSelect = document.getElementById('province-select-{{ $umkm->id }}');
+                                                                                const citySelect = document.getElementById('city-select-{{ $umkm->id }}');
+                                                                                const districtSelect = document.getElementById('district-select-{{ $umkm->id }}');
+                                                                                const selectedProvince = @json($umkm->address->province ?? '');
+                                                                                const selectedCity = @json($umkm->address->city ?? '');
+                                                                                const selectedDistrict = @json($umkm->address->district ?? '');
+
+                                                                                // Fetch provinces
+                                                                                fetch('https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json')
+                                                                                    .then(response => response.json())
+                                                                                    .then(provinces => {
+                                                                                        provinces.forEach(province => {
+                                                                                            const option = document.createElement('option');
+                                                                                            option.value = province.name;
+                                                                                            option.textContent = province.name;
+                                                                                            option.dataset.id = province.id;
+                                                                                            if (province.name === selectedProvince) {
+                                                                                                option.selected = true;
+                                                                                            }
+                                                                                            provinceSelect.appendChild(option);
+                                                                                        });
+
+                                                                                        // If province already selected, trigger change to load cities
+                                                                                        if (selectedProvince) {
+                                                                                            provinceSelect.dispatchEvent(new Event('change'));
+                                                                                        }
+                                                                                    });
+
+                                                                                provinceSelect.addEventListener('change', function() {
+                                                                                    const selectedOption = provinceSelect.options[provinceSelect.selectedIndex];
+                                                                                    const provinceId = selectedOption.dataset.id;
+
+                                                                                    // Reset city select
+                                                                                    citySelect.innerHTML = '<option value="">Pilih Kota/Kabupaten</option>';
+                                                                                    citySelect.disabled = true;
+                                                                                    districtSelect.innerHTML = '<option value="">Pilih Kecamatan</option>';
+                                                                                    districtSelect.disabled = true;
+
+                                                                                    if (provinceId) {
+                                                                                        citySelect.disabled = false;
+                                                                                        fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${provinceId}.json`)
+                                                                                            .then(response => response.json())
+                                                                                            .then(regencies => {
+                                                                                                regencies.forEach(regency => {
+                                                                                                    const option = document.createElement('option');
+                                                                                                    option.value = regency.name;
+                                                                                                    option.textContent = regency.name;
+                                                                                                    option.dataset.id = regency.id;
+                                                                                                    if (regency.name === selectedCity) {
+                                                                                                        option.selected = true;
+                                                                                                    }
+                                                                                                    citySelect.appendChild(option);
+                                                                                                });
+
+                                                                                                // If city already selected, trigger change to load districts
+                                                                                                if (selectedCity) {
+                                                                                                    citySelect.dispatchEvent(new Event('change'));
+                                                                                                }
+                                                                                            });
+                                                                                    }
+                                                                                });
+
+                                                                                citySelect.addEventListener('change', function() {
+                                                                                    const selectedOption = citySelect.options[citySelect.selectedIndex];
+                                                                                    const cityId = selectedOption.dataset.id;
+
+                                                                                    // Reset district select
+                                                                                    districtSelect.innerHTML = '<option value="">Pilih Kecamatan</option>';
+                                                                                    districtSelect.disabled = true;
+
+                                                                                    if (cityId) {
+                                                                                        districtSelect.disabled = false;
+                                                                                        fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/districts/${cityId}.json`)
+                                                                                            .then(response => response.json())
+                                                                                            .then(districts => {
+                                                                                                districts.forEach(district => {
+                                                                                                    const option = document.createElement('option');
+                                                                                                    option.value = district.name;
+                                                                                                    option.textContent = district.name;
+                                                                                                    if (district.name === selectedDistrict) {
+                                                                                                        option.selected = true;
+                                                                                                    }
+                                                                                                    districtSelect.appendChild(option);
+                                                                                                });
+                                                                                            });
+                                                                                    }
+                                                                                });
+
+                                                                                // If province and city already selected, load cities and districts on page load
+                                                                                if (selectedProvince) {
+                                                                                    fetch('https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json')
+                                                                                        .then(response => response.json())
+                                                                                        .then(provinces => {
+                                                                                            const province = provinces.find(p => p.name === selectedProvince);
+                                                                                            if (province) {
+                                                                                                citySelect.disabled = false;
+                                                                                                fetch(
+                                                                                                        `https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${province.id}.json`)
+                                                                                                    .then(response => response.json())
+                                                                                                    .then(regencies => {
+                                                                                                        regencies.forEach(regency => {
+                                                                                                            const option = document.createElement('option');
+                                                                                                            option.value = regency.name;
+                                                                                                            option.textContent = regency.name;
+                                                                                                            option.dataset.id = regency.id;
+                                                                                                            if (regency.name === selectedCity) {
+                                                                                                                option.selected = true;
+                                                                                                            }
+                                                                                                            citySelect.appendChild(option);
+                                                                                                        });
+
+                                                                                                        // If city already selected, load districts
+                                                                                                        if (selectedCity) {
+                                                                                                            const regency = regencies.find(r => r.name === selectedCity);
+                                                                                                            if (regency) {
+                                                                                                                districtSelect.disabled = false;
+                                                                                                                fetch(
+                                                                                                                        `https://www.emsifa.com/api-wilayah-indonesia/api/districts/${regency.id}.json`)
+                                                                                                                    .then(response => response.json())
+                                                                                                                    .then(districts => {
+                                                                                                                        districts.forEach(district => {
+                                                                                                                            const option = document.createElement(
+                                                                                                                                'option');
+                                                                                                                            option.value = district.name;
+                                                                                                                            option.textContent = district.name;
+                                                                                                                            if (district.name ===
+                                                                                                                                selectedDistrict) {
+                                                                                                                                option.selected = true;
+                                                                                                                            }
+                                                                                                                            districtSelect.appendChild(option);
+                                                                                                                        });
+                                                                                                                    });
+                                                                                                            }
+                                                                                                        }
+                                                                                                    });
+                                                                                            }
+                                                                                        });
+                                                                                }
+                                                                            });
+                                                                        </script>
 
                                                                         <label class="block mb-1 font-medium">Kode Pos
                                                                             <span class="text-red-600">*</span></label>
@@ -587,29 +736,115 @@
                                                         <small class="block mb-4 text-xs text-gray-500">Alamat lengkap
                                                             UMKM.</small>
 
-                                                        <label class="block mb-1 font-medium">Provinsi <span
-                                                                class="text-red-600">*</span></label>
-                                                        <input type="text" name="province"
-                                                            class="w-full px-3 py-2 mb-2 border rounded"
-                                                            placeholder="Provinsi" required>
-                                                        <small class="block mb-4 text-xs text-gray-500">Provinsi lokasi
-                                                            UMKM.</small>
+                                                        <!-- Province -->
+                                                        <div>
+                                                            <label class="font-semibold form-label">Provinsi: <span
+                                                                    class="text-red-600">*</span></label>
+                                                            <select id="province-select" name="province"
+                                                                class="w-full h-10 px-3 py-2 mt-2 border border-gray-200 rounded form-select dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600"
+                                                                required>
+                                                                <option value="">Pilih Provinsi</option>
+                                                                <!-- Options will be populated by JS -->
+                                                            </select>
+                                                        </div>
 
-                                                        <label class="block mb-1 font-medium">Kota <span
-                                                                class="text-red-600">*</span></label>
-                                                        <input type="text" name="city"
-                                                            class="w-full px-3 py-2 mb-2 border rounded"
-                                                            placeholder="Kota" required>
-                                                        <small class="block mb-4 text-xs text-gray-500">Kota/kabupaten
-                                                            lokasi UMKM.</small>
+                                                        <!-- City -->
+                                                        <div>
+                                                            <label class="font-semibold form-label">Kota: <span
+                                                                    class="text-red-600">*</span></label>
+                                                            <select id="city-select" name="city"
+                                                                class="w-full h-10 px-3 py-2 mt-2 border border-gray-200 rounded form-select dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600"
+                                                                required disabled>
+                                                                <option value="">Pilih Kota/Kabupaten</option>
+                                                                <!-- Options will be populated by JS -->
+                                                            </select>
+                                                        </div>
 
-                                                        <label class="block mb-1 font-medium">Kecamatan <span
-                                                                class="text-red-600">*</span></label>
-                                                        <input type="text" name="district"
-                                                            class="w-full px-3 py-2 mb-2 border rounded"
-                                                            placeholder="Kecamatan" required>
-                                                        <small class="block mb-4 text-xs text-gray-500">Kecamatan lokasi
-                                                            UMKM.</small>
+                                                        <!-- District -->
+                                                        <div>
+                                                            <label class="font-semibold form-label">Kecamatan: <span
+                                                                    class="text-red-600">*</span></label>
+                                                            <select id="district-select" name="district"
+                                                                class="w-full h-10 px-3 py-2 mt-2 border border-gray-200 rounded form-select dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600"
+                                                                required disabled>
+                                                                <option value="">Pilih Kecamatan</option>
+                                                                <!-- Options will be populated by JS -->
+                                                            </select>
+                                                        </div>
+
+                                                        <script>
+                                                            document.addEventListener('DOMContentLoaded', function() {
+                                                                const provinceSelect = document.getElementById('province-select');
+                                                                const citySelect = document.getElementById('city-select');
+                                                                const districtSelect = document.getElementById('district-select');
+                                                                // For add modal, no preselected values
+                                                                const selectedProvince = '';
+                                                                const selectedCity = '';
+                                                                const selectedDistrict = '';
+
+                                                                // Fetch provinces
+                                                                fetch('https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json')
+                                                                    .then(response => response.json())
+                                                                    .then(provinces => {
+                                                                        provinces.forEach(province => {
+                                                                            const option = document.createElement('option');
+                                                                            option.value = province.name;
+                                                                            option.textContent = province.name;
+                                                                            option.dataset.id = province.id;
+                                                                            provinceSelect.appendChild(option);
+                                                                        });
+                                                                    });
+
+                                                                provinceSelect.addEventListener('change', function() {
+                                                                    const selectedOption = provinceSelect.options[provinceSelect.selectedIndex];
+                                                                    const provinceId = selectedOption.dataset.id;
+
+                                                                    // Reset city select
+                                                                    citySelect.innerHTML = '<option value="">Pilih Kota/Kabupaten</option>';
+                                                                    citySelect.disabled = true;
+                                                                    districtSelect.innerHTML = '<option value="">Pilih Kecamatan</option>';
+                                                                    districtSelect.disabled = true;
+
+                                                                    if (provinceId) {
+                                                                        citySelect.disabled = false;
+                                                                        fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${provinceId}.json`)
+                                                                            .then(response => response.json())
+                                                                            .then(regencies => {
+                                                                                regencies.forEach(regency => {
+                                                                                    const option = document.createElement('option');
+                                                                                    option.value = regency.name;
+                                                                                    option.textContent = regency.name;
+                                                                                    option.dataset.id = regency.id;
+                                                                                    citySelect.appendChild(option);
+                                                                                });
+                                                                            });
+                                                                    }
+                                                                });
+
+                                                                citySelect.addEventListener('change', function() {
+                                                                    const selectedOption = citySelect.options[citySelect.selectedIndex];
+                                                                    const cityId = selectedOption.dataset.id;
+
+                                                                    // Reset district select
+                                                                    districtSelect.innerHTML = '<option value="">Pilih Kecamatan</option>';
+                                                                    districtSelect.disabled = true;
+
+                                                                    if (cityId) {
+                                                                        districtSelect.disabled = false;
+                                                                        fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/districts/${cityId}.json`)
+                                                                            .then(response => response.json())
+                                                                            .then(districts => {
+                                                                                districts.forEach(district => {
+                                                                                    const option = document.createElement('option');
+                                                                                    option.value = district.name;
+                                                                                    option.textContent = district.name;
+                                                                                    districtSelect.appendChild(option);
+                                                                                });
+                                                                            });
+                                                                    }
+                                                                });
+                                                            });
+                                                        </script>
 
                                                         <label class="block mb-1 font-medium">Kode Pos <span
                                                                 class="text-red-600">*</span></label>

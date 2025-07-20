@@ -118,7 +118,7 @@
                                                 <!-- Start Edit Modal -->
                                                 <dialog id="editModal{{ $umkm->id }}"
                                                     class="bg-white rounded-md shadow dark:shadow-gray-800 dark:bg-slate-900 text-slate-900 dark:text-white">
-                                                    <div class="relative h-auto md:w-[960px] w-full">
+                                                    <div class="relative h-auto md:w-[1200px] w-full max-w-[98vw]">
                                                         <!-- Adjusted width for larger modal -->
                                                         <!-- Modal Header with Close Button -->
                                                         <div
@@ -142,91 +142,203 @@
                                                                 @method('PUT')
 
                                                                 <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-                                                                    <!-- Grid for 3 columns -->
                                                                     <!-- User Data Section -->
                                                                     <div>
                                                                         <h4 class="mb-3 font-semibold">Data Akun</h4>
+                                                                        <label class="block mb-1 font-medium">Nama Akun
+                                                                            <span class="text-red-600">*</span></label>
                                                                         <input type="text" name="name"
                                                                             value="{{ $umkm->user->name }}"
-                                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                                             placeholder="Nama Akun" required>
+                                                                        <small
+                                                                            class="block mb-4 text-xs text-gray-500">Masukkan
+                                                                            nama lengkap akun pengguna.</small>
+
+                                                                        <label class="block mb-1 font-medium">Username <span
+                                                                                class="text-red-600">*</span></label>
                                                                         <input type="text" name="username"
                                                                             value="{{ $umkm->user->username }}"
-                                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                                             placeholder="Username" required>
+                                                                        <small
+                                                                            class="block mb-4 text-xs text-gray-500">Username
+                                                                            unik untuk login.</small>
+
+                                                                        <label class="block mb-1 font-medium">Email <span
+                                                                                class="text-red-600">*</span></label>
                                                                         <input type="email" name="email"
                                                                             value="{{ $umkm->user->email }}"
-                                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                                             placeholder="Email" required>
+                                                                        <small
+                                                                            class="block mb-4 text-xs text-gray-500">Alamat
+                                                                            email aktif pengguna.</small>
+
+                                                                        <label class="block mb-1 font-medium">No. Telp
+                                                                            <span class="text-red-600">*</span></label>
                                                                         <input type="number" name="phone_number"
                                                                             value="{{ $umkm->user->phone_number }}"
-                                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                                             placeholder="Contoh: 6287755819001" required>
+                                                                        <small
+                                                                            class="block mb-4 text-xs text-gray-500">Nomor
+                                                                            telepon yang dapat dihubungi.</small>
+
+                                                                        <label
+                                                                            class="block mb-1 font-medium">Password</label>
                                                                         <input type="password" name="password"
-                                                                            class="w-full px-3 py-2 mb-4 border rounded"
-                                                                            placeholder="Password (Opsional)">
+                                                                            class="w-full px-3 py-2 mb-2 border rounded"
+                                                                            placeholder="Password">
+                                                                        <small
+                                                                            class="block mb-4 text-xs text-gray-500">Minimal
+                                                                            8 karakter. Kosongkan jika tidak ingin mengubah
+                                                                            password.</small>
+
+                                                                        <label class="block mb-1 font-medium">Konfirmasi
+                                                                            Password</label>
                                                                         <input type="password"
                                                                             name="password_confirmation"
-                                                                            class="w-full px-3 py-2 mb-4 border rounded"
-                                                                            placeholder="Konfirmasi Password (Opsional)">
+                                                                            class="w-full px-3 py-2 mb-2 border rounded"
+                                                                            placeholder="Konfirmasi Password">
+                                                                        <small
+                                                                            class="block mb-4 text-xs text-gray-500">Ulangi
+                                                                            password di atas jika ingin mengubah
+                                                                            password.</small>
                                                                     </div>
 
                                                                     <!-- Address Data Section -->
                                                                     <div>
                                                                         <h4 class="mb-3 font-semibold">Data Alamat</h4>
+                                                                        <label class="block mb-1 font-medium">Alamat <span
+                                                                                class="text-red-600">*</span></label>
                                                                         <input type="text" name="address"
                                                                             value="{{ $umkm->address->address }}"
-                                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                                             placeholder="Alamat" required>
+                                                                        <small
+                                                                            class="block mb-4 text-xs text-gray-500">Alamat
+                                                                            lengkap UMKM.</small>
+
+                                                                        <label class="block mb-1 font-medium">Provinsi
+                                                                            <span class="text-red-600">*</span></label>
                                                                         <input type="text" name="province"
                                                                             value="{{ $umkm->address->province }}"
-                                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                                             placeholder="Provinsi" required>
+                                                                        <small
+                                                                            class="block mb-4 text-xs text-gray-500">Provinsi
+                                                                            lokasi UMKM.</small>
+
+                                                                        <label class="block mb-1 font-medium">Kota <span
+                                                                                class="text-red-600">*</span></label>
                                                                         <input type="text" name="city"
                                                                             value="{{ $umkm->address->city }}"
-                                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                                             placeholder="Kota" required>
+                                                                        <small
+                                                                            class="block mb-4 text-xs text-gray-500">Kota/kabupaten
+                                                                            lokasi UMKM.</small>
+
+                                                                        <label class="block mb-1 font-medium">Kecamatan
+                                                                            <span class="text-red-600">*</span></label>
                                                                         <input type="text" name="district"
                                                                             value="{{ $umkm->address->district }}"
-                                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                                             placeholder="Kecamatan" required>
+                                                                        <small
+                                                                            class="block mb-4 text-xs text-gray-500">Kecamatan
+                                                                            lokasi UMKM.</small>
+
+                                                                        <label class="block mb-1 font-medium">Kode Pos
+                                                                            <span class="text-red-600">*</span></label>
                                                                         <input type="text" name="post_code"
                                                                             value="{{ $umkm->address->post_code }}"
-                                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                                             placeholder="Kode Pos" required>
-                                                                        <textarea name="delivery_instructions" class="w-full px-3 py-2 mb-4 border rounded"
-                                                                            placeholder="Petunjuk Pengiriman">{{ $umkm->address->delivery_instructions }}</textarea>
+                                                                        <small
+                                                                            class="block mb-4 text-xs text-gray-500">Kode
+                                                                            pos lokasi UMKM.</small>
+
+                                                                        <label class="block mb-1 font-medium">Petunjuk
+                                                                            Pengiriman <span
+                                                                                class="text-red-600">*</span></label>
+                                                                        <textarea name="delivery_instructions" class="w-full px-3 py-2 mb-2 border rounded" placeholder="Petunjuk Pengiriman"
+                                                                            required>{{ $umkm->address->delivery_instructions }}</textarea>
+                                                                        <small
+                                                                            class="block mb-4 text-xs text-gray-500">Petunjuk
+                                                                            tambahan untuk pengiriman.</small>
                                                                     </div>
 
                                                                     <!-- Store Data Section -->
                                                                     <div>
                                                                         <h4 class="mb-3 font-semibold">Data Toko</h4>
+                                                                        <label class="block mb-1 font-medium">Nama UMKM
+                                                                            <span class="text-red-600">*</span></label>
                                                                         <input type="text" name="store_name"
                                                                             value="{{ $umkm->store_name }}"
-                                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                                             placeholder="Nama UMKM" required>
+                                                                        <small
+                                                                            class="block mb-4 text-xs text-gray-500">Nama
+                                                                            usaha/UMKM.</small>
+
+                                                                        <label class="block mb-1 font-medium">Nama Pemilik
+                                                                            <span class="text-red-600">*</span></label>
                                                                         <input type="text" name="owner_name"
                                                                             value="{{ $umkm->owner_name }}"
-                                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                                             placeholder="Nama Pemilik" required>
+                                                                        <small
+                                                                            class="block mb-4 text-xs text-gray-500">Nama
+                                                                            pemilik UMKM.</small>
+
+                                                                        <label class="block mb-1 font-medium">Kategori
+                                                                            Usaha <span
+                                                                                class="text-red-600">*</span></label>
                                                                         <input type="text" name="business_type"
                                                                             value="{{ $umkm->business_type }}"
-                                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                                             placeholder="Kategori Usaha" required>
+                                                                        <small
+                                                                            class="block mb-4 text-xs text-gray-500">Jenis/kategori
+                                                                            usaha.</small>
+
+                                                                        <label class="block mb-1 font-medium">Deskripsi
+                                                                            UMKM <span
+                                                                                class="text-red-600">*</span></label>
                                                                         <input type="text" name="description"
                                                                             value="{{ $umkm->description }}"
-                                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                                             placeholder="Deskripsi UMKM" required>
+                                                                        <small
+                                                                            class="block mb-4 text-xs text-gray-500">Deskripsi
+                                                                            singkat tentang UMKM.</small>
+
+                                                                        <label class="block mb-1 font-medium">Email Toko
+                                                                            <span class="text-red-600">*</span></label>
                                                                         <input type="email" name="store_email"
                                                                             value="{{ $umkm->email }}"
-                                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                                             placeholder="Email" required>
+                                                                        <small
+                                                                            class="block mb-4 text-xs text-gray-500">Email
+                                                                            resmi toko/UMKM.</small>
+
+                                                                        <label class="block mb-1 font-medium">No. Telp Toko
+                                                                            <span class="text-red-600">*</span></label>
                                                                         <input type="number" name="store_phone_number"
                                                                             value="{{ $umkm->phone_number }}"
-                                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                                             placeholder="Contoh: 6287755819001" required>
+                                                                        <small
+                                                                            class="block mb-4 text-xs text-gray-500">Nomor
+                                                                            telepon toko/UMKM.</small>
+
+                                                                        <label class="block mb-1 font-medium">Status <span
+                                                                                class="text-red-600">*</span></label>
                                                                         <select name="status"
-                                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                                             required>
                                                                             <option value="1"
                                                                                 {{ $umkm->status == 1 ? 'selected' : '' }}>
@@ -235,14 +347,21 @@
                                                                                 {{ $umkm->status == 0 ? 'selected' : '' }}>
                                                                                 Tidak Aktif</option>
                                                                         </select>
+                                                                        <small
+                                                                            class="block mb-4 text-xs text-gray-500">Status
+                                                                            aktif/tidak aktif UMKM.</small>
                                                                     </div>
                                                                 </div>
 
                                                                 <!-- Logo Upload Section -->
                                                                 <h4 class="mt-6 mb-3 font-semibold">Logo Toko</h4>
+                                                                <label class="block mb-1 font-medium">Upload Logo</label>
                                                                 <input type="file" name="logo"
-                                                                    class="w-full px-3 py-2 mb-4 border rounded"
+                                                                    class="w-full px-3 py-2 mb-2 border rounded"
                                                                     accept="image/*">
+                                                                <small class="block mb-4 text-xs text-gray-500">
+                                                                    Format gambar (jpg, png, jpeg). Kosongkan jika tidak ingin mengganti logo.
+                                                                </small>
 
                                                                 <!-- Submit Button -->
                                                                 <button type="submit"
@@ -405,88 +524,187 @@
                                                 @method('POST')
                                                 @csrf
                                                 <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-                                                    <!-- Grid for 3 columns -->
                                                     <!-- User Data Section -->
                                                     <div>
                                                         <h4 class="mb-3 font-semibold">Data Akun</h4>
+                                                        <label class="block mb-1 font-medium">Nama Akun <span
+                                                                class="text-red-600">*</span></label>
                                                         <input type="text" name="name"
-                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                             placeholder="Nama Akun" required>
+                                                        <small class="block mb-4 text-xs text-gray-500">Masukkan nama
+                                                            lengkap akun pengguna.</small>
+
+                                                        <label class="block mb-1 font-medium">Username <span
+                                                                class="text-red-600">*</span></label>
                                                         <input type="text" name="username"
-                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                             placeholder="Username" required>
+                                                        <small class="block mb-4 text-xs text-gray-500">Username unik untuk
+                                                            login.</small>
+
+                                                        <label class="block mb-1 font-medium">Email <span
+                                                                class="text-red-600">*</span></label>
                                                         <input type="email" name="email"
-                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                             placeholder="Email" required>
+                                                        <small class="block mb-4 text-xs text-gray-500">Alamat email aktif
+                                                            pengguna.</small>
+
+                                                        <label class="block mb-1 font-medium">No. Telp <span
+                                                                class="text-red-600">*</span></label>
                                                         <input type="number" name="phone_number"
-                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                             placeholder="Contoh: 6287755819001" required>
+                                                        <small class="block mb-4 text-xs text-gray-500">Nomor telepon yang
+                                                            dapat dihubungi.</small>
+
+                                                        <label class="block mb-1 font-medium">Password <span
+                                                                class="text-red-600">*</span></label>
                                                         <input type="password" name="password"
-                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                             placeholder="Password" required>
+                                                        <small class="block mb-4 text-xs text-gray-500">Minimal 8
+                                                            karakter.</small>
+
+                                                        <label class="block mb-1 font-medium">Konfirmasi Password <span
+                                                                class="text-red-600">*</span></label>
                                                         <input type="password" name="password_confirmation"
-                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                             placeholder="Konfirmasi Password" required>
+                                                        <small class="block mb-4 text-xs text-gray-500">Ulangi password di
+                                                            atas.</small>
                                                     </div>
 
                                                     <!-- Address Data Section -->
                                                     <div>
                                                         <h4 class="mb-3 font-semibold">Data Alamat</h4>
+                                                        <label class="block mb-1 font-medium">Alamat <span
+                                                                class="text-red-600">*</span></label>
                                                         <input type="text" name="address"
-                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                             placeholder="Alamat" required>
+                                                        <small class="block mb-4 text-xs text-gray-500">Alamat lengkap
+                                                            UMKM.</small>
+
+                                                        <label class="block mb-1 font-medium">Provinsi <span
+                                                                class="text-red-600">*</span></label>
                                                         <input type="text" name="province"
-                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                             placeholder="Provinsi" required>
+                                                        <small class="block mb-4 text-xs text-gray-500">Provinsi lokasi
+                                                            UMKM.</small>
+
+                                                        <label class="block mb-1 font-medium">Kota <span
+                                                                class="text-red-600">*</span></label>
                                                         <input type="text" name="city"
-                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                             placeholder="Kota" required>
+                                                        <small class="block mb-4 text-xs text-gray-500">Kota/kabupaten
+                                                            lokasi UMKM.</small>
+
+                                                        <label class="block mb-1 font-medium">Kecamatan <span
+                                                                class="text-red-600">*</span></label>
                                                         <input type="text" name="district"
-                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                             placeholder="Kecamatan" required>
+                                                        <small class="block mb-4 text-xs text-gray-500">Kecamatan lokasi
+                                                            UMKM.</small>
+
+                                                        <label class="block mb-1 font-medium">Kode Pos <span
+                                                                class="text-red-600">*</span></label>
                                                         <input type="text" name="post_code"
-                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                             placeholder="Kode Pos" required>
-                                                        <textarea name="delivery_instructions" class="w-full px-3 py-2 mb-4 border rounded" placeholder="Petunjuk Pengiriman"
+                                                        <small class="block mb-4 text-xs text-gray-500">Kode pos lokasi
+                                                            UMKM.</small>
+
+                                                        <label class="block mb-1 font-medium">Petunjuk Pengiriman <span
+                                                                class="text-red-600">*</span></label>
+                                                        <textarea name="delivery_instructions" class="w-full px-3 py-2 mb-2 border rounded" placeholder="Petunjuk Pengiriman"
                                                             required></textarea>
+                                                        <small class="block mb-4 text-xs text-gray-500">Petunjuk tambahan
+                                                            untuk pengiriman.</small>
                                                     </div>
 
                                                     <!-- Store Data Section -->
                                                     <div>
                                                         <h4 class="mb-3 font-semibold">Data Toko</h4>
+                                                        <label class="block mb-1 font-medium">Nama UMKM <span
+                                                                class="text-red-600">*</span></label>
                                                         <input type="text" name="store_name"
-                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                             placeholder="Nama UMKM" required>
+                                                        <small class="block mb-4 text-xs text-gray-500">Nama
+                                                            usaha/UMKM.</small>
+
+                                                        <label class="block mb-1 font-medium">Nama Pemilik <span
+                                                                class="text-red-600">*</span></label>
                                                         <input type="text" name="owner_name"
-                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                             placeholder="Nama Pemilik" required>
+                                                        <small class="block mb-4 text-xs text-gray-500">Nama pemilik
+                                                            UMKM.</small>
+
+                                                        <label class="block mb-1 font-medium">Kategori Usaha <span
+                                                                class="text-red-600">*</span></label>
                                                         <input type="text" name="business_type"
-                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                             placeholder="Kategori Usaha" required>
+                                                        <small class="block mb-4 text-xs text-gray-500">Jenis/kategori
+                                                            usaha.</small>
+
+                                                        <label class="block mb-1 font-medium">Deskripsi UMKM <span
+                                                                class="text-red-600">*</span></label>
                                                         <input type="text" name="description"
-                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                             placeholder="Deskripsi UMKM" required>
+                                                        <small class="block mb-4 text-xs text-gray-500">Deskripsi singkat
+                                                            tentang UMKM.</small>
+
+                                                        <label class="block mb-1 font-medium">Email Toko <span
+                                                                class="text-red-600">*</span></label>
                                                         <input type="email" name="store_email"
-                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                             placeholder="Email" required>
+                                                        <small class="block mb-4 text-xs text-gray-500">Email resmi
+                                                            toko/UMKM.</small>
+
+                                                        <label class="block mb-1 font-medium">No. Telp Toko <span
+                                                                class="text-red-600">*</span></label>
                                                         <input type="number" name="store_phone_number"
-                                                            class="w-full px-3 py-2 mb-4 border rounded"
+                                                            class="w-full px-3 py-2 mb-2 border rounded"
                                                             placeholder="Contoh: 6287755819001" required>
+                                                        <small class="block mb-4 text-xs text-gray-500">Nomor telepon
+                                                            toko/UMKM.</small>
+
+                                                        <label class="block mb-1 font-medium">Status <span
+                                                                class="text-red-600">*</span></label>
                                                         <select name="status"
-                                                            class="w-full px-3 py-2 mb-4 border rounded" required>
+                                                            class="w-full px-3 py-2 mb-2 border rounded" required>
                                                             <option value="1">Aktif</option>
                                                             <option value="0">Tidak Aktif</option>
                                                         </select>
+                                                        <small class="block mb-4 text-xs text-gray-500">Status aktif/tidak
+                                                            aktif UMKM.</small>
                                                     </div>
                                                 </div>
 
                                                 <!-- Logo Upload Section -->
-                                                <h4 class="mb-3 font-semibold">Logo Toko</h4>
-                                                <input type="file" name="logo"
-                                                    class="w-full px-3 py-2 mb-4 border rounded" accept="image/*">
+                                                <div class="mt-8">
+                                                    <h4 class="mb-3 font-semibold">Logo Toko</h4>
+                                                    <label class="block mb-1 font-medium">Upload Logo <span
+                                                            class="text-red-600">*</span></label>
+                                                    <input type="file" name="logo"
+                                                        class="w-full px-3 py-2 mb-2 border rounded" accept="image/*"
+                                                        required>
+                                                    <small class="block mb-4 text-xs text-gray-500">Format gambar (jpg,
+                                                        png, jpeg). Wajib diisi.</small>
+                                                </div>
 
                                                 <button type="submit"
-                                                    class="px-4 py-2 text-white bg-indigo-600 rounded">Tambah UMKM</button>
+                                                    class="px-6 py-2 mt-4 text-white bg-indigo-600 rounded">Tambah
+                                                    UMKM</button>
                                             </form>
                                         </div>
                                     </div>

@@ -167,14 +167,17 @@
                                             </div>
                                             <input type="file" id="edit-images-{{ $product->id }}" name="images"
                                                 accept="image/*" onchange="handleChange('edit', {{ $product->id }})"
-                                                hidden>
+                                                hidden required>
                                             <label
                                                 class="inline-block px-5 py-2 mt-6 text-base font-semibold tracking-wide text-center text-white align-middle duration-500 bg-indigo-600 border border-indigo-600 rounded-md cursor-pointer btn-upload hover:bg-indigo-700 hover:border-indigo-700"
                                                 for="edit-images-{{ $product->id }}">Ganti Foto</label>
+                                            <span class="mt-1 text-xs text-gray-500">Input foto produk (wajib diisi,
+                                                maksimal 2MB)</span>
                                             {{--  Memilih hanya pengiriman kota blitar --}}
                                             <div class="flex flex-col mt-4">
-                                                <h4 class="mb-4 font-semibold">Wilayah Pengiriman</h4>
-                                                <select name="is_blitar_only" class="w-full px-3 py-2 mb-4 border rounded"
+                                                <label class="mb-1 font-medium">Wilayah Pengiriman <span
+                                                        class="text-red-600">*</span></label>
+                                                <select name="is_blitar_only" class="w-full px-3 py-2 mb-2 border rounded"
                                                     required>
                                                     <option value="1"
                                                         {{ $product->is_blitar_only ? 'selected' : '' }}>Kota Blitar
@@ -183,58 +186,102 @@
                                                         {{ !$product->is_blitar_only ? 'selected' : '' }}>Semua kota
                                                     </option>
                                                 </select>
+                                                <span class="mt-1 text-xs text-gray-500">Pilih area pengiriman
+                                                    produk</span>
                                             </div>
                                         </div>
 
                                         <!-- Product Details Section -->
                                         <div class="flex flex-col">
                                             <h4 class="mb-4 font-semibold">Detail Produk</h4>
+                                            <label class="mb-1 font-medium">Nama Produk <span
+                                                    class="text-red-600">*</span></label>
                                             <input name="name" type="text"
-                                                class="w-full px-3 py-2 mb-4 border rounded" placeholder="Nama Produk"
+                                                class="w-full px-3 py-2 mb-2 border rounded" placeholder="Nama Produk"
                                                 value="{{ old('name', $product->name) }}" required>
+                                            <span class="mb-2 text-xs text-gray-500">Masukkan nama produk</span>
+
+                                            <label class="mb-1 font-medium">Deskripsi Produk <span
+                                                    class="text-red-600">*</span></label>
                                             <input name="description" type="text"
-                                                class="w-full px-3 py-2 mb-4 border rounded"
+                                                class="w-full px-3 py-2 mb-2 border rounded"
                                                 placeholder="Deskripsi Produk"
                                                 value="{{ old('description', $product->description) }}" required>
+                                            <span class="mb-2 text-xs text-gray-500">Masukkan deskripsi produk</span>
+
+                                            <label class="mb-1 font-medium">Kode Produk (SKU) <span
+                                                    class="text-red-600">*</span></label>
                                             <input name="sku" type="text"
-                                                class="w-full px-3 py-2 mb-4 border rounded"
+                                                class="w-full px-3 py-2 mb-2 border rounded"
                                                 placeholder="Kode Produk (SKU)" value="{{ old('sku', $product->sku) }}"
                                                 required>
+                                            <span class="mb-2 text-xs text-gray-500">Masukkan kode unik produk (SKU)</span>
+
+                                            <label class="mb-1 font-medium">Harga Produk <span
+                                                    class="text-red-600">*</span></label>
                                             <input name="price" type="number"
-                                                class="w-full px-3 py-2 mb-4 border rounded" placeholder="Harga Produk"
+                                                class="w-full px-3 py-2 mb-2 border rounded" placeholder="Harga Produk"
                                                 value="{{ old('price', $product->price) }}" required>
+                                            <span class="mb-2 text-xs text-gray-500">Masukkan harga produk (dalam
+                                                Rupiah)</span>
+
+                                            <label class="mb-1 font-medium">Stok Produk <span
+                                                    class="text-red-600">*</span></label>
                                             <input name="stock" type="number"
-                                                class="w-full px-3 py-2 mb-4 border rounded" placeholder="Stok Produk"
+                                                class="w-full px-3 py-2 mb-2 border rounded" placeholder="Stok Produk"
                                                 value="{{ old('stock', $product->stock) }}" required>
+                                            <span class="mb-2 text-xs text-gray-500">Masukkan jumlah stok produk</span>
                                         </div>
 
                                         <!-- Additional Information Section -->
                                         <div class="flex flex-col">
                                             <h4 class="mb-4 font-semibold">Detail Tambahan</h4>
+                                            <label class="mb-1 font-medium">Berat (Gram) <span
+                                                    class="text-red-600">*</span></label>
                                             <input name="weight" type="number"
-                                                class="w-full px-3 py-2 mb-4 border rounded" placeholder="Berat (Gram)"
-                                                value="{{ old('weight', $product->weight) }}">
+                                                class="w-full px-3 py-2 mb-2 border rounded" placeholder="Berat (Gram)"
+                                                value="{{ old('weight', $product->weight) }}" required>
+                                            <span class="mb-2 text-xs text-gray-500">Masukkan berat produk dalam
+                                                gram</span>
+
+                                            <label class="mb-1 font-medium">Dimensi Produk (Cm) <span
+                                                    class="text-red-600">*</span></label>
                                             <input name="dimensions" type="text"
-                                                class="w-full px-3 py-2 mb-4 border rounded"
+                                                class="w-full px-3 py-2 mb-2 border rounded"
                                                 placeholder="Dimensi Produk (Cm)"
-                                                value="{{ old('dimensions', $product->dimensions) }}">
+                                                value="{{ old('dimensions', $product->dimensions) }}" required>
+                                            <span class="mb-2 text-xs text-gray-500">Masukkan dimensi produk (misal:
+                                                10x20x5)</span>
+
+                                            <label class="mb-1 font-medium">Merek Produk <span
+                                                    class="text-red-600">*</span></label>
                                             <input name="brand" type="text"
-                                                class="w-full px-3 py-2 mb-4 border rounded" placeholder="Merek Produk"
-                                                value="{{ old('brand', $product->brand) }}">
-                                            <select name="status" required class="w-full px-3 py-2 mb-4 border rounded">
+                                                class="w-full px-3 py-2 mb-2 border rounded" placeholder="Merek Produk"
+                                                value="{{ old('brand', $product->brand) }}" required>
+                                            <span class="mb-2 text-xs text-gray-500">Masukkan merek produk</span>
+
+                                            <label class="mb-1 font-medium">Status <span
+                                                    class="text-red-600">*</span></label>
+                                            <select name="status" required class="w-full px-3 py-2 mb-2 border rounded">
                                                 <option value="1" {{ $product->status == 1 ? 'selected' : '' }}>Aktif
                                                 </option>
                                                 <option value="0" {{ $product->status == 0 ? 'selected' : '' }}>Tidak
                                                     Aktif</option>
                                             </select>
+                                            <span class="mb-2 text-xs text-gray-500">Pilih status produk</span>
+
+                                            <label class="mb-1 font-medium">Kategori Produk <span
+                                                    class="text-red-600">*</span></label>
                                             <select name="category_id" required
-                                                class="w-full px-3 py-2 mb-4 border rounded">
-                                                <option value="{{ $product->category_id }}" selected>
-                                                    {{ $product->category->title }}</option>
+                                                class="w-full px-3 py-2 mb-2 border rounded select2">
+                                                <option value="" disabled>Pilih Kategori</option>
                                                 @foreach ($categories as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                                    <option value="{{ $category->id }}"
+                                                        {{ $product->category_id == $category->id ? 'selected' : '' }}>
+                                                        {{ $category->title }}</option>
                                                 @endforeach
                                             </select>
+                                            <span class="mb-2 text-xs text-gray-500">Pilih kategori produk</span>
                                         </div>
                                     </div>
                                     <button type="submit"
@@ -341,53 +388,85 @@
                                 onchange="handleChange('add')" hidden required>
                             <label
                                 class="inline-block px-5 py-2 mt-6 text-base font-semibold tracking-wide text-center text-white align-middle duration-500 bg-indigo-600 border border-indigo-600 rounded-md cursor-pointer btn-upload hover:bg-indigo-700 hover:border-indigo-700"
-                                for="add-images">Unggah Foto</label>
+                                for="add-images">Unggah Foto <span class="text-red-600">*</span></label>
+                            <span class="mt-1 text-xs text-gray-500">Input foto produk (wajib diisi)</span>
                             <!-- Memilih hanya pengiriman kota blitar -->
                             <div class="flex flex-col mt-4">
-                                <h4 class="mb-4 font-semibold">Wilayah Pengiriman</h4>
+                                <h4 class="mb-4 font-semibold">Wilayah Pengiriman <span class="text-red-600">*</span></h4>
                                 <select name="is_blitar_only" class="w-full px-3 py-2 mb-4 border rounded" required>
+                                    <option value="" disabled selected>Pilih Wilayah</option>
                                     <option value="1">Kota Blitar</option>
                                     <option value="0">Semua kota</option>
                                 </select>
+                                <span class="mt-1 text-xs text-gray-500">Pilih area pengiriman produk</span>
                             </div>
                         </div>
 
                         <!-- Product Details Section -->
                         <div class="flex flex-col">
                             <h4 class="mb-4 font-semibold">Detail Produk</h4>
-                            <input name="name" type="text" class="w-full px-3 py-2 mb-4 border rounded"
+                            <label class="mb-1 font-medium">Nama Produk <span class="text-red-600">*</span></label>
+                            <input name="name" type="text" class="w-full px-3 py-2 mb-2 border rounded"
                                 placeholder="Nama Produk" required>
-                            <input name="description" type="text" class="w-full px-3 py-2 mb-4 border rounded"
+                            <span class="mb-2 text-xs text-gray-500">Masukkan nama produk</span>
+
+                            <label class="mb-1 font-medium">Deskripsi Produk <span class="text-red-600">*</span></label>
+                            <input name="description" type="text" class="w-full px-3 py-2 mb-2 border rounded"
                                 placeholder="Deskripsi Produk" required>
-                            <input name="sku" type="text" class="w-full px-3 py-2 mb-4 border rounded"
+                            <span class="mb-2 text-xs text-gray-500">Masukkan deskripsi produk</span>
+
+                            <label class="mb-1 font-medium">Kode Produk (SKU) <span class="text-red-600">*</span></label>
+                            <input name="sku" type="text" class="w-full px-3 py-2 mb-2 border rounded"
                                 placeholder="Kode Produk (SKU)" required>
-                            <input name="price" type="number" class="w-full px-3 py-2 mb-4 border rounded"
+                            <span class="mb-2 text-xs text-gray-500">Masukkan kode unik produk (SKU)</span>
+
+                            <label class="mb-1 font-medium">Harga Produk <span class="text-red-600">*</span></label>
+                            <input name="price" type="number" class="w-full px-3 py-2 mb-2 border rounded"
                                 placeholder="Harga Produk" required>
-                            <input name="stock" type="number" class="w-full px-3 py-2 mb-4 border rounded"
+                            <span class="mb-2 text-xs text-gray-500">Masukkan harga produk (dalam Rupiah)</span>
+
+                            <label class="mb-1 font-medium">Stok Produk <span class="text-red-600">*</span></label>
+                            <input name="stock" type="number" class="w-full px-3 py-2 mb-2 border rounded"
                                 placeholder="Stok Produk" required>
+                            <span class="mb-2 text-xs text-gray-500">Masukkan jumlah stok produk</span>
                         </div>
 
                         <!-- Additional Information Section -->
                         <div class="flex flex-col">
                             <h4 class="mb-4 font-semibold">Detail Tambahan</h4>
-                            <input name="weight" type="number" class="w-full px-3 py-2 mb-4 border rounded"
-                                placeholder="Berat (Gram)">
-                            <input name="dimensions" type="text" class="w-full px-3 py-2 mb-4 border rounded"
-                                placeholder="Dimensi Produk (Cm)">
-                            <input name="brand" type="text" class="w-full px-3 py-2 mb-4 border rounded"
-                                placeholder="Merek Produk">
-                            <select name="status" required class="w-full px-3 py-2 mb-4 border rounded">
+                            <label class="mb-1 font-medium">Berat (Gram) <span class="text-red-600">*</span></label>
+                            <input name="weight" type="number" class="w-full px-3 py-2 mb-2 border rounded"
+                                placeholder="Berat (Gram)" required>
+                            <span class="mb-2 text-xs text-gray-500">Masukkan berat produk dalam gram</span>
+
+                            <label class="mb-1 font-medium">Dimensi Produk (Cm) <span
+                                    class="text-red-600">*</span></label>
+                            <input name="dimensions" type="text" class="w-full px-3 py-2 mb-2 border rounded"
+                                placeholder="Dimensi Produk (Cm)" required>
+                            <span class="mb-2 text-xs text-gray-500">Masukkan dimensi produk (misal: 10x20x5)</span>
+
+                            <label class="mb-1 font-medium">Merek Produk <span class="text-red-600">*</span></label>
+                            <input name="brand" type="text" class="w-full px-3 py-2 mb-2 border rounded"
+                                placeholder="Merek Produk" required>
+                            <span class="mb-2 text-xs text-gray-500">Masukkan merek produk</span>
+
+                            <label class="mb-1 font-medium">Status <span class="text-red-600">*</span></label>
+                            <select name="status" required class="w-full px-3 py-2 mb-2 border rounded">
+                                <option value="" disabled selected>Pilih Status</option>
                                 <option value="1">Aktif</option>
                                 <option value="0">Tidak Aktif</option>
                             </select>
-                            <!-- Memilih Kategori produk -->
-                            <select name="category_id" class="w-full px-3 py-2 mb-4 border rounded select2" required>
+                            <span class="mb-2 text-xs text-gray-500">Pilih status produk</span>
+
+                            <label class="mb-1 font-medium">Kategori Produk <span class="text-red-600">*</span></label>
+                            <select name="category_id" class="w-full px-3 py-2 mb-2 border rounded select2" required>
+                                <option value="" disabled selected>Pilih Kategori</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}" class="text-black">{{ $category->title }}
                                     </option>
                                 @endforeach
                             </select>
-
+                            <span class="mb-2 text-xs text-gray-500">Pilih kategori produk</span>
                         </div>
                     </div>
                     <button type="submit" class="w-full px-4 py-2 mt-4 text-white bg-indigo-600 rounded">Tambah
